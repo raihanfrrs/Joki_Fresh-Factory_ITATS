@@ -2,22 +2,21 @@
 
 @section('section')
 <div class="content-wrapper">
-    <div class="content">                
-            <!-- Top Statistics -->
+    <div class="content">
             <div class="row">
               <div class="col-xl-3 col-sm-6">
                 <div class="card card-default card-mini">
                   <div class="card-header">
                     <h2>$18,699</h2>
-                    <div class="dropdown">
-                      <a href="#" class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                      </a>
-                      <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <div class="btn-group">
+                      <button type="button" class="dropdown-toggle icon-burger-mini" data-bs-toggle="dropdown" aria-expanded="false">
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end">
+                        <li><button class="dropdown-item" type="button">Action</button></li>
+                        <li><button class="dropdown-item" type="button">Another action</button></li>
+                        <li><button class="dropdown-item" type="button">Something else here</button></li>
                       </ul>
-                    </div>
+                    </div>             
                     <div class="sub-title">
                       <span class="mr-1">Sales of this year</span> |
                       <span class="mx-1">45%</span>
@@ -37,15 +36,14 @@
                 <div class="card card-default card-mini">
                   <div class="card-header">
                     <h2>$14,500</h2>
-                    <div class="dropdown">
-                      <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      </a>
-
-                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
+                    <div class="btn-group">
+                      <button type="button" class="dropdown-toggle icon-burger-mini" data-bs-toggle="dropdown" aria-expanded="false">
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end">
+                        <li><button class="dropdown-item" type="button">Action</button></li>
+                        <li><button class="dropdown-item" type="button">Another action</button></li>
+                        <li><button class="dropdown-item" type="button">Something else here</button></li>
+                      </ul>
                     </div>
                     <div class="sub-title">
                       <span class="mr-1">Expense of this year</span> |
@@ -66,16 +64,15 @@
                 <div class="card card-default card-mini">
                   <div class="card-header">
                     <h2>$4199</h2>
-                    <div class="dropdown">
-                      <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      </a>
-
-                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                    </div>
+                    <div class="btn-group">
+                      <button type="button" class="dropdown-toggle icon-burger-mini" data-bs-toggle="dropdown" aria-expanded="false">
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end">
+                        <li><button class="dropdown-item" type="button">Action</button></li>
+                        <li><button class="dropdown-item" type="button">Another action</button></li>
+                        <li><button class="dropdown-item" type="button">Something else here</button></li>
+                      </ul>
+                    </div> 
                     <div class="sub-title">
                       <span class="mr-1">Profit of this year</span> |
                       <span class="mx-1">20%</span>
@@ -95,16 +92,15 @@
                 <div class="card card-default card-mini">
                   <div class="card-header">
                     <h2>$20,199</h2>
-                    <div class="dropdown">
-                      <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      </a>
-
-                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                    </div>
+                    <div class="btn-group">
+                      <button type="button" class="dropdown-toggle icon-burger-mini" data-bs-toggle="dropdown" aria-expanded="false">
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end">
+                        <li><button class="dropdown-item" type="button">Action</button></li>
+                        <li><button class="dropdown-item" type="button">Another action</button></li>
+                        <li><button class="dropdown-item" type="button">Something else here</button></li>
+                      </ul>
+                    </div> 
                     <div class="sub-title">
                       <span class="mr-1">Revenue of this year</span> |
                       <span class="mx-1">35%</span>
@@ -130,18 +126,15 @@
               <div class="card card-default">
                 <div class="card-header">
                   <h2>Income And Expenses</h2>
-                  <div class="dropdown">
-                    <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false" data-display="static">
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
-
+                  <div class="btn-group">
+                    <button type="button" class="dropdown-toggle icon-burger-mini" data-bs-toggle="dropdown" aria-expanded="false">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <li><button class="dropdown-item" type="button">Action</button></li>
+                      <li><button class="dropdown-item" type="button">Another action</button></li>
+                      <li><button class="dropdown-item" type="button">Something else here</button></li>
+                    </ul>
+                  </div> 
                 </div>
                 <div class="card-body">
                   <div class="chart-wrapper">

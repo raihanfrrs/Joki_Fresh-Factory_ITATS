@@ -300,41 +300,44 @@
               </footer>
             </div>
           </li>
-          <!-- User Account -->
-          <li class="dropdown user-menu">
-            <button class="dropdown-toggle nav-link" data-toggle="dropdown">
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="images/user/user-xs-01.jpg" class="user-image rounded-circle" alt="User Image" />
               <span class="d-none d-lg-inline-block">John Doe</span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-right">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
               <li>
-                <a class="dropdown-link-item" href="user-profile.html">
+                <a class="dropdown-item" href="user-profile.html">
                   <i class="mdi mdi-account-outline"></i>
                   <span class="nav-text">My Profile</span>
                 </a>
               </li>
               <li>
-                <a class="dropdown-link-item" href="email-inbox.html">
+                <a class="dropdown-item" href="email-inbox.html">
                   <i class="mdi mdi-email-outline"></i>
                   <span class="nav-text">Message</span>
                   <span class="badge badge-pill badge-primary">24</span>
                 </a>
               </li>
               <li>
-                <a class="dropdown-link-item" href="user-activities.html">
+                <a class="dropdown-item" href="user-activities.html">
                   <i class="mdi mdi-diamond-stone"></i>
-                  <span class="nav-text">Activitise</span></a>
-              </li>
-              <li>
-                <a class="dropdown-link-item" href="user-account-settings.html">
-                  <i class="mdi mdi-settings"></i>
-                  <span class="nav-text">Account Setting</span>
+                  <span class="nav-text">Activities</span>
                 </a>
               </li>
-
-              <li class="dropdown-footer">
-                <a class="dropdown-link-item" href="sign-in.html"> <i class="mdi mdi-logout"></i> Log Out </a>
+              <li>
+                <a class="dropdown-item" href="user-account-settings.html">
+                  <i class="mdi mdi-settings"></i>
+                  <span class="nav-text">Account Settings</span>
+                </a>
               </li>
+              <li class="dropdown-footer">
+                <a class="dropdown-item d-flex justify-content-between" href="sign-in.html">
+                  <i class="mdi mdi-logout"></i>
+                  <span>Log Out</span>
+                </a>
+              </li>              
             </ul>
           </li>
         </ul>
