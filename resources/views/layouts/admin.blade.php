@@ -34,14 +34,18 @@
 </head>
 
 
-<body class="navbar-fixed sidebar-fixed" id="body">
+<body class="@auth navbar-fixed sidebar-fixed @else bg-light-gray @endauth " id="body">
+    @auth
     <script>
-      NProgress.configure({ showSpinner: false });
-      NProgress.start();
+        NProgress.configure({ showSpinner: false });
+        NProgress.start();
     </script>
+    @endauth
     
     @include('components.flasher.flasher')
     
+    @auth
+
     <div class="wrapper">
         @include('partials.admin.sidebar')
         <div class="page-wrapper">
@@ -54,6 +58,12 @@
 
         </div>
     </div>
+
+    @else
+    
+    @yield('authentication')
+
+    @endauth
 
     <script src="{{ asset('asset/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
