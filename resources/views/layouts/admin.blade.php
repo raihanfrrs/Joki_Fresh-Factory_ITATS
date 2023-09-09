@@ -7,15 +7,12 @@
 
   <title>Warehouse - Dashboard</title>
     
-  <!-- theme meta -->
-  <meta name="theme-name" content="mono" />
-
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
   <link href="{{ asset('asset/vendor/material/css/materialdesignicons.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('asset/vendor/simplebar/simplebar.css') }}" rel="stylesheet" />
 
-  <!-- PLUGINS CSS STYLE -->
+  <!-- VENDOR CSS STYLE -->
   <link href="{{ asset('asset/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('asset/vendor/nprogress/nprogress.css') }}" rel="stylesheet" />
   <link href="{{ asset('asset/vendor/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css') }}" rel="stylesheet" />
@@ -24,8 +21,8 @@
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <link href="{{ asset('asset/vendor/toaster/toastr.min.css') }}" rel="stylesheet" />
 
-  <!-- MONO CSS -->
-  <link id="main-css-href" rel="stylesheet" href="{{ asset('asset/css/style.css') }}" />
+  <!-- MAIN CSS -->
+  <link id="main-css-href" rel="stylesheet" href="{{ asset('asset/css/style-admin.css') }}" />
 
   <!-- FAVICON -->
   <link href="{{ asset('asset/images/favicon.png') }}" rel="shortcut icon" />
