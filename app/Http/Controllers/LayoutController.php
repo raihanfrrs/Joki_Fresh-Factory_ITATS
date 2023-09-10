@@ -10,7 +10,7 @@ class LayoutController extends Controller
     public function index()
     {
         if (Auth::check() && auth()->user()->level == 'tenant') {
-            return view('pages.user.dashboard.index');
+            return view('pages.tenant.dashboard.index');
         } elseif (Auth::check() && auth()->user()->level == 'admin') {
             return view('pages.admin.dashboard.index');
         } else {
