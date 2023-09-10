@@ -48,4 +48,20 @@ Project Setup :
     / pakai valet bila ada
 
 11. buka browser `http://127.0.0.1:8000`
+
+12. akses halaman admin dengan beri url `/ghost` seperti contoh : `http://127.0.0.1:8000/ghost`
+
+13. sign-in / login ke halaman admin :
+
+    ```
+    Username : raihan123
+    Password : test123
+    ```
+14. sign-in / login ke halaman tenant :
+
+    ```
+    Username : achmada123
+    Password : test123
+    ```
+
 # warehouse

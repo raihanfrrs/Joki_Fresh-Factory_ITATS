@@ -20,7 +20,7 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('asset/css/style-guest.css') }}">
     
-    <!-- FAVORIT -->
+    <!-- FAVICON -->
     <link rel="icon" href="{{ asset('asset/images/favicon.png') }}" type="image/x-icon">
 
 </head>
