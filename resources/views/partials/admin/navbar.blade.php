@@ -303,8 +303,8 @@
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="images/user/user-xs-01.jpg" class="user-image rounded-circle" alt="User Image" />
-              <span class="d-none d-lg-inline-block">John Doe</span>
+              <img src="{{ asset('asset/images/user/user-xs-01.jpg') }}" class="user-image rounded-circle" alt="User Image" />
+              <span class="d-none d-lg-inline-block">{{ auth()->user()->admin->name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
               <li>
