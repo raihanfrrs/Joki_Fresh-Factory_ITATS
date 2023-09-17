@@ -5,6 +5,7 @@
                 <img src="{{ asset('asset/images/logos/logo.png') }}" alt="Mono">
             </a>
         </div>
+
     <div class="sidebar-left" data-simplebar style="height: 100%;">
         <ul class="nav sidebar-inner" id="sidebar-menu">
             <li class="active">
@@ -27,7 +28,7 @@
                 <div class="collapse" id="user" data-bs-parent="#sidebar-menu">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="email-inbox.html">
+                            <a class="nav-link" href="/master/admin">
                                 <span class="nav-text">Admin</span>
                             </a>
                         </li>
