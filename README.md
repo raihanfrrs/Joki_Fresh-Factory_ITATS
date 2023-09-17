@@ -45,7 +45,7 @@ Project Setup :
     php artisan serve
     ```
 
-    / pakai valet bila ada
+    / pakai valet bila ada9
 
 11. buka browser `http://127.0.0.1:8000`
 
