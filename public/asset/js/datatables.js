@@ -4,7 +4,8 @@ $(document).ready(function () {
         serverSide: true,
         ajax: '/dataAdmin',
         columns: [
-            { data: 'id', name: 'id', class: 'text-center' }
+            { data: 'id', name: 'id', class: 'text-center' },
+            { data: 'action', name: 'action', class: 'text-center' }
         ]
     });
 });

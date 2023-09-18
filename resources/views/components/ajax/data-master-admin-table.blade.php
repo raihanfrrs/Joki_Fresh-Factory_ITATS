@@ -11,10 +11,9 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>ACTION</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
                 </table>
             </div>
         </div>

@@ -14490,9 +14490,19 @@ table.dataTable thead .sorting {
   border-bottom-color: #e5e9f2;
 }
 
+.dataTables_length {
+  float: left;
+}
+
+.dataTables_length select{
+  padding: 10px;
+  border: 1px solid #e5e9f2;
+  border-radius: 5px;
+}
+
 /* Data table Filter */
 .dataTables_wrapper .dataTables_filter {
-  float: none;
+  float: right;
   text-align: left;
   margin-bottom: 15px;
 }
