@@ -3,7 +3,6 @@
 @section('section')
 
 @include('components.modal.modal-add-admin')
-@include('components.modal.modal-detail-admin')
 
 <div class="content-wrapper">
     <div class="content">

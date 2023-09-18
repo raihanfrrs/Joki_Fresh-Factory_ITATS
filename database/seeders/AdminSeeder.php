@@ -20,9 +20,21 @@ class AdminSeeder extends Seeder
                 'slug' => 'mohamad-raihan-farras',
                 'email' => 'rehanfarras76@gmail.com',
                 'phone' => '081333903187',
-                'pod' => 'Blitar',
-                'bod' => now(),
-                'gender' => 'male'
+                'pob' => 'Blitar',
+                'dob' => now(),
+                'gender' => 'male',
+                'address' => 'Jl. Arief Rahman Hakim No.100, Klampis Ngasem, Kec. Sukolilo, Surabaya, Jawa Timur 60117'
+            ],
+            [
+                'user_id' => 3,
+                'name' => 'Mohamad Farras Raihan',
+                'slug' => 'mohamad-farras-raihan',
+                'email' => 'raihanfarras76@gmail.com',
+                'phone' => '081333903188',
+                'pob' => 'Blitar',
+                'dob' => now(),
+                'gender' => 'male',
+                'address' => 'Jl. Arief Rahman Hakim No.100, Klampis Ngasem, Kec. Sukolilo, Surabaya, Jawa Timur 60117'
             ]
         ];
 
