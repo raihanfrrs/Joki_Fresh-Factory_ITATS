@@ -99,6 +99,7 @@
 
     {{-- MAIN SCRIPT --}}
     <script src="{{ asset('asset/js/admin-master.js') }}"></script>
+    <script src="{{ asset('asset/js/form.js') }}"></script>
     <script src="{{ asset('asset/js/datatables.js') }}"></script>
   </body>
 </html>

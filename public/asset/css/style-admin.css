@@ -14500,6 +14500,10 @@ table.dataTable thead .sorting {
   border-radius: 5px;
 }
 
+.sorting_disabled {
+  display: none;
+}
+
 /* Data table Filter */
 .dataTables_wrapper .dataTables_filter {
   float: right;
