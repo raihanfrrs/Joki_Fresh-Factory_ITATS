@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('pod');
-            $table->date('bod');
+            $table->string('pob');
+            $table->date('dob');
             $table->enum('gender', ['male', 'female']);
-            $table->longText('address')->nullable();
+            $table->longText('address');
             $table->timestamps();
         });
     }
