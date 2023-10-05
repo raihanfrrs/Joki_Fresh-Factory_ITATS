@@ -109,7 +109,7 @@
                     </ul>
                 </li>
                 <li><a href="../documentation/index.html"><i class="ti-file"></i> Documentation</a></li>
-                <li><a><i class="ti-close"></i> Logout</a></li>
+                <li><a href="/sign-out"><i class="ti-close"></i> Logout</a></li>
             </ul>
         </div>
     </div>
