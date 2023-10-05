@@ -8,6 +8,11 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Place, Date of Birth</th>
+                            <th>Gender</th>
                             <th class="sorting_disabled"></th>
                         </tr>
                     </thead>

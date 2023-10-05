@@ -11,6 +11,9 @@ class YajraDatatablesController extends Controller
     public function data_admin()
     {
         return DataTables::of(Admin::whereNot('user_id', auth()->user()->id)->get())
+        ->addColumn('pdob', function ($model) {
+            return view('pages.admin.master.users.admin.place-date-of-birth', compact('model'))->render();
+        })
         ->addColumn('action', function ($model) {
             return view('pages.admin.master.users.admin.form-action', compact('model'))->render();
         })
