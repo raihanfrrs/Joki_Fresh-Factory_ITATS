@@ -333,7 +333,7 @@
                 </a>
               </li>
               <li class="dropdown-footer">
-                <a class="dropdown-item d-flex justify-content-between" href="sign-in.html">
+                <a class="dropdown-item d-flex justify-content-between" href="/sign-out">
                   <i class="mdi mdi-logout"></i>
                   <span>Log Out</span>
                 </a>

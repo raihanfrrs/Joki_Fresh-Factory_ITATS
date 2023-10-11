@@ -5,22 +5,28 @@ $(document).on('click', '#admin-form-btn', function () {
 $('#admin-form').submit(function(event) { 
     event.preventDefault();
 
-    const formData = $(this).serialize();
-
-    console.log(formData);
+    const formData = new FormData(this);
 
     $.ajax({
         type: 'POST',
         url: '/master/admin',
         data: formData,
+        contentType: false,
+        processData: false,
         success: function(response) {
             console.log(response);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Admin Created Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
         },
         error: function(jqXHR, textStatus, errorThrown) {
             if (jqXHR.status == 422) {
                 var errors = jqXHR.responseJSON.errors;
         
-                // Mengosongkan pesan kesalahan sebelumnya (jika ada)
                 $('.error-messages').empty();
         
                 for (var field in errors) {
@@ -34,6 +40,5 @@ $('#admin-form').submit(function(event) {
                 $('#error-message').html('Terjadi kesalahan saat mengirim formulir.');
             }
         }
-        
     });
 });

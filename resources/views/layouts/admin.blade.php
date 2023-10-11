@@ -20,6 +20,7 @@
   <link href="{{ asset('asset/vendor/daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <link href="{{ asset('asset/vendor/toaster/toastr.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('asset/vendor/sweetalert2/css/sweetalert2.min.css') }}" rel="stylesheet" />
 
   <!-- MAIN CSS -->
   <link id="main-css-href" rel="stylesheet" href="{{ asset('asset/css/style-admin.css') }}" />
@@ -28,6 +29,7 @@
   <link href="{{ asset('asset/images/favicon.png') }}" rel="shortcut icon" />
 
   <script src="{{ asset('asset/vendor/nprogress/nprogress.js') }}"></script>
+  <script src="{{ asset('asset/vendor/sweetalert2/js/sweetalert2.min.js') }}"></script>
 </head>
 
 
@@ -100,6 +102,7 @@
     {{-- MAIN SCRIPT --}}
     <script src="{{ asset('asset/js/admin-master.js') }}"></script>
     <script src="{{ asset('asset/js/form.js') }}"></script>
+    <script src="{{ asset('asset/js/prev-image.js') }}"></script>
     <script src="{{ asset('asset/js/datatables.js') }}"></script>
   </body>
 </html>
