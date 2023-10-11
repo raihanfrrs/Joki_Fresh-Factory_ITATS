@@ -30,7 +30,8 @@ class AdminRequest extends FormRequest
             'gender' => 'required',
             'address' => 'required',
             'username' => 'required|unique:users,username',
-            'password' => 'required'
+            'password' => 'required',
+            'image' => 'file|image'
         ];
     }
 }

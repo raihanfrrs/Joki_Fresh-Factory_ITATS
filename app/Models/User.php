@@ -16,6 +16,16 @@ class User extends Authenticatable
         'id'
     ];
 
+    public function createUser($data)
+    {
+        return $this->create([
+            'username' => $data['username'],
+            'password' => bcrypt($data['password']),
+            'level' => $data['level']
+        ]);
+    }
+     
+
     public function admin()
     {
         return $this->hasOne(Admin::class);
