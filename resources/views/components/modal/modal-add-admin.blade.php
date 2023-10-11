@@ -1,7 +1,7 @@
 <div class="modal fade" id="modal-add-admin" tabindex="-1" role="dialog" aria-labelledby="modalAddAdmin" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <form action="/" method="POST" enctype="multipart/form-data" id="admin-form">
+            <form action="{{ route('master.admin.store') }}" method="POST" enctype="multipart/form-data" id="admin-form">
                 @csrf
                 <div class="modal-header px-4">
                     <h5 class="modal-title">Create New Admin</h5>
@@ -12,12 +12,13 @@
                         <label for="image" class="col-sm-4 col-lg-2 col-form-label">Admin Image</label>
                         <div class="col-sm-8 col-lg-10">
                             <div class="custom-file mb-1">
-                                <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image" required>
+                                <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image" onchange="previewImage()" required>
                                 <label class="custom-file-label" for="image">Choose file...</label>
                                 @error('image')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <img class="mt-2 img-fluid w-25 img-preview">
                         </div>
                     </div>
 
