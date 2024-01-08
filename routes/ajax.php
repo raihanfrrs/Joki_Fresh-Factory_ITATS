@@ -6,4 +6,5 @@ use Illuminate\Support\Facades\Route;
 Route::controller(AjaxController::class)->group(function () {
     Route::get('ajax/master-admin-card', 'master_admin_card');
     Route::get('ajax/master-admin-table', 'master_admin_table');
+    Route::get('ajax/admin-edit-modal/{admin}', 'admin_edit_modal');
 });
