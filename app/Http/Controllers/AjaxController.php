@@ -27,4 +27,6 @@ class AjaxController extends Controller
     {
         return view('components.ajax.data-master-admin-table');
     }
+
+    public function admin_edit_modal(Request $)
 }

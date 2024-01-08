@@ -1,50 +1,72 @@
 @extends('layouts.admin')
 
-@section('authentication')
-<div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh">
-    <div class="d-flex flex-column justify-content-between">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10">
-          <div class="card card-default mb-0">
-            <div class="card-header pb-0">
-              <div class="app-brand w-100 d-flex justify-content-center border-bottom-0">
-                <a class="w-auto pl-0" href="{{ URL::current() }}">
-                  <img src="{{ asset('asset/images/logos/logo-black.png') }}" alt="warehouse">
-                </a>
-              </div>
-            </div>
-            <div class="card-body px-5 pb-5 pt-0">
+@section('section-admin-authentication')
+<!-- /Left Text -->
+<div class="d-none d-lg-flex col-lg-7 p-0">
+    <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
+    <img
+        src="{{ asset('assets/img/illustrations/boy-stand.png') }}"
+        alt="auth-login-cover"
+        class="img-fluid my-5 auth-illustration"
+        data-app-light-img="illustrations/boy-stand.png"
+        data-app-dark-img="illustrations/boy-stand.png" />
 
-              <h4 class="text-dark mb-6 text-center">Sign In</h4>
-
-              <form action="/sign-in/admin" method="POST">
-                @csrf
-                <div class="row">
-                  <div class="form-group col-md-12 mb-4">
-                    <input type="text" class="form-control input-lg @error('username') is-invalid @enderror" id="username" name="username" placeholder="Username" required autocomplete="off">
-                    @error('username')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                  </div>
-                  <div class="form-group col-md-12 ">
-                    <input type="password" class="form-control input-lg @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" required>
-                    @error('password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                  </div>
-                  <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary btn-pill mb-4">Sign In</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+    <img
+        src="{{ asset('assets/img/illustrations/bg-shape-image-light.png') }}"
+        alt="auth-login-cover"
+        class="platform-bg"
+        data-app-light-img="illustrations/bg-shape-image-light.png"
+        data-app-dark-img="illustrations/bg-shape-image-dark.png" />
     </div>
 </div>
+<!-- /Left Text -->
+
+<!-- Login -->
+<div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4">
+    <div class="w-px-400 mx-auto">
+    <!-- Logo -->
+    <div class="app-brand mb-4">
+        <a href="index.html" class="app-brand-link gap-2">
+            <img src="{{ asset('img/logo-icon.png') }}" alt="Logo FindFluence" width="50"> 
+        </a>
+    </div>
+    <!-- /Logo -->
+    <h3 class="mb-1 fw-bold">Selamat Datang di FindFluence</h3>
+    <p class="mb-4">Silahkan Masuk ke Akun Anda</p>
+
+    <form id="formAuthentication" class="mb-3" action="{{ route('login.store', 'admin') }}" method="POST">
+        @csrf
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+                type="text"
+                name="username"
+                class="form-control"
+                id="username"
+                placeholder="Username"
+                autofocus />
+            @error('email')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3 form-password-toggle">
+            <div class="input-group input-group-merge">
+                <input
+                type="password"
+                name="password"
+                id="password"
+                class="form-control"
+                name="password"
+                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                aria-describedby="password" />
+                <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+            </div>
+        </div>
+        <button class="btn btn-primary d-grid w-100">Masuk</button>
+    </form>
+    </div>
+</div>
+<!-- /Login -->
 @endsection

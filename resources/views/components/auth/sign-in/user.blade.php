@@ -11,7 +11,7 @@
                     </div>
                     <div class="login-form">
                         <h4>Tenant Sign In</h4>
-                        <form action="/sign-in/tenant" method="POST">
+                        <form action="{{ route('login.store', 'tenant') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label id="username">Username</label>
