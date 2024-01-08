@@ -7,15 +7,14 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Admin extends Model
+class Admin extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $guarded = [
-        'id'
-    ];
+    protected $guarded = [];
 
     public function registerMediaCollections(): void
     {
@@ -50,6 +49,10 @@ class Admin extends Model
             'gender' => $data['gender'],
             'address' => $data['address'],
         ]);
+    }
+
+    public function getRouteKeyName() {
+        return 'slug';
     }
 
     public function user()

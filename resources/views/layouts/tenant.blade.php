@@ -9,17 +9,17 @@
     <title>Tenant - Dashboard</title>
 
     <!-- VENDOR CSS -->
-    <link href="{{ asset('asset/vendor/calendar-2/css/pignose.calendar.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('asset/vendor/chartist/css/chartist.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('asset/vendor/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('asset/vendor/themify/fonts/themify-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('asset/vendor/owl-carousel/assets/owl.carousel.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('asset/vendor/owl-carousel/assets/owl.theme.default.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('asset/vendor/weather/css/weather-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('asset/vendor/menubar/sidebar.css') }}" rel="stylesheet">
-    <link href="{{ asset('asset/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('asset/vendor/helper.css') }}" rel="stylesheet">
-    <link href="{{ asset('asset/css/style-tenant.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/calendar-2/css/pignose.calendar.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/chartist/css/chartist.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/themify/fonts/themify-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/owl-carousel/assets/owl.carousel.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/vendor/owl-carousel/assets/owl.theme.default.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/vendor/weather/css/weather-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/vendor/menubar/sidebar.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/helper.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/style-tenant.css') }}" rel="stylesheet">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
@@ -44,27 +44,27 @@
     @endauth
 
     <!-- VENDOR JS -->
-    <script src="{{ asset('asset/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('asset/vendor/jquery/jquery.nanoscroller.min.js') }}"></script>
-    <script src="{{ asset('asset/vendor/menubar/sidebar.js') }}"></script>
-    <script src="{{ asset('asset/vendor/preloader/pace.min.js') }}"></script>
-    <script src="{{ asset('asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('asset/vendor/calendar-2/js/moment.latest.min.js') }}"></script>
-    <script src="{{ asset('asset/vendor/calendar-2/js/pignose.calendar.min.js') }}"></script>
-    <script src="{{ asset('asset/vendor/calendar-2/js/pignose.init.js') }}"></script>
-    <script src="{{ asset('asset/vendor/weather/js/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('asset/vendor/weather/js/weather-init.js') }}"></script>
-    <script src="{{ asset('asset/vendor/circle-progress/circle-progress.min.js') }}"></script>
-    <script src="{{ asset('asset/vendor/circle-progress/circle-progress-init.js') }}"></script>
-    <script src="{{ asset('asset/vendor/chartist/js/chartist.min.js') }}"></script>
-    <script src="{{ asset('asset/vendor/sparklinechart/jquery.sparkline.min.js') }}"></script>
-    <script src="{{ asset('asset/vendor/sparklinechart/sparkline.init.js') }}"></script>
-    <script src="{{ asset('asset/vendor/owl-carousel/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('asset/vendor/owl-carousel/owl.carousel-init.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.nanoscroller.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/menubar/sidebar.js') }}"></script>
+    <script src="{{ asset('assets/vendor/preloader/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/calendar-2/js/moment.latest.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/calendar-2/js/pignose.calendar.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/calendar-2/js/pignose.init.js') }}"></script>
+    <script src="{{ asset('assets/vendor/weather/js/jquery.simpleWeather.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/weather/js/weather-init.js') }}"></script>
+    <script src="{{ asset('assets/vendor/circle-progress/circle-progress.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/circle-progress/circle-progress-init.js') }}"></script>
+    <script src="{{ asset('assets/vendor/chartist/js/chartist.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/sparklinechart/jquery.sparkline.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/sparklinechart/sparkline.init.js') }}"></script>
+    <script src="{{ asset('assets/vendor/owl-carousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/owl-carousel/owl.carousel-init.js') }}"></script>
 
     <!-- MAIN JS -->
-    <script src="{{ asset('asset/js/dashboard2.js') }}"></script>
-    <script src="{{ asset('asset/js/scripts-tenant.js') }}"></script>
+    <script src="{{ asset('assets/js/dashboard2.js') }}"></script>
+    <script src="{{ asset('assets/js/scripts-tenant.js') }}"></script>
 
 </body>
 

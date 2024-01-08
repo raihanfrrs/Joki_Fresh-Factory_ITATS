@@ -26,17 +26,17 @@ class AdminController extends Controller
     {
         if ($adminRequest->validated()) {
 
-            if ($adminRequest->hasFile('report_image')) {
-                $this->admin->addMediaFromRequest('report_image')->withResponsiveImages()->toMediaCollection('report_images');
-            }
-
             $data = $adminRequest->all();
-            DB::transaction(function () use ($data) {
+            DB::transaction(function () use ($data, $adminRequest) {
                 $data['level'] = 'admin';
                 $user = $this->user->createUser($data);
     
                 $data['user_id'] = $user->id;
-                $this->admin->createAdmin($data);
+                $admins = $this->admin->createAdmin($data);
+
+                if ($adminRequest->hasFile('admin_image')) {
+                    $admins->addMediaFromRequest('admin_image')->withResponsiveImages()->toMediaCollection('admin_images');
+                }
             });
 
             return true;
