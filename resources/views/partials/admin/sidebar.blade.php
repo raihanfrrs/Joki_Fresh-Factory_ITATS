@@ -2,8 +2,8 @@
   
     <div class="app-brand demo">
       <a href="/" class="app-brand-link">
-        <img src="{{ asset('img/logo-icon.png') }}" alt="Logo FindFluence" width="35">
         <span class="app-brand-text demo menu-text fw-bold">ADMIN</span>
+        <span class="app-brand-text badge rounded-pill bg-primary">{{ auth()->user()->attribute == 'core' ? 'CORE' : 'DEFAULT' }}</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -16,13 +16,13 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboards -->
-      <li class="menu-item {{ request()->is('dashboard/admin', 'dashboard/crm') ? 'open' : '' }}">
+      <li class="menu-item {{ request()->is('/', 'dashboard/crm') ? 'open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons ti ti-smart-home"></i>
           <div data-i18n="Dashboards">Dashboards</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item {{ request()->is('dashboard/admin') ? 'active' : '' }}">
+          <li class="menu-item {{ request()->is('/') ? 'active' : '' }}">
             <a href="/" class="menu-link">
               <div data-i18n="Analitik">Analitik</div>
             </a>
@@ -39,74 +39,67 @@
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">MASTER</span>
       </li>
-      <li class="menu-item {{ request()->is('master/brand', 'master/brand/*', 'brand/*/favorite', 'influencer/*/favorite', 'master/influencer', 'master/influencer/*') ? 'open' : '' }}">
+      <li class="menu-item {{ request()->is('master/admin', 'master/admin/*', 'master/tenant', 'master/tenant/*') ? 'open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons ti ti-users"></i>
-          <div data-i18n="Pengguna">Pengguna</div>
+          <div data-i18n="User">User</div>
           <div class="badge bg-label-primary rounded-pill ms-auto" id="label-total-brand-influencer-new-count"></div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item {{ request()->is('master/brand', 'master/brand/*', 'brand/*/favorite') ? 'active' : '' }} menu-item-brand">
-            <a href="" class="menu-link">
-              <div data-i18n="Brand">Brand</div>
+          <li class="menu-item {{ request()->is('master/admin', 'master/admin/*') ? 'active' : '' }} menu-item-brand">
+            <a href="{{ route('master.admin') }}" class="menu-link">
+              <div data-i18n="Admin">Admin</div>
               <div class="badge bg-label-primary rounded-pill ms-auto" id="label-brand-new-count"></div>
             </a>
           </li>
-          <li class="menu-item {{ request()->is('master/influencer', 'master/influencer/*', 'influencer/*/favorite') ? 'active' : '' }} menu-item-influencer">
-            <a href="" class="menu-link">
-              <div data-i18n="Influencer">Influencer</div>
+          <li class="menu-item {{ request()->is('master/tenant', 'master/tenant/*') ? 'active' : '' }} menu-item-influencer">
+            <a href="{{ route('master.tenant') }}" class="menu-link">
+              <div data-i18n="Tenant">Tenant</div>
               <div class="badge bg-label-primary rounded-pill ms-auto" id="label-influencer-new-count"></div>
             </a>
           </li>
         </ul>
       </li>
-      <li class="menu-item {{ request()->is('master/campaign/category', 'master/campaign/category/*') ? 'open' : '' }}">
+      <li class="menu-item {{ request()->is('master/storage', 'master/storage/*', 'master/category', 'master/category/*') ? 'open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons ti ti-checkup-list"></i>
-          <div data-i18n="Campaign">Campaign</div>
+          <div data-i18n="Warehouse">Warehouse</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item {{ request()->is('master/campaign/category', 'master/campaign/category/*') ? 'active' : '' }}">
-            <a href="" class="menu-link">
-              <div data-i18n="Kategori">Kategori</div>
+          <li class="menu-item {{ request()->is('master/storage', 'master/storage/*') ? 'active' : '' }}">
+            <a href="{{ route('master.storage') }}" class="menu-link">
+              <div data-i18n="Storage">Storage</div>
+            </a>
+          </li>
+          <li class="menu-item {{ request()->is('master/category', 'master/category/*') ? 'active' : '' }}">
+            <a href="{{ route('master.category') }}" class="menu-link">
+              <div data-i18n="Category">Category</div>
             </a>
           </li>
         </ul>
       </li>
-      <li class="menu-item {{ request()->is('master/product', 'master/product/*') ? 'active' : '' }} menu-item-product">
-        <a href="" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-package"></i>
-          <div data-i18n="Produk">Produk</div>
-          <div class="badge bg-label-primary rounded-pill ms-auto" id="label-total-product-new-count"></div>
-        </a>
-      </li>
-      <li class="menu-item {{ request()->is('master/subscription', 'master/subscription/*') ? 'active' : '' }}">
-        <a href="" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-license"></i>
-          <div data-i18n="Langganan">Langganan</div>
-        </a>
-      </li>
-
-      <!-- AKTIVITAS -->
-      <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">AKTIVITAS</span>
-      </li>
-      <li class="menu-item {{ request()->is('submission/influencer', 'submission/influencer/*') ? 'active' : '' }}">
-        <a href="" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-transfer-in"></i>
-          <div data-i18n="Pengajuan">Pengajuan</div>
-        </a>
-      </li>
 
       <!-- LAPORAN -->
       <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">LAPORAN</span>
+        <span class="menu-header-text">REPORT</span>
       </li>
-      <li class="menu-item {{ request()->is('subscription/brand', 'subscription/brand/*') ? 'active' : '' }}">
-        <a href="" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-wallet"></i>
-          <div data-i18n="Langganan">Langganan</div>
+      <li class="menu-item {{ request()->is('report/sales', 'report/sales/*', 'report/performance', 'report/performance/*') ? 'open' : '' }}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons ti ti-checkup-list"></i>
+          <div data-i18n="Reporting">Reporting</div>
         </a>
+        <ul class="menu-sub">
+          <li class="menu-item {{ request()->is('report/sales', 'report/sales/*') ? 'active' : '' }}">
+            <a href="{{ route('report.sales') }}" class="menu-link">
+              <div data-i18n="Sales">Sales</div>
+            </a>
+          </li>
+          <li class="menu-item {{ request()->is('report/performance', 'report/performance/*') ? 'active' : '' }}">
+            <a href="{{ route('report.performance') }}" class="menu-link">
+              <div data-i18n="Performance">Performance</div>
+            </a>
+          </li>
+        </ul>
       </li>
     </ul>
 

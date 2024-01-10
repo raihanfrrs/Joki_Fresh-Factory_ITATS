@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('username');
             $table->string('password');
             $table->enum('level', ['admin', 'tenant'])->default('tenant');
+            $table->enum('attribute', ['core', 'none'])->default('none');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

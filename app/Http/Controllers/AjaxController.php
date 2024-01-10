@@ -16,17 +16,4 @@ class AjaxController extends Controller
         $this->tenant = $tenant;
     }
 
-    public function master_admin_card()
-    {
-        return view('components.ajax.data-master-admin-card', [
-            'admins' => $this->admin->getAllAdminExceptMe(auth()->user()->id)
-        ]);
-    }
-
-    public function master_admin_table()
-    {
-        return view('components.ajax.data-master-admin-table');
-    }
-
-    public function admin_edit_modal(Request $)
 }

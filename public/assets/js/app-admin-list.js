@@ -18,18 +18,19 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
-  var dt_brand_table = $('#listAccountsTable');
+  var dt_brand_table = $('#listAdminsTable');
 
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
-      ajax: "/listAccountsTable",
+      ajax: "/listAdminsTable",
       columns: [
         { data: '' },
-        { data: 'username' },
         { data: 'name' },
         { data: 'email' },
-        { data: 'phone_number' },
-        { data: 'role' },
+        { data: 'phone' },
+        { data: 'pob_dob' },
+        { data: 'gender' },
+        { data: 'address' },
         { data: 'created_at' },
         { data: 'status' },
         { data: 'action' }
@@ -49,41 +50,47 @@ $(function () {
           targets: 1,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.username;
+            return full.name;
           }
         },
         {
           targets: 2,
           render: function (data, type, full, meta) {
-            return full.name;
+            return full.email;
           }
         },
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.email;
+            return full.phone;
           }
         },
         {
           targets: 4,
           render: function (data, type, full, meta) {
-            return full.phone_number;
+            return full.pob_dob;
           }
         },
         {
           targets: 5,
           render: function (data, type, full, meta) {
-            return full.role;
+            return full.gender;
           }
         },
         {
           targets: 6,
           render: function (data, type, full, meta) {
-            return full.created_at;
+            return full.address;
           }
         },
         {
           targets: 7,
+          render: function (data, type, full, meta) {
+            return full.created_at;
+          }
+        },
+        {
+          targets: 8,
           render: function (data, type, full, meta) {
             return full.status;
           }
@@ -125,7 +132,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -145,7 +152,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7]
+                columns: [1, 2, 3, 4, 5, 6, 7, 8]
               }
             },
             {
@@ -153,7 +160,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8],
               }
             },
             {
@@ -161,7 +168,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8],
               }
             },
             {
@@ -169,10 +176,18 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8],
               }
             }
           ]
+        },
+        {
+          text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Admin</span>',
+          className: 'add-new btn btn-primary',
+          attr: {
+            'data-bs-toggle': 'offcanvas',
+            'data-bs-target': '#offcanvasAddUser'
+          }
         }
       ],
       // For responsive popup
@@ -212,17 +227,17 @@ $(function () {
   }
 
   // Delete Record
-  $(document).on('click', '#button-delete-account', function () {
-    let id = $(this).attr('data-id');
-    let formSelector = ".form-delete-account-" + id;
+  $(document).on('click', '#button-delete-admin', function () {
+    let slug = $(this).attr('data-slug');
+    let formSelector = ".form-delete-admin-" + slug;
 
     Swal.fire({
-      title: 'Apakah anda yakin?',
-      text: "Data yang berkaitan dengan pengguna ini akan dihapus semua!",
+      title: 'Are you sure?',
+      text: "Admin will be deleted!",
       icon: 'warning',
       showCancelButton: true,
-      cancelButtonText: 'Batal',
-      confirmButtonText: 'Ya, Hapus!',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, Delete!',
       customClass: {
         confirmButton: 'btn btn-primary me-3',
         cancelButton: 'btn btn-label-secondary'
@@ -246,7 +261,7 @@ $(function () {
 // Validation & Phone mask
 (function () {
   const phoneMaskList = document.querySelectorAll('.phone-mask'),
-    addNewUserForm = document.getElementById('addNewUserForm');
+    addNewUserForm = document.getElementById('addNewAdminForm');
 
   // Phone Number
   if (phoneMaskList) {
@@ -263,63 +278,91 @@ $(function () {
       name: {
         validators: {
           notEmpty: {
-            message: 'Tolong masukkan nama brand'
+            message: 'Please enter admin name'
           }
         }
       },
       email: {
         validators: {
           notEmpty: {
-            message: 'Tolong masukkan surel brand'
+            message: 'Please enter admin email'
           },
           emailAddress: {
-            message: 'Surel anda tidak valid'
+            message: 'The value is not a valid email address'
           }
         }
       },
       phone: {
         validators: {
           notEmpty: {
-            message: 'Tolong masukkan nomor telepon brand'
+            message: 'Please enter admin phone'
+          }
+        }
+      },
+      pob: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter place of birth'
+          }
+        }
+      },
+      dob: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter date of birth'
+          }
+        }
+      },
+      address: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter address'
+          }
+        }
+      },
+      admin_image: {
+        validators: {
+          notEmpty: {
+            message: 'Please select image'
           }
         }
       },
       username: {
         validators: {
           notEmpty: {
-            message: 'Tolong masukkan nama pengguna brand'
+            message: 'Please enter username'
           },
           stringLength: {
             min: 6,
-            message: 'Nama pengguna harus lebih dari 6 karakter'
+            message: 'Username must be more than 6 characters long'
           }
         }
       },
       password: {
         validators: {
           notEmpty: {
-            message: 'Tolong masukkan kata sandi'
+            message: 'Please enter password'
           },
           stringLength: {
             min: 6,
-            message: 'Kata sandi harus lebih dari 6 karakter'
+            message: 'Password must be more than 6 characters long'
           }
         }
       },
       'confirm-password': {
         validators: {
           notEmpty: {
-            message: 'Tolong masukkan konfirmasi kata sandi'
+            message: 'Please confirm password'
           },
           identical: {
             compare: function () {
               return addNewUserForm.querySelector('[name="password"]').value;
             },
-            message: 'Kata sandi tidak sama.'
+            message: 'The password and its confirm are not the same'
           },
           stringLength: {
             min: 6,
-            message: 'Kata sandi harus lebih dari 6 karakter'
+            message: 'Password must be more than 6 characters long'
           }
         }
       },

@@ -57,10 +57,10 @@
     @auth
         @if (request()->is('dashboard/admin') || request()->is('master/brand'))
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/cards-advance.css') }}" />
-        @elseif (request()->is('master/brand/*', 'master/influencer/*', 'master/campaign/category/*'))
+        @elseif (request()->is('master/admin/*', 'master/tenant/*'))
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-user-view.css') }}" />
-        @elseif (request()->is('admin/profile', 'brand/following', 'influencer/follower'))
-            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-profile.css') }}" />
+        {{-- @elseif (request()->is('admin/profile', 'brand/following', 'influencer/follower'))
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-profile.css') }}" /> --}}
         @endif
     @else
         <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
@@ -130,7 +130,7 @@
         @if (request()->is('dashboard/*'))
             <script src="{{ asset('assets/vendor/libs/swiper/swiper.js') }}"></script>
             <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-        @elseif (request()->is('master/*', 'submission/*', 'subscription/brand'))
+        @elseif (request()->is('master/*', 'report/*'))
             <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
             <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
             <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
@@ -158,13 +158,13 @@
         @if (request()->is('dashboard/*'))
             <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
             <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
-        @elseif (request()->is('master/account'))
-            <script src="{{ asset('assets/js/app-account-list.js') }}"></script>
-        @elseif (request()->is('master/brand'))
+        @elseif (request()->is('master/admin'))
+            <script src="{{ asset('assets/js/app-admin-list.js') }}"></script>
+        @elseif (request()->is('master/tenant'))
             <script src="{{ asset('assets/js/app-brand-list.js') }}"></script>
-        @elseif (request()->is('master/influencer'))
+        @elseif (request()->is('master/storage'))
             <script src="{{ asset('assets/js/app-influencer-list.js') }}"></script>
-        @elseif (request()->is('submission/influencer'))
+        @elseif (request()->is('master/category'))
             <script src="{{ asset('assets/js/app-submission-influencer-list.js') }}"></script>
         @elseif (request()->is('master/campaign/category'))
             <script src="{{ asset('assets/js/app-category-list.js') }}"></script>

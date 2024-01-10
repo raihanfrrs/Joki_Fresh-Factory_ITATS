@@ -23,6 +23,8 @@ return new class extends Migration
             $table->date('dob');
             $table->enum('gender', ['male', 'female']);
             $table->longText('address');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
