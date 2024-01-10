@@ -1,1 +1,0 @@
-{{ $model->pob }}, {{ \Carbon\Carbon::parse($model->dob)->isoFormat('D/M/Y') }}
