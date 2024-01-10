@@ -23,8 +23,8 @@ Route::middleware('guest')->group(function () {
     });
 
     Route::controller(RegisterController::class)->group(function () {
-        Route::get('sign-up', 'index');
-        Route::post('sign-up', 'store');
+        Route::get('sign-up', 'index')->name('register');
+        Route::post('sign-up', 'store')->name('register.store');
     });
 });
 
