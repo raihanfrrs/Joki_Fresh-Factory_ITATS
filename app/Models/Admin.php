@@ -13,7 +13,10 @@ class Admin extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
-    protected $guarded = [];
+    protected $keyType = "string";
+    protected $guarded = [
+        'id'
+    ];
 
     public function registerMediaCollections(): void
     {
@@ -27,10 +30,6 @@ class Admin extends Model implements HasMedia
             ->width(368)
             ->height(232)
             ->sharpen(10);
-    }
-
-    public function getRouteKeyName() {
-        return 'slug';
     }
 
     public function user()

@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use Ramsey\Uuid\Uuid;
 use App\Models\Tenant;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TenantSeeder extends Seeder
 {
@@ -13,23 +16,24 @@ class TenantSeeder extends Seeder
      */
     public function run(): void
     {
-        $tenants = [
-            [
-                'user_id' => 2,
-                'name' => 'Achmada Fiqri',
-                'slug' => 'achmada-fiqri',
-                'identity_number' => '4989197566292068',
-                'email' => 'achmadafiqri76@gmail.com',
-                'phone' => '081333903188',
-                'pod' => 'Surabaya',
-                'bod' => now(),
-                'gender' => 'male',
-                'address' => 'Jl. Arief Rahman Hakim No.100, Klampis Ngasem, Kec. Sukolilo, Surabaya, Jawa Timur 60117'
-            ]
-        ];
+        $users = User::where('level', 'tenant')->get();
+        $faker = Faker::create();
 
-        foreach ($tenants as $key => $tenant) {
-            Tenant::create($tenant);
+        foreach ($users as $key => $tenant) {
+            Tenant::create(
+                [
+                    'id' => Uuid::uuid4()->toString(),
+                    'user_id' => $tenant->id,
+                    'name' => 'Tenant 001',
+                    'identity_number' =>  $faker->numberBetween(1000000000000000, 9999999999999999),
+                    'email' => $faker->unique()->safeEmail,
+                    'phone' => $faker->phoneNumber,
+                    'pod' => 'Surabaya',
+                    'bod' => now(),
+                    'gender' => 'male',
+                    'address' => 'Jl. Arief Rahman Hakim No.100, Klampis Ngasem, Kec. Sukolilo, Surabaya, Jawa Timur 60117'
+                ]
+            );
         }
     }
 }

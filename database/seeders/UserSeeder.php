@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
@@ -15,18 +16,21 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'username' => 'raihan123',
-                'password' => bcrypt('test123'),
+                'id' => Uuid::uuid4()->toString(),
+                'username' => 'admin',
+                'password' => bcrypt('admin123'),
                 'level' => 'admin',
                 'attribute' => 'core'
             ],
             [
-                'username' => 'achmada123',
-                'password' => bcrypt('test123')
+                'id' => Uuid::uuid4()->toString(),
+                'username' => 'tenant',
+                'password' => bcrypt('tenant123')
             ],
             [
-                'username' => 'farras123',
-                'password' => bcrypt('test123'),
+                'id' => Uuid::uuid4()->toString(),
+                'username' => 'admin1',
+                'password' => bcrypt('admin123'),
                 'level' => 'admin'
             ]
         ];

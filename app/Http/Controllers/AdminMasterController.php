@@ -81,6 +81,19 @@ class AdminMasterController extends Controller
         ]);
     }
 
+    public function master_admin_update_status(Admin $admin)
+    {
+        $this->adminRepository->changeStatus($admin->slug);
+
+        return redirect()->back()->with([
+            'flash-type' => 'sweetalert',
+            'case' => 'default',
+            'position' => 'center',
+            'type' => 'success',
+            'message' => 'Status has been changed!'
+        ]);
+    }
+
     public function master_tenant_index()
     {
         

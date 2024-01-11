@@ -9,6 +9,7 @@ class Tenant extends Model
 {
     use HasFactory;
 
+    protected $keyType = "string";
     protected $guarded = [
         'id'
     ];

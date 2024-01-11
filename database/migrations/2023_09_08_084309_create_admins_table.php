@@ -13,10 +13,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(User::class);
+            $table->uuid('id')->primary();
+            $table->foreignIdFor(User::class)->nullable();
             $table->string('name');
-            $table->string('slug')->unique();
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('pob');
