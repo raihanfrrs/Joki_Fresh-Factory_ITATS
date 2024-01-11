@@ -14,6 +14,11 @@ class AdminRepository
                     ->get();
     }
 
+    public function getAdmin($slug)
+    {
+        return Admin::where('slug', $slug)->first();
+    }
+
     public function createAdmin($data)
     {
         return Admin::create([
@@ -27,5 +32,16 @@ class AdminRepository
             'gender' => $data['gender'],
             'address' => $data['address'],
         ]);
+    }
+
+    public function changeStatus($slug)
+    {
+        $admin = self::getAdmin($slug);
+
+        if ($admin->status == 'active') {
+            return $admin->update(['status' => 'inactive']);
+        } else {
+            return $admin->update(['status' => 'active']);
+        }
     }
 }
