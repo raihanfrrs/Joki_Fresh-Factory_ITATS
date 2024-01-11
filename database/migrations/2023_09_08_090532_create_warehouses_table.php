@@ -14,11 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('warehouses', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignIdFor(Admin::class);
             $table->foreignIdFor(WarehouseCategory::class);
             $table->string('name');
-            $table->string('slug')->unique();
             $table->string('capacity');
             $table->string('facility');
             $table->bigInteger('rental_price');

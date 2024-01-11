@@ -24,15 +24,8 @@
 <!-- Login -->
 <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4">
     <div class="w-px-400 mx-auto">
-    <!-- Logo -->
-    <div class="app-brand mb-4">
-        <a href="index.html" class="app-brand-link gap-2">
-            <img src="{{ asset('img/logo-icon.png') }}" alt="Logo FindFluence" width="50"> 
-        </a>
-    </div>
-    <!-- /Logo -->
-    <h3 class="mb-1 fw-bold">Selamat Datang di FindFluence</h3>
-    <p class="mb-4">Silahkan Masuk ke Akun Anda</p>
+    <h3 class="mb-1 fw-bold">Welcome Back!</h3>
+    <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
     <form id="formAuthentication" class="mb-3" action="{{ route('login.store', 'admin') }}" method="POST">
         @csrf

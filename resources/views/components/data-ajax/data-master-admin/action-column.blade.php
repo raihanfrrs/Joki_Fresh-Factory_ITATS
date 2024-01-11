@@ -12,7 +12,7 @@
     <div class="dropdown-menu dropdown-menu-end m-0">
         <a href="{{ route('master.admin.show', $model->admin->slug) }}" target="_blank" class="dropdown-item">Lihat</a>
         @if (auth()->user()->attribute == 'core')
-        <form action="" method="post">
+        <form action="{{ route('master.admin.update.status', $model->admin->slug) }}" method="post">
             @csrf
             @method('PATCH')
         <button type="submit" class="dropdown-item">{{ $model->admin->status == 'active' ? 'Nonaktifkan' : 'Aktifkan' }}</button>

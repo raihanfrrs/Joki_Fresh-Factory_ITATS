@@ -15,69 +15,16 @@ document.addEventListener('DOMContentLoaded', function (e) {
             validators: {
               notEmpty: {
                 message: 'Please enter username'
-              },
-              stringLength: {
-                min: 6,
-                message: 'Username must be more than 6 characters'
-              }
-            }
-          },
-          email: {
-            validators: {
-              notEmpty: {
-                message: 'Tolong masukkan email anda'
-              },
-              emailAddress: {
-                message: 'Tolong masukkan email yang valid'
-              }
-            }
-          },
-          'email-username': {
-            validators: {
-              notEmpty: {
-                message: 'Please enter email / username'
-              },
-              stringLength: {
-                min: 6,
-                message: 'Username must be more than 6 characters'
               }
             }
           },
           password: {
             validators: {
               notEmpty: {
-                message: 'Tolong masukkan kata sandi anda'
-              },
-              stringLength: {
-                min: 6,
-                message: 'Kata sandi harus lebih dari 6 karakter'
+                message: 'Please enter password'
               }
             }
           },
-          'confirm-password': {
-            validators: {
-              notEmpty: {
-                message: 'Please confirm password'
-              },
-              identical: {
-                compare: function () {
-                  return formAuthentication.querySelector('[name="password"]').value;
-                },
-                message: 'The password and its confirm are not the same'
-              },
-              stringLength: {
-                min: 6,
-                message: 'Password must be more than 6 characters'
-              }
-            }
-          },
-          terms: {
-            validators: {
-              notEmpty: {
-                message: 'Please agree terms & conditions'
-              }
-            }
-          }
         },
         plugins: {
           trigger: new FormValidation.plugins.Trigger(),

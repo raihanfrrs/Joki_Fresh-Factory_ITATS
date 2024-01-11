@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class WarehouseCategory extends Model
 {
     use HasFactory;
+
+    protected $keyType = "string";
+    protected $guarded = [
+        'id'
+    ];
 }

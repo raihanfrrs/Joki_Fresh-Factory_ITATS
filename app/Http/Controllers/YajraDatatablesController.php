@@ -12,6 +12,8 @@ class YajraDatatablesController extends Controller
     public function admin_index()
     {
         return DataTables::of(User::where('level', 'admin')
+                                    ->whereNot('attribute', 'core')
+                                    ->whereNot('id', auth()->user()->id)
                                     ->get())
         ->addColumn('name', function ($model) {
             return view('components.data-ajax.data-master-admin.name-column', compact('model'))->render();

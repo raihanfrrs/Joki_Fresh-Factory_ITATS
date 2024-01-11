@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Admin;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AdminSeeder extends Seeder
 {
@@ -13,33 +16,21 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $admins = [
-            [
-                'user_id' => 1,
-                'name' => 'Mohamad Raihan Farras',
-                'slug' => 'mohamad-raihan-farras',
-                'email' => 'rehanfarras76@gmail.com',
-                'phone' => '081333903187',
-                'pob' => 'Blitar',
-                'dob' => now(),
-                'gender' => 'male',
-                'address' => 'Jl. Arief Rahman Hakim No.100, Klampis Ngasem, Kec. Sukolilo, Surabaya, Jawa Timur 60117'
-            ],
-            [
-                'user_id' => 3,
-                'name' => 'Mohamad Farras Raihan',
-                'slug' => 'mohamad-farras-raihan',
-                'email' => 'raihanfarras76@gmail.com',
-                'phone' => '081333903188',
-                'pob' => 'Blitar',
-                'dob' => now(),
-                'gender' => 'male',
-                'address' => 'Jl. Arief Rahman Hakim No.100, Klampis Ngasem, Kec. Sukolilo, Surabaya, Jawa Timur 60117'
-            ]
-        ];
+        $users = User::where('level', 'admin')->get();
+        $faker = Faker::create();
 
-        foreach ($admins as $key => $admin) {
-            Admin::create($admin);
+        foreach ($users as $key => $admin) {
+            Admin::create([
+                'id' => Uuid::uuid4()->toString(),
+                'user_id' => $admin->id,
+                'name' => 'Admin Pusat 001',
+                'email' => $faker->unique()->safeEmail,
+                'phone' => $faker->phoneNumber,
+                'pob' => 'Blitar',
+                'dob' => now(),
+                'gender' => 'male',
+                'address' => 'Jl. Arief Rahman Hakim No.100, Klampis Ngasem, Kec. Sukolilo, Surabaya, Jawa Timur 60117'
+            ]);
         }
     }
 }

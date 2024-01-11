@@ -11,6 +11,7 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::post('master/admin', 'master_admin_store')->name('master.admin.store');
         Route::get('master/admin/{admin}', 'master_admin_show')->name('master.admin.show');
         Route::delete('master/admin/{admin}', 'master_admin_destroy')->name('master.admin.destroy');
+        Route::patch('master/admin/{admin}/status', 'master_admin_update_status')->name('master.admin.update.status');
 
         Route::get('master/tenant', 'master_tenant_index')->name('master.tenant');
 
