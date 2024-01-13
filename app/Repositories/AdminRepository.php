@@ -14,9 +14,9 @@ class AdminRepository
                     ->get();
     }
 
-    public function getAdmin($slug)
+    public function getAdmin($id)
     {
-        return Admin::where('slug', $slug)->first();
+        return Admin::find($id);
     }
 
     public function createAdmin($data)
@@ -42,6 +42,29 @@ class AdminRepository
             return $admin->update(['status' => 'inactive']);
         } else {
             return $admin->update(['status' => 'active']);
+        }
+    }
+
+    public function updateAdmin($data, $id)
+    {
+        return self::getAdmin($id)->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'pob' => $data['pob'],
+            'dob' => $data['dob'],
+            'gender' => $data['gender'],
+            'address' => $data['address']
+        ]);
+    }
+
+    public function destroyAdmin($admin)
+    {
+        $admin = self::getAdmin($admin);
+        if ($admin->trashed()) {
+            return $admin->forceDelete();
+        } else {
+            return $admin->delete();
         }
     }
 }

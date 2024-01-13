@@ -25,13 +25,14 @@ $(function () {
       ajax: "/listAdminsTable",
       columns: [
         { data: '' },
+        { data: 'index', class: 'text-center' },
         { data: 'name' },
-        { data: 'email' },
-        { data: 'phone' },
+        { data: 'email', class: 'text-center' },
+        { data: 'phone', class: 'text-center' },
         { data: 'pob_dob' },
-        { data: 'gender' },
+        { data: 'gender', class: 'text-center text-capitalize' },
         { data: 'address' },
-        { data: 'created_at' },
+        { data: 'created_at', class: 'text-center' },
         { data: 'status' },
         { data: 'action' }
       ],
@@ -50,47 +51,54 @@ $(function () {
           targets: 1,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.name;
+            return full.index;
           }
         },
         {
           targets: 2,
+          responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.email;
+            return full.name;
           }
         },
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.phone;
+            return full.email;
           }
         },
         {
           targets: 4,
           render: function (data, type, full, meta) {
-            return full.pob_dob;
+            return full.phone;
           }
         },
         {
           targets: 5,
           render: function (data, type, full, meta) {
-            return full.gender;
+            return full.pob_dob;
           }
         },
         {
           targets: 6,
           render: function (data, type, full, meta) {
-            return full.address;
+            return full.gender;
           }
         },
         {
           targets: 7,
           render: function (data, type, full, meta) {
-            return full.created_at;
+            return full.address;
           }
         },
         {
           targets: 8,
+          render: function (data, type, full, meta) {
+            return full.created_at;
+          }
+        },
+        {
+          targets: 9,
           render: function (data, type, full, meta) {
             return full.status;
           }
@@ -196,7 +204,7 @@ $(function () {
           display: $.fn.dataTable.Responsive.display.modal({
             header: function (row) {
               var data = row.data();
-              return 'Rincian';
+              return 'Details';
             }
           }),
           type: 'column',
@@ -228,12 +236,12 @@ $(function () {
 
   // Delete Record
   $(document).on('click', '#button-delete-admin', function () {
-    let slug = $(this).attr('data-slug');
-    let formSelector = ".form-delete-admin-" + slug;
+    let id = $(this).attr('data-id');
+    let formSelector = ".form-delete-admin-" + id;
 
     Swal.fire({
       title: 'Are you sure?',
-      text: "Admin will be deleted!",
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
       cancelButtonText: 'Cancel',

@@ -12,8 +12,13 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::get('master/admin/{admin}', 'master_admin_show')->name('master.admin.show');
         Route::delete('master/admin/{admin}', 'master_admin_destroy')->name('master.admin.destroy');
         Route::patch('master/admin/{admin}/status', 'master_admin_update_status')->name('master.admin.update.status');
+        Route::patch('master/admin/{admin}', 'master_admin_update')->name('master.admin.update');
 
         Route::get('master/tenant', 'master_tenant_index')->name('master.tenant');
+        Route::get('master/tenant/{tenant}', 'master_tenant_show')->name('master.tenant.show');
+        Route::patch('master/tenant/{tenant}', 'master_tenant_update')->name('master.tenant.update');
+        Route::delete('master/tenant/{tenant}', 'master_tenant_destroy')->name('master.tenant.destroy');
+        Route::patch('master/tenant/{tenant}/status', 'master_tenant_update_status')->name('master.tenant.update.status');
 
         Route::get('master/storage', 'master_storage_index')->name('master.storage');
 
