@@ -28,8 +28,8 @@ class TenantSeeder extends Seeder
                     'identity_number' =>  $faker->numberBetween(1000000000000000, 9999999999999999),
                     'email' => $faker->unique()->safeEmail,
                     'phone' => $faker->phoneNumber,
-                    'pod' => 'Surabaya',
-                    'bod' => now(),
+                    'pob' => 'Surabaya',
+                    'dob' => now(),
                     'gender' => 'male',
                     'address' => 'Jl. Arief Rahman Hakim No.100, Klampis Ngasem, Kec. Sukolilo, Surabaya, Jawa Timur 60117'
                 ]

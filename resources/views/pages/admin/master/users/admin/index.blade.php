@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('section-admin')
-<div id="attribute" data-attribute="{{ auth()->user()->attribute }}"></div>
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
       <div class="card-header border-bottom">
@@ -12,6 +11,7 @@
           <thead>
             <tr>
               <th></th>
+              <th class="text-center">No</th>
               <th class="text-center">Admin</th>
               <th class="text-center">Email</th>
               <th class="text-center">Phone</th>
