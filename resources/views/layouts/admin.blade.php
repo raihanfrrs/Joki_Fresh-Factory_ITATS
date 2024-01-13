@@ -79,6 +79,8 @@
 
     @include('components.flasher.flasher')
 
+    @include('components.modal.modal')
+
     @auth
         <div class="layout-wrapper layout-content-navbar">
             <div class="layout-container">
@@ -127,19 +129,17 @@
 
     <!-- Vendors JS -->
     @auth
-        @if (request()->is('dashboard/*'))
-            <script src="{{ asset('assets/vendor/libs/swiper/swiper.js') }}"></script>
-            <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-        @elseif (request()->is('master/*', 'report/*'))
-            <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
-            <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-            <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
-            <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
-            <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
-            <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
-            <script src="{{ asset('assets/vendor/libs/cleavejs/cleave.js') }}"></script>
-            <script src="{{ asset('assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
-        @endif
+        <script src="{{ asset('assets/vendor/libs/swiper/swiper.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/cleavejs/cleave.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
+        <script src="{{ asset('assets/js/modal-edit-tenant.js') }}"></script>
     @else
         <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
@@ -149,8 +149,8 @@
     <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
     <!-- Main JS -->
-    <script src="{{ asset('js/script-admin.js') }}"></script>
-    <script src="{{ asset('js/images.js') }}"></script>
+    <script src="{{ asset('assets/js/script-admin.js') }}"></script>
+    <script src="{{ asset('assets/js/images.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
@@ -158,19 +158,9 @@
         @if (request()->is('dashboard/*'))
             <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
             <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
-        @elseif (request()->is('master/admin'))
+        @elseif (request()->is('master/admin', 'master/tenant'))
             <script src="{{ asset('assets/js/app-admin-list.js') }}"></script>
-        @elseif (request()->is('master/tenant'))
-            <script src="{{ asset('assets/js/app-brand-list.js') }}"></script>
-        @elseif (request()->is('master/storage'))
-            <script src="{{ asset('assets/js/app-influencer-list.js') }}"></script>
-        @elseif (request()->is('master/category'))
-            <script src="{{ asset('assets/js/app-submission-influencer-list.js') }}"></script>
-        @elseif (request()->is('master/campaign/category'))
-            <script src="{{ asset('assets/js/app-category-list.js') }}"></script>
-        @elseif (request()->is('master/product/*'))
-            <script src="{{ asset('assets/js/cards-statistics.js') }}"></script>
-            <script src="{{ asset('assets/js/cards-analytics.js') }}"></script>
+            <script src="{{ asset('assets/js/app-tenant-list.js') }}"></script>
         @elseif (request()->is('admin/profile'))
             <script src="{{ asset('assets/js/pages-profile.js') }}"></script>
         @elseif (request()->is('submission/*'))

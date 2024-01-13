@@ -4,16 +4,47 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Repositories\AdminRepository;
+use App\Repositories\TenantRepository;
 
 class AjaxController extends Controller
 {
-    private $admin;
-    private $tenant;
+    private $adminRepository;
+    private $tenantRepository;
 
-    public function __construct(Admin $admin, Tenant $tenant) {
-        $this->admin = $admin;
-        $this->tenant = $tenant;
+    public function __construct(AdminRepository $adminRepository, TenantRepository $tenantRepository) {
+        $this->adminRepository = $adminRepository;
+        $this->tenantRepository = $tenantRepository;
     }
 
+    public function admin_detail_show($admin, $type)
+    {
+        if ($type == 'account') {
+            return view('components.data-ajax.pages.data-admin-detail.account');
+        } elseif ($type == 'security') {
+            return view('components.data-ajax.pages.data-admin-detail.security');
+        }
+    }
+
+    public function tenant_detail_show($tenant, $type)
+    {
+        if ($type == 'account') {
+            return view('components.data-ajax.pages.data-tenant-detail.account');
+        } elseif ($type == 'security') {
+            return view('components.data-ajax.pages.data-tenant-detail.security');
+        }
+    }
+
+    public function admin_edit(User $user)
+    {
+        $admin = $user->admin;
+        return view('components.data-ajax.pages.data-edit-admin-modal', compact('admin'));
+    }
+
+    public function tenant_edit(Tenant $tenant)
+    {
+        return view('components.data-ajax.pages.data-edit-tenant-modal', compact('tenant'));
+    }
 }

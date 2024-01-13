@@ -18,21 +18,23 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
-  var dt_brand_table = $('#listBrandsTable');
+  var dt_brand_table = $('#listTenantsTable');
 
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
-      ajax: "/listBrandsTable",
+      ajax: "/listTenantsTable",
       columns: [
         { data: '' },
+        { data: 'index', class: 'text-center' },
         { data: 'name' },
-        { data: 'website' },
+        { data: 'identity_number', class: 'text-center' },
+        { data: 'email', class: 'text-center' },
+        { data: 'phone', class: 'text-center' },
+        { data: 'pob_dob' },
+        { data: 'gender', class: 'text-center text-capitalize' },
         { data: 'address' },
-        { data: 'phone_number' },
-        { data: 'campaigns' },
-        { data: 'products' },
-        { data: 'created_at' },
-        { data: 'status' },
+        { data: 'created_at', class: 'text-center' },
+        { data: 'status', class: 'text-center' },
         { data: 'action' }
       ],
       columnDefs: [
@@ -50,47 +52,59 @@ $(function () {
           targets: 1,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.name;
+            return full.index;
           }
         },
         {
           targets: 2,
           render: function (data, type, full, meta) {
-            return full.website;
+            return full.name;
           }
         },
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.address;
+            return full.identity_number;
           }
         },
         {
           targets: 4,
           render: function (data, type, full, meta) {
-            return full.phone_number;
+            return full.email;
           }
         },
         {
           targets: 5,
           render: function (data, type, full, meta) {
-            return full.campaigns;
+            return full.phone;
           }
         },
         {
           targets: 6,
           render: function (data, type, full, meta) {
-            return full.products;
+            return full.pob_dob;
           }
         },
         {
           targets: 7,
           render: function (data, type, full, meta) {
-            return full.created_at;
+            return full.gender;
           }
         },
         {
           targets: 8,
+          render: function (data, type, full, meta) {
+            return full.address;
+          }
+        },
+        {
+          targets: 9,
+          render: function (data, type, full, meta) {
+            return full.created_at;
+          }
+        },
+        {
+          targets: 10,
           render: function (data, type, full, meta) {
             return full.status;
           }
@@ -132,7 +146,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -152,7 +166,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
               }
             },
             {
@@ -160,7 +174,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
               }
             },
             {
@@ -168,7 +182,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
               }
             },
             {
@@ -176,18 +190,10 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
               }
             }
           ]
-        },
-        {
-          text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Tambah Brand Baru</span>',
-          className: 'add-new btn btn-primary',
-          attr: {
-            'data-bs-toggle': 'offcanvas',
-            'data-bs-target': '#offcanvasAddUser'
-          }
         }
       ],
       // For responsive popup
@@ -196,7 +202,7 @@ $(function () {
           display: $.fn.dataTable.Responsive.display.modal({
             header: function (row) {
               var data = row.data();
-              return 'Rincian';
+              return 'Details';
             }
           }),
           type: 'column',
@@ -227,17 +233,17 @@ $(function () {
   }
 
   // Delete Record
-  $(document).on('click', '#button-delete-brand', function () {
+  $(document).on('click', '#button-delete-tenant', function () {
     let id = $(this).attr('data-id');
-    let formSelector = ".form-delete-brand-" + id;
+    let formSelector = ".form-delete-tenant-" + id;
 
     Swal.fire({
-      title: 'Apakah anda yakin?',
-      text: "Anda tidak mungkin dapat mengembalikan proses ini!",
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      cancelButtonText: 'Batal',
-      confirmButtonText: 'Ya, Hapus!',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, Delete!',
       customClass: {
         confirmButton: 'btn btn-primary me-3',
         cancelButton: 'btn btn-label-secondary'
@@ -250,8 +256,6 @@ $(function () {
     });
   });
 
-  // Filter form control to default size
-  // ? setTimeout used for multilingual table initialization
   setTimeout(() => {
     $('.dataTables_filter .form-control').removeClass('form-control-sm');
     $('.dataTables_length .form-select').removeClass('form-select-sm');
@@ -272,86 +276,4 @@ $(function () {
       });
     });
   }
-  // Add New User Form Validation
-  const fv = FormValidation.formValidation(addNewUserForm, {
-    fields: {
-      name: {
-        validators: {
-          notEmpty: {
-            message: 'Tolong masukkan nama brand'
-          }
-        }
-      },
-      email: {
-        validators: {
-          notEmpty: {
-            message: 'Tolong masukkan surel brand'
-          },
-          emailAddress: {
-            message: 'Surel anda tidak valid'
-          }
-        }
-      },
-      phone: {
-        validators: {
-          notEmpty: {
-            message: 'Tolong masukkan nomor telepon brand'
-          }
-        }
-      },
-      username: {
-        validators: {
-          notEmpty: {
-            message: 'Tolong masukkan nama pengguna brand'
-          },
-          stringLength: {
-            min: 6,
-            message: 'Nama pengguna harus lebih dari 6 karakter'
-          }
-        }
-      },
-      password: {
-        validators: {
-          notEmpty: {
-            message: 'Tolong masukkan kata sandi'
-          },
-          stringLength: {
-            min: 6,
-            message: 'Kata sandi harus lebih dari 6 karakter'
-          }
-        }
-      },
-      'confirm-password': {
-        validators: {
-          notEmpty: {
-            message: 'Tolong masukkan konfirmasi kata sandi'
-          },
-          identical: {
-            compare: function () {
-              return addNewUserForm.querySelector('[name="password"]').value;
-            },
-            message: 'Kata sandi tidak sama.'
-          },
-          stringLength: {
-            min: 6,
-            message: 'Kata sandi harus lebih dari 6 karakter'
-          }
-        }
-      },
-    },
-    plugins: {
-      trigger: new FormValidation.plugins.Trigger(),
-      bootstrap5: new FormValidation.plugins.Bootstrap5({
-        // Use this for enabling/changing valid/invalid class
-        eleValidClass: '',
-        rowSelector: function (field, ele) {
-          // field is the field name & ele is the field element
-          return '.mb-3';
-        }
-      }),
-      // Submit the form when all fields are valid
-      // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
-      autoFocus: new FormValidation.plugins.AutoFocus()
-    }
-  });
 })();

@@ -19,10 +19,12 @@ return new class extends Migration
             $table->string('identity_number')->unique();
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('pod');
-            $table->date('bod');
+            $table->string('pob');
+            $table->date('dob');
             $table->enum('gender', ['male', 'female']);
             $table->longText('address');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
