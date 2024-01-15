@@ -14,8 +14,16 @@ class Admin extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
     protected $keyType = "string";
-    protected $guarded = [
-        'id'
+    protected $fillable = [
+        'id',
+        'user_id',
+        'name',
+        'email',
+        'phone',
+        'pob',
+        'dob',
+        'gender',
+        'address'
     ];
 
     public function registerMediaCollections(): void

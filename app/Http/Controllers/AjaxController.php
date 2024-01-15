@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Tenant;
 use App\Models\User;
+use App\Models\WarehouseCategory;
 use Illuminate\Http\Request;
 use App\Repositories\AdminRepository;
 use App\Repositories\TenantRepository;
@@ -40,11 +41,16 @@ class AjaxController extends Controller
     public function admin_edit(User $user)
     {
         $admin = $user->admin;
-        return view('components.data-ajax.pages.data-edit-admin-modal', compact('admin'));
+        return view('components.data-ajax.pages.modal.data-edit-admin-modal', compact('admin'));
     }
 
     public function tenant_edit(Tenant $tenant)
     {
-        return view('components.data-ajax.pages.data-edit-tenant-modal', compact('tenant'));
+        return view('components.data-ajax.pages.modal.data-edit-tenant-modal', compact('tenant'));
+    }
+
+    public function warehouse_category_edit(WarehouseCategory $warehouse_category)
+    {
+        return view('components.data-ajax.pages.modal.data-edit-warehouse-category-modal', compact('warehouse_category'));
     }
 }

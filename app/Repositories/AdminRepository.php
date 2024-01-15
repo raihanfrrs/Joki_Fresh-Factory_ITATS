@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Admin;
+use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 
@@ -11,6 +12,7 @@ class AdminRepository
     public function getAllAdminExceptMe($id): Collection
     {
         return Admin::whereNot('user_id', $id)
+                    ->orderBy('created_at', 'ASC')->get()
                     ->get();
     }
 
@@ -22,9 +24,9 @@ class AdminRepository
     public function createAdmin($data)
     {
         return Admin::create([
+            'id' => Uuid::uuid4()->toString(),
             'user_id' => $data['user_id'],
             'name' => $data['name'],
-            'slug' => Str::slug($data['name']),
             'email' => $data['email'],
             'phone' => $data['phone'],
             'pob' => $data['pob'],

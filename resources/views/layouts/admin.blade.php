@@ -158,9 +158,11 @@
         @if (request()->is('dashboard/*'))
             <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
             <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
-        @elseif (request()->is('master/admin', 'master/tenant'))
+        @elseif (request()->is('master/admin', 'master/tenant', 'master/warehouse', 'master/category'))
             <script src="{{ asset('assets/js/app-admin-list.js') }}"></script>
             <script src="{{ asset('assets/js/app-tenant-list.js') }}"></script>
+            <script src="{{ asset('assets/js/app-warehouse-list.js') }}"></script>
+            <script src="{{ asset('assets/js/app-category-list.js') }}"></script>
         @elseif (request()->is('admin/profile'))
             <script src="{{ asset('assets/js/pages-profile.js') }}"></script>
         @elseif (request()->is('submission/*'))
