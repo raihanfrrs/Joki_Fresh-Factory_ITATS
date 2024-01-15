@@ -60,19 +60,19 @@
           </li>
         </ul>
       </li>
-      <li class="menu-item {{ request()->is('master/storage', 'master/storage/*', 'master/category', 'master/category/*') ? 'open' : '' }}">
+      <li class="menu-item {{ request()->is('master/warehouse', 'master/warehouse/*', 'master/category', 'master/category/*') ? 'open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons ti ti-building-warehouse"></i>
           <div data-i18n="Property">Property</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item {{ request()->is('master/storage', 'master/storage/*') ? 'active' : '' }}">
-            <a href="{{ route('master.storage') }}" class="menu-link">
+          <li class="menu-item {{ request()->is('master/warehouse', 'master/warehouse/*') ? 'active' : '' }}">
+            <a href="{{ route('master.warehouse') }}" class="menu-link">
               <div data-i18n="Warehouse">Warehouse</div>
             </a>
           </li>
           <li class="menu-item {{ request()->is('master/category', 'master/category/*') ? 'active' : '' }}">
-            <a href="{{ route('master.category') }}" class="menu-link">
+            <a href="{{ route('master.warehouse.category') }}" class="menu-link">
               <div data-i18n="Category">Category</div>
             </a>
           </li>

@@ -10,7 +10,13 @@ class WarehouseCategory extends Model
     use HasFactory;
 
     protected $keyType = "string";
-    protected $guarded = [
-        'id'
+    protected $fillable = [
+        'id',
+        'category'
     ];
+
+    public function warehouse()
+    {
+        return $this->hasMany(Warehouse::class);
+    }
 }

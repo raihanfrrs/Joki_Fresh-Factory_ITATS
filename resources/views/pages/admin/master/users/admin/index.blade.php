@@ -61,8 +61,6 @@
               <input
                 type="email"
                 class="form-control"
-                placeholder="25"
-                aria-label="25"
                 id="email"
                 name="email"
                 value="{{ old('email') }}" />

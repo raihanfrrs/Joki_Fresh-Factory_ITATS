@@ -2,8 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Models\Admin;
 use App\Models\User;
+use App\Models\Admin;
+use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 
@@ -14,15 +15,37 @@ class UserRepository
         return User::where('level', 'admin')
                     ->whereNot('attribute', 'core')
                     ->whereNot('id', $id)
+                    ->orderBy('created_at', 'ASC')->get()
                     ->get();
     }
 
-    public function createUser($data)
+    public function createUserAndAdmin($request, $data)
     {
-        return User::create([
+        $uuid = Uuid::uuid4()->toString();
+
+        $user = User::create([
+            'id' => $uuid,
             'username' => $data['username'],
             'password' => bcrypt($data['password']),
-            'level' => $data['level']
+            'level' => 'admin'
         ]);
+
+        $admin = Admin::create([
+            'id' => Uuid::uuid4()->toString(),
+            'user_id' => $uuid,
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'pob' => $data['pob'],
+            'dob' => $data['dob'],
+            'gender' => $data['gender'],
+            'address' => $data['address']
+        ]);
+
+        if ($request->hasFile('admin_image')) {
+            $admin->addMediaFromRequest('admin_image')->withResponsiveImages()->toMediaCollection('admin_images');
+        }
+
+        return $user && $admin;
     }
 }

@@ -97,3 +97,25 @@ $(document).on('click', '#button-trigger-modal-edit-tenant', function () {
         }
     });
 });
+
+$(document).on('click', '#button-trigger-modal-edit-warehouse-category', function () {
+    let id = $(this).attr('data-id');
+
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
+    $.ajax({
+        url: "/ajax/warehouse-category/"+id+"/edit",
+        method: "get",
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#data-edit-warehouse-category-modal").html(response);
+        },
+        error: function(xhr, status, error) {
+        }
+    });
+});
