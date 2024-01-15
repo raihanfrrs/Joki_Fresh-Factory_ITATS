@@ -18,16 +18,28 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
-  var dt_brand_table = $('#listCategoriesTable');
+  var dt_brand_table = $('#listWarehousesTable');
 
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
-      ajax: "/listCategoriesTable",
+      ajax: "/listWarehousesTable",
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
-        { data: 'category', class: 'text-center' },
-        { data: 'total_warehouse', class: 'text-center' },
+        { data: 'name' },
+        { data: 'category'},
+        { data: 'capacity'},
+        { data: 'facility' },
+        { data: 'rental_price' },
+        { data: 'surface_area' },
+        { data: 'building_area' },
+        { data: 'city' },
+        { data: 'address' },
+        { data: 'description' },
+        { data: 'payment_time' },
+        { data: 'admin' },
+        { data: 'created_at' },
+        { data: 'status' },
         { data: 'action' }
       ],
       columnDefs: [
@@ -58,7 +70,73 @@ $(function () {
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.total_warehouse;
+            return full.capacity;
+          }
+        },
+        {
+          targets: 4,
+          render: function (data, type, full, meta) {
+            return full.facility;
+          }
+        },
+        {
+          targets: 5,
+          render: function (data, type, full, meta) {
+            return full.rental_price;
+          }
+        },
+        {
+          targets: 6,
+          render: function (data, type, full, meta) {
+            return full.surface_area;
+          }
+        },
+        {
+          targets: 7,
+          render: function (data, type, full, meta) {
+            return full.building_area;
+          }
+        },
+        {
+          targets: 8,
+          render: function (data, type, full, meta) {
+            return full.city;
+          }
+        },
+        {
+          targets: 9,
+          render: function (data, type, full, meta) {
+            return full.address;
+          }
+        },
+        {
+          targets: 10,
+          render: function (data, type, full, meta) {
+            return full.description;
+          }
+        },
+        {
+          targets: 11,
+          render: function (data, type, full, meta) {
+            return full.payment_time
+          }
+        },
+        {
+          targets: 12,
+          render: function (data, type, full, meta) {
+            return full.admin;
+          }
+        },
+        {
+          targets: 13,
+          render: function (data, type, full, meta) {
+            return full.created_at;
+          }
+        },
+        {
+          targets: 14,
+          render: function (data, type, full, meta) {
+            return full.status;
           }
         },
         {
@@ -86,6 +164,7 @@ $(function () {
         search: '',
         searchPlaceholder: 'Search..'
       },
+      
       buttons: [
         {
           extend: 'collection',
@@ -97,7 +176,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -117,7 +196,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3]
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
               }
             },
             {
@@ -125,7 +204,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
               }
             },
             {
@@ -133,7 +212,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
               }
             },
             {
@@ -141,13 +220,13 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
               }
             }
           ]
         },
         {
-          text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Category</span>',
+          text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Warehouse</span>',
           className: 'add-new btn btn-primary',
           attr: {
             'data-bs-toggle': 'offcanvas',
@@ -161,7 +240,7 @@ $(function () {
           display: $.fn.dataTable.Responsive.display.modal({
             header: function (row) {
               var data = row.data();
-              return 'Rincian';
+              return 'Details';
             }
           }),
           type: 'column',
@@ -192,18 +271,17 @@ $(function () {
   }
 
   // Delete Record
-  $(document).on('click', '#button-delete-campaign-category', function () {
+  $(document).on('click', '#button-delete-warehouse-category', function () {
     let id = $(this).attr('data-id');
-    let count = $(this).attr('data-count');
-    let formSelector = ".form-delete-campaign-category-" + id;
+    let formSelector = ".form-delete-warehouse-category-" + id;
 
     Swal.fire({
-      title: 'Apakah anda yakin?',
-      text: "Kategori akan dihapus dari "+count+" influencer!",
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      cancelButtonText: 'Batal',
-      confirmButtonText: 'Ya, Hapus!',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, Delete!',
       customClass: {
         confirmButton: 'btn btn-primary me-3',
         cancelButton: 'btn btn-label-secondary'
@@ -227,7 +305,7 @@ $(function () {
 // Validation & Phone mask
 (function () {
   const phoneMaskList = document.querySelectorAll('.phone-mask'),
-    addNewCategoryForm = document.getElementById('addNewCategoryForm');
+    addNewUserForm = document.getElementById('addNewAdminForm');
 
   // Phone Number
   if (phoneMaskList) {
@@ -239,12 +317,96 @@ $(function () {
     });
   }
   // Add New User Form Validation
-  const fv = FormValidation.formValidation(addNewCategoryForm, {
+  const fv = FormValidation.formValidation(addNewUserForm, {
     fields: {
       name: {
         validators: {
           notEmpty: {
-            message: 'Please enter category name'
+            message: 'Please enter admin name'
+          }
+        }
+      },
+      email: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter admin email'
+          },
+          emailAddress: {
+            message: 'The value is not a valid email address'
+          }
+        }
+      },
+      phone: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter admin phone'
+          }
+        }
+      },
+      pob: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter place of birth'
+          }
+        }
+      },
+      dob: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter date of birth'
+          }
+        }
+      },
+      address: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter address'
+          }
+        }
+      },
+      admin_image: {
+        validators: {
+          notEmpty: {
+            message: 'Please select image'
+          }
+        }
+      },
+      username: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter username'
+          },
+          stringLength: {
+            min: 6,
+            message: 'Username must be more than 6 characters long'
+          }
+        }
+      },
+      password: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter password'
+          },
+          stringLength: {
+            min: 6,
+            message: 'Password must be more than 6 characters long'
+          }
+        }
+      },
+      'confirm-password': {
+        validators: {
+          notEmpty: {
+            message: 'Please confirm password'
+          },
+          identical: {
+            compare: function () {
+              return addNewUserForm.querySelector('[name="password"]').value;
+            },
+            message: 'The password and its confirm are not the same'
+          },
+          stringLength: {
+            min: 6,
+            message: 'Password must be more than 6 characters long'
           }
         }
       },

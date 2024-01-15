@@ -32,6 +32,12 @@ class UserSeeder extends Seeder
                 'username' => 'admin1',
                 'password' => bcrypt('admin123'),
                 'level' => 'admin'
+            ],
+            [
+                'id' => Uuid::uuid4()->toString(),
+                'username' => 'admin2',
+                'password' => bcrypt('admin123'),
+                'level' => 'admin'
             ]
         ];
 

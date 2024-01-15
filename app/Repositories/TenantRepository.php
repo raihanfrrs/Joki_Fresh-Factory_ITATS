@@ -11,7 +11,7 @@ class TenantRepository
 {
     public function getAllTenants()
     {
-        return Tenant::all();
+        return Tenant::orderBy('created_at', 'ASC')->get();
     }
 
     public function getTenant($id)
