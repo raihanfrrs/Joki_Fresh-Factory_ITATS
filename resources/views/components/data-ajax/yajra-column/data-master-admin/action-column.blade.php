@@ -11,7 +11,7 @@
     @endif
     <a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical ti-sm mx-1"></i></a>
     <div class="dropdown-menu dropdown-menu-end m-0">
-        <a href="{{ route('master.admin.show', $model->admin->id) }}" target="_blank" class="dropdown-item">Lihat</a>
+        <a href="{{ route('master.admin.show', $model->admin->id) }}" target="_blank" class="dropdown-item">Details</a>
         @if (auth()->user()->attribute == 'core')
         <form action="{{ route('master.admin.update.status', $model->admin->id) }}" method="post">
             @csrf

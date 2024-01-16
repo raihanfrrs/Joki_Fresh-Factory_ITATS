@@ -158,7 +158,7 @@
         @if (request()->is('dashboard/*'))
             <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
             <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
-        @elseif (request()->is('master/admin', 'master/tenant', 'master/warehouse', 'master/category'))
+        @elseif (request()->is('master/admin', 'master/admin/*', 'master/tenant', 'master/tenant/*', 'master/warehouse', 'master/warehouse/*', 'master/category', 'master/category/*'))
             <script src="{{ asset('assets/js/app-admin-list.js') }}"></script>
             <script src="{{ asset('assets/js/app-tenant-list.js') }}"></script>
             <script src="{{ asset('assets/js/app-warehouse-list.js') }}"></script>
