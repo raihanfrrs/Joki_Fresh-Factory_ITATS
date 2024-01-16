@@ -28,6 +28,7 @@ return new class extends Migration
             $table->longText('description');
             $table->enum('payment_time', ['daily', 'monthly', 'yearly']);
             $table->enum('status', ['available', 'rented', 'maintenance', 'damaged', 'unavailable'])->default('available');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

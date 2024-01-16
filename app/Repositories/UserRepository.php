@@ -15,11 +15,11 @@ class UserRepository
         return User::where('level', 'admin')
                     ->whereNot('attribute', 'core')
                     ->whereNot('id', $id)
-                    ->orderBy('created_at', 'ASC')->get()
+                    ->orderBy('created_at', 'ASC')
                     ->get();
     }
 
-    public function createUserAndAdmin($request, $data)
+    public function createUserAndAdmin($data)
     {
         $uuid = Uuid::uuid4()->toString();
 
@@ -42,7 +42,7 @@ class UserRepository
             'address' => $data['address']
         ]);
 
-        if ($request->hasFile('admin_image')) {
+        if ($data->hasFile('admin_image')) {
             $admin->addMediaFromRequest('admin_image')->withResponsiveImages()->toMediaCollection('admin_images');
         }
 
