@@ -129,6 +129,9 @@ class YajraDatatablesController extends Controller
         ->addColumn('surface_area', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.surface-area-column', compact('model'))->render();
         })
+        ->addColumn('building_area', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.building-area-column', compact('model'))->render();
+        })
         ->addColumn('city', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.city-column', compact('model'))->render();
         })
@@ -147,10 +150,13 @@ class YajraDatatablesController extends Controller
         ->addColumn('status', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.status-column', compact('model'))->render();
         })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.created-at-column', compact('model'))->render();
+        })
         ->addColumn('action', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.action-column', compact('model'))->render();
         })
-        ->rawColumns(['name', 'category', 'capacity', 'facility', 'rental_price', 'surface_area', 'city', 'address', 'description', 'payment_time', 'admin', 'status', 'action'])
+        ->rawColumns(['name', 'category', 'capacity', 'facility', 'rental_price', 'surface_area', 'building_area','city', 'address', 'description', 'payment_time', 'admin', 'status', 'created_at', 'action'])
         ->make(true);
     }
 

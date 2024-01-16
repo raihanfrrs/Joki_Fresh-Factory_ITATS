@@ -27,19 +27,19 @@ $(function () {
         { data: '' },
         { data: 'index', class: 'text-center' },
         { data: 'name' },
-        { data: 'category'},
-        { data: 'capacity'},
-        { data: 'facility' },
-        { data: 'rental_price' },
-        { data: 'surface_area' },
-        { data: 'building_area' },
-        { data: 'city' },
+        { data: 'category', class: 'text-center' },
+        { data: 'capacity', class: 'text-center' },
+        { data: 'facility'},
+        { data: 'rental_price', class: 'text-center' },
+        { data: 'surface_area', class: 'text-center' },
+        { data: 'building_area', class: 'text-center' },
+        { data: 'city', class: 'text-center' },
         { data: 'address' },
         { data: 'description' },
-        { data: 'payment_time' },
-        { data: 'admin' },
-        { data: 'created_at' },
-        { data: 'status' },
+        { data: 'payment_time', class: 'text-center' },
+        { data: 'admin', class: 'text-center' },
+        { data: 'created_at', class: 'text-center' },
+        { data: 'status', class: 'text-center' },
         { data: 'action' }
       ],
       columnDefs: [
@@ -64,77 +64,84 @@ $(function () {
           targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.category;
+            return full.name;
           }
         },
         {
           targets: 3,
+          responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.capacity;
+            return full.category;
           }
         },
         {
           targets: 4,
           render: function (data, type, full, meta) {
-            return full.facility;
+            return full.capacity;
           }
         },
         {
           targets: 5,
           render: function (data, type, full, meta) {
-            return full.rental_price;
+            return full.facility;
           }
         },
         {
           targets: 6,
           render: function (data, type, full, meta) {
-            return full.surface_area;
+            return full.rental_price;
           }
         },
         {
           targets: 7,
           render: function (data, type, full, meta) {
-            return full.building_area;
+            return full.surface_area;
           }
         },
         {
           targets: 8,
           render: function (data, type, full, meta) {
-            return full.city;
+            return full.building_area;
           }
         },
         {
           targets: 9,
           render: function (data, type, full, meta) {
-            return full.address;
+            return full.city;
           }
         },
         {
           targets: 10,
           render: function (data, type, full, meta) {
-            return full.description;
+            return full.address;
           }
         },
         {
           targets: 11,
           render: function (data, type, full, meta) {
-            return full.payment_time
+            return full.description;
           }
         },
         {
           targets: 12,
           render: function (data, type, full, meta) {
-            return full.admin;
+            return full.payment_time
           }
         },
         {
           targets: 13,
           render: function (data, type, full, meta) {
-            return full.created_at;
+            return full.admin;
           }
         },
         {
           targets: 14,
+          render: function (data, type, full, meta) {
+            return full.created_at;
+          }
+        },
+        {
+          targets: 15,
           render: function (data, type, full, meta) {
             return full.status;
           }
@@ -176,7 +183,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -196,7 +203,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
               }
             },
             {
@@ -204,7 +211,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
               }
             },
             {
@@ -212,7 +219,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
               }
             },
             {
@@ -220,7 +227,7 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
               }
             }
           ]
@@ -271,9 +278,9 @@ $(function () {
   }
 
   // Delete Record
-  $(document).on('click', '#button-delete-warehouse-category', function () {
+  $(document).on('click', '#button-delete-warehouse', function () {
     let id = $(this).attr('data-id');
-    let formSelector = ".form-delete-warehouse-category-" + id;
+    let formSelector = ".form-delete-warehouse-" + id;
 
     Swal.fire({
       title: 'Are you sure?',
@@ -305,7 +312,7 @@ $(function () {
 // Validation & Phone mask
 (function () {
   const phoneMaskList = document.querySelectorAll('.phone-mask'),
-    addNewUserForm = document.getElementById('addNewAdminForm');
+    addNewWarehouseForm = document.getElementById('addNewWarehouseForm');
 
   // Phone Number
   if (phoneMaskList) {
@@ -317,43 +324,63 @@ $(function () {
     });
   }
   // Add New User Form Validation
-  const fv = FormValidation.formValidation(addNewUserForm, {
+  const fv = FormValidation.formValidation(addNewWarehouseForm, {
     fields: {
       name: {
         validators: {
           notEmpty: {
-            message: 'Please enter admin name'
+            message: 'Please enter warehouse name'
           }
         }
       },
-      email: {
+      capacity: {
         validators: {
           notEmpty: {
-            message: 'Please enter admin email'
+            message: 'Please enter warehouse capacity'
           },
-          emailAddress: {
-            message: 'The value is not a valid email address'
+          numeric: {
+            message: 'Capacity must be a number'
           }
         }
       },
-      phone: {
+      facility: {
         validators: {
           notEmpty: {
-            message: 'Please enter admin phone'
+            message: 'Please enter warehouse facility'
           }
         }
       },
-      pob: {
+      rental_price: {
         validators: {
           notEmpty: {
-            message: 'Please enter place of birth'
+            message: 'Please enter rental price'
           }
         }
       },
-      dob: {
+      surface_area: {
         validators: {
           notEmpty: {
-            message: 'Please enter date of birth'
+            message: 'Please enter surface area'
+          },
+          numeric: {
+            message: 'Surface area must be a number'
+          }
+        }
+      },
+      building_area: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter building area'
+          },
+          numeric: {
+            message: 'Building area must be a number'
+          }
+        }
+      },
+      city: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter city'
           }
         }
       },
@@ -361,52 +388,24 @@ $(function () {
         validators: {
           notEmpty: {
             message: 'Please enter address'
-          }
-        }
-      },
-      admin_image: {
-        validators: {
-          notEmpty: {
-            message: 'Please select image'
-          }
-        }
-      },
-      username: {
-        validators: {
-          notEmpty: {
-            message: 'Please enter username'
           },
           stringLength: {
             min: 6,
-            message: 'Username must be more than 6 characters long'
+            message: 'Address must be more than 6 characters long'
           }
         }
       },
-      password: {
+      description: {
         validators: {
           notEmpty: {
-            message: 'Please enter password'
-          },
-          stringLength: {
-            min: 6,
-            message: 'Password must be more than 6 characters long'
+            message: 'Please enter description'
           }
         }
       },
-      'confirm-password': {
+      warehouse_image: {
         validators: {
           notEmpty: {
-            message: 'Please confirm password'
-          },
-          identical: {
-            compare: function () {
-              return addNewUserForm.querySelector('[name="password"]').value;
-            },
-            message: 'The password and its confirm are not the same'
-          },
-          stringLength: {
-            min: 6,
-            message: 'Password must be more than 6 characters long'
+            message: 'Please select warehouse image'
           }
         }
       },

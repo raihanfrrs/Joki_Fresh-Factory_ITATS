@@ -21,6 +21,10 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::patch('master/tenant/{tenant}/status', 'master_tenant_update_status')->name('master.tenant.update.status');
 
         Route::get('master/warehouse', 'master_warehouse_index')->name('master.warehouse');
+        Route::post('master/warehouse', 'master_warehouse_store')->name('master.warehouse.store');
+        Route::get('master/warehouse/{warehouse}', 'master_warehouse_show')->name('master.warehouse.show');
+        Route::patch('master/warehouse/{warehouse}', 'master_warehouse_update')->name('master.warehouse.update');
+        Route::delete('master/warehouse/{warehouse}', 'master_warehouse_destroy')->name('master.warehouse.destroy');
 
         Route::get('master/category', 'master_category_index')->name('master.warehouse.category');
         Route::post('master/category', 'master_category_store')->name('master.warehouse.category.store');

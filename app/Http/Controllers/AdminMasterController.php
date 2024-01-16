@@ -12,7 +12,10 @@ use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\TenantUpdateRequest;
 use App\Http\Requests\WarehouseCategoryStoreRequest;
 use App\Http\Requests\WarehouseCategoryUpdateRequest;
+use App\Http\Requests\WarehouseStoreRequest;
+use App\Http\Requests\WarehouseUpdateRequest;
 use App\Models\Tenant;
+use App\Models\Warehouse;
 use App\Models\WarehouseCategory;
 use App\Repositories\AdminRepository;
 use App\Repositories\CategoryRepository;
@@ -52,10 +55,8 @@ class AdminMasterController extends Controller
         }
 
         if ($adminRequest->validated()) {
-
-            $data = $adminRequest->all();
-            DB::transaction(function () use ($data, $adminRequest) {
-                $this->userRepository->createUserAndAdmin($adminRequest, $data);
+            DB::transaction(function () use ($adminRequest) {
+                $this->userRepository->createUserAndAdmin($adminRequest);
             });
 
             return redirect()->back()->with([
@@ -192,7 +193,7 @@ class AdminMasterController extends Controller
 
     public function master_category_show(WarehouseCategory $warehouse_category)
     {
-        dd($warehouse_category);
+        return view('pages.admin.master.property.category.show', compact('warehouse_category'));
     }
 
     public function master_category_update(WarehouseCategoryUpdateRequest $request, $warehouse_category)
@@ -228,5 +229,53 @@ class AdminMasterController extends Controller
         $warehouse_categories = $this->warehouseCategoryRepository->getAllWarehouseCategories();
 
         return view('pages.admin.master.property.warehouse.index', compact('warehouse_categories'));
+    }
+
+    public function master_warehouse_store(WarehouseStoreRequest $request)
+    {
+        if ($request->validated()) {
+            if ($this->warehouseRepository->createWarehouse($request)) {
+                return redirect()->back()->with([
+                    'flash-type' => 'sweetalert',
+                    'case' => 'default',
+                    'position' => 'center',
+                    'type' => 'success',
+                    'message' => 'Warehouse has been created!'
+                ]);
+            }
+        }
+    }
+
+    public function master_warehouse_update(WarehouseUpdateRequest $request, $warehouse)
+    {
+        if ($request->validated()) {
+            if ($this->warehouseRepository->updateWarehouse($request, $warehouse)) {
+                return redirect()->back()->with([
+                    'flash-type' => 'sweetalert',
+                    'case' => 'default',
+                    'position' => 'center',
+                    'type' => 'success',
+                    'message' => 'Warehouse has been updated!'
+                ]);
+            }
+        }
+    }
+
+    public function master_warehouse_show(Warehouse $warehouse)
+    {
+        return view('pages.admin.master.property.warehouse.show', compact('warehouse'));
+    }
+
+    public function master_warehouse_destroy($warehouse)
+    {
+        if ($this->warehouseRepository->deleteWarehouse($warehouse)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Warehouse has been deleted!'
+            ]);
+        }
     }
 }
