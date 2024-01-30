@@ -1,36 +1,68 @@
-<header class="navigation">
-    <div id="navbar">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <nav class="navbar navbar-expand-lg px-0 py-4">
-              <a class="navbar-brand" href="/">
-                <img src="{{ asset('asset/images/logos/logo-white.png') }}" alt="" class="img-fluid d-block w-25">
-              </a>
-        
-              <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09"
-                aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="fa fa-bars"></span>
-              </button>
-        
-              <div class="collapse navbar-collapse justify-content-end" id="navbarsExample09">
-                <ul class="navbar-nav ml-auto">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
-                  </li>
-                  <li class="nav-item @@service"><a class="nav-link" href="service.html">About Us</a></li>
-                  <li class="nav-item @@project"><a class="nav-link" href="project.html">Our Properties</a></li>
-                  <li class="nav-item @@contact"><a class="nav-link" href="contact.html">Contact</a></li>
-                </ul>
-        
-                <div class="my-2 my-md-0 ml-lg-4 text-center ms-2">
-                  <a href="/sign-in" class="btn btn-solid-border btn-round-full">Sign In</a>
-                </div>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  
+@if (Request::is('/'))
+<section class="slider">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-9 col-md-10">
+				<div class="block">
+					<span class="d-block mb-3 text-white text-capitalize">Prepare for new future</span>
+					<h1 class="animated fadeInUp mb-5">Our work is to <br> contribute to helping <br> your product management.</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+@elseif (Request::is('about-us'))
+<section class="page-title bg-1">
+	<div class="container">
+	  <div class="row">
+		<div class="col-md-12">
+		  <div class="block text-center">
+			<span class="text-white">About Us</span>
+			<h1 class="text-capitalize mb-4 text-lg">Our Company</h1>
+			<ul class="list-inline">
+			  <li class="list-inline-item"><a href="{{ route('/') }}" class="text-white">Home</a></li>
+			  <li class="list-inline-item"><span class="text-white">/</span></li>
+			  <li class="list-inline-item text-white-50">About Us</li>
+			</ul>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</section>
+@elseif (Request::is('service'))
+<section class="page-title bg-1">
+	<div class="container">
+	  <div class="row">
+		<div class="col-md-12">
+		  <div class="block text-center">
+			<span class="text-white">Our services</span>
+			<h1 class="text-capitalize mb-4 text-lg">What We Do</h1>
+			<ul class="list-inline">
+			  <li class="list-inline-item"><a href="index.html" class="text-white">Home</a></li>
+			  <li class="list-inline-item"><span class="text-white">/</span></li>
+			  <li class="list-inline-item text-white-50">Our services</li>
+			</ul>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</section>
+@elseif (Request::is('contact-us'))
+<section class="page-title bg-1">
+	<div class="container">
+	  <div class="row">
+		<div class="col-md-12">
+		  <div class="block text-center">
+			<span class="text-white">Contact Us</span>
+			<h1 class="text-capitalize mb-4 text-lg">Get in Touch</h1>
+			<ul class="list-inline">
+			  <li class="list-inline-item"><a href="index.html" class="text-white">Home</a></li>
+			  <li class="list-inline-item"><span class="text-white">/</span></li>
+			  <li class="list-inline-item text-white-50">Contact Us</li>
+			</ul>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</section>
+@endif

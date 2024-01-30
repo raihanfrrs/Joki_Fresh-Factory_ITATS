@@ -554,7 +554,7 @@ ul.dropdown-menu li {
   }
 }
 .bg-1 {
-  background: url("../images/bg/home-2.jpg") no-repeat 50% 50%;
+  background: url("../images/bg/home-11.jpg") no-repeat 50% 50%;
   background-size: cover;
 }
 
@@ -649,7 +649,7 @@ ul.dropdown-menu li {
 }
 
 .bg-counter {
-  background: url("../images/bg/counter.jpg") no-repeat;
+  background: url("../images/bg/home-12.jpg") no-repeat;
   background-size: cover;
 }
 
@@ -726,13 +726,13 @@ ul.dropdown-menu li {
 }
 
 .cta {
-  background: url("../images/bg/home-3.jpg") fixed 50% 50%;
+  background: url("../images/bg/home-10.jpg") fixed 50% 50%;
   background-size: cover;
   padding: 120px 0px;
 }
 
 .cta-block {
-  background: url("../images/bg/home-3.jpg") no-repeat;
+  background: url("../images/bg/home-10.jpg") no-repeat;
   background-size: cover;
 }
 

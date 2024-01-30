@@ -1,14 +1,13 @@
 @extends('layouts.guest')
 
-@section('section')
+@section('section-guest')
 <section class="section intro">
 	<div class="container">
 		<div class="row ">
 			<div class="col-lg-8">
 				<div class="section-title">
-					<span class="h6 text-color ">We are creative & expert people</span>
-					<h2 class="mt-3 content-title">We work with business & provide solution to client with their business problem
-					</h2>
+					<span class="h6 text-color ">We specialize in creative warehouse solutions for streamlined operations.</span>
+					<h2 class="mt-3 content-title">Collaborating across industries, we efficiently customize warehouse resource management.</h2>
 				</div>
 			</div>
 		</div>
@@ -16,42 +15,22 @@
 			<div class="col-lg-4 col-md-6 col-12">
 				<div class="intro-item mb-5 mb-lg-0">
 					<i class="ti-desktop color-one"></i>
-					<h4 class="mt-4 mb-3">Modern & Responsive design</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit, ducimus.</p>
+					<h4 class="mt-4 mb-3">Innovative and adaptable design solutions for your logistics optimization</h4>
+					<p>Revolutionize your logistics with our innovative and adaptable solutions designed to optimize your operations effectively.</p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6">
 				<div class="intro-item mb-5 mb-lg-0">
 					<i class="ti-medall color-one"></i>
-					<h4 class="mt-4 mb-3">Awarded licensed company</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit, ducimus.</p>
+					<h4 class="mt-4 mb-3">A recognized and licensed partner in optimizing storage functionalities</h4>
+					<p>As a distinguished and licensed partner, we specialize in enhancing storage functionalities to ensure seamless and efficient warehouse management.</p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-12">
 				<div class="intro-item">
 					<i class="ti-layers-alt color-one"></i>
-					<h4 class="mt-4 mb-3">Build your website Professionally</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit, ducimus.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<section class="section about position-relative">
-	<div class="bg-about"></div>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6 offset-lg-6 offset-md-0">
-				<div class="about-item ">
-					<span class="h6 text-color">What we are</span>
-					<h2 class="mt-3 mb-4 position-relative content-title">We are dynamic team of creative people</h2>
-					<div class="about-content">
-						<h4 class="mb-3 position-relative">We are Perfect Solution</h4>
-						<p class="mb-5">We provide consulting services in the area of IFRS and management reporting, helping
-							companies to reach their highest level. We optimize business processes, making them easier.</p>
-
-						<a href="#" class="btn btn-main btn-round-full">Get started</a>
-					</div>
+					<h4 class="mt-4 mb-3">Elevate your online presence with expertly crafted logistics websites.</h4>
+					<p>Enhance your online visibility with our meticulously crafted logistics websites, expertly designed to represent your storage solutions in the digital realm.</p>
 				</div>
 			</div>
 		</div>
@@ -63,7 +42,7 @@
 		<div class="row">
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="counter-item text-center mb-5 mb-lg-0">
-					<h3 class="mb-0"><span class="counter-stat font-weight-bold">1730</span> +</h3>
+					<h3 class="mb-0"><span class="counter-stat font-weight-bold">69</span> +</h3>
 					<p class="text-muted">Project Done</p>
 				</div>
 			</div>
@@ -104,48 +83,48 @@
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="service-item mb-5">
 					<i class="ti-desktop"></i>
-					<h4 class="mb-3">Web development.</h4>
-					<p>A digital agency isn't here to replace your internal team, we're here to partner</p>
+					<h4 class="mb-3">Web Innovation Partnership.</h4>
+					<p>As your strategic collaborator in web development, we complement your internal team's efforts instead of replacing them.</p>
 				</div>
 			</div>
 
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="service-item mb-5">
 					<i class="ti-layers"></i>
-					<h4 class="mb-3">Interface Design.</h4>
-					<p>A digital agency isn't here to replace your internal team, we're here to partner</p>
+					<h4 class="mb-3">Creative Interface Alliances.</h4>
+					<p>In the dynamic field of interface design, we're not substitutes for your internal team; we're creative allies fostering innovative interfaces.</p>
 				</div>
 			</div>
 
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="service-item mb-5">
 					<i class="ti-bar-chart"></i>
-					<h4 class="mb-3">Business Consulting.</h4>
-					<p>A digital agency isn't here to replace your internal team, we're here to partner</p>
+					<h4 class="mb-3">Strategic Business Collaborations.</h4>
+					<p>In the realm of business consulting, we're not here to replace your internal team; we're strategic collaborators shaping successful business ventures.</p>
 				</div>
 			</div>
 
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="service-item mb-5 mb-lg-0">
 					<i class="ti-vector"></i>
-					<h4 class="mb-3">Branding.</h4>
-					<p>A digital agency isn't here to replace your internal team, we're here to partner</p>
+					<h4 class="mb-3">Brand-building Companionship.</h4>
+					<p>Beyond branding, we don't replace your internal efforts; we're your trusted companions in building and elevating your brand.</p>
 				</div>
 			</div>
 
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="service-item mb-5 mb-lg-0">
 					<i class="ti-android"></i>
-					<h4 class="mb-3">App development.</h4>
-					<p>A digital agency isn't here to replace your internal team, we're here to partner</p>
+					<h4 class="mb-3">App Development Associates.</h4>
+					<p>In app development, we don't replace your internal team; we're your dedicated associates in bringing your app ideas to life.</p>
 				</div>
 			</div>
 
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="service-item mb-5 mb-lg-0">
 					<i class="ti-pencil-alt"></i>
-					<h4 class="mb-3">Content creation.</h4>
-					<p>A digital agency isn't here to replace your internal team, we're here to partner</p>
+					<h4 class="mb-3">Collaborative Content Creation.</h4>
+					<p>Beyond content creation, we're not a substitute for your team; we're your collaborative content creators, infusing creativity into every project.</p>
 				</div>
 			</div>
 		</div>
@@ -158,8 +137,8 @@
 			<div class="col-xl-5 col-lg-6">
 				<div class="cta-item  bg-white p-5 rounded">
 					<span class="h6 text-color">We create for you</span>
-					<h2 class="mt-2 mb-4">Entrust Your Project to Our Best Team of Professionals</h2>
-					<p class="lead mb-4">Have any project on mind? For immidiate support :</p>
+					<h2 class="mt-2 mb-4">Trust our expert team for success in your endeavors</h2>
+					<p class="lead mb-4">Have a goal in mind? Immediate support awaits you:</p>
 					<h3><i class="ti-mobile mr-3 text-color"></i>+23 876 65 455</h3>
 				</div>
 			</div>
@@ -312,8 +291,8 @@
 		<div class="cta-block-2 bg-gray p-5 rounded border-1">
 			<div class="row justify-content-center align-items-center ">
 				<div class="col-lg-7">
-					<span class="text-color">For Every type business</span>
-					<h2 class="mt-2 mb-4 mb-lg-0">Entrust Your Project to Our Best Team of Professionals</h2>
+					<span class="text-color">Elevate every business</span>
+					<h2 class="mt-2 mb-4 mb-lg-0">Entrust success to our expert team</h2>
 				</div>
 				<div class="col-lg-4">
 					<a href="contact.html" class="btn btn-main btn-round-full float-lg-right ">Contact Us</a>
