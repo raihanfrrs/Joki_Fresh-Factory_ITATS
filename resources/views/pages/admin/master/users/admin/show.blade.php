@@ -11,10 +11,10 @@
         <div class="card-body">
           <div class="user-avatar-section">
             <div class="d-flex align-items-center flex-column">
-              @if ($admin->getFirstMediaUrl('admin_image'))
+              @if ($admin->getFirstMediaUrl('admin_images'))
                     <img
                         class="img-fluid rounded mb-3 pt-1 mt-4"
-                        src="{{ $admin->getFirstMediaUrl('admin_image') }}"
+                        src="{{ $admin->getFirstMediaUrl('admin_images') }}"
                         height="100"
                         width="100"
                         alt="{{ $admin->id }}" />
@@ -61,7 +61,7 @@
               </li>
               <li class="mb-2 pt-1">
                 <span class="fw-semibold me-1">Status:</span>
-                <span class="badge bg-label-success">{{ $admin->status }}</span>
+                <span class="badge bg-label-{{ $admin->status == 'active' ? 'success' : 'danger' }}">{{ $admin->status }}</span>
               </li>
               <li class="mb-2 pt-1">
                 <span class="fw-semibold me-1">Role:</span>
@@ -82,8 +82,12 @@
             </ul>
             @if (auth()->user()->attribute == 'core')
             <div class="d-flex justify-content-center">
-              <a href="javascript:;" class="btn btn-primary me-3 waves-effect waves-light" data-bs-target="#editUser" data-bs-toggle="modal">Edit</a>
-              <a href="javascript:;" class="btn btn-label-danger suspend-user waves-effect">Suspended</a>
+              <a href="javascript:;" class="btn btn-primary me-3 waves-effect waves-light" data-bs-target="#editAdmin" data-bs-toggle="modal" id="button-trigger-modal-edit-admin" data-id="{{ $admin->user_id }}">Edit</a>
+              <form action="{{ route('master.admin.update.status', $admin->id) }}" method="post">
+                @csrf
+                @method('PATCH')
+                <button type="submit" class="btn btn-label-{{ $admin->status == 'active' ? 'danger' : 'success' }} suspend-user waves-effect">{{ $admin->status == 'active' ? 'Suspended' : 'Actived' }}</button>
+              </form>
             </div>
             @endif
           </div>

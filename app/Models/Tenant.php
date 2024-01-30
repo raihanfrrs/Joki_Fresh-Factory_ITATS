@@ -14,8 +14,18 @@ class Tenant extends Model implements HasMedia
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $keyType = "string";
-    protected $guarded = [
-        'id'
+    protected $fillable = [
+        'id',
+        'user_id',
+        'name',
+        'identity_number',
+        'email',
+        'phone',
+        'pob',
+        'dob',
+        'gender',
+        'address',
+        'status'
     ];
 
     public function registerMediaCollections(): void

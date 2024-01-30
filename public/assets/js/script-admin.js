@@ -171,3 +171,22 @@ function formatRupiah(angka) {
     var formatted = reverse.match(/\d{1,3}/g).join('.').split('').reverse().join('');
     return 'Rp ' + formatted;
 }
+
+$(document).on('click', '#button-submit-image-change', function(e) {
+    let filePath = $('#image').val();
+
+    let allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        e.preventDefault();
+        alert('Invalid file type. Please select a valid image file (jpg, jpeg, png).');
+        return false;
+    }
+
+    $(this).submit();
+});
+
+// $(document).on('click', '#button-password-change', function (e) {
+
+
+//     $("#formChangePassword").submit();
+// });

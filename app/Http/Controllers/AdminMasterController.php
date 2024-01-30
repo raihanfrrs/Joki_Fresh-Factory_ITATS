@@ -89,7 +89,7 @@ class AdminMasterController extends Controller
 
     public function master_admin_update_status(Admin $admin)
     {
-        if ($this->adminRepository->changeStatus($admin->slug)) {
+        if ($this->adminRepository->changeStatus($admin->id)) {
             return redirect()->back()->with([
                 'flash-type' => 'sweetalert',
                 'case' => 'default',
@@ -112,6 +112,32 @@ class AdminMasterController extends Controller
                     'message' => 'Admin has been updated!'
                 ]);
             }
+        }
+    }
+
+    public function master_admin_update_image(Request $request, $admin)
+    {
+        if ($this->adminRepository->updateAdminImage($request, $admin)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Image has been updated!'
+            ]);
+        }
+    }
+
+    public function master_admin_update_password(Request $request, Admin $admin)
+    {
+        if ($this->adminRepository->updateAdminPassword($request, $admin->user_id)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Password has been updated!'
+            ]);
         }
     }
 
@@ -151,6 +177,32 @@ class AdminMasterController extends Controller
     public function master_tenant_show(Tenant $tenant)
     {
         return view('pages.admin.master.users.tenant.show', compact('tenant'));
+    }
+
+    public function master_tenant_update_image(Request $request, $tenant)
+    {
+        if ($this->tenantRepository->updateTenantImage($request, $tenant)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Image has been updated!'
+            ]);
+        }
+    }
+
+    public function master_tenant_update_password(Request $request, Tenant $tenant)
+    {
+        if ($this->tenantRepository->updateTenantPassword($request, $tenant->user_id)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Password has been updated!'
+            ]);
+        }
     }
 
     public function master_tenant_destroy($tenant)

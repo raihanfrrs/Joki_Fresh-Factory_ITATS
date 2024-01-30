@@ -59,8 +59,8 @@
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/cards-advance.css') }}" />
         @elseif (request()->is('master/admin/*', 'master/tenant/*'))
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-user-view.css') }}" />
-        {{-- @elseif (request()->is('admin/profile', 'brand/following', 'influencer/follower'))
-            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-profile.css') }}" /> --}}
+        @elseif (request()->is('profile/*'))
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-profile.css') }}" />
         @endif
     @else
         <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
@@ -149,6 +149,7 @@
     <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
     <!-- Main JS -->
+    <script src="{{ asset('assets/js/prev-image.js') }}"></script>
     <script src="{{ asset('assets/js/script-admin.js') }}"></script>
     <script src="{{ asset('assets/js/images.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
@@ -163,12 +164,8 @@
             <script src="{{ asset('assets/js/app-tenant-list.js') }}"></script>
             <script src="{{ asset('assets/js/app-warehouse-list.js') }}"></script>
             <script src="{{ asset('assets/js/app-category-list.js') }}"></script>
-        @elseif (request()->is('admin/profile'))
-            <script src="{{ asset('assets/js/pages-profile.js') }}"></script>
-        @elseif (request()->is('submission/*'))
-            <script src="{{ asset('assets/js/offcanvas-send-invoice.js') }}"></script>
-        @elseif (request()->is('subscription/brand', 'subscription/brand/*'))
-        <script src="{{ asset('assets/js/app-subscription-list.js') }}"></script>
+        @elseif (request()->is('settings/*'))
+            <script src="{{ asset('assets/js/pages-account-settings-security.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
