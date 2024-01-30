@@ -1,7 +1,10 @@
+@if (auth()->user()->attribute == 'core')
 <div class="card mb-4">
     <h5 class="card-header">Change Password</h5>
     <div class="card-body">
-    <form id="formChangePassword" method="POST" onsubmit="return false" class="fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+    <form action="{{ route('master.admin.update.password', $admin->id) }}" id="formChangePassword" method="POST" class="fv-plugins-bootstrap5 fv-plugins-framework">
+        @csrf
+        @method('PATCH')
         <div class="alert alert-warning" role="alert">
         <h5 class="alert-heading mb-2">Ensure that these requirements are met</h5>
         <span>Minimum 8 characters long, uppercase &amp; symbol</span>
@@ -23,12 +26,13 @@
             </div><div class="fv-plugins-message-container invalid-feedback"></div>
         </div>
         <div>
-            <button type="submit" class="btn btn-primary me-2 waves-effect waves-light">Change Password</button>
+            <button type="submit" class="btn btn-primary me-2 waves-effect waves-light" id="button-password-change">Change Password</button>
         </div>
         </div>
-    <input type="hidden"></form>
+    </form>
     </div>
 </div>
+@endif
 
 <div class="card mb-4">
     <h5 class="card-header pb-2">Two-steps verification</h5>
@@ -120,3 +124,5 @@
     </table>
     </div>
 </div>
+
+<script src="{{ asset('assets/js/app-user-view-security.js') }}"></script>

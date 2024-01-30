@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminMasterController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AdminReportingController;
 
 Route::group(['middleware' => ['cekUserLogin:admin']], function(){
@@ -13,12 +14,16 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::delete('master/admin/{admin}', 'master_admin_destroy')->name('master.admin.destroy');
         Route::patch('master/admin/{admin}/status', 'master_admin_update_status')->name('master.admin.update.status');
         Route::patch('master/admin/{admin}', 'master_admin_update')->name('master.admin.update');
+        Route::patch('master/admin/{admin}/image', 'master_admin_update_image')->name('master.admin.update.image');
+        Route::patch('master/admin/{admin}/password', 'master_admin_update_password')->name('master.admin.update.password');
 
         Route::get('master/tenant', 'master_tenant_index')->name('master.tenant');
         Route::get('master/tenant/{tenant}', 'master_tenant_show')->name('master.tenant.show');
         Route::patch('master/tenant/{tenant}', 'master_tenant_update')->name('master.tenant.update');
         Route::delete('master/tenant/{tenant}', 'master_tenant_destroy')->name('master.tenant.destroy');
         Route::patch('master/tenant/{tenant}/status', 'master_tenant_update_status')->name('master.tenant.update.status');
+        Route::patch('master/tenant/{tenant}/image', 'master_tenant_update_image')->name('master.tenant.update.image');
+        Route::patch('master/tenant/{tenant}/password', 'master_tenant_update_password')->name('master.tenant.update.password');
 
         Route::get('master/warehouse', 'master_warehouse_index')->name('master.warehouse');
         Route::post('master/warehouse', 'master_warehouse_store')->name('master.warehouse.store');
@@ -37,5 +42,14 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::get('report/sales', 'report_sales_index')->name('report.sales');
 
         Route::get('report/performance', 'report_performance_index')->name('report.performance');
+    });
+
+    Route::controller(AdminProfileController::class)->group(function () {
+        Route::get('profile/admin', 'admin_profile_index')->name('admin.profile');
+
+        Route::get('settings/admin-profile', 'admin_setting_profile_index')->name('admin.settings.profile');
+        Route::patch('settings/admin-profile/{admin}', 'admin_setting_profile_update')->name('admin.settings.profile.update');
+        Route::get('settings/admin-password', 'admin_setting_password_index')->name('admin.settings.password');
+        Route::patch('settings/admin-password/{admin}', 'admin_setting_password_update')->name('admin.settings.password.update');
     });
 });

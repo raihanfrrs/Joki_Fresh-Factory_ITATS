@@ -1,4 +1,19 @@
+@if (auth()->user()->attribute == 'core')
 <div class="card mb-4">
+    <h5 class="card-header pb-0">Change Admin Image</h5>
+    <form action="{{ route('master.admin.update.image', $admin->id) }}" method="post" enctype="multipart/form-data" id="form-admin-image-change">
+        @csrf
+        @method('PATCH')
+        <div class="card-body">
+            <label for="admin_image">Admin Image</label>
+            <input type="file" name="admin_image" id="admin_image" class="form-control" required>
+            <button class="btn btn-primary mt-3" type="submit" id="button-submit-admin-image-change">Change</button>
+        </div>
+    </form>
+</div>
+@endif
+
+{{-- <div class="card mb-4">
     <h5 class="card-header">User's Projects List</h5>
     <div class="table-responsive mb-3">
     <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer"><div class="d-flex justify-content-between align-items-center flex-column flex-sm-row mx-4 row"><div class="col-sm-4 col-12 d-flex align-items-center justify-content-sm-start justify-content-center"><div class="dataTables_length" id="DataTables_Table_0_length"><label>Show <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select"><option value="7">7</option><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="75">75</option><option value="100">100</option></select></label></div></div><div class="col-sm-8 col-12 d-flex align-items-center justify-content-sm-end justify-content-center"><div id="DataTables_Table_0_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control" placeholder="Search Project" aria-controls="DataTables_Table_0"></label></div></div></div><table class="table datatable-project border-top dataTable no-footer dtr-column" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
@@ -101,4 +116,4 @@
         </thead><tbody><tr class="odd"><td valign="top" colspan="5" class="dataTables_empty">Loading...</td></tr></tbody>
     </table><div class="row mx-4"><div class="col-md-12 col-lg-6 text-center text-lg-start pb-md-2 pb-lg-0"><div class="dataTables_info" id="DataTables_Table_1_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div></div><div class="col-md-12 col-lg-6 d-flex justify-content-center justify-content-lg-end"><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_1_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="DataTables_Table_1_previous"><a aria-controls="DataTables_Table_1" aria-disabled="true" aria-role="link" data-dt-idx="previous" tabindex="0" class="page-link waves-effect">Previous</a></li><li class="paginate_button page-item next disabled" id="DataTables_Table_1_next"><a aria-controls="DataTables_Table_1" aria-disabled="true" aria-role="link" data-dt-idx="next" tabindex="0" class="page-link waves-effect">Next</a></li></ul></div></div></div></div>
     </div>
-</div>
+</div> --}}

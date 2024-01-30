@@ -84,8 +84,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
               message: 'The name must be more than 6 and less than 30 characters long'
             },
             regexp: {
-              regexp: /^[a-zA-Z0-9 ]+$/,
-              message: 'The name can only consist of alphabetical, number and space'
+              regexp: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
+              message: 'Password must contain at least one uppercase letter and one symbol (!@#$%^&*)'
             }
           }
         },
