@@ -9,6 +9,13 @@ use Illuminate\Support\Collection;
 
 class TenantRepository
 {
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function getAllTenants()
     {
         return Tenant::orderBy('created_at', 'ASC')->get();
@@ -33,6 +40,24 @@ class TenantRepository
         ]);
     }
 
+    public function updateTenantImage($data, $id)
+    {
+        $tenant = self::getTenant($id);
+
+        if ($data->hasFile('tenant_image')) {
+            $media = $tenant->addMediaFromRequest('tenant_image')->withResponsiveImages()->toMediaCollection('tenant_images');
+
+            $media->where('model_type', Admin::class)
+                ->where('model_id', $tenant->id)
+                ->update([
+                    'model_id' => $tenant->id,
+                    'model_type' => Admin::class,
+                ]);
+        }
+
+        return true;
+    }
+
     public function changeStatus($id)
     {
         $tenant = self::getTenant($id);
@@ -41,6 +66,12 @@ class TenantRepository
         } else {
             return $tenant->update(['status' => 'active']);
         }
+    }
+
+    public function updateTenantPassword($data, $user_id)
+    {
+        $user = $this->userRepository->getUser($user_id);
+        return $user->update(['password' => bcrypt($data->newPassword)]);
     }
 
     public function deleteTenant($tenant)

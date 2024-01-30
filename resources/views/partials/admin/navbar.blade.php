@@ -178,15 +178,15 @@
                 <div class="dropdown-divider"></div>
             </li>
             <li>
-                <a class="dropdown-item" href="">
+                <a class="dropdown-item" href="{{ route('admin.profile') }}">
                 <i class="ti ti-user-check me-2 ti-sm"></i>
-                <span class="align-middle">Profil Saya</span>
+                <span class="align-middle">My Profile</span>
                 </a>
             </li>
             <li>
-                <a class="dropdown-item" href="">
+                <a class="dropdown-item" href="{{ route('admin.settings.profile') }}">
                 <i class="ti ti-settings me-2 ti-sm"></i>
-                <span class="align-middle">Pengaturan</span>
+                <span class="align-middle">Settings</span>
                 </a>
             </li>
             <li>

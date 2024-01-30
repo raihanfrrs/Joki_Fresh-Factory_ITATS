@@ -11,10 +11,10 @@
         <div class="card-body">
           <div class="user-avatar-section">
             <div class="d-flex align-items-center flex-column">
-              @if ($tenant->getFirstMediaUrl('tenant_image'))
+              @if ($tenant->getFirstMediaUrl('tenant_images'))
                     <img
                         class="img-fluid rounded mb-3 pt-1 mt-4"
-                        src="{{ $tenant->getFirstMediaUrl('tenant_image') }}"
+                        src="{{ $tenant->getFirstMediaUrl('tenant_images') }}"
                         height="100"
                         width="100"
                         alt="{{ $tenant->id }}" />
@@ -86,7 +86,7 @@
             </ul>
             @if (auth()->user()->attribute == 'core')
             <div class="d-flex justify-content-center">
-              <a href="javascript:;" class="btn btn-primary me-3 waves-effect waves-light" data-bs-target="#editUser" data-bs-toggle="modal">Edit</a>
+              <a href="javascript:;" class="btn btn-primary me-3 waves-effect waves-light" data-bs-target="#editTenant" data-bs-toggle="modal" id="button-trigger-modal-edit-tenant" data-id="{{ $tenant->id }}">Edit</a>
               <a href="javascript:;" class="btn btn-label-danger suspend-user waves-effect">Suspended</a>
             </div>
             @endif

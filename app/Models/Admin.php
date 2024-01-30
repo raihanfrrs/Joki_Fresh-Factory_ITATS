@@ -14,6 +14,8 @@ class Admin extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
     protected $keyType = "string";
+    public $incrementing = false;
+    protected $primaryKey = 'id';
     protected $fillable = [
         'id',
         'user_id',
@@ -23,7 +25,8 @@ class Admin extends Model implements HasMedia
         'pob',
         'dob',
         'gender',
-        'address'
+        'address',
+        'status'
     ];
 
     public function registerMediaCollections(): void

@@ -19,6 +19,11 @@ class UserRepository
                     ->get();
     }
 
+    public function getUser($id)
+    {
+        return User::find($id);
+    }
+
     public function createUserAndAdmin($data)
     {
         $uuid = Uuid::uuid4()->toString();

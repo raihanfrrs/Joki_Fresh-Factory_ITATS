@@ -25,18 +25,26 @@ class AjaxController extends Controller
     public function admin_detail_show($admin, $type)
     {
         if ($type == 'account') {
-            return view('components.data-ajax.pages.data-admin-detail.account');
+            return view('components.data-ajax.pages.data-admin-detail.account', [
+                'admin' => $this->adminRepository->getAdmin($admin)
+            ]);
         } elseif ($type == 'security') {
-            return view('components.data-ajax.pages.data-admin-detail.security');
+            return view('components.data-ajax.pages.data-admin-detail.security', [
+                'admin' => $this->adminRepository->getAdmin($admin)
+            ]);
         }
     }
 
     public function tenant_detail_show($tenant, $type)
     {
         if ($type == 'account') {
-            return view('components.data-ajax.pages.data-tenant-detail.account');
+            return view('components.data-ajax.pages.data-tenant-detail.account', [
+                'tenant' => $this->tenantRepository->getTenant($tenant)
+            ]);
         } elseif ($type == 'security') {
-            return view('components.data-ajax.pages.data-tenant-detail.security');
+            return view('components.data-ajax.pages.data-tenant-detail.security', [
+                'tenant' => $this->tenantRepository->getTenant($tenant)
+            ]);
         }
     }
 

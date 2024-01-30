@@ -9,6 +9,13 @@ use Illuminate\Support\Collection;
 
 class AdminRepository
 {
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function getAllAdminExceptMe($id): Collection
     {
         return Admin::whereNot('user_id', $id)
@@ -36,9 +43,9 @@ class AdminRepository
         ]);
     }
 
-    public function changeStatus($slug)
+    public function changeStatus($id)
     {
-        $admin = self::getAdmin($slug);
+        $admin = self::getAdmin($id);
 
         if ($admin->status == 'active') {
             return $admin->update(['status' => 'inactive']);
@@ -58,6 +65,30 @@ class AdminRepository
             'gender' => $data['gender'],
             'address' => $data['address']
         ]);
+    }
+
+    public function updateAdminImage($data, $id)
+    {
+        $admin = self::getAdmin($id);
+
+        if ($data->hasFile('admin_image')) {
+            $media = $admin->addMediaFromRequest('admin_image')->withResponsiveImages()->toMediaCollection('admin_images');
+
+            $media->where('model_type', Admin::class)
+                ->where('model_id', $admin->id)
+                ->update([
+                    'model_id' => $admin->id,
+                    'model_type' => Admin::class,
+                ]);
+        }
+
+        return true;
+    }
+
+    public function updateAdminPassword($data, $user_id)
+    {
+        $user = $this->userRepository->getUser($user_id);
+        return $user->update(['password' => bcrypt($data->newPassword)]);
     }
 
     public function destroyAdmin($admin)
