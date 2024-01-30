@@ -21,17 +21,17 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style-guest.css') }}">
     
     <!-- FAVICON -->
-    <link rel="icon" href="{{ asset('assets/images/logos') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
 
 </head>
 
 <body>
 
+    @include('partials.guest.navbar')
+
     @include('partials.guest.header')
 
-    @include('partials.guest.slider')
-
-    @yield('section')
+    @yield('section-guest')
 
     @include('partials.guest.footer')
 
@@ -46,7 +46,7 @@
     <script src="{{ asset('assets/vendor/counterup/jquery.counterup.min.js') }}"></script>
 
     <!-- MAIN JS -->
-    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{ asset('assets/js/script-guest.js') }}"></script>
 
 </body>
 
