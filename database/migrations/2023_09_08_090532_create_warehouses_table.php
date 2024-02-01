@@ -20,13 +20,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('capacity');
             $table->string('facility');
-            $table->bigInteger('rental_price');
             $table->integer('surface_area');
             $table->integer('building_area');
             $table->string('city');
             $table->longText('address');
             $table->longText('description');
-            $table->enum('payment_time', ['daily', 'monthly', 'yearly']);
             $table->enum('status', ['available', 'rented', 'maintenance', 'damaged', 'unavailable'])->default('available');
             $table->softDeletes();
             $table->timestamps();

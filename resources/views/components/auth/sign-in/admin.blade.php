@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('section-admin-authentication')
-<!-- /Left Text -->
 <div class="d-none d-lg-flex col-lg-7 p-0">
     <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
     <img
@@ -19,9 +18,7 @@
         data-app-dark-img="illustrations/bg-shape-image-dark.png" />
     </div>
 </div>
-<!-- /Left Text -->
 
-<!-- Login -->
 <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4">
     <div class="w-px-400 mx-auto">
     <h3 class="mb-1 fw-bold">Welcome Back!</h3>
@@ -61,5 +58,4 @@
     </form>
     </div>
 </div>
-<!-- /Login -->
 @endsection
