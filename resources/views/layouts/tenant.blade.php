@@ -1,71 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html
+  lang="en"
+  class="light-style customizer-hide"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../../assets/"
+  data-template="vertical-menu-template">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Tenant - Dashboard</title>
+    <title>Dashboard</title>
 
-    <!-- VENDOR CSS -->
-    <link href="{{ asset('assets/vendor/calendar-2/css/pignose.calendar.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/chartist/css/chartist.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/themify/fonts/themify-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/owl-carousel/assets/owl.carousel.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/vendor/owl-carousel/assets/owl.theme.default.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/vendor/weather/css/weather-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/vendor/menubar/sidebar.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/helper.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/style-tenant.css') }}" rel="stylesheet">
+    <meta name="description" content="" />
 
-    <!-- FAVICON -->
-    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
-</head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/logo-icon.png') }}" />
 
-<body>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/tabler-icons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/flag-icons.css') }}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core.css') }}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/node-waves/node-waves.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/typeahead-js/typeahead.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/trix-main/css/trix.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/dropzone.css') }}" />
+
+    @guest
+        <link rel="stylesheet" href="{{ asset('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
+    @endguest
+
+    <!-- Page CSS -->
+    @auth
+        @if (request()->is('dashboard/admin') || request()->is('master/brand'))
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/cards-advance.css') }}" />
+        @elseif (request()->is('master/admin/*', 'master/tenant/*'))
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-user-view.css') }}" />
+        @elseif (request()->is('profile/*'))
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-profile.css') }}" />
+        @endif
+    @else
+        <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
+    @endauth
+
+    <!-- Helpers -->
+    <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
+    <script src="{{ asset('vendor/trix-main/js/trix.umd.min.js') }}"></script>
+
+    <script src="{{ asset('assets/vendor/js/template-customizer.js') }}"></script>
+    <script src="{{ asset('assets/js/config.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+  </head>
+
+  <body>
 
     @include('components.flasher.flasher')
 
+    @include('components.modal.modal')
+
     @auth
-        @include('partials.tenant.sidebar')
-
-        @include('partials.tenant.navbar')
-
-        <div class="content-wrap">
-            <div class="main">
-                @yield('section')
+        <div class="layout-wrapper layout-content-navbar">
+            <div class="layout-container">
+    
+            @include('partials.tenant.sidebar')
+    
+            <div class="layout-page">
+            
+                @include('partials.tenant.navbar')
+    
+                <div class="content-wrapper">
+    
+                @yield('section-tenant')
+    
+                <div class="content-backdrop fade"></div>
+                </div>
             </div>
+            </div>
+    
+            <div class="layout-overlay layout-menu-toggle"></div>
+    
+            <div class="drag-target"></div>
         </div>
     @else
-        @yield('authentication')
+        <div class="authentication-wrapper authentication-cover authentication-bg">
+            <div class="authentication-inner row">
+
+                @yield('authentication')
+
+            </div>
+        </div>
     @endauth
 
-    <!-- VENDOR JS -->
-    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/jquery/jquery.nanoscroller.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/menubar/sidebar.js') }}"></script>
-    <script src="{{ asset('assets/vendor/preloader/pace.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/calendar-2/js/moment.latest.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/calendar-2/js/pignose.calendar.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/calendar-2/js/pignose.init.js') }}"></script>
-    <script src="{{ asset('assets/vendor/weather/js/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/weather/js/weather-init.js') }}"></script>
-    <script src="{{ asset('assets/vendor/circle-progress/circle-progress.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/circle-progress/circle-progress-init.js') }}"></script>
-    <script src="{{ asset('assets/vendor/chartist/js/chartist.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/sparklinechart/jquery.sparkline.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/sparklinechart/sparkline.init.js') }}"></script>
-    <script src="{{ asset('assets/vendor/owl-carousel/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/owl-carousel/owl.carousel-init.js') }}"></script>
+    <!-- Core JS -->
+    <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/node-waves/node-waves.js') }}"></script>
 
-    <!-- MAIN JS -->
-    <script src="{{ asset('assets/js/dashboard2.js') }}"></script>
-    <script src="{{ asset('assets/js/scripts-tenant.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/hammer/hammer.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/i18n/i18n.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/typeahead-js/typeahead.js') }}"></script>
 
-</body>
+    <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
 
+    <!-- Vendors JS -->
+    @auth
+        <script src="{{ asset('assets/vendor/libs/swiper/swiper.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/cleavejs/cleave.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
+        <script src="{{ asset('assets/js/modal-edit-tenant.js') }}"></script>
+    @else
+        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
+    @endauth
+    <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+
+    <!-- Main JS -->
+    <script src="{{ asset('assets/js/prev-image.js') }}"></script>
+    <script src="{{ asset('assets/js/script-admin.js') }}"></script>
+    <script src="{{ asset('assets/js/images.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    <!-- Page JS -->
+    @auth
+        @if (request()->is('dashboard/*'))
+            <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+            <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
+        @elseif (request()->is('master/admin', 'master/admin/*', 'master/tenant', 'master/tenant/*', 'master/warehouse', 'master/warehouse/*', 'master/category', 'master/category/*'))
+            <script src="{{ asset('assets/js/app-admin-list.js') }}"></script>
+            <script src="{{ asset('assets/js/app-tenant-list.js') }}"></script>
+            <script src="{{ asset('assets/js/app-warehouse-list.js') }}"></script>
+            <script src="{{ asset('assets/js/app-category-list.js') }}"></script>
+        @elseif (request()->is('settings/*'))
+            <script src="{{ asset('assets/js/pages-account-settings-security.js') }}"></script>
+        @endif
+    @else
+        <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
+    @endauth
+    @stack('scripts')
+  </body>
 </html>

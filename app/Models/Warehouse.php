@@ -41,4 +41,9 @@ class Warehouse extends Model implements HasMedia
     {
         return $this->belongsTo(WarehouseCategory::class);
     }
+
+    public function warehouse_subscription()
+    {
+        return $this->hasMany(WarehouseSubscription::class);
+    }
 }

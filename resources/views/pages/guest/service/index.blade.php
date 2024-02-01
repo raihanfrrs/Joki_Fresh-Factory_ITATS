@@ -97,7 +97,7 @@
 					<h2 class="mt-2 mb-4 mb-lg-0">Entrust success to our expert team</h2>
 				</div>
 				<div class="col-lg-4">
-					<a href="contact.html" class="btn btn-main btn-round-full float-lg-right ">Contact Us</a>
+					<a href="{{ route('contact') }}" class="btn btn-main btn-round-full float-lg-right">Contact Us</a>
 				</div>
 			</div>
 		</div>
