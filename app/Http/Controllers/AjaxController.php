@@ -6,20 +6,26 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Tenant;
 use App\Models\Warehouse;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use App\Models\WarehouseCategory;
+use App\Models\WarehouseSubscription;
 use App\Repositories\AdminRepository;
 use App\Repositories\TenantRepository;
+use App\Repositories\WarehouseRepository;
 use App\Repositories\WarehouseCategoryRepository;
+use App\Repositories\WarehouseSubscriptionCartRepository;
 
 class AjaxController extends Controller
 {
-    private $adminRepository, $tenantRepository, $warehouseCategoryRepository;
+    private $adminRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $warehouseSubscriptionCartRepository;
 
-    public function __construct(AdminRepository $adminRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository) {
+    public function __construct(AdminRepository $adminRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, WarehouseSubscriptionCartRepository $warehouseSubscriptionCartRepository) {
         $this->adminRepository = $adminRepository;
         $this->tenantRepository = $tenantRepository;
         $this->warehouseCategoryRepository = $warehouseCategoryRepository;
+        $this->warehouseRepository = $warehouseRepository;
+        $this->warehouseSubscriptionCartRepository = $warehouseSubscriptionCartRepository;
     }
 
     public function admin_detail_show($admin, $type)
@@ -79,5 +85,22 @@ class AjaxController extends Controller
     public function warehouse_category_edit(WarehouseCategory $warehouse_category)
     {
         return view('components.data-ajax.pages.modal.data-edit-warehouse-category-modal', compact('warehouse_category'));
+    }
+
+    public function subscription_edit(Subscription $subscription)
+    {
+        return view('components.data-ajax.pages.modal.data-edit-subscription-modal', compact('subscription'));
+    }
+
+    public function warehouse_show()
+    {
+        return view('components.data-ajax.pages.modal.data-warehouse-show-modal', [
+            'warehouses' => $this->warehouseRepository->getAllWarehouses()
+        ]);
+    }
+
+    public function warehouse_subscription_store_edit(WarehouseSubscription $warehouse_subscription)
+    {
+        return $this->warehouseSubscriptionCartRepository->storeWarehouseSubscriptionCart(['warehouse_id' => $warehouse_subscription->warehouse_id, 'subscription_id' => $warehouse_subscription->subscription_id, 'price_rate' => $warehouse_subscription->price_rate, 'total_price' => $warehouse_subscription->total_price]);
     }
 }

@@ -22,7 +22,7 @@ $(function () {
 
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
-      ajax: "/listWarehousesTable",
+      ajax: "/listWarehousesTable/show",
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
@@ -30,13 +30,11 @@ $(function () {
         { data: 'category', class: 'text-center' },
         { data: 'capacity', class: 'text-center' },
         { data: 'facility'},
-        { data: 'rental_price', class: 'text-center' },
         { data: 'surface_area', class: 'text-center' },
         { data: 'building_area', class: 'text-center' },
         { data: 'city', class: 'text-center' },
         { data: 'address' },
         { data: 'description' },
-        { data: 'payment_time', class: 'text-center' },
         { data: 'admin', class: 'text-center' },
         { data: 'created_at', class: 'text-center' },
         { data: 'status', class: 'text-center' },
@@ -89,59 +87,47 @@ $(function () {
         {
           targets: 6,
           render: function (data, type, full, meta) {
-            return full.rental_price;
+            return full.surface_area;
           }
         },
         {
           targets: 7,
           render: function (data, type, full, meta) {
-            return full.surface_area;
+            return full.building_area;
           }
         },
         {
           targets: 8,
           render: function (data, type, full, meta) {
-            return full.building_area;
+            return full.city;
           }
         },
         {
           targets: 9,
           render: function (data, type, full, meta) {
-            return full.city;
+            return full.address;
           }
         },
         {
           targets: 10,
           render: function (data, type, full, meta) {
-            return full.address;
+            return full.description;
           }
         },
         {
           targets: 11,
           render: function (data, type, full, meta) {
-            return full.description;
+            return full.admin;
           }
         },
         {
           targets: 12,
           render: function (data, type, full, meta) {
-            return full.payment_time
-          }
-        },
-        {
-          targets: 13,
-          render: function (data, type, full, meta) {
-            return full.admin;
-          }
-        },
-        {
-          targets: 14,
-          render: function (data, type, full, meta) {
             return full.created_at;
           }
         },
         {
-          targets: 15,
+          targets: 13,
           render: function (data, type, full, meta) {
             return full.status;
           }
@@ -183,7 +169,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -203,7 +189,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
               }
             },
             {
@@ -211,7 +197,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
               }
             },
             {
@@ -219,7 +205,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
               }
             },
             {
@@ -227,7 +213,7 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
               }
             }
           ]

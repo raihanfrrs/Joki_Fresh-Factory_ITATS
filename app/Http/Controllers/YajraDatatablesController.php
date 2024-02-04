@@ -6,20 +6,25 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Repositories\UserRepository;
 use App\Repositories\TenantRepository;
+use Illuminate\Support\Facades\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Repositories\WarehouseRepository;
+use App\Repositories\SubscriptionRepository;
 use App\Repositories\WarehouseCategoryRepository;
+use App\Repositories\WarehouseSubscriptionRepository;
 
 class YajraDatatablesController extends Controller
 {
-    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository;
+    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository;
 
-    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository)
+    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository)
     {
         $this->userRepository = $userRepository;
         $this->tenantRepository = $tenantRepository;
         $this->warehouseCategoryRepository = $warehouseCategoryRepository;
         $this->warehouseRepository = $warehouseRepository;
+        $this->subscriptionRepository = $subscriptionRepository;
+        $this->warehouseSubscriptionRepository = $warehouseSubscriptionRepository;
     }
 
     public function admin_index()
@@ -103,7 +108,7 @@ class YajraDatatablesController extends Controller
         ->make(true);
     }
 
-    public function warehouse_index()
+    public function warehouse_index($type)
     {
         $warehouses = $this->warehouseRepository->getAllWarehouses();
 
@@ -153,8 +158,11 @@ class YajraDatatablesController extends Controller
         ->addColumn('created_at', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.created-at-column', compact('model'))->render();
         })
-        ->addColumn('action', function ($model) {
-            return view('components.data-ajax.yajra-column.data-master-warehouse.action-column', compact('model'))->render();
+        ->addColumn('action', function ($model) use ($type) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.action-column', [
+                'model' => $model,
+                'type' => $type
+            ])->render();
         })
         ->rawColumns(['name', 'category', 'capacity', 'facility', 'rental_price', 'surface_area', 'building_area','city', 'address', 'description', 'payment_time', 'admin', 'status', 'created_at', 'action'])
         ->make(true);
@@ -181,4 +189,85 @@ class YajraDatatablesController extends Controller
         ->make(true);
     }
 
+    public function subscription_index()
+    {
+        $subscriptions = $this->subscriptionRepository->getAllSubscriptions();
+
+        return DataTables::of($subscriptions)
+        ->addColumn('index', function ($model) use ($subscriptions) {
+            return $subscriptions->search($model) + 1;
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-subscription.name-column', compact('model'))->render();
+        })
+        ->addColumn('month_duration', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-subscription.month-duration-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-subscription.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['name', 'month_duration', 'action'])
+        ->make(true);
+    }
+
+    public function rental_price_calculation_index()
+    {
+        $warehouseSubscription = $this->warehouseSubscriptionRepository->getAllWarehouseSubscriptions();
+        $warehouseSubscription = $warehouseSubscription->get();
+
+        return DataTables::of($warehouseSubscription)
+        ->addColumn('index', function ($model) use ($warehouseSubscription) {
+            return $warehouseSubscription->search($model) + 1;
+        })
+        ->addColumn('warehouse_name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.warehouse-name-column', compact('model'))->render();
+        })
+        ->addColumn('subscription_name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.subscription-name-column', compact('model'))->render();
+        })
+        ->addColumn('month_duration', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.month-duration-column', compact('model'))->render();
+        })
+        ->addColumn('price_rate', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.price-rate-column', compact('model'))->render();
+        })
+        ->addColumn('total_price', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.total-price-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['warehouse_name', 'subscription_name', 'month_duration', 'price_rate', 'total_price', 'action'])
+        ->make(true);
+    }
+
+    public function warehouse_subscription_index($warehouse)
+    {
+        $warehouseSubscription = $this->warehouseSubscriptionRepository->getWarehouseSubscriptionByWarehouseId($warehouse);
+
+        return DataTables::of($warehouseSubscription)
+        ->addColumn('index', function ($model) use ($warehouseSubscription) {
+            return $warehouseSubscription->search($model) + 1;
+        })
+        ->addColumn('warehouse_name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.warehouse-name-column', compact('model'))->render();
+        })
+        ->addColumn('subscription_name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.subscription-name-column', compact('model'))->render();
+        })
+        ->addColumn('month_duration', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.month-duration-column', compact('model'))->render();
+        })
+        ->addColumn('price_rate', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.price-rate-column', compact('model'))->render();
+        })
+        ->addColumn('total_price', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.total-price-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-price-calculation.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['warehouse_name', 'subscription_name', 'month_duration', 'price_rate', 'total_price', 'action'])
+        ->make(true);
+    }
 }

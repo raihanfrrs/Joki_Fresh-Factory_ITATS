@@ -132,7 +132,6 @@
         <script src="{{ asset('assets/vendor/libs/swiper/swiper.js') }}"></script>
         <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
         <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
-        <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
         <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
         <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
@@ -159,17 +158,22 @@
         @if (request()->is('dashboard/*'))
             <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
             <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
-        @elseif (request()->is('master/admin', 'master/admin/*', 'master/tenant', 'master/tenant/*', 'master/warehouse', 'master/warehouse/*', 'master/category', 'master/category/*'))
+        @elseif (request()->is('master/admin', 'master/admin/*', 'master/tenant', 'master/tenant/*', 'master/warehouse', 'master/warehouse/*', 'master/category', 'master/category/*', 'master/subscription', 'master/subscription/*'))
             <script src="{{ asset('assets/js/app-admin-list.js') }}"></script>
             <script src="{{ asset('assets/js/app-tenant-list.js') }}"></script>
             <script src="{{ asset('assets/js/app-warehouse-list.js') }}"></script>
             <script src="{{ asset('assets/js/app-category-list.js') }}"></script>
+            <script src="{{ asset('assets/js/app-subscription-list.js') }}"></script>
+        @elseif (request()->is('calculation/rental-price', 'calculation/rental-price/*'))
+            <script src="{{ asset('assets/js/app-rental-price-calculation-list.js') }}"></script>
+            <script src="{{ asset('assets/js/app-warehouse-subscription-list.js') }}"></script>
         @elseif (request()->is('settings/*'))
             <script src="{{ asset('assets/js/pages-account-settings-security.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
     @endauth
+    
     @stack('scripts')
   </body>
 </html>

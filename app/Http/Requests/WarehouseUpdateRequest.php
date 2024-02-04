@@ -25,12 +25,10 @@ class WarehouseUpdateRequest extends FormRequest
             'name' => 'required',
             'capacity' => 'required',
             'facility' => 'required',
-            'rental_price' => 'required',
             'surface_area' => 'required',
             'building_area' => 'required',
             'city' => 'required',
             'address' => 'required',
-            'payment_time' => 'required',
             'warehouse_category_id' => 'required',
             'warehouse_image' => 'file|image',
             'description' => 'required'

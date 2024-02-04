@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('tenant_subscriptions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignIdFor(Subscription::class);
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }
