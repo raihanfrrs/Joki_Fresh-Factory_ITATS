@@ -78,6 +78,29 @@
           </li>
         </ul>
       </li>
+      @if (auth()->user()->attribute == 'core')
+      <li class="menu-item {{ request()->is('master/subscription', 'master/subscription/*') ? 'active' : '' }} menu-item-brand">
+        <a href="{{ route('master.subscription') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-assembly"></i>
+          <div data-i18n="Subscription">Subscription</div>
+          <div class="badge bg-label-primary rounded-pill ms-auto" id="label-brand-new-count"></div>
+        </a>
+      </li>
+      @endif
+
+      @if (auth()->user()->attribute == 'core')
+      <!-- PERHITUNGAN HARGA RENTAL -->
+      <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">CALCULATION</span>
+      </li>
+      <li class="menu-item {{ request()->is('calculation/rental-price', 'calculation/rental-price/*', 'calculation/rental-price/*') ? 'active' : '' }} menu-item-brand">
+        <a href="{{ route('calculation.rental.price') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-zoom-money"></i>
+          <div data-i18n="Rental Price">Rental Price</div>
+          <div class="badge bg-label-primary rounded-pill ms-auto" id="label-brand-new-count"></div>
+        </a>
+      </li>
+      @endif
 
       <!-- LAPORAN -->
       <li class="menu-header small text-uppercase">

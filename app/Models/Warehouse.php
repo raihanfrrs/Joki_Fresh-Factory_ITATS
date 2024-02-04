@@ -23,13 +23,11 @@ class Warehouse extends Model implements HasMedia
         'name',
         'capacity',
         'facility',
-        'rental_price',
         'surface_area',
         'building_area',
         'city',
         'address',
-        'description',
-        'payment_time'
+        'description'
     ];
 
     public function admin()
@@ -45,5 +43,10 @@ class Warehouse extends Model implements HasMedia
     public function warehouse_subscription()
     {
         return $this->hasMany(WarehouseSubscription::class);
+    }
+
+    public function warehouse_subscription_cart()
+    {
+        return $this->hasMany(WarehouseSubscriptionCart::class);
     }
 }

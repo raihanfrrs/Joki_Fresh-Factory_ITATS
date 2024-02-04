@@ -68,20 +68,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-12 col-md-6">
-        <label class="form-label" for="rental_price">Rental Price</label>
-        <input
-          type="text"
-          id="rental_price"
-          name="rental_price"
-          class="form-control"
-          value="{{ old('rental_price', $warehouse->rental_price) }}" 
-          required/>
-          @error('rental_price')
-              <div class="invalid-feedback">{{ $message }}</div>
-          @enderror
-    </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-12">
         <label class="form-label" for="city">City</label>
         <input
           type="text"
@@ -93,14 +80,6 @@
           @error('city')
               <div class="invalid-feedback">{{ $message }}</div>
           @enderror
-    </div>
-    <div class="col-12 col-md-12">
-        <label class="form-label" for="payment_time">Payment Duration</label>
-        <select name="payment_time" id="payment_time" class="form-select">
-            <option value="daily" {{ old('payment_time', $warehouse->payment_time) == 'daily' ? 'selected' : '' }}>Daily</option>
-            <option value="monthly" {{ old('payment_time', $warehouse->payment_time) == 'monthly' ? 'selected' : '' }}>Monthly</option>
-            <option value="yearly" {{ old('payment_time', $warehouse->payment_time) == 'yearly' ? 'selected' : '' }}>Yearly</option>
-        </select>
     </div>
     <div class="col-12 col-md-6">
         <label class="form-label" for="address">Address</label>
