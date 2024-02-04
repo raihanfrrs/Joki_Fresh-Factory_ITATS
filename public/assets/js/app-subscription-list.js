@@ -25,14 +25,9 @@ $(function () {
       ajax: "/listSubscriptionsTable",
       columns: [
         { data: '' },
-        { data: 'brand' },
-        { data: 'subscription_name' },
-        { data: 'price' },
-        { data: 'duration' },
-        { data: 'start_date' },
-        { data: 'end_date' },
-        { data: 'created_at' },
-        { data: 'status' },
+        { data: 'index', class: 'text-center' },
+        { data: 'name', class: 'text-center' },
+        { data: 'month_duration', class: 'text-center' },
         { data: 'action' }
       ],
       columnDefs: [
@@ -50,49 +45,20 @@ $(function () {
           targets: 1,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.brand;
+            return full.index;
           }
         },
         {
           targets: 2,
+          responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.subscription_name;
+            return full.name;
           }
         },
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.price;
-          }
-        },
-        {
-          targets: 4,
-          render: function (data, type, full, meta) {
-            return full.duration;
-          }
-        },
-        {
-          targets: 5,
-          render: function (data, type, full, meta) {
-            return full.start_date;
-          }
-        },
-        {
-          targets: 6,
-          render: function (data, type, full, meta) {
-            return full.end_date;
-          }
-        },
-        {
-          targets: 7,
-          render: function (data, type, full, meta) {
-            return full.created_at;
-          }
-        },
-        {
-          targets: 8,
-          render: function (data, type, full, meta) {
-            return full.status;
+            return full.month_duration;
           }
         },
         {
@@ -120,7 +86,6 @@ $(function () {
         search: '',
         searchPlaceholder: 'Search..'
       },
-      
       buttons: [
         {
           extend: 'collection',
@@ -132,7 +97,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8],
+                columns: [1, 2, 3],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -152,7 +117,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                columns: [1, 2, 3]
               }
             },
             {
@@ -160,7 +125,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8],
+                columns: [1, 2, 3],
               }
             },
             {
@@ -168,7 +133,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8],
+                columns: [1, 2, 3],
               }
             },
             {
@@ -176,10 +141,18 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8],
+                columns: [1, 2, 3],
               }
             }
           ]
+        },
+        {
+          text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Subscription</span>',
+          className: 'add-new btn btn-primary',
+          attr: {
+            'data-bs-toggle': 'offcanvas',
+            'data-bs-target': '#offcanvasAddUser'
+          }
         }
       ],
       // For responsive popup
@@ -219,17 +192,17 @@ $(function () {
   }
 
   // Delete Record
-  $(document).on('click', '#button-delete-account', function () {
+  $(document).on('click', '#button-delete-subscription', function () {
     let id = $(this).attr('data-id');
-    let formSelector = ".form-delete-account-" + id;
+    let formSelector = ".form-delete-subscription-" + id;
 
     Swal.fire({
-      title: 'Apakah anda yakin?',
-      text: "Data yang berkaitan dengan pengguna ini akan dihapus semua!",
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      cancelButtonText: 'Batal',
-      confirmButtonText: 'Ya, Hapus!',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, Delete!',
       customClass: {
         confirmButton: 'btn btn-primary me-3',
         cancelButton: 'btn btn-label-secondary'
@@ -253,7 +226,7 @@ $(function () {
 // Validation & Phone mask
 (function () {
   const phoneMaskList = document.querySelectorAll('.phone-mask'),
-    addNewUserForm = document.getElementById('addNewUserForm');
+    addNewSubscriptionForm = document.getElementById('addNewSubscriptionForm');
 
   // Phone Number
   if (phoneMaskList) {
@@ -265,71 +238,25 @@ $(function () {
     });
   }
   // Add New User Form Validation
-  const fv = FormValidation.formValidation(addNewUserForm, {
+  const fv = FormValidation.formValidation(addNewSubscriptionForm, {
     fields: {
       name: {
         validators: {
           notEmpty: {
-            message: 'Tolong masukkan nama brand'
+            message: 'Please enter subscription name'
           }
         }
       },
-      email: {
+      month_duration: {
         validators: {
           notEmpty: {
-            message: 'Tolong masukkan surel brand'
+            message: 'Please enter month duration'
           },
-          emailAddress: {
-            message: 'Surel anda tidak valid'
+          numeric: {
+            message: 'Please enter valid month duration'
           }
         }
-      },
-      phone: {
-        validators: {
-          notEmpty: {
-            message: 'Tolong masukkan nomor telepon brand'
-          }
-        }
-      },
-      username: {
-        validators: {
-          notEmpty: {
-            message: 'Tolong masukkan nama pengguna brand'
-          },
-          stringLength: {
-            min: 6,
-            message: 'Nama pengguna harus lebih dari 6 karakter'
-          }
-        }
-      },
-      password: {
-        validators: {
-          notEmpty: {
-            message: 'Tolong masukkan kata sandi'
-          },
-          stringLength: {
-            min: 6,
-            message: 'Kata sandi harus lebih dari 6 karakter'
-          }
-        }
-      },
-      'confirm-password': {
-        validators: {
-          notEmpty: {
-            message: 'Tolong masukkan konfirmasi kata sandi'
-          },
-          identical: {
-            compare: function () {
-              return addNewUserForm.querySelector('[name="password"]').value;
-            },
-            message: 'Kata sandi tidak sama.'
-          },
-          stringLength: {
-            min: 6,
-            message: 'Kata sandi harus lebih dari 6 karakter'
-          }
-        }
-      },
+      }
     },
     plugins: {
       trigger: new FormValidation.plugins.Trigger(),

@@ -4,36 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Admin;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests\AdminRequest;
-use App\Http\Requests\AdminUpdateRequest;
-use App\Http\Requests\CategoryStoreRequest;
-use App\Http\Requests\TenantUpdateRequest;
-use App\Http\Requests\WarehouseCategoryStoreRequest;
-use App\Http\Requests\WarehouseCategoryUpdateRequest;
-use App\Http\Requests\WarehouseStoreRequest;
-use App\Http\Requests\WarehouseUpdateRequest;
 use App\Models\Tenant;
 use App\Models\Warehouse;
+use Illuminate\Http\Request;
 use App\Models\WarehouseCategory;
-use App\Repositories\AdminRepository;
-use App\Repositories\CategoryRepository;
-use App\Repositories\TenantRepository;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\AdminRequest;
 use App\Repositories\UserRepository;
-use App\Repositories\WarehouseCategoryRepository;
+use App\Repositories\AdminRepository;
+use App\Repositories\TenantRepository;
+use App\Repositories\CategoryRepository;
+use App\Http\Requests\AdminUpdateRequest;
 use App\Repositories\WarehouseRepository;
+use App\Http\Requests\TenantUpdateRequest;
+use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\WarehouseStoreRequest;
+use App\Repositories\SubscriptionRepository;
+use App\Http\Requests\WarehouseUpdateRequest;
+use App\Http\Requests\SubscriptionStoreRequest;
+use App\Http\Requests\SubscriptionUpdateRequest;
+use App\Repositories\WarehouseCategoryRepository;
+use App\Http\Requests\WarehouseCategoryStoreRequest;
+use App\Http\Requests\WarehouseCategoryUpdateRequest;
+use App\Models\Subscription;
 
 class AdminMasterController extends Controller
 {
-    private $adminRepository, $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository;
+    private $adminRepository, $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository;
 
-    public function __construct(AdminRepository $adminRepository, UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehoseCategoryRepository, WarehouseRepository $warehouseRepository) {
+    public function __construct(AdminRepository $adminRepository, UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehoseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository) {
         $this->adminRepository = $adminRepository;
         $this->userRepository = $userRepository;
         $this->tenantRepository = $tenantRepository;
         $this->warehouseCategoryRepository = $warehoseCategoryRepository;
         $this->warehouseRepository = $warehouseRepository;
+        $this->subscriptionRepository = $subscriptionRepository;
     }
 
     public function master_admin_index()
@@ -327,6 +332,57 @@ class AdminMasterController extends Controller
                 'position' => 'center',
                 'type' => 'success',
                 'message' => 'Warehouse has been deleted!'
+            ]);
+        }
+    }
+
+    public function master_subscription_index()
+    {
+        return view('pages.admin.master.subscription.index');
+    }
+
+    public function master_subscription_store(SubscriptionStoreRequest $request)
+    {
+        if ($request->validated()) {
+            if ($this->subscriptionRepository->createSubscription($request)) {
+                return redirect()->back()->with([
+                    'flash-type' => 'sweetalert',
+                    'case' => 'default',
+                    'position' => 'center',
+                    'type' => 'success',
+                    'message' => 'Subscription has been created!'
+                ]);
+            }
+        }
+    }
+
+    public function master_subscription_show(Subscription $subscription)
+    {
+        return view('pages.admin.master.subscription.show', compact('subscription'));
+    }
+
+    public function master_subscription_update(SubscriptionUpdateRequest $request, $subscription)
+    {
+        if ($this->subscriptionRepository->updateSubscription($request, $subscription)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Subscription has been updated!'
+            ]);
+        }
+    }
+
+    public function master_subscription_destroy($subscription)
+    {
+        if ($this->subscriptionRepository->deleteSubscription($subscription)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Subscription has been deleted!'
             ]);
         }
     }

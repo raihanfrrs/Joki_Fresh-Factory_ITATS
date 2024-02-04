@@ -9,6 +9,13 @@ class WarehouseSubscription extends Model
 {
     use HasFactory;
     protected $keyType = "string";
+    protected $fillable = [
+        'id',
+        'warehouse_id',
+        'subscription_id',
+        'price_rate',
+        'total_price'
+    ];
 
     public function transaction()
     {

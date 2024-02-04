@@ -1,3 +1,4 @@
+@if ($type == 'show')
 <div class="d-flex justify-content-center">
     <a href="javascript:;" class="text-body" data-bs-target="#editWarehouse" data-bs-toggle="modal" id="button-trigger-modal-edit-warehouse" data-id="{{ $model->id }}"><i class="ti ti-pencil ti-sm mx-1"></i></a>
     <form action="{{ route('master.warehouse.destroy', $model->id) }}" method="post" class="form-delete-warehouse-{{ $model->id }}">
@@ -12,3 +13,11 @@
         <a href="{{ route('master.warehouse.show', $model->id) }}" target="_blank" class="dropdown-item">Details</a>
     </div>
 </div>
+@elseif ($type == 'choose')
+<div class="d-flex justify-content-center">
+    <form action="{{ route('calculation.rental.price.store', $model->id) }}" method="post" class="form-choose-warehouse-{{ $model->id }}">
+        @csrf
+        <a href="javascript:;" class="text-body" data-id="{{ $model->id }}" id="button-choose-warehouse"><i class="ti ti-check ti-sm mx-2"></i></a>
+    </form>
+</div>
+@endif
