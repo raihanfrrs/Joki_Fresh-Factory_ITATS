@@ -56,4 +56,9 @@ class Tenant extends Model implements HasMedia
     {
         return $this->hasMany(TempTransaction::class);
     }
+
+    public function tenant_subscription()
+    {
+        return $this->hasOne(TenantSubscription::class);
+    }
 }

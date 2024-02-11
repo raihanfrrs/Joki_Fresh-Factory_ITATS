@@ -3,19 +3,9 @@
 @section('authentication')
 <div class="d-none d-lg-flex col-lg-7 p-0">
     <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
-    <img
-        src="{{ asset('assets/img/illustrations/boy-stand.png') }}"
-        alt="auth-login-cover"
-        class="img-fluid my-5 auth-illustration"
-        data-app-light-img="illustrations/boy-stand.png"
-        data-app-dark-img="illustrations/boy-stand.png" />
+      <img src="{{ asset('assets/img/illustrations/auth-login-illustration-light.png') }}" alt="auth-login-cover" class="img-fluid my-5 auth-illustration" data-app-light-img="illustrations/auth-login-illustration-light.png" data-app-dark-img="illustrations/auth-login-illustration-dark.png">
 
-    <img
-        src="{{ asset('assets/img/illustrations/bg-shape-image-light.png') }}"
-        alt="auth-login-cover"
-        class="platform-bg"
-        data-app-light-img="illustrations/bg-shape-image-light.png"
-        data-app-dark-img="illustrations/bg-shape-image-dark.png" />
+      <img src="{{ asset('assets/img/illustrations/bg-shape-image-light.png') }}" alt="auth-login-cover" class="platform-bg" data-app-light-img="illustrations/bg-shape-image-light.png" data-app-dark-img="illustrations/bg-shape-image-dark.png">
     </div>
 </div>
 
@@ -35,7 +25,7 @@
                 id="username"
                 placeholder="Username"
                 autofocus />
-            @error('email')
+            @error('username')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -54,8 +44,14 @@
                 <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
             </div>
         </div>
-        <button class="btn btn-primary d-grid w-100">Masuk</button>
+        <button class="btn btn-primary d-grid w-100">Sign in</button>
     </form>
+    <p class="text-center">
+        <span>New on our platform?</span>
+        <a href="{{ route('register') }}">
+          <span>Create an account</span>
+        </a>
+    </p>
     </div>
 </div>
 @endsection
