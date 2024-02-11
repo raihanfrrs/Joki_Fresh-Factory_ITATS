@@ -67,7 +67,10 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
-  align-items: center;
+  align-items: baseline !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: space-evenly !important;
 }
 
 @media (max-width: 520px) {

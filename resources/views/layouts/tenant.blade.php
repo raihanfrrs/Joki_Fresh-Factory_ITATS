@@ -46,8 +46,9 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
-    <link rel="stylesheet" href="{{ asset('vendor/trix-main/css/trix.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/dropzone.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
 
     @guest
         <link rel="stylesheet" href="{{ asset('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
@@ -55,20 +56,13 @@
 
     <!-- Page CSS -->
     @auth
-        @if (request()->is('dashboard/admin') || request()->is('master/brand'))
-            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/cards-advance.css') }}" />
-        @elseif (request()->is('master/admin/*', 'master/tenant/*'))
-            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-user-view.css') }}" />
-        @elseif (request()->is('profile/*'))
-            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-profile.css') }}" />
-        @endif
+        
     @else
         <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
     @endauth
 
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
-    <script src="{{ asset('vendor/trix-main/js/trix.umd.min.js') }}"></script>
 
     <script src="{{ asset('assets/vendor/js/template-customizer.js') }}"></script>
     <script src="{{ asset('assets/js/config.js') }}"></script>
@@ -124,6 +118,11 @@
     <script src="{{ asset('assets/vendor/libs/hammer/hammer.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/i18n/i18n.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/typeahead-js/typeahead.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/cleavejs/cleave.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
 
     <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
 
@@ -133,24 +132,17 @@
         <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
         <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
         <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-        <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
-        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/libs/cleavejs/cleave.js') }}"></script>
-        <script src="{{ asset('assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
-        <script src="{{ asset('assets/js/modal-edit-tenant.js') }}"></script>
     @else
-        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
     @endauth
+
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
     <!-- Main JS -->
     <script src="{{ asset('assets/js/prev-image.js') }}"></script>
-    <script src="{{ asset('assets/js/script-admin.js') }}"></script>
+    <script src="{{ asset('assets/js/script-tenant.js') }}"></script>
     <script src="{{ asset('assets/js/images.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
@@ -169,6 +161,7 @@
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
+        <script src="{{ asset('assets/js/pages-auth-multisteps.js') }}"></script>
     @endauth
     @stack('scripts')
   </body>

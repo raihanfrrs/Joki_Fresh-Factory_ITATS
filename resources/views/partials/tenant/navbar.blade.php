@@ -190,6 +190,23 @@
                 </a>
             </li>
             <li>
+                <a class="dropdown-item" href="pages-account-settings-billing.html">
+                    <span class="d-flex align-items-center align-middle">
+                      <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
+                      <span class="flex-grow-1 align-middle">Billing</span>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li>
+                <a class="dropdown-item" href="pages-pricing.html">
+                  <i class="ti ti-currency-dollar me-2 ti-sm"></i>
+                  <span class="align-middle">Pricing</span>
+                </a>
+            </li>
+            <li>
                 <div class="dropdown-divider"></div>
             </li>
             <li>

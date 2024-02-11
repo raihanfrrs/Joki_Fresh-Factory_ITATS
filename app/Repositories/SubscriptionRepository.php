@@ -12,6 +12,11 @@ class SubscriptionRepository
         return Subscription::orderBy('created_at', 'ASC')->get();
     }
 
+    public function getSubscriptionByName($name)
+    {
+        return Subscription::where('name', $name)->first();
+    }
+
     public function getSubscription($id)
     {
         return Subscription::find($id);

@@ -9,6 +9,17 @@ class TenantSubscription extends Model
 {
     use HasFactory;
     protected $keyType = "string";
+    protected $fillable = [
+        'id',
+        'tenant_id',
+        'subscription_id'
+    ];
+
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
 
     public function subscription()
     {

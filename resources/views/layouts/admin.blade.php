@@ -105,8 +105,8 @@
             <div class="drag-target"></div>
         </div>
     @else
-        <div class="authentication-wrapper authentication-cover authentication-bg">
-            <div class="authentication-inner row">
+        <div class="authentication-wrapper authentication-basic container-p-y">
+            <div class="authentication-inner py-4">
 
                 @yield('section-admin-authentication')
 
