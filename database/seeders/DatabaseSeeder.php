@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AdminSeeder::class,
             TenantSeeder::class,
-            WarehouseCategorySeeder::class
+            WarehouseCategorySeeder::class,
+            SubscriptionSeeder::class
         ]);
     }
 }

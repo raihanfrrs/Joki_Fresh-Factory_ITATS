@@ -24,9 +24,9 @@ class LoginController extends Controller
         $kredensial = $request->only('username', 'password');
 
         if ($level == 'admin') {
-            $checkUser = User::where('username', $request->username)->where('level', 'admin')->first();
+            $checkUser = User::where('username', $request->username)->where('level', $level)->first();
         } else {
-            $checkUser = User::where('username', $request->username)->where('level', 'tenant')->first();
+            $checkUser = User::where('username', $request->username)->where('level', $level)->first();
         }
 
         if (empty($checkUser)) {

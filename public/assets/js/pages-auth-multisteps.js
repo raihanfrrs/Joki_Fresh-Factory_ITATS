@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
       // Account details
       const multiSteps1 = FormValidation.formValidation(stepsValidationFormStep1, {
         fields: {
-          multiStepsUsername: {
+          username: {
             validators: {
               notEmpty: {
                 message: 'Please enter username'
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
               }
             }
           },
-          multiStepsEmail: {
+          email: {
             validators: {
               notEmpty: {
                 message: 'Please enter email address'
@@ -124,21 +124,37 @@ document.addEventListener('DOMContentLoaded', function (e) {
               }
             }
           },
-          multiStepsPass: {
+          password: {
             validators: {
               notEmpty: {
                 message: 'Please enter password'
+              },
+              stringLength: {
+                min: 8,
+                message: 'Password must be more than 8 characters'
+              },
+              regexp: {
+                regexp: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
+                message: 'Password must contain at least one uppercase letter and one symbol (!@#$%^&*)'
               }
             }
           },
-          multiStepsConfirmPass: {
+          confirm_password: {
             validators: {
               notEmpty: {
                 message: 'Confirm Password is required'
               },
+              stringLength: {
+                min: 8,
+                message: 'Password must be more than 8 characters'
+              },
+              regexp: {
+                regexp: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
+                message: 'Password must contain at least one uppercase letter and one symbol (!@#$%^&*)'
+              },
               identical: {
                 compare: function () {
-                  return stepsValidationFormStep1.querySelector('[name="multiStepsPass"]').value;
+                  return stepsValidationFormStep1.querySelector('[name="password"]').value;
                 },
                 message: 'The password and its confirm are not the same'
               }
@@ -171,14 +187,49 @@ document.addEventListener('DOMContentLoaded', function (e) {
       // Personal info
       const multiSteps2 = FormValidation.formValidation(stepsValidationFormStep2, {
         fields: {
-          multiStepsFirstName: {
+          first_name: {
             validators: {
               notEmpty: {
                 message: 'Please enter first name'
               }
             }
           },
-          multiStepsAddress: {
+          phone: {
+            validators: {
+              notEmpty: {
+                message: 'Please enter your phone number'
+              }
+            }
+          },
+          identity_number: {
+            validators: {
+              notEmpty: {
+                message: 'Please enter your identity number'
+              }
+            }
+          },
+          dob: {
+            validators: {
+              notEmpty: {
+                message: 'Please enter your date of birth'
+              }
+            }
+          },
+          pob: {
+            validators: {
+              notEmpty: {
+                message: 'Please enter your place of birth'
+              }
+            }
+          },
+          gender: {
+            validators: {
+              notEmpty: {
+                message: 'Please select your gender'
+              }
+            }
+          },
+          address: {
             validators: {
               notEmpty: {
                 message: 'Please enter your address'
