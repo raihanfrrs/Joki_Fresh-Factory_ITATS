@@ -125,6 +125,15 @@
 
         <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
             <a
+                class="nav-link dropdown-toggle hide-arrow"
+                href="{{ route('shopping.cart.index') }}">
+                <i class="ti ti-shopping-cart ti-md"></i>
+                <span class="badge bg-danger rounded-pill badge-notifications d-none" id="label-total-shopping-cart-count"></span>
+            </a>
+        </li>
+
+        <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+            <a
             class="nav-link dropdown-toggle hide-arrow"
             href="javascript:void(0);"
             data-bs-toggle="dropdown"

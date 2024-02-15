@@ -196,16 +196,16 @@
                                 @enderror
                             </div>
                             <div class="col-sm-4">
-                                <label class="form-label" for="dob">Date of Birth</label>
-                                <input type="date" id="dob" name="dob" class="form-control @error('dob') is-invalid @enderror" value="{{ old('dob') }}" />
-                                @error('dob')
+                                <label class="form-label" for="pob">Place of Birth</label>
+                                <input type="text" id="pob" name="pob" class="form-control @error('pob') is-invalid @enderror" value="{{ old('pob') }}" />
+                                @error('pob')
                                     <div class="invalid-feedback"> {{ $message }} </div>
                                 @enderror
                             </div>
                             <div class="col-sm-4">
-                                <label class="form-label" for="pob">Place of Birth</label>
-                                <input type="date" id="pob" name="pob" class="form-control @error('pob') is-invalid @enderror" value="{{ old('pob') }}" />
-                                @error('pob')
+                                <label class="form-label" for="dob">Date of Birth</label>
+                                <input type="date" id="dob" name="dob" class="form-control @error('dob') is-invalid @enderror" value="{{ old('dob') }}" />
+                                @error('dob')
                                     <div class="invalid-feedback"> {{ $message }} </div>
                                 @enderror
                             </div>

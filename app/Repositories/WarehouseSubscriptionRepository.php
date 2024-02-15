@@ -42,6 +42,11 @@ class WarehouseSubscriptionRepository
         return $query->get();
     }
 
+    public function getWarehouseSubscriptionByShortestMonthDuration($warehouse_id)
+    {
+        // return WarehouseSubscription::orderBy('subscriptions.month_duration', 'ASC')->where('warehouse_id', $warehouse_id)->first();
+    }
+
     public function createWarehouseSubscription()
     {
         $warehouse_subscription = $this->warehouseSubscriptionCartRepository->getFirstWarehouseSubscriptionCart();

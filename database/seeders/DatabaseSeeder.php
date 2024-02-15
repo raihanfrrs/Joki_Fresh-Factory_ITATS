@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             // TenantSeeder::class,
             WarehouseCategorySeeder::class,
-            // SubscriptionSeeder::class
+            SubscriptionSeeder::class,
             CountrySeeder::class
         ]);
     }

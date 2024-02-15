@@ -24,5 +24,8 @@ Route::controller(AjaxController::class)->group(function () {
     Route::get('ajax/subscription/{subscription}/edit', 'subscription_edit');
     Route::get('ajax/warehouse/show', 'warehouse_show');
     Route::get('ajax/warehouse_subscription/{warehouse_subscription}/edit', 'warehouse_subscription_store_edit');
+    Route::get('ajax/tenant-details/shopping-cart-count', 'tenant_shopping_cart_count');
+    Route::get('ajax/shopping-cart/{temp_transaction}/delete', 'tenant_shopping_cart_destroy');
+    Route::post('ajax/shopping-cart/{temp_transaction}/update-subscription', 'tenant_shopping_cart_update_subscription');
 });
 

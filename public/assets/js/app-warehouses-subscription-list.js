@@ -29,11 +29,21 @@ $(function () {
         { data: 'name' },
         { data: 'category', class: 'text-center' },
         { data: 'capacity', class: 'text-center' },
-        { data: 'facility'},
         { data: 'surface_area', class: 'text-center' },
         { data: 'building_area', class: 'text-center' },
+        { data: 'country', class: 'text-center' },
+        { data: 'zip_code', class: 'text-center' },
         { data: 'city', class: 'text-center' },
         { data: 'address' },
+        { data: 'storage_shelves', class: 'text-center' },
+        { data: 'goods_handling_equipment', class: 'text-center' },
+        { data: 'effective_lighting_system', class: 'text-center' },
+        { data: 'advanced_security_system', class: 'text-center' },
+        { data: 'toilet_and_rest_area', class: 'text-center' },
+        { data: 'electricity', class: 'text-center' },
+        { data: 'administrative_room_or_office', class: 'text-center' },
+        { data: 'worker_safety_equipment', class: 'text-center' },
+        { data: 'firefighting_tools', class: 'text-center' },
         { data: 'description' },
         { data: 'admin', class: 'text-center' },
         { data: 'created_at', class: 'text-center' },
@@ -81,53 +91,113 @@ $(function () {
         {
           targets: 5,
           render: function (data, type, full, meta) {
-            return full.facility;
+            return full.surface_area;
           }
         },
         {
           targets: 6,
           render: function (data, type, full, meta) {
-            return full.surface_area;
+            return full.building_area;
           }
         },
         {
           targets: 7,
           render: function (data, type, full, meta) {
-            return full.building_area;
+            return full.country;
           }
         },
         {
           targets: 8,
           render: function (data, type, full, meta) {
-            return full.city;
+            return full.zip_code;
           }
         },
         {
           targets: 9,
           render: function (data, type, full, meta) {
-            return full.address;
+            return full.city;
           }
         },
         {
           targets: 10,
           render: function (data, type, full, meta) {
-            return full.description;
+            return full.address;
           }
         },
         {
           targets: 11,
           render: function (data, type, full, meta) {
-            return full.admin;
+            return full.storage_shelves;
           }
         },
         {
           targets: 12,
           render: function (data, type, full, meta) {
-            return full.created_at;
+            return full.goods_handling_equipment;
           }
         },
         {
           targets: 13,
+          render: function (data, type, full, meta) {
+            return full.effective_lighting_system;
+          }
+        },
+        {
+          targets: 14,
+          render: function (data, type, full, meta) {
+            return full.advanced_security_system;
+          }
+        },
+        {
+          targets: 15,
+          render: function (data, type, full, meta) {
+            return full.toilet_and_rest_area;
+          }
+        },
+        {
+          targets: 16,
+          render: function (data, type, full, meta) {
+            return full.electricity;
+          }
+        },
+        {
+          targets: 17,
+          render: function (data, type, full, meta) {
+            return full.administrative_room_or_office;
+          }
+        },
+        {
+          targets: 18,
+          render: function (data, type, full, meta) {
+            return full.worker_safety_equipment;
+          }
+        },
+        {
+          targets: 19,
+          render: function (data, type, full, meta) {
+            return full.firefighting_tools;
+          }
+        },
+        {
+          targets: 20,
+          render: function (data, type, full, meta) {
+            return full.description;
+          }
+        },
+        {
+          targets: 21,
+          render: function (data, type, full, meta) {
+            return full.admin;
+          }
+        },
+        {
+          targets: 22,
+          render: function (data, type, full, meta) {
+            return full.created_at;
+          }
+        },
+        {
+          targets: 23,
           render: function (data, type, full, meta) {
             return full.status;
           }
