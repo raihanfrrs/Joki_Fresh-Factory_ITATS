@@ -65,7 +65,7 @@
 
 .bs-stepper-header {
   display: -ms-flexbox;
-  /* display: flex; */
+  display: flex;
   -ms-flex-align: center;
   align-items: baseline !important;
   flex-direction: row !important;

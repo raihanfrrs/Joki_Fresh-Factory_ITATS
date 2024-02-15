@@ -64,4 +64,9 @@ class Warehouse extends Model implements HasMedia
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function temp_transaction()
+    {
+        return $this->hasMany(TempTransaction::class);
+    }
 }
