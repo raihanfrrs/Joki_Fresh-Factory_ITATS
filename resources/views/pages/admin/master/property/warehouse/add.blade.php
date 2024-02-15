@@ -8,7 +8,7 @@
 
     <!-- Property Listing Wizard -->
     <div id="wizard-property-listing" class="bs-stepper vertical mt-2 linear">
-      <div class="bs-stepper-header">
+      <div class="bs-stepper-header" style="display: inline">
         <div class="step active" data-target="#personal-details">
           <button type="button" class="step-trigger" aria-selected="true">
             <span class="bs-stepper-circle"><i class="ti ti-home ti-sm"></i></span>
@@ -34,7 +34,7 @@
             <span class="bs-stepper-circle"><i class="ti ti-bookmarks ti-sm"></i></span>
             <span class="bs-stepper-label">
               <span class="bs-stepper-title">Property Features</span>
-              <span class="bs-stepper-subtitle">Bedrooms/Floor No</span>
+              <span class="bs-stepper-subtitle">About Storage</span>
             </span>
           </button>
         </div>

@@ -17,8 +17,18 @@ class SubscriptionSeeder extends Seeder
         $subscriptions = [
             [
                 'id' => Uuid::uuid4()->toString(),
-                'name' => 'Starter',
-                'month_duration' => 0
+                'name' => 'Pro',
+                'month_duration' => 1
+            ],
+            [
+                'id' => Uuid::uuid4()->toString(),
+                'name' => 'Enterprise',
+                'month_duration' => 6
+            ],
+            [
+                'id' => Uuid::uuid4()->toString(),
+                'name' => 'Champion',
+                'month_duration' => 12
             ]
         ];
 

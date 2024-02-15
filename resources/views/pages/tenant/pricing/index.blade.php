@@ -48,7 +48,7 @@
                             <li class="list-group-item"><b>Rental Price</b><br>
                                 <div class="demo-inline-spacing mt-3">
                                     <ol class="list-group list-group-numbered">
-                                    @foreach ($warehouse->warehouse_subscription->sortBy('subscription.created_at') as $subscription)
+                                    @foreach ($warehouse->warehouse_subscription->sortBy('subscription.month_duration') as $subscription)
                                         <li class="list-group-item">
                                             {{ $subscription->subscription->name }} | @convertMonthsToYearsAndMonths($subscription->subscription->month_duration)
                                             <span style="float: right;" class="fw-bold">@rupiah($subscription->total_price)</span>
@@ -58,12 +58,25 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="card-body d-flex justify-content-center">
-                            <a href="" class="btn btn-primary btn-md w-100 me-3"><i class="menu-icon tf-icons ti ti-file-description"></i> Details</a>
-                            <a href="" class="btn btn-info btn-md w-100"><i class="menu-icon tf-icons ti ti-receipt"></i> Book Now</a>
+                        <div class="card-body">
+                            <form action="{{ route('pricing.store.cart', $warehouse->id) }}" method="post" class="d-flex flex-row">
+                                @csrf
+                                <a href="" class="btn btn-primary btn-md w-100 me-3"><i class="menu-icon tf-icons ti ti-file-description"></i> Details</a>
+                                @if (!$warehouse->temp_transaction()->exists())
+                                    <button type="submit" class="btn btn-info w-100 btn-md"><i class="menu-icon tf-icons ti ti-receipt"></i> Book Now</button>
+                                @endif
+                            </form>
                         </div>
                     </div>
                 </div>
+            @else
+            <div class="misc-wrapper mt-5">
+                <h2 class="mb-1 mx-2 d-flex justify-content-center">Not Available!</h2>
+                <p class="mb-4 mx-2 d-flex justify-content-center">I apologize for any inconvenience; the warehouse is currently in the process of being set up by the system.</p>
+                <div class="mt-4 d-flex justify-content-center">
+                  <img src="{{ asset('assets/img/illustrations/page-misc-under-maintenance.png') }}" width="550" class="img-fluid">
+                </div>
+            </div>
             @endif
         @endforeach
     </div>

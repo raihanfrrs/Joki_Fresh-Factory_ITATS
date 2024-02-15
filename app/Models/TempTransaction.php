@@ -9,6 +9,19 @@ class TempTransaction extends Model
 {
     use HasFactory;
     protected $keyType = "string";
+    protected $fillable = [
+        'id',
+        'warehouse_id',
+        'warehouse_subscription_id',
+        'tenant_id',
+        'subtotal',
+        'payment_due'
+    ];
+
+    public function warehouse()
+    {
+        return $this->belongsTo(Warehouse::class);
+    }
 
     public function warehouse_subscription()
     {
