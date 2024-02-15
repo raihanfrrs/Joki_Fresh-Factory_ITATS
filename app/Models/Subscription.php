@@ -16,11 +16,6 @@ class Subscription extends Model
         'month_duration'
     ];
 
-    public function tenant_subscription()
-    {
-        return $this->hasOne(TenantSubscription::class);
-    }
-
     public function warehouse_subscription()
     {
         return $this->hasMany(WarehouseSubscription::class);

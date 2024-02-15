@@ -27,7 +27,9 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::patch('master/tenant/{tenant}/password', 'master_tenant_update_password')->name('master.tenant.update.password');
 
         Route::get('master/warehouse', 'master_warehouse_index')->name('master.warehouse');
+        Route::get('master/warehouse/add', 'master_warehouse_create');
         Route::post('master/warehouse', 'master_warehouse_store')->name('master.warehouse.store');
+        Route::get('master/warehouse/{warehouse}/edit', 'master_warehouse_edit')->name('master.warehouse.edit');
         Route::get('master/warehouse/{warehouse}', 'master_warehouse_show')->name('master.warehouse.show');
         Route::patch('master/warehouse/{warehouse}', 'master_warehouse_update')->name('master.warehouse.update');
         Route::delete('master/warehouse/{warehouse}', 'master_warehouse_destroy')->name('master.warehouse.destroy');
@@ -66,6 +68,7 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::post('calculation/rental-price/add/{warehouse}', 'admin_calculation_rental_price_store')->name('calculation.rental.price.store');
         Route::post('calculation/rental-price/add', 'admin_calculation_rental_price_save');
         Route::post('calculation/rental-price/cancel', 'admin_calculation_rental_price_cancel');
+        Route::post('calculation/rental-price/clear', 'admin_calculation_rental_price_clear');
         Route::get('calculation/rental-price/{warehouse_subscription}/edit', 'admin_calculation_rental_price_edit');
         Route::patch('calculation/rental-price/{warehouse_subscription}', 'admin_calculation_rental_price_update');
     });

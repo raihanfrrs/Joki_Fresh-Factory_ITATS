@@ -23,15 +23,24 @@ class WarehouseUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'capacity' => 'required',
-            'facility' => 'required',
-            'surface_area' => 'required',
-            'building_area' => 'required',
+            'capacity' => 'required|numeric',
+            'surface_area' => 'required|numeric',
+            'building_area' => 'required|numeric',
+            'country_id' => 'required',
             'city' => 'required',
+            'zip_code' => 'required|numeric',
             'address' => 'required',
             'warehouse_category_id' => 'required',
-            'warehouse_image' => 'file|image',
-            'description' => 'required'
+            'description' => 'nullable',
+            'storage_shelves' => 'required|numeric',
+            'goods_handling_equipment' => 'nullable',
+            'effective_lighting_system' => 'required',
+            'advanced_security_system' => 'required',
+            'toilet_and_rest_area' => 'required|numeric',
+            'electricity' => 'required',
+            'administrative_room_or_office' => 'required',
+            'worker_safety_equipment' => 'required',
+            'firefighting_tools' => 'required'
         ];
     }
 }

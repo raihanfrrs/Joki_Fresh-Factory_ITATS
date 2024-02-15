@@ -25,7 +25,8 @@ class Tenant extends Model implements HasMedia
         'dob',
         'gender',
         'address',
-        'status'
+        'status',
+        'rank'
     ];
 
     public function registerMediaCollections(): void
@@ -57,8 +58,8 @@ class Tenant extends Model implements HasMedia
         return $this->hasMany(TempTransaction::class);
     }
 
-    public function tenant_subscription()
+    public function rented()
     {
-        return $this->hasOne(TenantSubscription::class);
+        return $this->hasMany(Rented::class);
     }
 }

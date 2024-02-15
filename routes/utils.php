@@ -20,9 +20,9 @@ Route::controller(AjaxController::class)->group(function () {
     Route::get('ajax/warehouse-details/{warehouse}/{type}', 'warehouse_detail_show');
     Route::get('ajax/admin/{user}/edit', 'admin_edit');
     Route::get('ajax/tenant/{tenant}/edit', 'tenant_edit');
-    Route::get('ajax/warehouse/{warehouse}/edit', 'warehouse_edit');
     Route::get('ajax/warehouse-category/{warehouse_category}/edit', 'warehouse_category_edit');
     Route::get('ajax/subscription/{subscription}/edit', 'subscription_edit');
     Route::get('ajax/warehouse/show', 'warehouse_show');
     Route::get('ajax/warehouse_subscription/{warehouse_subscription}/edit', 'warehouse_subscription_store_edit');
 });
+

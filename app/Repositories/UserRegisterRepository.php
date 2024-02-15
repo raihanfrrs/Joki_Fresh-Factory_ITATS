@@ -41,13 +41,8 @@ class UserRegisterRepository
                 'dob' => $data['dob'],
                 'gender' => $data['gender'],
                 'address' => $data['address'],
-                'status' => 'active'
-            ]);
-    
-            TenantSubscription::create([
-                'id' => Uuid::uuid4()->toString(),
-                'tenant_id' => $tenant_id,
-                'subscription_id' => $this->subscriptionRepository->getSubscriptionByName('Starter')->id
+                'status' => 'active',
+                'rank' => 'starter'
             ]);
         });   
 
