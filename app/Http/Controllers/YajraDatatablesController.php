@@ -125,17 +125,17 @@ class YajraDatatablesController extends Controller
         ->addColumn('capacity', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.capacity-column', compact('model'))->render();
         })
-        ->addColumn('facility', function ($model) {
-            return view('components.data-ajax.yajra-column.data-master-warehouse.facility-column', compact('model'))->render();
-        })
-        ->addColumn('rental_price', function ($model) {
-            return view('components.data-ajax.yajra-column.data-master-warehouse.rental-price-column', compact('model'))->render();
-        })
         ->addColumn('surface_area', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.surface-area-column', compact('model'))->render();
         })
         ->addColumn('building_area', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.building-area-column', compact('model'))->render();
+        })
+        ->addColumn('country', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.country-column', compact('model'))->render();
+        })
+        ->addColumn('zip_code', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.zip-code-column', compact('model'))->render();
         })
         ->addColumn('city', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.city-column', compact('model'))->render();
@@ -143,11 +143,35 @@ class YajraDatatablesController extends Controller
         ->addColumn('address', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.address-column', compact('model'))->render();
         })
+        ->addColumn('storage_shelves', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.storage-shelves-column', compact('model'))->render();
+        })
+        ->addColumn('goods_handling_equipment', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.goods-handling-equipment-column', compact('model'))->render();
+        })
+        ->addColumn('effective_lighting_system', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.effective-lighting-system-column', compact('model'))->render();
+        })
+        ->addColumn('advanced_security_system', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.advanced-security-system-column', compact('model'))->render();
+        })
+        ->addColumn('toilet_and_rest_area', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.toilet-and-rest-area-column', compact('model'))->render();
+        })
+        ->addColumn('electricity', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.electricity-column', compact('model'))->render();
+        })
+        ->addColumn('administrative_room_or_office', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.administrative-room-or-office-column', compact('model'))->render();
+        })
+        ->addColumn('worker_safety_equipment', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.worker-safety-equipment-column', compact('model'))->render();
+        })
+        ->addColumn('firefighting_tools', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-warehouse.firefighting-tools-column', compact('model'))->render();
+        })
         ->addColumn('description', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.description-column', compact('model'))->render();
-        })
-        ->addColumn('payment_time', function ($model) {
-            return view('components.data-ajax.yajra-column.data-master-warehouse.payment-time-column', compact('model'))->render();
         })
         ->addColumn('admin', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-warehouse.admin-column', compact('model'))->render();
@@ -164,7 +188,7 @@ class YajraDatatablesController extends Controller
                 'type' => $type
             ])->render();
         })
-        ->rawColumns(['name', 'category', 'capacity', 'facility', 'rental_price', 'surface_area', 'building_area','city', 'address', 'description', 'payment_time', 'admin', 'status', 'created_at', 'action'])
+        ->rawColumns(['name', 'category', 'capacity', 'surface_area', 'building_area', 'country', 'zip_code', 'city', 'address', 'storage_shelves', 'effective_lighting_system', 'goods_handling_equipment', 'advanced_security_system', 'toilet_and_rest_area', 'electricity', 'administrative_room_or_office', 'worker_safety_equipment', 'firefighting_tools', 'description', 'admin', 'status', 'created_at', 'action'])
         ->make(true);
     }
 

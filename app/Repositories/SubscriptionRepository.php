@@ -12,6 +12,11 @@ class SubscriptionRepository
         return Subscription::orderBy('created_at', 'ASC')->get();
     }
 
+    public function getAllSubscriptionsWithoutStarter()
+    {
+        return Subscription::where('name', '!=', 'Starter')->orderBy('created_at', 'ASC')->get();
+    }
+
     public function getSubscriptionByName($name)
     {
         return Subscription::where('name', $name)->first();
@@ -35,7 +40,7 @@ class SubscriptionRepository
     {
         return self::getSubscription($id)->update([
             'name' => $data['name'],
-            'month_duration' => $data['month_duration']
+            'month_duration' => $data['month_duration'] ?? 1
         ]);
     }
 

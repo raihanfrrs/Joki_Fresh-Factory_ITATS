@@ -49,6 +49,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/dropzone.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/swiper/swiper.css') }}" />
 
     @guest
         <link rel="stylesheet" href="{{ asset('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
@@ -56,7 +57,9 @@
 
     <!-- Page CSS -->
     @auth
-        
+        @if (request()->is('pricing'))
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/ui-carousel.css') }}" />
+        @endif
     @else
         <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
     @endauth
@@ -143,7 +146,6 @@
     <!-- Main JS -->
     <script src="{{ asset('assets/js/prev-image.js') }}"></script>
     <script src="{{ asset('assets/js/script-tenant.js') }}"></script>
-    <script src="{{ asset('assets/js/images.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
@@ -151,13 +153,8 @@
         @if (request()->is('dashboard/*'))
             <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
             <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
-        @elseif (request()->is('master/admin', 'master/admin/*', 'master/tenant', 'master/tenant/*', 'master/warehouse', 'master/warehouse/*', 'master/category', 'master/category/*'))
-            <script src="{{ asset('assets/js/app-admin-list.js') }}"></script>
-            <script src="{{ asset('assets/js/app-tenant-list.js') }}"></script>
-            <script src="{{ asset('assets/js/app-warehouse-list.js') }}"></script>
-            <script src="{{ asset('assets/js/app-category-list.js') }}"></script>
-        @elseif (request()->is('settings/*'))
-            <script src="{{ asset('assets/js/pages-account-settings-security.js') }}"></script>
+        @elseif (request()->is('pricing'))
+            <script src="{{ asset('assets/js/ui-carousel.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>

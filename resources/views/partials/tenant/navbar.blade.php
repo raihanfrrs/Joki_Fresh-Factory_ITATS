@@ -201,7 +201,7 @@
                 <div class="dropdown-divider"></div>
             </li>
             <li>
-                <a class="dropdown-item" href="pages-pricing.html">
+                <a class="dropdown-item" href="{{ route('pricing') }}">
                   <i class="ti ti-currency-dollar me-2 ti-sm"></i>
                   <span class="align-middle">Pricing</span>
                 </a>

@@ -17,11 +17,6 @@ class WarehouseSubscription extends Model
         'total_price'
     ];
 
-    public function transaction()
-    {
-        return $this->hasMany(Transaction::class);
-    }
-
     public function warehouse()
     {
         return $this->belongsTo(Warehouse::class);
@@ -35,5 +30,15 @@ class WarehouseSubscription extends Model
     public function temp_transaction()
     {
         return $this->hasMany(TempTransaction::class);
+    }
+
+    public function detail_transaction()
+    {
+        return $this->hasMany(DetailTransaction::class);
+    }
+
+    public function rented()
+    {
+        return $this->hasMany(Rented::class);
     }
 }

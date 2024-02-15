@@ -11,7 +11,7 @@ class WarehouseCategoryRepository
 {
     public function getAllWarehouseCategories()
     {
-        return WarehouseCategory::orderBy('created_at', 'ASC')->get();
+        return WarehouseCategory::orderBy('category', 'ASC')->get();
     }
 
     public function getWarehouseCategory($id)

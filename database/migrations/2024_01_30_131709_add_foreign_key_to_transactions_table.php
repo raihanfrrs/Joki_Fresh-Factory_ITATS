@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->foreign(['warehouse_subscription_id'], 'transactions_ibfk_1')->references(['id'])->on('warehouse_subscriptions')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreign(['tenant_id'], 'transactions_ibfk_2')->references(['id'])->on('tenants')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign(['tenant_id'], 'transactions_ibfk_1')->references(['id'])->on('tenants')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -24,7 +23,6 @@ return new class extends Migration
     {
         Schema::table('transactions', function (Blueprint $table) {
             $table->dropForeign('transactions_ibfk_1');
-            $table->dropForeign('transactions_ibfk_2');
         });
     }
 };

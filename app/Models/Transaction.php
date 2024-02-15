@@ -10,13 +10,13 @@ class Transaction extends Model
     use HasFactory;
     protected $keyType = "string";
 
-    public function warehouse_subscription()
-    {
-        return $this->belongsTo(WarehouseSubscription::class);
-    }
-
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    public function detail_transaction()
+    {
+        return $this->hasMany(DetailTransaction::class);
     }
 }

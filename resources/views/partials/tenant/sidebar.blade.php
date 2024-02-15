@@ -3,7 +3,7 @@
     <div class="app-brand demo">
       <a href="/" class="app-brand-link">
         <span class="app-brand-text demo menu-text fw-bold">TENANT</span>
-        <span class="app-brand-text badge rounded-pill bg-primary">{{ auth()->user()->tenant->tenant_subscription->subscription->name }}</span>
+        <span class="app-brand-text badge rounded-pill bg-primary text-capitalize">{{ auth()->user()->tenant->rank }}</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">

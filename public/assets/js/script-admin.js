@@ -117,28 +117,6 @@ $(document).on('click', '#button-trigger-modal-edit-tenant', function () {
     });
 });
 
-$(document).on('click', '#button-trigger-modal-edit-warehouse', function () {
-    let id = $(this).attr('data-id');
-
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-
-    $.ajax({
-        url: "/ajax/warehouse/"+id+"/edit",
-        method: "get",
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            $("#data-edit-warehouse-modal").html(response);
-        },
-        error: function(xhr, status, error) {
-        }
-    });
-});
-
 $(document).on('click', '#button-trigger-modal-edit-warehouse-category', function () {
     let id = $(this).attr('data-id');
 
@@ -249,7 +227,21 @@ $(document).on('click', '#button-submit-image-change', function(e) {
 });
 
 $(document).on('click', '#button-add-rental-price-calculation', function () {
-    location.href = '/calculation/rental-price/add';
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
+    $.ajax({
+        url: "/calculation/rental-price/clear",
+        method: "post",
+        success: function(response) {
+            location.href = '/calculation/rental-price/add';
+        },
+        error: function(xhr, status, error) {
+        }
+    });
 });
 
 $(document).on('click', '#button-choose-warehouse', function (e) {
@@ -306,11 +298,14 @@ function calculateRentalPrice(price_rate_value, subscription_month_duration_valu
 $(document).on('click', '#subscription_id', function () {
     let warehouse_id = $("#warehouse_id").attr('data-id');
     let price_rate_value = $("#price_rate").val().replace(/\D/g, '');
-    let total_price_value = $("#total_price").attr('data-total-price');
+    let total_price = $("#total_price");
+    let total_price_value = total_price.attr('data-total-price');
     let subscription = $(this).find(':selected');
     let subscription_id = subscription.val();
-
-    console.log(price_rate_value, total_price_value);
+    let subscription_month_duration_value = subscription.attr('data-month-duration');
+    let warehouse = $("#warehouse_id");
+    let building_area_value = warehouse.attr('data-building-area');
+    let surface_area_value = warehouse.attr('data-surface-area');
     
     if (subscription.text() != 'Select Subscription' && subscription.text() != 'No Subscription') {
         $.ajaxSetup({
@@ -324,7 +319,7 @@ $(document).on('click', '#subscription_id', function () {
             method: "post",
             data: {subscription_id: subscription_id, price_rate: price_rate_value, total_price: total_price_value},
             success: function(response) {
-                return;
+                total_price.val(calculateRentalPrice(price_rate_value, subscription_month_duration_value, building_area_value, surface_area_value)).attr('data-total-price', calculateRentalPrice(price_rate_value, subscription_month_duration_value, building_area_value, surface_area_value));
             },
             error: function(xhr, status, error) {
             }
@@ -402,4 +397,8 @@ $(document).on('click', '#button-update-warehouse-subscription', function () {
     form_warehouse_subscription.attr('action', '/calculation/rental-price/'+warehouse_subscription_id);
 
     form_warehouse_subscription.submit();
+});
+
+$(document).on('click', '#button-add-warehouse', function () {
+    location.href = "/master/warehouse/add";
 });
