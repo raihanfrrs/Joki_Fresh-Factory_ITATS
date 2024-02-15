@@ -13,7 +13,6 @@ class Warehouse extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
     protected $keyType = "string";
-    public $incrementing = false;
     protected $primaryKey = 'id';
     
     protected $fillable = [
@@ -22,12 +21,23 @@ class Warehouse extends Model implements HasMedia
         'warehouse_category_id',
         'name',
         'capacity',
-        'facility',
         'surface_area',
         'building_area',
         'city',
+        'zip_code',
+        'country_id',
         'address',
-        'description'
+        'description',
+        'storage_shelves',
+        'goods_handling_equipment',
+        'effective_lighting_system',
+        'advanced_security_system',
+        'toilet_and_rest_area',
+        'electricity',
+        'administrative_room_or_office',
+        'worker_safety_equipment',
+        'firefighting_tools',
+        'status'
     ];
 
     public function admin()
@@ -48,5 +58,10 @@ class Warehouse extends Model implements HasMedia
     public function warehouse_subscription_cart()
     {
         return $this->hasMany(WarehouseSubscriptionCart::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 }

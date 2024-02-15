@@ -27,7 +27,7 @@ class AdminCalculationController extends Controller
     public function admin_calculation_rental_price_create()
     {
         return view('pages.admin.calculation.rental-price.add', [
-            'subscriptions' => $this->subscriptionRepository->getAllSubscriptions(),
+            'subscriptions' => $this->subscriptionRepository->getAllSubscriptionsWithoutStarter(),
             'warehouse_subscription_cart' => $this->warehouseSubscriptionCartRepository->getFirstWarehouseSubscriptionCart()
         ]);
     }
@@ -80,10 +80,17 @@ class AdminCalculationController extends Controller
         }
     }
 
+    public function admin_calculation_rental_price_clear()
+    {
+        if ($this->warehouseSubscriptionCartRepository->resetWarehouseSubscriptionCart()) {
+            return true;
+        }
+    }
+
     public function admin_calculation_rental_price_edit(WarehouseSubscription $warehouse_subscription)
     {
         return view('pages.admin.calculation.rental-price.add', [
-            'subscriptions' => $this->subscriptionRepository->getAllSubscriptions(),
+            'subscriptions' => $this->subscriptionRepository->getAllSubscriptionsWithoutStarter(),
             'warehouse_subscription_cart' => $this->warehouseSubscriptionCartRepository->getFirstWarehouseSubscriptionCart(),
             'warehouse_subscription' => $warehouse_subscription
         ]);

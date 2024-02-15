@@ -29,11 +29,21 @@ $(function () {
         { data: 'name' },
         { data: 'category', class: 'text-center' },
         { data: 'capacity', class: 'text-center' },
-        { data: 'facility'},
         { data: 'surface_area', class: 'text-center' },
         { data: 'building_area', class: 'text-center' },
+        { data: 'country', class: 'text-center' },
+        { data: 'zip_code', class: 'text-center' },
         { data: 'city', class: 'text-center' },
         { data: 'address' },
+        { data: 'storage_shelves', class: 'text-center' },
+        { data: 'goods_handling_equipment', class: 'text-center' },
+        { data: 'effective_lighting_system', class: 'text-center' },
+        { data: 'advanced_security_system', class: 'text-center' },
+        { data: 'toilet_and_rest_area', class: 'text-center' },
+        { data: 'electricity', class: 'text-center' },
+        { data: 'administrative_room_or_office', class: 'text-center' },
+        { data: 'worker_safety_equipment', class: 'text-center' },
+        { data: 'firefighting_tools', class: 'text-center' },
         { data: 'description' },
         { data: 'admin', class: 'text-center' },
         { data: 'created_at', class: 'text-center' },
@@ -81,53 +91,113 @@ $(function () {
         {
           targets: 5,
           render: function (data, type, full, meta) {
-            return full.facility;
+            return full.surface_area;
           }
         },
         {
           targets: 6,
           render: function (data, type, full, meta) {
-            return full.surface_area;
+            return full.building_area;
           }
         },
         {
           targets: 7,
           render: function (data, type, full, meta) {
-            return full.building_area;
+            return full.country;
           }
         },
         {
           targets: 8,
           render: function (data, type, full, meta) {
-            return full.city;
+            return full.zip_code;
           }
         },
         {
           targets: 9,
           render: function (data, type, full, meta) {
-            return full.address;
+            return full.city;
           }
         },
         {
           targets: 10,
           render: function (data, type, full, meta) {
-            return full.description;
+            return full.address;
           }
         },
         {
           targets: 11,
           render: function (data, type, full, meta) {
-            return full.admin;
+            return full.storage_shelves;
           }
         },
         {
           targets: 12,
           render: function (data, type, full, meta) {
-            return full.created_at;
+            return full.goods_handling_equipment;
           }
         },
         {
           targets: 13,
+          render: function (data, type, full, meta) {
+            return full.effective_lighting_system;
+          }
+        },
+        {
+          targets: 14,
+          render: function (data, type, full, meta) {
+            return full.advanced_security_system;
+          }
+        },
+        {
+          targets: 15,
+          render: function (data, type, full, meta) {
+            return full.toilet_and_rest_area;
+          }
+        },
+        {
+          targets: 16,
+          render: function (data, type, full, meta) {
+            return full.electricity;
+          }
+        },
+        {
+          targets: 17,
+          render: function (data, type, full, meta) {
+            return full.administrative_room_or_office;
+          }
+        },
+        {
+          targets: 18,
+          render: function (data, type, full, meta) {
+            return full.worker_safety_equipment;
+          }
+        },
+        {
+          targets: 19,
+          render: function (data, type, full, meta) {
+            return full.firefighting_tools;
+          }
+        },
+        {
+          targets: 20,
+          render: function (data, type, full, meta) {
+            return full.description;
+          }
+        },
+        {
+          targets: 21,
+          render: function (data, type, full, meta) {
+            return full.admin;
+          }
+        },
+        {
+          targets: 22,
+          render: function (data, type, full, meta) {
+            return full.created_at;
+          }
+        },
+        {
+          targets: 23,
           render: function (data, type, full, meta) {
             return full.status;
           }
@@ -169,7 +239,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -189,7 +259,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
               }
             },
             {
@@ -197,7 +267,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
               }
             },
             {
@@ -205,7 +275,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
               }
             },
             {
@@ -213,7 +283,7 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
               }
             }
           ]
@@ -222,8 +292,7 @@ $(function () {
           text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Warehouse</span>',
           className: 'add-new btn btn-primary',
           attr: {
-            'data-bs-toggle': 'offcanvas',
-            'data-bs-target': '#offcanvasAddUser'
+            'id': 'button-add-warehouse'
           }
         }
       ],
@@ -294,121 +363,3 @@ $(function () {
     $('.dataTables_length .form-select').removeClass('form-select-sm');
   }, 300);
 });
-
-// Validation & Phone mask
-(function () {
-  const phoneMaskList = document.querySelectorAll('.phone-mask'),
-    addNewWarehouseForm = document.getElementById('addNewWarehouseForm');
-
-  // Phone Number
-  if (phoneMaskList) {
-    phoneMaskList.forEach(function (phoneMask) {
-      new Cleave(phoneMask, {
-        phone: true,
-        phoneRegionCode: 'US'
-      });
-    });
-  }
-  // Add New User Form Validation
-  const fv = FormValidation.formValidation(addNewWarehouseForm, {
-    fields: {
-      name: {
-        validators: {
-          notEmpty: {
-            message: 'Please enter warehouse name'
-          }
-        }
-      },
-      capacity: {
-        validators: {
-          notEmpty: {
-            message: 'Please enter warehouse capacity'
-          },
-          numeric: {
-            message: 'Capacity must be a number'
-          }
-        }
-      },
-      facility: {
-        validators: {
-          notEmpty: {
-            message: 'Please enter warehouse facility'
-          }
-        }
-      },
-      rental_price: {
-        validators: {
-          notEmpty: {
-            message: 'Please enter rental price'
-          }
-        }
-      },
-      surface_area: {
-        validators: {
-          notEmpty: {
-            message: 'Please enter surface area'
-          },
-          numeric: {
-            message: 'Surface area must be a number'
-          }
-        }
-      },
-      building_area: {
-        validators: {
-          notEmpty: {
-            message: 'Please enter building area'
-          },
-          numeric: {
-            message: 'Building area must be a number'
-          }
-        }
-      },
-      city: {
-        validators: {
-          notEmpty: {
-            message: 'Please enter city'
-          }
-        }
-      },
-      address: {
-        validators: {
-          notEmpty: {
-            message: 'Please enter address'
-          },
-          stringLength: {
-            min: 6,
-            message: 'Address must be more than 6 characters long'
-          }
-        }
-      },
-      description: {
-        validators: {
-          notEmpty: {
-            message: 'Please enter description'
-          }
-        }
-      },
-      warehouse_image: {
-        validators: {
-          notEmpty: {
-            message: 'Please select warehouse image'
-          }
-        }
-      },
-    },
-    plugins: {
-      trigger: new FormValidation.plugins.Trigger(),
-      bootstrap5: new FormValidation.plugins.Bootstrap5({
-        // Use this for enabling/changing valid/invalid class
-        eleValidClass: '',
-        rowSelector: function (field, ele) {
-          // field is the field name & ele is the field element
-          return '.mb-3';
-        }
-      }),
-      // Submit the form when all fields are valid
-      // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
-      autoFocus: new FormValidation.plugins.AutoFocus()
-    }
-  });
-})();

@@ -74,14 +74,6 @@ class AjaxController extends Controller
         return view('components.data-ajax.pages.modal.data-edit-tenant-modal', compact('tenant'));
     }
 
-    public function warehouse_edit(Warehouse $warehouse)
-    {
-        return view('components.data-ajax.pages.modal.data-edit-warehouse-modal', [
-            'warehouse' => $warehouse,
-            'categories' => $this->warehouseCategoryRepository->getAllWarehouseCategories()
-        ]);
-    }
-
     public function warehouse_category_edit(WarehouseCategory $warehouse_category)
     {
         return view('components.data-ajax.pages.modal.data-edit-warehouse-category-modal', compact('warehouse_category'));

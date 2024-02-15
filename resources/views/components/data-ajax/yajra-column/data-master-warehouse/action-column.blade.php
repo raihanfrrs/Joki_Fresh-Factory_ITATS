@@ -1,6 +1,6 @@
 @if ($type == 'show')
 <div class="d-flex justify-content-center">
-    <a href="javascript:;" class="text-body" data-bs-target="#editWarehouse" data-bs-toggle="modal" id="button-trigger-modal-edit-warehouse" data-id="{{ $model->id }}"><i class="ti ti-pencil ti-sm mx-1"></i></a>
+    <a href="{{ route('master.warehouse.edit', $model->id) }}" class="text-body"><i class="ti ti-pencil ti-sm mx-1"></i></a>
     <form action="{{ route('master.warehouse.destroy', $model->id) }}" method="post" class="form-delete-warehouse-{{ $model->id }}">
         @csrf
         @method('delete')

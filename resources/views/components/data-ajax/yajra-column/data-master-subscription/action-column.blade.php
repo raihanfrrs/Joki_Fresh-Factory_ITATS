@@ -1,5 +1,6 @@
 <div class="d-flex justify-content-center">
     <a href="javascript:;" class="text-body" data-bs-target="#editSubscription" data-bs-toggle="modal" id="button-trigger-modal-edit-subscription" data-id="{{ $model->id }}"><i class="ti ti-pencil ti-sm mx-1"></i></a>
+    
     <form action="{{ route('master.subscription.destroy', $model->id) }}" method="post" class="form-delete-subscription-{{ $model->id }}">
         @csrf
         @method('delete')

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->longText('address');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('rank', ['starter', 'paid'])->default('starter');
             $table->softDeletes();
             $table->timestamps();
         });

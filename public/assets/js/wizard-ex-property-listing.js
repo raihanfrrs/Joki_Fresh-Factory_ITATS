@@ -10,8 +10,8 @@
 
   const flatpickrRange = document.querySelector('.flatpickr'),
     phoneMask = document.querySelector('.contact-number-mask'),
-    plCountry = $('#plCountry'),
-    plFurnishingDetailsSuggestionEl = document.querySelector('#plFurnishingDetails');
+    countrySelect = $('#country'),
+    goods_handling_equipment = document.querySelector('#goods_handling_equipment');
 
   // Phone Number Input Mask
   if (phoneMask) {
@@ -21,38 +21,47 @@
     });
   }
 
-  // select2 (Country)
-
-  if (plCountry) {
-    plCountry.wrap('<div class="position-relative"></div>');
-    plCountry.select2({
-      placeholder: 'Select country',
-      dropdownParent: plCountry.parent()
-    });
-  }
-
   if (flatpickrRange) {
     flatpickrRange.flatpickr();
   }
 
-  // Tagify (Furnishing details)
-  const furnishingList = [
-    'Fridge',
-    'TV',
-    'AC',
-    'WiFi',
-    'RO',
+  const country_id = $('#country_id');
+  if (country_id.length) {
+    country_id.wrap('<div class="position-relative"></div>');
+    country_id
+      .select2({
+        placeholder: 'Select Country',
+        dropdownParent: country_id.parent()
+      });
+  }
+
+  const warehouse_category_id = $('#warehouse_category_id');
+  if (warehouse_category_id.length) {
+    warehouse_category_id.wrap('<div class="position-relative"></div>');
+    warehouse_category_id
+      .select2({
+        placeholder: 'Select Warehouse Type',
+        dropdownParent: warehouse_category_id.parent()
+      });
+  }
+
+  const goods_handling_equipment_list = [
+    'Forklift',
+    'Stacker',
+    'Pallet Jack (Hand Pallet Truck)',
+    'Conveyor Belt',
+    'Racking Systems',
     'Washing Machine',
-    'Sofa',
-    'Bed',
-    'Dining Table',
-    'Microwave',
-    'Cupboard'
+    'Overhead Crane',
+    'Automated Guided Vehicles (AGVs)',
+    'Reach Trucks',
+    'Hand Trucks',
+    'Pneumatic Tube Systems'
   ];
-  if (plFurnishingDetailsSuggestionEl) {
-    const plFurnishingDetailsSuggestion = new Tagify(plFurnishingDetailsSuggestionEl, {
-      whitelist: furnishingList,
-      maxTags: 10,
+  if (goods_handling_equipment) {
+    new Tagify(goods_handling_equipment, {
+      whitelist: goods_handling_equipment_list,
+      maxTags: 20,
       dropdown: {
         maxItems: 20,
         classname: 'tags-inline',
@@ -86,30 +95,90 @@
     // Personal Details
     const FormValidation1 = FormValidation.formValidation(wizardPropertyListingFormStep1, {
       fields: {
-        // * Validate the fields here based on your requirements
-        plFirstName: {
+        name: {
           validators: {
             notEmpty: {
-              message: 'Please enter your first name'
+              message: 'Please enter warehouse name'
             }
           }
         },
-        plLastName: {
+        warehouse_category_id: {
           validators: {
             notEmpty: {
-              message: 'Please enter your first name'
+              message: 'Please enter warehouse type'
             }
           }
-        }
+        },
+        country: {
+          validators: {
+            notEmpty: {
+              message: 'Please select country'
+            }
+          }
+        },
+        city: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter city'
+            }
+          }
+        },
+        zip_code: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter zip code'
+            },
+            stringLength: {
+              min: 4,
+              max: 10,
+              message: 'The zip code must be more `than 4 and less than 10 characters long'
+            }
+          }
+        },
+        address: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter address'
+            },
+            stringLength: {
+              min: 6,
+              message: 'Address must be more than 6 characters long'
+            }
+          }
+        },
+        'warehouse_image[]': {
+          validators: {
+              notEmpty: {
+                  message: 'Please select at least one warehouse image.'
+              },
+              file: {
+                  extension: 'jpeg,jpg,png',
+                  type: 'image/jpeg,image/png',
+                  maxSize: 5 * 1024 * 1024,
+                  minFiles: 1,
+                  message: 'Please choose at least one image file (JPEG or PNG) with a maximum size of 5MB.'
+              }
+          }
+        },
+        'edit_warehouse_image[]': {
+          validators: {
+              file: {
+                  extension: 'jpeg,jpg,png',
+                  type: 'image/jpeg,image/png',
+                  maxSize: 5 * 1024 * 1024,
+                  minFiles: 1,
+                  message: 'Please choose at least one image file (JPEG or PNG) with a maximum size of 5MB.'
+              }
+          }
+        },
       },
-
       plugins: {
         trigger: new FormValidation.plugins.Trigger(),
         bootstrap5: new FormValidation.plugins.Bootstrap5({
           // Use this for enabling/changing valid/invalid class
           // eleInvalidClass: '',
           eleValidClass: '',
-          rowSelector: '.col-sm-6'
+          rowSelector: '.col-sm-6, .col-sm-4, .col-lg-12'
         }),
         autoFocus: new FormValidation.plugins.AutoFocus(),
         submitButton: new FormValidation.plugins.SubmitButton()
@@ -132,22 +201,33 @@
       fields: {
         // * Validate the fields here based on your requirements
 
-        plPropertyType: {
+        capacity: {
           validators: {
             notEmpty: {
-              message: 'Please select property type'
+              message: 'Please enter capacity'
+            },
+            numeric: {
+              message: 'Capacity must be a number'
             }
           }
         },
-        plZipCode: {
+        surface_area: {
           validators: {
             notEmpty: {
-              message: 'Please enter zip code'
+              message: 'Please enter surface area'
             },
-            stringLength: {
-              min: 4,
-              max: 10,
-              message: 'The zip code must be more than 4 and less than 10 characters long'
+            numeric: {
+              message: 'Surface area must be a number'
+            }
+          }
+        },
+        building_area: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter building area'
+            },
+            numeric: {
+              message: 'Building area must be a number'
             }
           }
         }
@@ -164,7 +244,7 @@
               case 'plAddress':
                 return '.col-lg-12';
               default:
-                return '.col-sm-6';
+                return '.col-sm-4';
             }
           }
         }),
@@ -176,25 +256,75 @@
       validationStepper.next();
     });
 
-    // select2 (Property type)
-    const plPropertyType = $('#plPropertyType');
-    if (plPropertyType.length) {
-      plPropertyType.wrap('<div class="position-relative"></div>');
-      plPropertyType
-        .select2({
-          placeholder: 'Select property type',
-          dropdownParent: plPropertyType.parent()
-        })
-        .on('change.select2', function () {
-          // Revalidate the color field when an option is chosen
-          FormValidation2.revalidateField('plPropertyType');
-        });
-    }
-
     // Property Features
     const FormValidation3 = FormValidation.formValidation(wizardPropertyListingFormStep3, {
       fields: {
         // * Validate the fields here based on your requirements
+        storage_shelves: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter storage shelves'
+            },
+            numeric: {
+              message: 'Storage shelves must be a number'
+            }
+          }
+        },
+        toilet_and_rest_area: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter toilet and rest area'
+            },
+            numeric: {
+              message: 'Toilet and rest area must be a number'
+            }
+          }
+        },
+        effective_lighting_system: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter effective lighting system'
+            }
+          }
+        },
+        advanced_security_system: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter advanced security system'
+            }
+          }
+        },
+        electricity: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter electricity'
+            },
+            numeric: {
+              message: 'Electricity must be a number'
+            }
+          }
+        },
+        administrative_room_or_office: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter administrative room or office'
+            }
+          }
+        },
+        worker_safety_equipment: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter worker safety equipment'
+            }
+          }
+        },
+        firefighting_tools: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter firefighting tools'
+            }
+          }
+        }
       },
       plugins: {
         trigger: new FormValidation.plugins.Trigger(),
@@ -202,58 +332,15 @@
           // Use this for enabling/changing valid/invalid class
           // eleInvalidClass: '',
           eleValidClass: '',
-          rowSelector: '.col-sm-6'
+          rowSelector: '.col-sm-6, .col-lg-12'
         }),
         autoFocus: new FormValidation.plugins.AutoFocus(),
         submitButton: new FormValidation.plugins.SubmitButton()
       }
     }).on('core.form.valid', function () {
-      validationStepper.next();
-    });
-
-    // Property Area
-    const FormValidation4 = FormValidation.formValidation(wizardPropertyListingFormStep4, {
-      fields: {
-        // * Validate the fields here based on your requirements
-      },
-      plugins: {
-        trigger: new FormValidation.plugins.Trigger(),
-        bootstrap5: new FormValidation.plugins.Bootstrap5({
-          // Use this for enabling/changing valid/invalid class
-          // eleInvalidClass: '',
-          eleValidClass: '',
-          rowSelector: '.col-md-12'
-        }),
-        autoFocus: new FormValidation.plugins.AutoFocus(),
-        submitButton: new FormValidation.plugins.SubmitButton()
-      }
-    }).on('core.form.valid', function () {
-      // Jump to the next step when all fields in the current step are valid
-      validationStepper.next();
-    });
-
-    // Price Details
-    const FormValidation5 = FormValidation.formValidation(wizardPropertyListingFormStep5, {
-      fields: {
-        // * Validate the fields here based on your requirements
-      },
-      plugins: {
-        trigger: new FormValidation.plugins.Trigger(),
-        bootstrap5: new FormValidation.plugins.Bootstrap5({
-          // Use this for enabling/changing valid/invalid class
-          // eleInvalidClass: '',
-          eleValidClass: '',
-          rowSelector: '.col-md-12'
-        }),
-        autoFocus: new FormValidation.plugins.AutoFocus(),
-        submitButton: new FormValidation.plugins.SubmitButton()
-      }
-    }).on('core.form.valid', function () {
-      // You can submit the form
-      // wizardPropertyListingForm.submit()
-      // or send the form data to server via an Ajax request
-      // To make the demo simple, I just placed an alert
-      alert('Submitted..!!');
+      let form = $(".form-submit-warehouse");
+      form.attr('onsubmit', 'return true');
+      form.submit();
     });
 
     wizardPropertyListingNext.forEach(item => {
@@ -272,14 +359,6 @@
             FormValidation3.validate();
             break;
 
-          case 3:
-            FormValidation4.validate();
-            break;
-
-          case 4:
-            FormValidation5.validate();
-            break;
-
           default:
             break;
         }
@@ -289,14 +368,6 @@
     wizardPropertyListingPrev.forEach(item => {
       item.addEventListener('click', event => {
         switch (validationStepper._currentIndex) {
-          case 4:
-            validationStepper.previous();
-            break;
-
-          case 3:
-            validationStepper.previous();
-            break;
-
           case 2:
             validationStepper.previous();
             break;

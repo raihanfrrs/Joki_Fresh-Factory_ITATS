@@ -6,6 +6,7 @@ use Ramsey\Uuid\Uuid;
 use App\Models\Warehouse;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class WarehouseRepository
 {
@@ -23,49 +24,92 @@ class WarehouseRepository
     {
         $warehouse_id = Uuid::uuid4()->toString();
 
-        $warehouse = Warehouse::create([
-            'id' => $warehouse_id,
-            'admin_id' => auth()->user()->admin->id,
-            'warehouse_category_id' => $data['warehouse_category_id'],
-            'name' => $data['name'],
-            'capacity' => $data['capacity'],
-            'facility' => $data['facility'],
-            'surface_area' => $data['surface_area'],
-            'building_area' => $data['building_area'],
-            'city' => $data['city'],
-            'address' => $data['address'],
-            'description' => $data['description'],
-            'payment_time' => $data['payment_time'],
-        ]);
+        DB::transaction(function () use ($data, $warehouse_id) {
+            $warehouse = Warehouse::create([
+                'id' => $warehouse_id,
+                'admin_id' => auth()->user()->admin->id,
+                'warehouse_category_id' => $data['warehouse_category_id'],
+                'name' => $data['name'],
+                'capacity' => $data['capacity'],
+                'surface_area' => $data['surface_area'],
+                'building_area' => $data['building_area'],
+                'country_id' => $data['country_id'],
+                'zip_code' => $data['zip_code'],
+                'city' => $data['city'],
+                'address' => $data['address'],
+                'description' => $data['description'] ?? '',
+                'storage_shelves' => $data['storage_shelves'],
+                'effective_lighting_system' => $data['effective_lighting_system'],
+                'advanced_security_system' => $data['advanced_security_system'],
+                'toilet_and_rest_area' => $data['toilet_and_rest_area'],
+                'electricity' => $data['electricity'],
+                'administrative_room_or_office' => $data['administrative_room_or_office'],
+                'worker_safety_equipment' => $data['worker_safety_equipment'],
+                'firefighting_tools' => $data['firefighting_tools'],
+                'goods_handling_equipment' => $data['goods_handling_equipment'] ?? ''
+            ]);
+    
+            if ($data->hasFile('warehouse_image')) {
+                foreach ($data->file('warehouse_image') as $key => $file) {
+                    $media = $warehouse->addMedia($file)
+                        ->withResponsiveImages()
+                        ->toMediaCollection('warehouse_images');
+            
+                    $media->update([
+                        'model_id' => $warehouse_id,
+                        'model_type' => Warehouse::class,
+                    ]);
+                }
+            }
+        });
 
-        if ($data->hasFile('warehouse_image')) {
-            $media = $warehouse->addMediaFromRequest('warehouse_image')->withResponsiveImages()->toMediaCollection('warehouse_images');
-
-            $media->where('model_type', Warehouse::class)
-                ->where('model_id', $warehouse->id)
-                ->update([
-                    'model_id' => $warehouse->id,
-                    'model_type' => Warehouse::class,
-                ]);
-        }
-
-        return $warehouse;
+        return true;
     }
 
     public function updateWarehouse($data, $id)
     {
-        return self::getWarehouse($id)->update([
-            'name' => $data['name'],
-            'warehouse_category_id' => $data['warehouse_category_id'],
-            'capacity' => $data['capacity'],
-            'facility'=> $data['facility'],
-            'surface_area' => $data['surface_area'],
-            'building_area' => $data['building_area'],
-            'city' => $data['city'],
-            'address' => $data['address'],
-            'description' => $data['description'],
-            'payment_time' => $data['payment_time']
-        ]);
+        DB::transaction(function () use ($data, $id) {
+            $warehouse = self::getWarehouse($id);
+
+            $warehouse->update([
+                'warehouse_category_id' => $data['warehouse_category_id'],
+                'name' => $data['name'],
+                'capacity' => $data['capacity'],
+                'surface_area' => $data['surface_area'],
+                'building_area' => $data['building_area'],
+                'country_id' => $data['country_id'],
+                'zip_code' => $data['zip_code'],
+                'city' => $data['city'],
+                'address' => $data['address'],
+                'description' => $data['description'] ?? '',
+                'storage_shelves' => $data['storage_shelves'],
+                'effective_lighting_system' => $data['effective_lighting_system'],
+                'advanced_security_system' => $data['advanced_security_system'],
+                'toilet_and_rest_area' => $data['toilet_and_rest_area'],
+                'electricity' => $data['electricity'],
+                'administrative_room_or_office' => $data['administrative_room_or_office'],
+                'worker_safety_equipment' => $data['worker_safety_equipment'],
+                'firefighting_tools' => $data['firefighting_tools'],
+                'goods_handling_equipment' => $data['goods_handling_equipment'] ?? ''
+            ]);
+    
+            if ($data->hasFile('edit_warehouse_image')) {
+                $warehouse->clearMediaCollection('warehouse_images');
+
+                foreach ($data->file('edit_warehouse_image') as $key => $file) {
+                    $media = $warehouse->addMedia($file)
+                        ->withResponsiveImages()
+                        ->toMediaCollection('warehouse_images');
+            
+                    $media->update([
+                        'model_id' => $id,
+                        'model_type' => Warehouse::class,
+                    ]);
+                }
+            }
+        });
+
+        return true;
     }
 
     public function deleteWarehouse($warehouse)

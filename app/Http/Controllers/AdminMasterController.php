@@ -27,18 +27,20 @@ use App\Repositories\WarehouseCategoryRepository;
 use App\Http\Requests\WarehouseCategoryStoreRequest;
 use App\Http\Requests\WarehouseCategoryUpdateRequest;
 use App\Models\Subscription;
+use App\Repositories\CountryRepository;
 
 class AdminMasterController extends Controller
 {
-    private $adminRepository, $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository;
+    private $adminRepository, $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $countryRepository;
 
-    public function __construct(AdminRepository $adminRepository, UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehoseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository) {
+    public function __construct(AdminRepository $adminRepository, UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehoseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, CountryRepository $countryRepository) {
         $this->adminRepository = $adminRepository;
         $this->userRepository = $userRepository;
         $this->tenantRepository = $tenantRepository;
         $this->warehouseCategoryRepository = $warehoseCategoryRepository;
         $this->warehouseRepository = $warehouseRepository;
         $this->subscriptionRepository = $subscriptionRepository;
+        $this->countryRepository = $countryRepository;
     }
 
     public function master_admin_index()
@@ -283,9 +285,15 @@ class AdminMasterController extends Controller
 
     public function master_warehouse_index()
     {
-        $warehouse_categories = $this->warehouseCategoryRepository->getAllWarehouseCategories();
+        return view('pages.admin.master.property.warehouse.index');
+    }
 
-        return view('pages.admin.master.property.warehouse.index', compact('warehouse_categories'));
+    public function master_warehouse_create()
+    {
+        return view('pages.admin.master.property.warehouse.add', [
+            'warehouse_categories' => $this->warehouseCategoryRepository->getAllWarehouseCategories(),
+            'countries' => $this->countryRepository->getAllCountries()
+        ]);
     }
 
     public function master_warehouse_store(WarehouseStoreRequest $request)
@@ -301,6 +309,15 @@ class AdminMasterController extends Controller
                 ]);
             }
         }
+    }
+
+    public function master_warehouse_edit(Warehouse $warehouse)
+    {
+        return view('pages.admin.master.property.warehouse.edit', [
+            'warehouse' => $warehouse,
+            'warehouse_categories' => $this->warehouseCategoryRepository->getAllWarehouseCategories(),
+            'countries' => $this->countryRepository->getAllCountries()
+        ]);
     }
 
     public function master_warehouse_update(WarehouseUpdateRequest $request, $warehouse)
