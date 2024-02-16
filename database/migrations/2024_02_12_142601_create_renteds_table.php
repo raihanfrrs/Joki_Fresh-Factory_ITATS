@@ -17,8 +17,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignIdFor(Tenant::class);
             $table->foreignIdFor(WarehouseSubscription::class);
-            $table->date('started_at');
-            $table->date('ended_at');
+            $table->date('started_at')->nullable();
+            $table->date('ended_at')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->timestamps();
         });
     }

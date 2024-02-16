@@ -20,8 +20,6 @@ return new class extends Migration
             $table->foreignIdFor(WarehouseSubscription::class);
             $table->foreignIdFor(Tenant::class);
             $table->bigInteger('subtotal');
-            $table->dateTime('payment_due')->nullable();
-            $table->enum('status', ['pending', 'payment'])->default('pending');
             $table->timestamps();
         });
     }

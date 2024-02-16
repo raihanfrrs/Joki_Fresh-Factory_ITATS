@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Repositories\TaxRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\TenantRepository;
 use Illuminate\Support\Facades\Request;
@@ -15,9 +16,9 @@ use App\Repositories\WarehouseSubscriptionRepository;
 
 class YajraDatatablesController extends Controller
 {
-    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository;
+    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository;
 
-    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository)
+    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository)
     {
         $this->userRepository = $userRepository;
         $this->tenantRepository = $tenantRepository;
@@ -25,6 +26,7 @@ class YajraDatatablesController extends Controller
         $this->warehouseRepository = $warehouseRepository;
         $this->subscriptionRepository = $subscriptionRepository;
         $this->warehouseSubscriptionRepository = $warehouseSubscriptionRepository;
+        $this->taxRepository = $taxRepository;
     }
 
     public function admin_index()
@@ -231,6 +233,27 @@ class YajraDatatablesController extends Controller
             return view('components.data-ajax.yajra-column.data-master-subscription.action-column', compact('model'))->render();
         })
         ->rawColumns(['name', 'month_duration', 'action'])
+        ->make(true);
+    }
+
+    public function taxes_index()
+    {
+        $taxes = $this->taxRepository->getAllTaxes();
+
+        return DataTables::of($taxes)
+        ->addColumn('index', function ($model) use ($taxes) {
+            return $taxes->search($model) + 1;
+        })
+        ->addColumn('value', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-tax.value-column', compact('model'))->render();
+        })
+        ->addColumn('status', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-tax.status-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-master-tax.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['value', 'status', 'action'])
         ->make(true);
     }
 

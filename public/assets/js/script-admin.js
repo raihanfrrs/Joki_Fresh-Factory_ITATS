@@ -161,6 +161,28 @@ $(document).on('click', '#button-trigger-modal-edit-subscription', function () {
     });
 });
 
+$(document).on('click', '#button-trigger-modal-edit-tax', function () {
+    let id = $(this).attr('data-id');
+
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
+    $.ajax({
+        url: "/ajax/tax/"+id+"/edit",
+        method: "get",
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#data-edit-tax-modal").html(response);
+        },
+        error: function(xhr, status, error) {
+        }
+    });
+});
+
 $(document).on('click', '#button-trigger-modal-show-list-warehouses', function () {
     $.ajaxSetup({
         headers: {
