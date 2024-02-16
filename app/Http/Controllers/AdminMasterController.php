@@ -6,13 +6,18 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Tenant;
 use App\Models\Warehouse;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use App\Models\WarehouseCategory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AdminRequest;
+use App\Repositories\TaxRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\AdminRepository;
+use App\Http\Requests\TaxStoreRequest;
 use App\Repositories\TenantRepository;
+use App\Http\Requests\TaxUpdateRequest;
+use App\Repositories\CountryRepository;
 use App\Repositories\CategoryRepository;
 use App\Http\Requests\AdminUpdateRequest;
 use App\Repositories\WarehouseRepository;
@@ -26,14 +31,12 @@ use App\Http\Requests\SubscriptionUpdateRequest;
 use App\Repositories\WarehouseCategoryRepository;
 use App\Http\Requests\WarehouseCategoryStoreRequest;
 use App\Http\Requests\WarehouseCategoryUpdateRequest;
-use App\Models\Subscription;
-use App\Repositories\CountryRepository;
 
 class AdminMasterController extends Controller
 {
-    private $adminRepository, $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $countryRepository;
+    private $adminRepository, $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $countryRepository, $taxRepository;
 
-    public function __construct(AdminRepository $adminRepository, UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehoseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, CountryRepository $countryRepository) {
+    public function __construct(AdminRepository $adminRepository, UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehoseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, CountryRepository $countryRepository, TaxRepository $taxRepository) {
         $this->adminRepository = $adminRepository;
         $this->userRepository = $userRepository;
         $this->tenantRepository = $tenantRepository;
@@ -41,6 +44,7 @@ class AdminMasterController extends Controller
         $this->warehouseRepository = $warehouseRepository;
         $this->subscriptionRepository = $subscriptionRepository;
         $this->countryRepository = $countryRepository;
+        $this->taxRepository = $taxRepository;
     }
 
     public function master_admin_index()
@@ -400,6 +404,39 @@ class AdminMasterController extends Controller
                 'position' => 'center',
                 'type' => 'success',
                 'message' => 'Subscription has been deleted!'
+            ]);
+        }
+    }
+
+    public function master_taxes_index()
+    {
+        return view('pages.admin.master.taxes.index');
+    }
+
+    public function master_taxes_store(TaxStoreRequest $request)
+    {
+        if ($request->validated()) {
+            if ($this->taxRepository->createTax($request)) {
+                return redirect()->back()->with([
+                    'flash-type' => 'sweetalert',
+                    'case' => 'default',
+                    'position' => 'center',
+                    'type' => 'success',
+                    'message' => 'Tax has been created!'
+                ]);
+            }
+        }
+    }
+
+    public function master_taxes_update(TaxUpdateRequest $request, $tax)
+    {
+        if ($this->taxRepository->updateTax($request, $tax)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Tax has been updated!'
             ]);
         }
     }

@@ -46,13 +46,13 @@
           <div class="badge bg-label-primary rounded-pill ms-auto" id="label-total-brand-influencer-new-count"></div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item {{ request()->is('master/admin', 'master/admin/*') ? 'active' : '' }} menu-item-brand">
+          <li class="menu-item {{ request()->is('master/admin', 'master/admin/*') ? 'active' : '' }}">
             <a href="{{ route('master.admin') }}" class="menu-link">
               <div data-i18n="Admin">Admin</div>
               <div class="badge bg-label-primary rounded-pill ms-auto" id="label-brand-new-count"></div>
             </a>
           </li>
-          <li class="menu-item {{ request()->is('master/tenant', 'master/tenant/*') ? 'active' : '' }} menu-item-influencer">
+          <li class="menu-item {{ request()->is('master/tenant', 'master/tenant/*') ? 'active' : '' }}">
             <a href="{{ route('master.tenant') }}" class="menu-link">
               <div data-i18n="Tenant">Tenant</div>
               <div class="badge bg-label-primary rounded-pill ms-auto" id="label-influencer-new-count"></div>
@@ -79,10 +79,17 @@
         </ul>
       </li>
       @if (auth()->user()->attribute == 'core')
-      <li class="menu-item {{ request()->is('master/subscription', 'master/subscription/*') ? 'active' : '' }} menu-item-brand">
+      <li class="menu-item {{ request()->is('master/subscription', 'master/subscription/*') ? 'active' : '' }}">
         <a href="{{ route('master.subscription') }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-assembly"></i>
           <div data-i18n="Subscription">Subscription</div>
+          <div class="badge bg-label-primary rounded-pill ms-auto" id="label-brand-new-count"></div>
+        </a>
+      </li>
+      <li class="menu-item {{ request()->is('master/tax', 'master/tax/*') ? 'active' : '' }}">
+        <a href="{{ route('master.taxes') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-receipt-tax"></i>
+          <div data-i18n="Taxes">Taxes</div>
           <div class="badge bg-label-primary rounded-pill ms-auto" id="label-brand-new-count"></div>
         </a>
       </li>
@@ -93,7 +100,7 @@
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">CALCULATION</span>
       </li>
-      <li class="menu-item {{ request()->is('calculation/rental-price', 'calculation/rental-price/*', 'calculation/rental-price/*') ? 'active' : '' }} menu-item-brand">
+      <li class="menu-item {{ request()->is('calculation/rental-price', 'calculation/rental-price/*', 'calculation/rental-price/*') ? 'active' : '' }}">
         <a href="{{ route('calculation.rental.price') }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-zoom-money"></i>
           <div data-i18n="Rental Price">Rental Price</div>

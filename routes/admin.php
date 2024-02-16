@@ -45,6 +45,11 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::get('master/subscription/{subscription}', 'master_subscription_show')->name('master.subscription.show');
         Route::patch('master/subscription/{subscription}', 'master_subscription_update')->name('master.subscription.update');
         Route::delete('master/subscription/{subscription}', 'master_subscription_destroy')->name('master.subscription.destroy');
+
+        Route::get('master/taxes', 'master_taxes_index')->name('master.taxes');
+        Route::post('master/taxes', 'master_taxes_store')->name('master.taxes.store');
+        Route::patch('master/taxes/{taxes}', 'master_taxes_update')->name('master.taxes.update');
+        Route::delete('master/taxes/{taxes}', 'master_taxes_destroy')->name('master.taxes.destroy');
     });
 
     Route::controller(AdminReportingController::class)->group(function () {
