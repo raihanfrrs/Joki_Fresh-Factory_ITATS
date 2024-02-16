@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->foreign(['tenant_id'], 'transactions_ibfk_1')->references(['id'])->on('tenants')->onUpdate('CASCADE')->onDelete('CASCADE');
+        Schema::create('taxes', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->integer('value');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->dropForeign('transactions_ibfk_1');
-        });
+        Schema::dropIfExists('taxes');
     }
 };

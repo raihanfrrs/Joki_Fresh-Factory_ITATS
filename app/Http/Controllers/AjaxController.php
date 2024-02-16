@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tax;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Tenant;
@@ -82,6 +83,11 @@ class AjaxController extends Controller
         return view('components.data-ajax.pages.modal.data-edit-warehouse-category-modal', compact('warehouse_category'));
     }
 
+    public function tax_edit(Tax $tax)
+    {
+        return view('components.data-ajax.pages.modal.data-edit-tax-modal', compact('tax'));
+    }
+
     public function subscription_edit(Subscription $subscription)
     {
         return view('components.data-ajax.pages.modal.data-edit-subscription-modal', compact('subscription'));
@@ -101,7 +107,7 @@ class AjaxController extends Controller
 
     public function tenant_shopping_cart_count()
     {
-        return $this->tempTransactionRepository->getTempTransactionByTenantId()->where('status', 'pending')->count();
+        return $this->tempTransactionRepository->getTempTransactionByTenantId()->count();
     }
 
     public function tenant_shopping_cart_destroy(TempTransaction $temp_transaction)

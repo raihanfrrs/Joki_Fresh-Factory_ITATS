@@ -68,19 +68,21 @@
                             <dt class="col-6 fw-normal">Subtotal</dt>
                             <dd class="col-6 text-end">@rupiah($carts->sum('subtotal'))</dd>
 
-                            <dt class="col-6 fw-normal">Application Charges (5%)</dt>
-                            <dd class="col-6 text-end">@rupiah($carts->sum('subtotal') * 0.05)</dd>
+                            <dt class="col-6 fw-normal">Application Charges ({{ $tax->value }}%)</dt>
+                            <dd class="col-6 text-end">@rupiah($carts->sum('subtotal') * $tax->value / 100)</dd>
                         </dl>
 
                         <hr class="mx-n4">
                         <dl class="row mb-0">
                             <dt class="col-6">Total</dt>
-                            <dd class="col-6 fw-semibold text-end mb-0">@rupiah($carts->sum('subtotal') + $carts->sum('subtotal') * 0.05)</dd>
+                            <dd class="col-6 fw-semibold text-end mb-0">@rupiah($carts->sum('subtotal') + $carts->sum('subtotal') * $tax->value / 100)</dd>
                         </dl>
                     </div>
+                    @if ($carts->count())
                     <div class="d-grid">
-                        <button class="btn btn-primary btn-next waves-effect waves-light">Place Order</button>
+                      <button class="btn btn-primary btn-next waves-effect waves-light">Place Order</button>
                     </div>
+                    @endif
                 </div>
                 </div>
             </div>

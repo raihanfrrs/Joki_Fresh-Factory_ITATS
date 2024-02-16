@@ -2,16 +2,22 @@
 
 namespace App\Repositories;
 
+use App\Models\DetailTransaction;
+use App\Models\Rented;
 use Ramsey\Uuid\Uuid;
+use App\Models\Transaction;
 use App\Models\TempTransaction;
+use Illuminate\Support\Facades\DB;
+use App\Repositories\TaxRepository;
 
 class TempTransactionRepository
 {
-    protected $warehouseSubscriptionRepository;
+    protected $warehouseSubscriptionRepository, $taxRepository;
 
-    public function __construct(WarehouseSubscriptionRepository $warehouseSubscriptionRepository)
+    public function __construct(WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository)
     {
         $this->warehouseSubscriptionRepository = $warehouseSubscriptionRepository;
+        $this->taxRepository = $taxRepository;
     }
 
     public function getTempTransactionById($id)
@@ -53,11 +59,39 @@ class TempTransactionRepository
         ]);
     }
 
-    public function updateTempTransactionStatus()
+    public function storeToTransaction()
     {
-        return self::getTempTransactionByTenantId()->update([
-            'status' => 'payment',
+        $transaction_id = Uuid::uuid4()->toString();
+
+        Transaction::create([
+            'id' => $transaction_id,
+            'tenant_id' => auth()->user()->tenant->id,
+            'tax_id' => $this->taxRepository->getTaxByStatus('active')->first()->id,
+            'grand_total' => self::getTempTransactionByTenantId()->sum('subtotal') + (self::getTempTransactionByTenantId()->sum('subtotal') * $this->taxRepository->getTaxByStatus('active')->first()->value / 100),
             'payment_due' => now()->addHour()
         ]);
+
+        DB::transaction(function () use ($transaction_id) {
+            foreach (self::getTempTransactionByTenantId()->get() as $item) {
+                DetailTransaction::create([
+                    'id' => Uuid::uuid4()->toString(),
+                    'transaction_id' => $transaction_id,
+                    'warehouse_subscription_id' => $item->warehouse_subscription_id,
+                    'subtotal' => $item->subtotal
+                ]);
+
+                Rented::create([
+                    'id' => Uuid::uuid4()->toString(),
+                    'tenant_id' => auth()->user()->tenant->id,
+                    'warehouse_subscription_id' => $item->warehouse_subscription_id,
+                ]);
+
+                self::destroyTempTransaction($item->id);
+            }
+        });
+
+
+
+        return $transaction_id;
     }
 }

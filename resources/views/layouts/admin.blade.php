@@ -174,6 +174,8 @@
             <script src="{{ asset('assets/js/app-category-list.js') }}"></script>
         @elseif (request()->is('master/subscription', 'master/subscription/*'))
             <script src="{{ asset('assets/js/app-subscription-list.js') }}"></script>
+        @elseif (request()->is('master/taxes', 'master/taxes/*'))
+            <script src="{{ asset('assets/js/app-taxes-list.js') }}"></script>
         @elseif (request()->is('calculation/rental-price', 'calculation/rental-price/*'))
             <script src="{{ asset('assets/js/app-rental-price-calculation-list.js') }}"></script>
             <script src="{{ asset('assets/js/app-warehouse-subscription-list.js') }}"></script>

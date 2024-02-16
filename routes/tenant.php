@@ -14,6 +14,6 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
     Route::controller(CartController::class)->group(function () {
         Route::get('shopping-cart', 'cart_index')->name('shopping.cart.index');
         Route::post('shopping-cart', 'cart_store')->name('shopping.cart.store');
-        Route::get('shopping-cart/payment', 'cart_payment')->name('shopping.cart.payment');
+        Route::get('shopping-cart/payment/{transaction}', 'cart_payment')->name('shopping.cart.payment');
     });
 });
