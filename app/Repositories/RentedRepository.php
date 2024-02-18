@@ -18,10 +18,10 @@ class RentedRepository
     {
         $data = [];
         foreach ($this->tempTransactionRepository->getTempTransactionByTenantId()->get() as $key => $item) {
-            $data[] = $item->warehouse_subscription->id;
+            $data[] = $item->warehouse_subscription->warehouse_id;
         }
 
         return Rented::where('tenant_id', auth()->user()->tenant->id)
-                    ->whereIn('warehouse_subscription_id', $data);
+                    ->whereIn('warehouse_id', $data);
     }
 }

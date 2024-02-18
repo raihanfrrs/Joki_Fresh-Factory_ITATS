@@ -10,15 +10,16 @@ use App\Repositories\TenantRepository;
 use Illuminate\Support\Facades\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Repositories\WarehouseRepository;
+use App\Repositories\TransactionRepository;
 use App\Repositories\SubscriptionRepository;
 use App\Repositories\WarehouseCategoryRepository;
 use App\Repositories\WarehouseSubscriptionRepository;
 
 class YajraDatatablesController extends Controller
 {
-    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository;
+    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository, $transactionRepository;
 
-    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository)
+    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository, TransactionRepository $transactionRepository)
     {
         $this->userRepository = $userRepository;
         $this->tenantRepository = $tenantRepository;
@@ -27,6 +28,7 @@ class YajraDatatablesController extends Controller
         $this->subscriptionRepository = $subscriptionRepository;
         $this->warehouseSubscriptionRepository = $warehouseSubscriptionRepository;
         $this->taxRepository = $taxRepository;
+        $this->transactionRepository = $transactionRepository;
     }
 
     public function admin_index()
@@ -315,6 +317,33 @@ class YajraDatatablesController extends Controller
             return view('components.data-ajax.yajra-column.data-rental-price-calculation.action-column', compact('model'))->render();
         })
         ->rawColumns(['warehouse_name', 'subscription_name', 'month_duration', 'price_rate', 'total_price', 'action'])
+        ->make(true);
+    }
+
+    public function transaction_payment()
+    {
+        $transactions = $this->transactionRepository->getTransactionByStatus('payment');
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('payment_id', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-payment.payment-id-column', compact('model'))->render();
+        })
+        ->addColumn('date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-payment.date-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-payment.amount-column', compact('model'))->render();
+        })
+        ->addColumn('total_payment', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-payment.total-payment-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-payment.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['payment_id', 'date', 'amount', 'total_payment', 'action'])
         ->make(true);
     }
 }
