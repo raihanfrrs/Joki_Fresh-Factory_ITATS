@@ -13,6 +13,7 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listTaxesTable', 'taxes_index');
     Route::get('listRentalPriceCalculationsTable', 'rental_price_calculation_index');
     Route::get('listWarehouseSubscriptionsTable/{warehouse}', 'warehouse_subscription_index');
+    Route::get('listTransactionsPaymentTable', 'transaction_payment');
 });
 
 Route::controller(AjaxController::class)->group(function () {

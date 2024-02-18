@@ -71,26 +71,23 @@ class TempTransactionRepository
             'payment_due' => now()->addHour()
         ]);
 
-        DB::transaction(function () use ($transaction_id) {
-            foreach (self::getTempTransactionByTenantId()->get() as $item) {
-                DetailTransaction::create([
-                    'id' => Uuid::uuid4()->toString(),
-                    'transaction_id' => $transaction_id,
-                    'warehouse_subscription_id' => $item->warehouse_subscription_id,
-                    'subtotal' => $item->subtotal
-                ]);
+        foreach (self::getTempTransactionByTenantId()->get() as $item) {
+            DetailTransaction::create([
+                'id' => Uuid::uuid4()->toString(),
+                'transaction_id' => $transaction_id,
+                'warehouse_subscription_id' => $item->warehouse_subscription_id,
+                'subtotal' => $item->subtotal
+            ]);
 
-                Rented::create([
-                    'id' => Uuid::uuid4()->toString(),
-                    'tenant_id' => auth()->user()->tenant->id,
-                    'warehouse_subscription_id' => $item->warehouse_subscription_id,
-                ]);
+            Rented::create([
+                'id' => Uuid::uuid4()->toString(),
+                'tenant_id' => auth()->user()->tenant->id,
+                'warehouse_subscription_id' => $item->warehouse_subscription_id,
+                'warehouse_id' => $item->warehouse_id
+            ]);
 
-                self::destroyTempTransaction($item->id);
-            }
-        });
-
-
+            self::destroyTempTransaction($item->id);
+        }
 
         return $transaction_id;
     }

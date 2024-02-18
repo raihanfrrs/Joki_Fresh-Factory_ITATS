@@ -69,4 +69,9 @@ class Warehouse extends Model implements HasMedia
     {
         return $this->hasMany(TempTransaction::class);
     }
+
+    public function rented()
+    {
+        return $this->hasOne(Rented::class);
+    }
 }

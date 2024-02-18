@@ -39,8 +39,10 @@ class CartController extends Controller
             ]);
         }
 
-        if ($this->tempTransactionRepository->storeToTransaction()) {
-            return redirect()->route('shopping.cart.payment', $this->tempTransactionRepository->storeToTransaction())->with([
+        $storeToTransaction = $this->tempTransactionRepository->storeToTransaction();
+
+        if ($storeToTransaction) {
+            return redirect()->route('shopping.cart.payment', $storeToTransaction)->with([
                 'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',

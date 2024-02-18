@@ -10,7 +10,7 @@
               <div class="card-body">
                 <form method="post" id="form-warehouse-subscription">
                     @csrf
-                    @if (strpos(request()->is(), "edit") !== false)
+                    @if (request()->is('*edit*'))
                         @method('PATCH')
                     @endif
                     <div class="mb-3">
@@ -81,7 +81,7 @@
                     @if (isset($warehouse_subscription_cart->warehouse->id))
                     <div class="d-flex justify-content-between">
                       <button type="button" class="btn btn-danger" id="button-cancel-warehouse-subscription">Cancel</button>
-                      <button type="button" class="btn btn-primary" id="{{ strpos(request()->url(), "edit") !== false ? 'button-update-warehouse-subscription' : 'button-submit-warehouse-subscription' }}" data-id="{{ isset($warehouse_subscription) ? $warehouse_subscription->id : '' }}">{{ strpos(request()->url(), 'edit') ? 'Edit' : 'Submit' }}</button>
+                      <button type="button" class="btn btn-primary" id="{{ request()->is('*edit*') ? 'button-update-warehouse-subscription' : 'button-submit-warehouse-subscription' }}" data-id="{{ isset($warehouse_subscription) ? $warehouse_subscription->id : '' }}">{{ request()->is('*edit*') ? 'Edit' : 'Submit' }}</button>
                     </div>
                     @endif                                   
                 </form>

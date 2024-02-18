@@ -2,20 +2,41 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Transaction extends Model
+class Transaction extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
+
+    public $incrementing = false;
     protected $keyType = "string";
+    protected $primaryKey = 'id';
     protected $fillable = [
         'id',
         'tenant_id',
         'tax_id',
-        'grand_total'
-
+        'grand_total',
+        'payment_due',
+        'status'
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('transaction_images')
+            ->singleFile();
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(368)
+            ->height(232)
+            ->sharpen(10);
+    }
 
     public function tenant()
     {

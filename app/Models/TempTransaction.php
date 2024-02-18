@@ -14,8 +14,7 @@ class TempTransaction extends Model
         'warehouse_id',
         'warehouse_subscription_id',
         'tenant_id',
-        'subtotal',
-        'payment_due'
+        'subtotal'
     ];
 
     public function warehouse()

@@ -155,6 +155,8 @@
             <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
         @elseif (request()->is('pricing'))
             <script src="{{ asset('assets/js/ui-carousel.js') }}"></script>
+        @elseif (request()->is('transaction/payment'))
+            <script src="{{ asset('assets/js/app-transaction-payment-list.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
