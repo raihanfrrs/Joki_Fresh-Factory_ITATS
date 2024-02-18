@@ -346,4 +346,175 @@ class YajraDatatablesController extends Controller
         ->rawColumns(['payment_id', 'date', 'amount', 'total_payment', 'action'])
         ->make(true);
     }
+
+    public function transaction_pending()
+    {
+        $transactions = $this->transactionRepository->getTransactionByStatus('success');
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('payment_id', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-pending.payment-id-column', compact('model'))->render();
+        })
+        ->addColumn('date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-pending.date-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-pending.amount-column', compact('model'))->render();
+        })
+        ->addColumn('total_payment', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-pending.total-payment-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-pending.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['payment_id', 'date', 'amount', 'total_payment', 'action'])
+        ->make(true);
+    }
+
+    public function transaction_confirmed()
+    {
+        $transactions = $this->transactionRepository->getTransactionByStatus('confirmed');
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('payment_id', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-confirmed.payment-id-column', compact('model'))->render();
+        })
+        ->addColumn('date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-confirmed.date-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-confirmed.amount-column', compact('model'))->render();
+        })
+        ->addColumn('total_payment', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-confirmed.total-payment-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-confirmed.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['payment_id', 'date', 'amount', 'total_payment', 'action'])
+        ->make(true);
+    }
+
+    public function transaction_declined()
+    {
+        $transactions = $this->transactionRepository->getTransactionByStatus('declined');
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('payment_id', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-declined.payment-id-column', compact('model'))->render();
+        })
+        ->addColumn('date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-declined.date-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-declined.amount-column', compact('model'))->render();
+        })
+        ->addColumn('total_payment', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-declined.total-payment-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-transaction-declined.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['payment_id', 'date', 'amount', 'total_payment', 'action'])
+        ->make(true);
+    }
+
+    public function purchases_pending()
+    {
+        $transactions = $this->transactionRepository->getTransactionByStatus('success');
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('payment_id', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-pending.payment-id-column', compact('model'))->render();
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-pending.name-column', compact('model'))->render();
+        })
+        ->addColumn('date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-pending.date-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-pending.amount-column', compact('model'))->render();
+        })
+        ->addColumn('total_payment', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-pending.total-payment-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-pending.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['payment_id', 'name', 'date', 'amount', 'total_payment', 'action'])
+        ->make(true);
+    }
+
+    public function purchases_confirmed()
+    {
+        $transactions = $this->transactionRepository->getTransactionByStatus('confirmed');
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('payment_id', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-confirmed.payment-id-column', compact('model'))->render();
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-confirmed.name-column', compact('model'))->render();
+        })
+        ->addColumn('date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-confirmed.date-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-confirmed.amount-column', compact('model'))->render();
+        })
+        ->addColumn('total_payment', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-confirmed.total-payment-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-confirmed.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['payment_id', 'name', 'date', 'amount', 'total_payment', 'action'])
+        ->make(true);
+    }
+
+    public function purchases_declined()
+    {
+        $transactions = $this->transactionRepository->getTransactionByStatus('declined');
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('payment_id', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-declined.payment-id-column', compact('model'))->render();
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-declined.name-column', compact('model'))->render();
+        })
+        ->addColumn('date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-declined.date-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-declined.amount-column', compact('model'))->render();
+        })
+        ->addColumn('total_payment', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-declined.total-payment-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-purchase-declined.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['payment_id', 'name', 'date', 'amount', 'total_payment', 'action'])
+        ->make(true);
+    }
 }

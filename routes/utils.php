@@ -14,6 +14,12 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listRentalPriceCalculationsTable', 'rental_price_calculation_index');
     Route::get('listWarehouseSubscriptionsTable/{warehouse}', 'warehouse_subscription_index');
     Route::get('listTransactionsPaymentTable', 'transaction_payment');
+    Route::get('listTransactionsPendingTable', 'transaction_pending');
+    Route::get('listTransactionsConfirmedTable', 'transaction_confirmed');
+    Route::get('listTransactionsDeclinedTable', 'transaction_declined');
+    Route::get('listPurchasesPendingTable', 'purchases_pending');
+    Route::get('listPurchasesConfirmedTable', 'purchases_confirmed');
+    Route::get('listPurchasesDeclinedTable', 'purchases_declined');
 });
 
 Route::controller(AjaxController::class)->group(function () {
@@ -28,6 +34,8 @@ Route::controller(AjaxController::class)->group(function () {
     Route::get('ajax/warehouse/show', 'warehouse_show');
     Route::get('ajax/warehouse_subscription/{warehouse_subscription}/edit', 'warehouse_subscription_store_edit');
     Route::get('ajax/tenant-details/shopping-cart-count', 'tenant_shopping_cart_count');
+    Route::get('ajax/tenant-details/new-payment-count', 'tenant_new_payment_count');
+    Route::get('ajax/admin-details/new-purchase-count', 'admin_new_purchase_count');
     Route::get('ajax/shopping-cart/{temp_transaction}/delete', 'tenant_shopping_cart_destroy');
     Route::post('ajax/shopping-cart/{temp_transaction}/update-subscription', 'tenant_shopping_cart_update_subscription');
 });

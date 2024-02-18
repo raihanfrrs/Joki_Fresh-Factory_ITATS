@@ -20,6 +20,7 @@ const tenantDetailData = (url, targetSelector, property) => {
 
 const allTenantDetailData = () => {
     tenantDetailData("/ajax/tenant-details/shopping-cart-count", "#label-total-shopping-cart-count", 'd-none');
+    tenantDetailData("/ajax/tenant-details/new-payment-count", "#label-total-new-payment-count", '');
 };
 
 $(document).on('click', '#button-submit-register-tenant', function () {

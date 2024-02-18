@@ -15,21 +15,23 @@ use App\Models\WarehouseSubscription;
 use App\Repositories\AdminRepository;
 use App\Repositories\TenantRepository;
 use App\Repositories\WarehouseRepository;
+use App\Repositories\TransactionRepository;
 use App\Repositories\TempTransactionRepository;
 use App\Repositories\WarehouseCategoryRepository;
 use App\Repositories\WarehouseSubscriptionCartRepository;
 
 class AjaxController extends Controller
 {
-    private $adminRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $warehouseSubscriptionCartRepository, $tempTransactionRepository;
+    private $adminRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $warehouseSubscriptionCartRepository, $tempTransactionRepository, $transactionRepository;
 
-    public function __construct(AdminRepository $adminRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, WarehouseSubscriptionCartRepository $warehouseSubscriptionCartRepository, TempTransactionRepository $tempTransactionRepository) {
+    public function __construct(AdminRepository $adminRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, WarehouseSubscriptionCartRepository $warehouseSubscriptionCartRepository, TempTransactionRepository $tempTransactionRepository, TransactionRepository $transactionRepository) {
         $this->adminRepository = $adminRepository;
         $this->tenantRepository = $tenantRepository;
         $this->warehouseCategoryRepository = $warehouseCategoryRepository;
         $this->warehouseRepository = $warehouseRepository;
         $this->warehouseSubscriptionCartRepository = $warehouseSubscriptionCartRepository;
         $this->tempTransactionRepository = $tempTransactionRepository;
+        $this->transactionRepository = $transactionRepository;
     }
 
     public function admin_detail_show($admin, $type)
@@ -108,6 +110,16 @@ class AjaxController extends Controller
     public function tenant_shopping_cart_count()
     {
         return $this->tempTransactionRepository->getTempTransactionByTenantId()->count();
+    }
+
+    public function tenant_new_payment_count()
+    {
+        return $this->transactionRepository->getTransactionByStatus('payment')->count() > 0 ? $this->transactionRepository->getTransactionByStatus('payment')->count() : '';
+    }
+
+    public function admin_new_purchase_count()
+    {
+        return $this->transactionRepository->getTransactionByStatus('success')->count() > 0 ? $this->transactionRepository->getTransactionByStatus('success')->count() : '';
     }
 
     public function tenant_shopping_cart_destroy(TempTransaction $temp_transaction)
