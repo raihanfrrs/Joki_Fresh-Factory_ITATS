@@ -25,10 +25,11 @@
     @if ($status === 'payment')
         @include('pages.tenant.transaction.payment.index')
     @elseif ($status === 'success')
-
+        @include('pages.tenant.transaction.pending.index')
     @elseif ($status === 'confirmed')
-
+        @include('pages.tenant.transaction.confirmed.index')
     @elseif ($status === 'declined')
+        @include('pages.tenant.transaction.declined.index')
     @endif
 </div>
 @endsection

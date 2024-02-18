@@ -27,4 +27,19 @@ class TransactionRepository
         return $query->get();
     }
 
+    public function updateTransactionStatus($id, $status)
+    {
+        $transaction = self::getTransactionById($id);
+
+        if ($status == 'success') {
+            return $transaction->update([
+                'status' => 'confirmed'
+            ]);
+        } elseif ($status == 'declined') {
+            return $transaction->update([
+                'status' => 'declined'
+            ]);
+        }
+    }
+
 }

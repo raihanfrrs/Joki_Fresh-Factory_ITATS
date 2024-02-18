@@ -28,6 +28,8 @@ const allMasterDetailData = () => {
     if (warehouseId) {
         masterDetailData("/ajax/warehouse-details/"+warehouseId+'/information', "#data-warehouse-detail");
     }
+
+    masterDetailData('/ajax/admin-details/new-purchase-count', "#label-new-purchase-count");
 };
 
 $('.nav-link-admin').on('click', function () {
