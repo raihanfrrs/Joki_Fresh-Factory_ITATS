@@ -157,6 +157,12 @@
             <script src="{{ asset('assets/js/ui-carousel.js') }}"></script>
         @elseif (request()->is('transaction/payment'))
             <script src="{{ asset('assets/js/app-transaction-payment-list.js') }}"></script>
+        @elseif (request()->is('transaction/success'))
+            <script src="{{ asset('assets/js/app-transaction-pending-list.js') }}"></script>
+        @elseif (request()->is('transaction/confirmed'))
+            <script src="{{ asset('assets/js/app-transaction-confirmed-list.js') }}"></script>
+        @elseif (request()->is('transaction/declined'))
+            <script src="{{ asset('assets/js/app-transaction-declined-list.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>

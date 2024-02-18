@@ -109,6 +109,18 @@
       </li>
       @endif
 
+      <!-- TRANSAKSI MASUK -->
+      <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">PURCHASE</span>
+      </li>
+      <li class="menu-item {{ request()->is('purchase/*') ? 'active' : '' }}">
+        <a href="{{ route('purchase.index', 'success') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-zoom-money"></i>
+          <div data-i18n="Purchases">Purchases</div>
+          <div class="badge bg-label-primary rounded-pill ms-auto" id="label-new-purchase-count"></div>
+        </a>
+      </li>
+
       <!-- LAPORAN -->
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">REPORT</span>

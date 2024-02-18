@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminMasterController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AdminReportingController;
+use App\Http\Controllers\TransactionController;
 
 Route::group(['middleware' => ['cekUserLogin:admin']], function(){
     Route::controller(AdminMasterController::class)->group(function () {
@@ -76,5 +77,11 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::post('calculation/rental-price/clear', 'admin_calculation_rental_price_clear');
         Route::get('calculation/rental-price/{warehouse_subscription}/edit', 'admin_calculation_rental_price_edit');
         Route::patch('calculation/rental-price/{warehouse_subscription}', 'admin_calculation_rental_price_update');
+    });
+
+    Route::controller(TransactionController::class)->group(function () {
+        Route::get('purchase/{status}', 'purchase_index')->name('purchase.index');
+        Route::get('purchase/{transaction}/detail', 'purchase_show')->name('purchase.show');
+        Route::patch('purchase/{transaction}/{status}', 'purchase_update')->name('purchase.update');
     });
 });
