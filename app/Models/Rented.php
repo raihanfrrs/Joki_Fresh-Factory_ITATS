@@ -13,6 +13,7 @@ class Rented extends Model
         'id',
         'tenant_id',
         'warehouse_subscription_id',
+        'warehouse_id',
         'started_at',
         'ended_at'
     ];
@@ -25,5 +26,10 @@ class Rented extends Model
     public function warehouse_subscription()
     {
         return $this->belongsTo(WarehouseSubscription::class);
+    }
+
+    public function warehouse()
+    {
+        return $this->belongsTo(Warehouse::class);
     }
 }
