@@ -35,7 +35,7 @@ class TransactionController extends Controller
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'success',
-                'message' => 'Update Success!'
+                'message' => $status == 'success' ? 'Purchase Confirmed' : 'Purchase Declined'
             ]);
         }
     }

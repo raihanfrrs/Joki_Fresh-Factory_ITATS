@@ -30,4 +30,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Tenant::class);
     }
+
+    public function bank()
+    {
+        return $this->hasMany(Bank::class);
+    }
 }

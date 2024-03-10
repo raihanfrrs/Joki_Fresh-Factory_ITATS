@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AdminUpdateRequest;
-use App\Repositories\AdminProfileRepository;
 use Illuminate\Http\Request;
+use App\Repositories\BillingRepository;
+use App\Http\Requests\AdminUpdateRequest;
+use App\Http\Requests\BillingStoreRequest;
+use App\Models\Bank;
+use App\Repositories\AdminProfileRepository;
 
 class AdminProfileController extends Controller
 {
-    protected $adminProfileRepository;
+    protected $adminProfileRepository, $billingRepository;
 
-    public function __construct(AdminProfileRepository $adminProfileRepository)
+    public function __construct(AdminProfileRepository $adminProfileRepository, BillingRepository $billingRepository)
     {
         $this->adminProfileRepository = $adminProfileRepository;
+        $this->billingRepository = $billingRepository;
     }
 
     public function admin_profile_index()
@@ -59,6 +63,65 @@ class AdminProfileController extends Controller
                     'position' => 'center',
                     'type' => 'success',
                     'message' => 'Change Password Success!'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function admin_setting_billing_index()
+    {
+        return view('pages.admin.settings.index', [
+            'bills' => $this->billingRepository->getAllBillingByUserId()
+        ]);
+    }
+
+    public function admin_setting_billing_store(BillingStoreRequest $request)
+    {
+        try {
+            if ($this->billingRepository->createBilling($request)) {
+                return redirect()->back()->with([
+                    'flash-type' => 'sweetalert',
+                    'case' => 'default',
+                    'position' => 'center',
+                    'type' => 'success',
+                    'message' => 'Add Success!'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function admin_setting_billing_update(Request $request, Bank $bank)
+    {
+        try {
+            if ($this->billingRepository->updateBilling($request, $bank->id)) {
+                return redirect()->back()->with([
+                    'flash-type' => 'sweetalert',
+                    'case' => 'default',
+                    'position' => 'center',
+                    'type' => 'success',
+                    'message' => 'Update Success!'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            dd($th);
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function admin_setting_billing_destroy(Bank $bank)
+    {
+        try {
+            if ($this->billingRepository->destroyBilling($bank->id)) {
+                return redirect()->back()->with([
+                    'flash-type' => 'sweetalert',
+                    'case' => 'default',
+                    'position' => 'center',
+                    'type' => 'success',
+                    'message' => 'Delete Success!'
                 ]);
             }
         } catch (\Throwable $th) {

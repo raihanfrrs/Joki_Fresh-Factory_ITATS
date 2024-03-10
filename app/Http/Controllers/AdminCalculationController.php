@@ -27,7 +27,7 @@ class AdminCalculationController extends Controller
     public function admin_calculation_rental_price_create()
     {
         return view('pages.admin.calculation.rental-price.add', [
-            'subscriptions' => $this->subscriptionRepository->getAllSubscriptionsWithoutStarter(),
+            'subscriptions' => $this->subscriptionRepository->getAllSubscriptionsWithoutStarterOrderByMonthDuration(),
             'warehouse_subscription_cart' => $this->warehouseSubscriptionCartRepository->getFirstWarehouseSubscriptionCart()
         ]);
     }

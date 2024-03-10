@@ -31,6 +31,7 @@ Route::controller(AjaxController::class)->group(function () {
     Route::get('ajax/warehouse-category/{warehouse_category}/edit', 'warehouse_category_edit');
     Route::get('ajax/tax/{tax}/edit', 'tax_edit');
     Route::get('ajax/subscription/{subscription}/edit', 'subscription_edit');
+    Route::get('ajax/bank-account/{bank}/edit', 'bank_account_edit');
     Route::get('ajax/warehouse/show', 'warehouse_show');
     Route::get('ajax/warehouse_subscription/{warehouse_subscription}/edit', 'warehouse_subscription_store_edit');
     Route::get('ajax/tenant-details/shopping-cart-count', 'tenant_shopping_cart_count');

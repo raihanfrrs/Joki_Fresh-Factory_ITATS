@@ -81,3 +81,18 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="editBankAccountModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-simple modal-add-new-cc">
+    <div class="modal-content p-3 p-md-5">
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="text-center mb-4">
+          <h3 class="mb-2">Bank Account</h3>
+          <p class="text-muted">Edit your saved bank account details</p>
+        </div>
+        <div id="data-edit-bank-account-modal"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tax;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Bank;
 use App\Models\Tenant;
 use App\Models\Warehouse;
 use App\Models\Subscription;
@@ -93,6 +94,11 @@ class AjaxController extends Controller
     public function subscription_edit(Subscription $subscription)
     {
         return view('components.data-ajax.pages.modal.data-edit-subscription-modal', compact('subscription'));
+    }
+
+    public function bank_account_edit(Bank $bank)
+    {
+        return view('components.data-ajax.pages.modal.data-edit-bank-account-modal', compact('bank'));
     }
 
     public function warehouse_show()

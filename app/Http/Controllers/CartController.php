@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Repositories\BillingRepository;
 use Illuminate\Http\Request;
 use App\Repositories\TaxRepository;
 use App\Repositories\RentedRepository;
@@ -10,13 +11,14 @@ use App\Repositories\TempTransactionRepository;
 
 class CartController extends Controller
 {
-    protected $tempTransactionRepository, $taxRepository, $rentedRepository;
+    protected $tempTransactionRepository, $taxRepository, $rentedRepository, $billingRepository;
 
-    public function __construct(TempTransactionRepository $tempTransactionRepository, TaxRepository $taxRepository, RentedRepository $rentedRepository)
+    public function __construct(TempTransactionRepository $tempTransactionRepository, TaxRepository $taxRepository, RentedRepository $rentedRepository, BillingRepository $billingRepository)
     {
         $this->tempTransactionRepository = $tempTransactionRepository;
         $this->taxRepository = $taxRepository;
         $this->rentedRepository = $rentedRepository;
+        $this->billingRepository = $billingRepository;
     }
 
     public function cart_index()
@@ -54,6 +56,9 @@ class CartController extends Controller
 
     public function cart_payment(Transaction $transaction)
     {
-        return view('pages.tenant.cart.payment', compact('transaction'));
+        return view('pages.tenant.cart.payment', [
+            'transaction' => $transaction,
+            'bank' => $this->billingRepository->getBillingStatusUserCore()
+        ]);
     }
 }
