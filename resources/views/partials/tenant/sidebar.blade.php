@@ -35,52 +35,23 @@
         </ul>
       </li>
 
-      <!-- MASTER -->
+      <!-- WAREHOUSE -->
+      @if (auth()->user()->tenant->rented()->exists())
       <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">MASTER</span>
+        <span class="menu-header-text">WAREHOUSE</span>
       </li>
-      <li class="menu-item {{ request()->is('master/admin', 'master/admin/*', 'master/tenant', 'master/tenant/*') ? 'open' : '' }}">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons ti ti-users"></i>
-          <div data-i18n="User">User</div>
-          <div class="badge bg-label-primary rounded-pill ms-auto" id="label-total-brand-influencer-new-count"></div>
+      @foreach (auth()->user()->tenant->rented as $item)
+      <li class="menu-item">
+        <a href="{{ route('warehouse.index', $item->warehouse->id) }}" class="menu-link" target="_blank">
+          <i class="menu-icon tf-icons ti ti-building"></i>
+          <div data-i18n="{{ $item->warehouse->name }}">{{ $item->warehouse->name }}</div>
         </a>
-        <ul class="menu-sub">
-          <li class="menu-item {{ request()->is('master/admin', 'master/admin/*') ? 'active' : '' }} menu-item-brand">
-            <a href="{{ route('master.admin') }}" class="menu-link">
-              <div data-i18n="Admin">Admin</div>
-              <div class="badge bg-label-primary rounded-pill ms-auto" id="label-brand-new-count"></div>
-            </a>
-          </li>
-          <li class="menu-item {{ request()->is('master/tenant', 'master/tenant/*') ? 'active' : '' }} menu-item-influencer">
-            <a href="{{ route('master.tenant') }}" class="menu-link">
-              <div data-i18n="Tenant">Tenant</div>
-              <div class="badge bg-label-primary rounded-pill ms-auto" id="label-influencer-new-count"></div>
-            </a>
-          </li>
-        </ul>
       </li>
-      <li class="menu-item {{ request()->is('master/warehouse', 'master/warehouse/*', 'master/category', 'master/category/*') ? 'open' : '' }}">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons ti ti-building-warehouse"></i>
-          <div data-i18n="Property">Property</div>
-        </a>
-        <ul class="menu-sub">
-          <li class="menu-item {{ request()->is('master/warehouse', 'master/warehouse/*') ? 'active' : '' }}">
-            <a href="{{ route('master.warehouse') }}" class="menu-link">
-              <div data-i18n="Warehouse">Warehouse</div>
-            </a>
-          </li>
-          <li class="menu-item {{ request()->is('master/category', 'master/category/*') ? 'active' : '' }}">
-            <a href="{{ route('master.warehouse.category') }}" class="menu-link">
-              <div data-i18n="Category">Category</div>
-            </a>
-          </li>
-        </ul>
-      </li>
+      @endforeach
+      @endif
 
       <!-- LAPORAN -->
-      <li class="menu-header small text-uppercase">
+      {{-- <li class="menu-header small text-uppercase">
         <span class="menu-header-text">REPORT</span>
       </li>
       <li class="menu-item {{ request()->is('report/sales', 'report/sales/*', 'report/performance', 'report/performance/*') ? 'open' : '' }}">
@@ -100,7 +71,7 @@
             </a>
           </li>
         </ul>
-      </li>
+      </li> --}}
     </ul>
 
 </aside>

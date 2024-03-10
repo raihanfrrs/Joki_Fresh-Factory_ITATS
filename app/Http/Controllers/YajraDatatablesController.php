@@ -517,4 +517,76 @@ class YajraDatatablesController extends Controller
         ->rawColumns(['payment_id', 'name', 'date', 'amount', 'total_payment', 'action'])
         ->make(true);
     }
+
+    public function admin_daily_sales_report()
+    {
+        $transactions = $this->transactionRepository->getAllTransactionsGroupByPeriodically('day');
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-daily-sales-report.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-daily-sales-report.amount-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-daily-sales-report.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-daily-sales-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['created_at', 'amount', 'grand_total', 'action'])
+        ->make(true);
+    }
+
+    public function admin_monthly_sales_report()
+    {
+        $transactions = $this->transactionRepository->getAllTransactionsGroupByPeriodically('month');
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-monthly-sales-report.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-monthly-sales-report.amount-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-monthly-sales-report.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-monthly-sales-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['created_at', 'amount', 'grand_total', 'action'])
+        ->make(true);
+    }
+
+    public function admin_yearly_sales_report()
+    {
+        $transactions = $this->transactionRepository->getAllTransactionsGroupByPeriodically('year');
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-yearly-sales-report.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-yearly-sales-report.amount-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-yearly-sales-report.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-yearly-sales-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['created_at', 'amount', 'grand_total', 'action'])
+        ->make(true);
+    }
 }

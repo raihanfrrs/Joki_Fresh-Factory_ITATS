@@ -123,22 +123,27 @@
 
       <!-- LAPORAN -->
       <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">REPORT</span>
+        <span class="menu-header-text">REPORTING</span>
       </li>
-      <li class="menu-item {{ request()->is('report/sales', 'report/sales/*', 'report/performance', 'report/performance/*') ? 'open' : '' }}">
+      <li class="menu-item {{ request()->is('report/daily-sales', 'report/monthly-sales', 'report/yearly-sales') ? 'open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons ti ti-checkup-list"></i>
-          <div data-i18n="Reporting">Reporting</div>
+          <div data-i18n="Sales">Sales</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item {{ request()->is('report/sales', 'report/sales/*') ? 'active' : '' }}">
-            <a href="{{ route('report.sales') }}" class="menu-link">
-              <div data-i18n="Sales">Sales</div>
+          <li class="menu-item {{ request()->is('report/daily-sales') ? 'active' : '' }}">
+            <a href="{{ route('report.daily.sales') }}" class="menu-link">
+              <div data-i18n="Daily">Daily</div>
             </a>
           </li>
-          <li class="menu-item {{ request()->is('report/performance', 'report/performance/*') ? 'active' : '' }}">
-            <a href="{{ route('report.performance') }}" class="menu-link">
-              <div data-i18n="Performance">Performance</div>
+          <li class="menu-item {{ request()->is('report/monthly-sales') ? 'active' : '' }}">
+            <a href="{{ route('report.monthly.sales') }}" class="menu-link">
+              <div data-i18n="Monthly">Monthly</div>
+            </a>
+          </li>
+          <li class="menu-item {{ request()->is('report/yearly-sales') ? 'active' : '' }}">
+            <a href="{{ route('report.yearly.sales') }}" class="menu-link">
+              <div data-i18n="Yearly">Yearly</div>
             </a>
           </li>
         </ul>

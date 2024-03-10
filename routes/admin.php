@@ -56,7 +56,14 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
     });
 
     Route::controller(AdminReportingController::class)->group(function () {
-        Route::get('report/sales', 'report_sales_index')->name('report.sales');
+        Route::get('report/daily-sales', 'report_daily_sales')->name('report.daily.sales');
+        Route::get('report/daily-sales/{date}/print', 'report_daily_sales_print')->name('report.daily.sales.print');
+
+        Route::get('report/monthly-sales', 'report_monthly_sales')->name('report.monthly.sales');
+        Route::get('report/monthly-sales/{date}/print', 'report_monthly_sales_print')->name('report.monthly.sales.print');
+
+        Route::get('report/yearly-sales', 'report_yearly_sales')->name('report.yearly.sales');
+        Route::get('report/yearly-sales/{date}/print', 'report_yearly_sales_print')->name('report.yearly.sales.print');
 
         Route::get('report/performance', 'report_performance_index')->name('report.performance');
     });

@@ -84,6 +84,9 @@
     @include('components.modal.modal')
 
     @auth
+        @if (request()->is('report/daily-sales/*/print', 'report/monthly-sales/*/print', 'report/yearly-sales/*/print'))
+            @yield('section-print')
+        @else
         <div class="layout-wrapper layout-content-navbar">
             <div class="layout-container">
     
@@ -106,6 +109,7 @@
     
             <div class="drag-target"></div>
         </div>
+        @endif
     @else
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner py-4">
@@ -188,6 +192,14 @@
         @elseif (request()->is('settings/*'))
             <script src="{{ asset('assets/js/pages-account-settings-security.js') }}"></script>
             <script src="{{ asset('assets/js/pages-account-settings-billing.js') }}"></script>
+        @elseif (request()->is('report/daily-sales'))
+            <script src="{{ asset('assets/js/app-daily-sales-report-list.js') }}"></script>
+        @elseif (request()->is('report/monthly-sales'))
+            <script src="{{ asset('assets/js/app-monthly-sales-report-list.js') }}"></script>
+        @elseif (request()->is('report/yearly-sales'))
+            <script src="{{ asset('assets/js/app-yearly-sales-report-list.js') }}"></script>
+        @elseif (request()->is('report/daily-sales/*/print', 'report/monthly-sales/*/print', 'report/yearly-sales/*/print'))
+            {{-- <script src="{{ asset('assets/js/app-invoice-print.js') }}"></script> --}}
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
