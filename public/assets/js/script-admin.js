@@ -185,6 +185,28 @@ $(document).on('click', '#button-trigger-modal-edit-tax', function () {
     });
 });
 
+$(document).on('click', '#button-trigger-modal-edit-bank-account', function () {
+    let id = $(this).attr('data-id');
+
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
+    $.ajax({
+        url: "/ajax/bank-account/"+id+"/edit",
+        method: "get",
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#data-edit-bank-account-modal").html(response);
+        },
+        error: function(xhr, status, error) {
+        }
+    });
+});
+
 $(document).on('click', '#button-trigger-modal-show-list-warehouses', function () {
     $.ajaxSetup({
         headers: {
@@ -426,3 +448,32 @@ $(document).on('click', '#button-update-warehouse-subscription', function () {
 $(document).on('click', '#button-add-warehouse', function () {
     location.href = "/master/warehouse/add";
 });
+
+$(document).on('click', '#button-add-biling-submit', function () {
+    let form = $("#creditCardForm");
+    form.attr('onsubmit', 'true');
+    form.submit();
+});
+
+$(document).on('click', '#button-delete-bank-account', function () {
+    let id = $(this).attr('data-id');
+    let formSelector = "#form-delete-bank-account-" + id;
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Bank Account will be deleted!",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, Delete it!',
+      customClass: {
+        confirmButton: 'btn btn-primary me-3',
+        cancelButton: 'btn btn-label-secondary'
+      },
+      buttonsStyling: false
+    }).then(function (result) {
+      if (result.isConfirmed) {
+        $(formSelector).submit();
+      }
+    });
+  });

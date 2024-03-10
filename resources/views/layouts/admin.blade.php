@@ -187,6 +187,7 @@
             <script src="{{ asset('assets/js/app-warehouse-subscription-list.js') }}"></script>
         @elseif (request()->is('settings/*'))
             <script src="{{ asset('assets/js/pages-account-settings-security.js') }}"></script>
+            <script src="{{ asset('assets/js/pages-account-settings-billing.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>

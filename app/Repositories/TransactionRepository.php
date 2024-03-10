@@ -6,6 +6,13 @@ use App\Models\Transaction;
 
 class TransactionRepository
 {
+    protected $rented;
+
+    public function __construct(RentedRepository $rentedRepository)
+    {
+        $this->rented = $rentedRepository;
+    }
+
     public function getAllTransactions()
     {
         return Transaction::all();
@@ -32,13 +39,21 @@ class TransactionRepository
         $transaction = self::getTransactionById($id);
 
         if ($status == 'success') {
-            return $transaction->update([
+            $transaction->update([
                 'status' => 'confirmed'
             ]);
+
+            return $this->rented->updateRentedStatusByTransactionId($id);
         } elseif ($status == 'declined') {
-            return $transaction->update([
+            $transaction->update([
                 'status' => 'declined'
             ]);
+
+            foreach ($this->rented->getRentedByTransactionId($id) as $key => $item) {
+                $this->rented->deleteRented($item->id);
+            }
+
+            return true;
         }
     }
 

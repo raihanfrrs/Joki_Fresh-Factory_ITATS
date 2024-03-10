@@ -178,7 +178,7 @@
                     </div>
                     <div class="flex-grow-1">
                     <span class="fw-semibold d-block">{{ auth()->user()->tenant->name }}</span>
-                    <small class="text-muted">Admin</small>
+                    <small class="text-muted">Tenant</small>
                     </div>
                 </div>
                 </a>
@@ -196,14 +196,6 @@
                 <a class="dropdown-item" href="{{ route('admin.settings.profile') }}">
                 <i class="ti ti-settings me-2 ti-sm"></i>
                 <span class="align-middle">Settings</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item" href="pages-account-settings-billing.html">
-                    <span class="d-flex align-items-center align-middle">
-                      <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
-                      <span class="flex-grow-1 align-middle">Billing</span>
-                    </span>
                 </a>
             </li>
             <li>

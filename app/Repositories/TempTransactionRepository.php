@@ -83,7 +83,8 @@ class TempTransactionRepository
                 'id' => Uuid::uuid4()->toString(),
                 'tenant_id' => auth()->user()->tenant->id,
                 'warehouse_subscription_id' => $item->warehouse_subscription_id,
-                'warehouse_id' => $item->warehouse_id
+                'warehouse_id' => $item->warehouse_id,
+                'transaction_id' => $transaction_id
             ]);
 
             self::destroyTempTransaction($item->id);
