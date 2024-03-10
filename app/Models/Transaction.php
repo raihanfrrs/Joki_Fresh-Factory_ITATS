@@ -52,4 +52,9 @@ class Transaction extends Model implements HasMedia
     {
         return $this->belongsTo(Tax::class);
     }
+
+    public function rented()
+    {
+        return $this->hasMany(Rented::class);
+    }
 }

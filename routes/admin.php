@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminMasterController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AdminReportingController;
+use App\Http\Controllers\BankController;
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\TransactionController;
 
 Route::group(['middleware' => ['cekUserLogin:admin']], function(){
@@ -66,6 +68,11 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::patch('settings/admin-profile/{admin}', 'admin_setting_profile_update')->name('admin.settings.profile.update');
         Route::get('settings/admin-password', 'admin_setting_password_index')->name('admin.settings.password');
         Route::patch('settings/admin-password/{admin}', 'admin_setting_password_update')->name('admin.settings.password.update');
+
+        Route::get('settings/billing', 'admin_setting_billing_index')->name('admin.settings.billing');
+        Route::post('settings/billing', 'admin_setting_billing_store')->name('admin.settings.billing.store');
+        Route::patch('settings/billing/{bank}', 'admin_setting_billing_update')->name('admin.settings.billing.update');
+        Route::delete('settings/billing/{bank}', 'admin_setting_billing_destroy')->name('admin.settings.billing.destroy');
     });
 
     Route::controller(AdminCalculationController::class)->group(function () {

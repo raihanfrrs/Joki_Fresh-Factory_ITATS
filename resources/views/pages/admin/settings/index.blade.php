@@ -13,7 +13,7 @@
             <a class="nav-link {{ Request::is('settings/admin-password') ? 'active' : '' }}" href="{{ route('admin.settings.password') }}"><i class="ti-xs ti ti-lock me-1"></i> Security</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages-account-settings-billing.html"><i class="ti-xs ti ti-file-description me-1"></i> Billing &amp; Plans</a>
+            <a class="nav-link {{ Request::is('settings/billing') ? 'active' : '' }}" href="{{ route('admin.settings.billing') }}"><i class="ti-xs ti ti-file-description me-1"></i> Billing</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pages-account-settings-notifications.html"><i class="ti-xs ti ti-bell me-1"></i> Notifications</a>
@@ -24,9 +24,11 @@
         </ul>
 
         @if (Request::is('settings/admin-profile'))
-          @include('pages.admin.settings.profile')
+          @include('pages.admin.settings.profile.index')
         @elseif (Request::is('settings/admin-password'))
-          @include('pages.admin.settings.password')
+          @include('pages.admin.settings.password.index')
+        @elseif (Request::is('settings/billing'))
+          @include('pages.admin.settings.billing.index')
         @endif
         
       </div>

@@ -87,10 +87,27 @@ document.addEventListener('DOMContentLoaded', function (e) {
     if (creditCardForm) {
       FormValidation.formValidation(creditCardForm, {
         fields: {
-          paymentCard: {
+          bank_account_number: {
             validators: {
               notEmpty: {
-                message: 'Please enter your credit card number'
+                message: 'Please enter your account number'
+              },
+              numeric: {
+                message: 'The value is not a valid number'
+              }
+            }
+          },
+          account_holder_name: {
+            validators: {
+              notEmpty: {
+                message: 'Please enter account holder name'
+              }
+            }
+          },
+          bank_name: {
+            validators: {
+              notEmpty: {
+                message: 'Please enter bank name'
               }
             }
           }

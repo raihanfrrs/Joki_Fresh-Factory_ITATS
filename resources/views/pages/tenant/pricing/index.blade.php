@@ -69,14 +69,14 @@
                         </div>
                     </div>
                 </div>
-            @else
+            {{-- @else
             <div class="misc-wrapper mt-5">
                 <h2 class="mb-1 mx-2 d-flex justify-content-center">Not Available!</h2>
                 <p class="mb-4 mx-2 d-flex justify-content-center">I apologize for any inconvenience; the warehouse is currently in the process of being set up by the system.</p>
                 <div class="mt-4 d-flex justify-content-center">
                   <img src="{{ asset('assets/img/illustrations/page-misc-under-maintenance.png') }}" width="550" class="img-fluid">
                 </div>
-            </div>
+            </div> --}}
             @endif
         @endforeach
     </div>
