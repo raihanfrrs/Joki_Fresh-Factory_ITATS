@@ -63,7 +63,7 @@
                                 @csrf
                                 <a href="" class="btn btn-primary btn-md w-100 me-3"><i class="menu-icon tf-icons ti ti-file-description"></i> Details</a>
                                 @if (!$warehouse->temp_transaction()->exists())
-                                    <button type="submit" class="btn btn-info w-100 btn-md"><i class="menu-icon tf-icons ti ti-receipt"></i> Book Now</button>
+                                    <button type="submit" class="btn btn-{{ $warehouse->rented ? 'secondary' : 'info' }} w-100 btn-md" {{ $warehouse->rented ? 'disabled' : '' }}><i class="menu-icon tf-icons ti ti-receipt"></i> {{ $warehouse->rented ? 'Reserved' : 'Book Now' }}</button>
                                 @endif
                             </form>
                         </div>

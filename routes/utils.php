@@ -20,6 +20,9 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listPurchasesPendingTable', 'purchases_pending');
     Route::get('listPurchasesConfirmedTable', 'purchases_confirmed');
     Route::get('listPurchasesDeclinedTable', 'purchases_declined');
+    Route::get('listDailySalesReportTable', 'admin_daily_sales_report');
+    Route::get('listMonthlySalesReportTable', 'admin_monthly_sales_report');
+    Route::get('listYearlySalesReportTable', 'admin_yearly_sales_report');
 });
 
 Route::controller(AjaxController::class)->group(function () {
