@@ -7,14 +7,14 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="user-profile-header-banner">
-            <img src="../../assets/img/pages/profile-banner.png" alt="Banner image" class="rounded-top">
+            <img src="{{ asset('assets/img/pages/profile-banner.png') }}" alt="Banner image" class="rounded-top">
           </div>
           <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
             <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
                 @if (auth()->user()->admin->getFirstMediaUrl('admin_images'))
                     <img src="{{ auth()->user()->admin->getFirstMediaUrl('admin_images') }}" alt="user image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
                 @else 
-                    <img src="../../assets/img/avatars/14.png" alt="user image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
+                    <img src="{{ asset('assets/img/avatars/14.png') }}" alt="user image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
                 @endif
             </div>
             <div class="flex-grow-1 mt-3 mt-sm-5">
@@ -26,9 +26,6 @@
                     <li class="list-inline-item"><i class="ti ti-calendar"></i> Joined {{ \Carbon\Carbon::parse(auth()->user()->created_at)->format('F Y') }}</li>
                   </ul>
                 </div>
-                <a href="javascript:void(0)" class="btn btn-primary waves-effect waves-light">
-                  <i class="ti ti-user-check me-1"></i>Connected
-                </a>
               </div>
             </div>
           </div>
@@ -40,11 +37,13 @@
       <div class="col-md-12">
         <ul class="nav nav-pills flex-column flex-sm-row mb-4">
           <li class="nav-item">
-            <a class="nav-link active" href="javascript:void(0);"><i class="ti-xs ti ti-user-check me-1"></i> Profile</a>
+            <a class="nav-link {{ Request::is('admin/profile') ? 'active' : '' }}" href="{{ route('admin.profile') }}"><i class="ti-xs ti ti-user-check me-1"></i> Profile</a>
           </li>
+          @if (auth()->user()->attribute == 'core')
           <li class="nav-item">
-            <a class="nav-link" href="pages-profile-teams.html"><i class="ti-xs ti ti-users me-1"></i> Teams</a>
+            <a class="nav-link {{ Request::is('admin/teams') ? 'active' : '' }}" href="{{ route('admin.teams') }}"><i class="ti-xs ti ti-users me-1"></i> Teams</a>
           </li>
+          @endif
           <li class="nav-item">
             <a class="nav-link" href="pages-profile-projects.html"><i class="ti-xs ti ti-layout-grid me-1"></i> Projects</a>
           </li>
@@ -55,8 +54,10 @@
       </div>
     </div>
 
-    @if (Request::is('profile/admin'))
+    @if (Request::is('admin/profile'))
       @include('pages.admin.profile.profile')
+    @elseif (auth()->user()->attribute == 'core' && Request::is('admin/teams'))
+      @include('pages.admin.profile.teams')
     @endif
 </div>
 @endsection

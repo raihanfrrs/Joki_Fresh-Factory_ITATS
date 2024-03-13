@@ -31,6 +31,7 @@ use App\Http\Requests\SubscriptionUpdateRequest;
 use App\Repositories\WarehouseCategoryRepository;
 use App\Http\Requests\WarehouseCategoryStoreRequest;
 use App\Http\Requests\WarehouseCategoryUpdateRequest;
+use App\Models\Tax;
 
 class AdminMasterController extends Controller
 {
@@ -437,6 +438,32 @@ class AdminMasterController extends Controller
                 'position' => 'center',
                 'type' => 'success',
                 'message' => 'Tax has been updated!'
+            ]);
+        }
+    }
+
+    public function master_taxes_update_status(Tax $taxes)
+    {
+        if ($this->taxRepository->updateTaxStatus($taxes->id)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Tax status has been updated!'
+            ]);
+        }
+    }
+
+    public function master_taxes_destroy(Tax $taxes)
+    {
+        if ($this->taxRepository->deleteTax($taxes->id)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Tax has been deleted!'
             ]);
         }
     }

@@ -13,7 +13,7 @@
         <form action="{{ route('master.tenant.update.status', $model->id) }}" method="post">
             @csrf
             @method('PATCH')
-        <button type="submit" class="dropdown-item">{{ $model->status == 'active' ? 'Nonaktifkan' : 'Aktifkan' }}</button>
+        <button type="submit" class="dropdown-item">{{ $model->status == 'active' ? 'Nonactive' : 'Active' }}</button>
         </form>
     </div>
 </div>

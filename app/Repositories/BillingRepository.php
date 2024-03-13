@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class BillingRepository
 {
+
     public function getAllBilling()
     {
         return Bank::all();
@@ -31,6 +32,11 @@ class BillingRepository
     public function checkBillingStatusUser()
     {
         return Bank::where('status', 'primary')->where('user_id', auth()->user()->id)->first();
+    }
+
+    public function getPrimaryBilling()
+    {
+        return Bank::where('status', 'primary')->first();
     }
 
     public function getBillingStatusUserCore()

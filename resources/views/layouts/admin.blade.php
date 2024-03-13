@@ -62,7 +62,7 @@
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-user-view.css') }}" />
         @elseif (request()->is('master/warehouse/*'))
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/ui-carousel.css') }}" />
-        @elseif (request()->is('profile/*'))
+        @elseif (request()->is('admin/profile', 'admin/teams'))
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-profile.css') }}" />
         @endif
     @else
@@ -192,6 +192,7 @@
         @elseif (request()->is('settings/*'))
             <script src="{{ asset('assets/js/pages-account-settings-security.js') }}"></script>
             <script src="{{ asset('assets/js/pages-account-settings-billing.js') }}"></script>
+            <script src="{{ asset('assets/js/app-bills-history-list.js') }}"></script>
         @elseif (request()->is('report/daily-sales'))
             <script src="{{ asset('assets/js/app-daily-sales-report-list.js') }}"></script>
         @elseif (request()->is('report/monthly-sales'))

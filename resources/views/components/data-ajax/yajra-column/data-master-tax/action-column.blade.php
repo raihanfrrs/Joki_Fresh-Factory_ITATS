@@ -7,4 +7,9 @@
             <i class="ti ti-trash ti-sm mx-2"></i>
         </a>
     </form>
+    <form action="{{ route('master.taxes.update.status', $model->id) }}" method="POST">
+        @csrf
+        @method('PATCH')
+        <button type="submit" class="bg-transparent border-0 text-body"><i class="ti ti-square-{{ $model->status == 'active' ? 'x' : 'check' }} ti-sm"></i></button>
+    </form>
 </div>

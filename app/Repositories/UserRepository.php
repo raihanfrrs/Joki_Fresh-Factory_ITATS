@@ -5,8 +5,11 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Models\Admin;
 use Ramsey\Uuid\Uuid;
+use App\Models\Tenant;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use App\Repositories\AdminRepository;
+use App\Repositories\TenantRepository;
 
 class UserRepository
 {
@@ -15,6 +18,14 @@ class UserRepository
         return User::where('level', 'admin')
                     ->whereNot('attribute', 'core')
                     ->whereNot('id', $id)
+                    ->orderBy('created_at', 'ASC')
+                    ->get();
+    }
+
+    public function getAllUserAdminExceptCore()
+    {
+        return User::where('level', 'admin')
+                    ->whereNot('attribute', 'core')
                     ->orderBy('created_at', 'ASC')
                     ->get();
     }
@@ -52,5 +63,25 @@ class UserRepository
         }
 
         return $user && $admin;
+    }
+
+    public function updateUserPassword($data, $id)
+    {
+        return self::getUser($id)->update([
+            'password' => bcrypt($data['newPassword']),
+        ]);
+    }
+
+    public function deactivateUser()
+    {
+        if (auth()->user()->level == 'admin') {
+            return Admin::find(auth()->user()->admin->id)->update([
+                'status' => 'inactive'
+            ]);
+        } elseif (auth()->user()->level == 'tenant') {
+            return Tenant::find(auth()->user()->tenant->id)->update([
+                'status' => 'inactive'
+            ]);
+        }
     }
 }

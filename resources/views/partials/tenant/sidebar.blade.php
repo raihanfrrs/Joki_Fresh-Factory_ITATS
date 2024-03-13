@@ -36,11 +36,11 @@
       </li>
 
       <!-- WAREHOUSE -->
-      @if (auth()->user()->tenant->rented()->exists())
+      @if (auth()->user()->tenant->rented()->where('status', 'active')->count() > 0)
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">WAREHOUSE</span>
       </li>
-      @foreach (auth()->user()->tenant->rented as $item)
+      @foreach (auth()->user()->tenant->rented->where('status', 'active') as $item)
       <li class="menu-item">
         <a href="{{ route('warehouse.index', $item->warehouse->id) }}" class="menu-link" target="_blank">
           <i class="menu-icon tf-icons ti ti-building"></i>

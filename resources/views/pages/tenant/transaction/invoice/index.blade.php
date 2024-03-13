@@ -48,15 +48,15 @@
                     </tr>
                     <tr>
                       <td class="pe-4">Bank name:</td>
-                      <td></td>
+                      <td>{{ $bank->bank_name }}</td>
                     </tr>
                     <tr>
-                      <td class="pe-4">Country:</td>
-                      <td></td>
+                      <td class="pe-4">Account Holder Name:</td>
+                      <td>{{ $bank->account_holder_name }}</td>
                     </tr>
                     <tr>
                       <td class="pe-4">BAN:</td>
-                      <td></td>
+                      <td>{{ $bank->bank_account_number }}</td>
                     </tr>
                   </tbody>
                 </table>
