@@ -52,6 +52,7 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::get('master/taxes', 'master_taxes_index')->name('master.taxes');
         Route::post('master/taxes', 'master_taxes_store')->name('master.taxes.store');
         Route::patch('master/taxes/{taxes}', 'master_taxes_update')->name('master.taxes.update');
+        Route::patch('master/taxes/{taxes}/status', 'master_taxes_update_status')->name('master.taxes.update.status');
         Route::delete('master/taxes/{taxes}', 'master_taxes_destroy')->name('master.taxes.destroy');
     });
 
@@ -69,7 +70,8 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
     });
 
     Route::controller(AdminProfileController::class)->group(function () {
-        Route::get('profile/admin', 'admin_profile_index')->name('admin.profile');
+        Route::get('admin/profile', 'admin_profile_index')->name('admin.profile');
+        Route::get('admin/teams', 'admin_teams_index')->name('admin.teams');
 
         Route::get('settings/admin-profile', 'admin_setting_profile_index')->name('admin.settings.profile');
         Route::patch('settings/admin-profile/{admin}', 'admin_setting_profile_update')->name('admin.settings.profile.update');

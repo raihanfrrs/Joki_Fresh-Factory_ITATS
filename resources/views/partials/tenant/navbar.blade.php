@@ -132,26 +132,6 @@
             </a>
         </li>
 
-        <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-            <a
-            class="nav-link dropdown-toggle hide-arrow"
-            href="javascript:void(0);"
-            data-bs-toggle="dropdown"
-            data-bs-auto-close="outside"
-            aria-expanded="false">
-            <i class="ti ti-trash ti-md"></i>
-                <span class="badge bg-danger rounded-pill badge-notifications d-none" id="label-total-account-deleted-count"></span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end py-0">
-            <li class="dropdown-menu-header border-bottom">
-                <div class="dropdown-header d-flex align-items-center py-3">
-                <h5 class="text-body mb-0 me-auto">Sampah</h5>
-                </div>
-            </li>
-            <div id="data-account-deleted-notification"></div>
-            </ul>
-        </li>
-
         <!-- User -->
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -165,7 +145,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
             <li>
-                <a class="dropdown-item" href="pages-account-settings-account.html">
+                <a class="dropdown-item" href="{{ route('tenant.profile') }}">
                 <div class="d-flex">
                     <div class="flex-shrink-0 me-3">
                     <div class="avatar avatar-online">
@@ -187,13 +167,13 @@
                 <div class="dropdown-divider"></div>
             </li>
             <li>
-                <a class="dropdown-item" href="{{ route('admin.profile') }}">
+                <a class="dropdown-item" href="{{ route('tenant.profile') }}">
                 <i class="ti ti-user-check me-2 ti-sm"></i>
                 <span class="align-middle">My Profile</span>
                 </a>
             </li>
             <li>
-                <a class="dropdown-item" href="{{ route('admin.settings.profile') }}">
+                <a class="dropdown-item" href="{{ route('tenant.settings.profile') }}">
                 <i class="ti ti-settings me-2 ti-sm"></i>
                 <span class="align-middle">Settings</span>
                 </a>
@@ -202,7 +182,7 @@
                 <div class="dropdown-divider"></div>
             </li>
             <li>
-                <a class="dropdown-item" href="{{ route('pricing') }}">
+                <a class="dropdown-item" href="{{ route('pricing.index', 'all') }}">
                   <i class="ti ti-currency-dollar me-2 ti-sm"></i>
                   <span class="align-middle">Pricing</span>
                 </a>

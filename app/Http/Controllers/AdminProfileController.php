@@ -8,20 +8,29 @@ use App\Http\Requests\AdminUpdateRequest;
 use App\Http\Requests\BillingStoreRequest;
 use App\Models\Bank;
 use App\Repositories\AdminProfileRepository;
+use App\Repositories\UserRepository;
 
 class AdminProfileController extends Controller
 {
-    protected $adminProfileRepository, $billingRepository;
+    protected $adminProfileRepository, $billingRepository, $userRepository;
 
-    public function __construct(AdminProfileRepository $adminProfileRepository, BillingRepository $billingRepository)
+    public function __construct(AdminProfileRepository $adminProfileRepository, BillingRepository $billingRepository, UserRepository $userRepository)
     {
         $this->adminProfileRepository = $adminProfileRepository;
         $this->billingRepository = $billingRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function admin_profile_index()
     {
         return view('pages.admin.profile.index');
+    }
+
+    public function admin_teams_index()
+    {
+        return view('pages.admin.profile.index', [
+            'teams' => $this->userRepository->getAllUserAdminExceptCore(),
+        ]);
     }
 
     public function admin_setting_profile_index()

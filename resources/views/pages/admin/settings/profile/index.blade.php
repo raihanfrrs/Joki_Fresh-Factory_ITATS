@@ -87,25 +87,24 @@
     </div>
 </form>
 
-
-@if (auth()->user()->attribute != 'core')
+@if (auth()->user()->attribute == 'core')
 <div class="card">
-    <h5 class="card-header">Delete Account</h5>
+    <h5 class="card-header">Deactivate Account</h5>
     <div class="card-body">
-        <div class="mb-3 col-12 mb-0">
-            <div class="alert alert-warning">
-            <h5 class="alert-heading mb-1">Are you sure you want to delete your account?</h5>
-            <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
-            </div>
+      <div class="mb-3 col-12 mb-0">
+        <div class="alert alert-warning">
+          <h5 class="alert-heading mb-1">Are you sure want to deactivate your account?</h5>
+          <p class="mb-0">You won't be able to recover your account.</p>
         </div>
-        <form id="formAccountDeactivation" onsubmit="return false" class="fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
-                <div class="form-check mb-4">
-                <input class="form-check-input" type="checkbox" name="accountActivation" id="accountActivation">
-                <label class="form-check-label" for="accountActivation">I confirm my account deactivation</label>
-                <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                <button type="submit" class="btn btn-danger deactivate-account waves-effect waves-light">Deactivate Account</button>
-            <input type="hidden">
-        </form>
+      </div>
+      <form id="formAccountDeactivation" onsubmit="return false" class="fv-plugins-bootstrap5 fv-plugins-framework form-update-deactivate-profile-settings" novalidate="novalidate">
+          <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" name="accountActivation" id="accountActivation">
+              <label class="form-check-label" for="accountActivation">I confirm my account deactivation.</label>
+              <div class="fv-plugins-message-container invalid-feedback"></div>
+          </div>
+        <button type="submit" class="btn btn-danger deactivate-account waves-effect waves-light">Deactivate Account</button>
+      </form>
     </div>
 </div>
 @endif

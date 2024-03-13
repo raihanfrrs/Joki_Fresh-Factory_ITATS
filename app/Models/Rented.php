@@ -16,7 +16,8 @@ class Rented extends Model
         'warehouse_id',
         'transaction_id',
         'started_at',
-        'ended_at'
+        'ended_at',
+        'status'
     ];
 
     public function tenant()

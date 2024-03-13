@@ -14,6 +14,12 @@ class WarehouseCategoryRepository
         return WarehouseCategory::orderBy('category', 'ASC')->get();
     }
 
+    public function getAllWarehouseCategoriesExistingInWarehouse()
+    {
+        return WarehouseCategory::join('warehouses', 'warehouse_categories.id', '=', 'warehouses.warehouse_category_id')
+                                ->select('warehouse_categories.*');
+    }
+
     public function getWarehouseCategory($id)
     {
         return WarehouseCategory::find($id);

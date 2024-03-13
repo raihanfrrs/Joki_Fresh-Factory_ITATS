@@ -19,6 +19,7 @@ class Transaction extends Model implements HasMedia
         'id',
         'tenant_id',
         'tax_id',
+        'bank_id',
         'grand_total',
         'payment_due',
         'status'
@@ -56,5 +57,10 @@ class Transaction extends Model implements HasMedia
     public function rented()
     {
         return $this->hasMany(Rented::class);
+    }
+
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class);
     }
 }

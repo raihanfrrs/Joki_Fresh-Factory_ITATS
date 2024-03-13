@@ -71,3 +71,23 @@
       </div>
     </div>
 </div>
+
+<div class="card">
+  <div class="card-header border-bottom">
+    <h5 class="card-title mb-3">Billing History</h5>
+  </div>
+  <div class="card-datatable table-responsive">
+    <table class="table border-top" id="listBillsHistoryTable">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="text-center">No</th>
+          <th class="text-center">Client</th>
+          <th class="text-center">Bank</th>
+          <th class="text-center">Issued Date</th>
+          <th class="text-center">Balance</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>

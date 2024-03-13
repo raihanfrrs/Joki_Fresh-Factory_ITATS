@@ -23,6 +23,7 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listDailySalesReportTable', 'admin_daily_sales_report');
     Route::get('listMonthlySalesReportTable', 'admin_monthly_sales_report');
     Route::get('listYearlySalesReportTable', 'admin_yearly_sales_report');
+    Route::get('listBillsHistoryTable', 'bills_history');
 });
 
 Route::controller(AjaxController::class)->group(function () {
@@ -42,5 +43,6 @@ Route::controller(AjaxController::class)->group(function () {
     Route::get('ajax/admin-details/new-purchase-count', 'admin_new_purchase_count');
     Route::get('ajax/shopping-cart/{temp_transaction}/delete', 'tenant_shopping_cart_destroy');
     Route::post('ajax/shopping-cart/{temp_transaction}/update-subscription', 'tenant_shopping_cart_update_subscription');
+    Route::post('ajax/deactivate-account', 'deactivate_account');
 });
 
