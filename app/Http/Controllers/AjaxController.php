@@ -18,14 +18,15 @@ use App\Repositories\TenantRepository;
 use App\Repositories\WarehouseRepository;
 use App\Repositories\TransactionRepository;
 use App\Repositories\TempTransactionRepository;
+use App\Repositories\UserRepository;
 use App\Repositories\WarehouseCategoryRepository;
 use App\Repositories\WarehouseSubscriptionCartRepository;
 
 class AjaxController extends Controller
 {
-    private $adminRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $warehouseSubscriptionCartRepository, $tempTransactionRepository, $transactionRepository;
+    private $adminRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $warehouseSubscriptionCartRepository, $tempTransactionRepository, $transactionRepository, $userRepository;
 
-    public function __construct(AdminRepository $adminRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, WarehouseSubscriptionCartRepository $warehouseSubscriptionCartRepository, TempTransactionRepository $tempTransactionRepository, TransactionRepository $transactionRepository) {
+    public function __construct(AdminRepository $adminRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, WarehouseSubscriptionCartRepository $warehouseSubscriptionCartRepository, TempTransactionRepository $tempTransactionRepository, TransactionRepository $transactionRepository, UserRepository $userRepository) {
         $this->adminRepository = $adminRepository;
         $this->tenantRepository = $tenantRepository;
         $this->warehouseCategoryRepository = $warehouseCategoryRepository;
@@ -33,6 +34,7 @@ class AjaxController extends Controller
         $this->warehouseSubscriptionCartRepository = $warehouseSubscriptionCartRepository;
         $this->tempTransactionRepository = $tempTransactionRepository;
         $this->transactionRepository = $transactionRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function admin_detail_show($admin, $type)
@@ -138,6 +140,13 @@ class AjaxController extends Controller
     public function tenant_shopping_cart_update_subscription(Request $request, TempTransaction $temp_transaction)
     {
         if($this->tempTransactionRepository->updateTempTransaction($request, $temp_transaction->id)) {
+            return true;
+        }
+    }
+
+    public function deactivate_account()
+    {
+        if($this->userRepository->deactivateUser(auth()->user()->id)) {
             return true;
         }
     }

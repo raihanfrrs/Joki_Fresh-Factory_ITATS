@@ -33,6 +33,20 @@ class LoginController extends Controller
             return back()->withErrors([
                 'username' => 'Wrong username or password!'
             ])->onlyInput('username');
+        } else {
+            if ($level == 'admin') {
+                if ($checkUser->admin()->withTrashed()->first()->status == 'inactive' || $checkUser->admin()->withTrashed()->first()->deleted_at != null) {
+                    return back()->withErrors([
+                        'username' => 'Your account is inactive, please contact your administrator!'
+                    ])->onlyInput('username');
+                }
+            } elseif ($level == 'tenant') {
+                if ($checkUser->tenant()->withTrashed()->first()->status == 'inactive' || $checkUser->tenant()->withTrashed()->first()->deleted_at != null) {
+                    return back()->withErrors([
+                        'username' => 'Your account is inactive, please contact your administrator!'
+                    ])->onlyInput('username');
+                }
+            }
         }
 
         if (Auth::attempt($kredensial)) {

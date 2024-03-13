@@ -4,15 +4,17 @@ namespace App\Repositories;
 
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
+use App\Repositories\BillingRepository;
 use App\Repositories\TransactionRepository;
 
 class CheckoutRepository
 {
-    protected $transactionRepository;
+    protected $transactionRepository, $billingRepository;
 
-    public function __construct(TransactionRepository $transactionRepository)
+    public function __construct(TransactionRepository $transactionRepository, BillingRepository $billingRepository)
     {
         $this->transactionRepository = $transactionRepository;
+        $this->billingRepository = $billingRepository;
     }
 
     public function storeTransaction($data, $transaction_id)
@@ -22,6 +24,7 @@ class CheckoutRepository
             $transaction = $this->transactionRepository->getTransactionById($transaction_id);
 
             $transaction->update([
+                'bank_id' => $this->billingRepository->getPrimaryBilling()->id,
                 'status' => 'success'
             ]);
 

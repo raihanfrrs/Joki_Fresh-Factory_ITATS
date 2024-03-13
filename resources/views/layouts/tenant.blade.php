@@ -59,6 +59,8 @@
     @auth
         @if (request()->is('pricing'))
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/ui-carousel.css') }}" />
+        @elseif (request()->is('tenant/profile'))
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-profile.css') }}" />
         @endif
     @else
         <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
@@ -163,6 +165,11 @@
             <script src="{{ asset('assets/js/app-transaction-confirmed-list.js') }}"></script>
         @elseif (request()->is('transaction/declined'))
             <script src="{{ asset('assets/js/app-transaction-declined-list.js') }}"></script>
+        @elseif (request()->is('tenant/profile'))
+            <script src="{{ asset('assets/js/pages-profile.js') }}"></script>
+        @elseif (request()->is('settings/*'))
+            <script src="{{ asset('assets/js/pages-account-settings-account.js')  }}"></script>
+            <script src="{{ asset('assets/js/pages-account-settings-security.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>

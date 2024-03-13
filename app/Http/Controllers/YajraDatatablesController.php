@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Repositories\TaxRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\TenantRepository;
+use App\Repositories\BillingRepository;
 use Illuminate\Support\Facades\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Repositories\WarehouseRepository;
@@ -17,9 +18,9 @@ use App\Repositories\WarehouseSubscriptionRepository;
 
 class YajraDatatablesController extends Controller
 {
-    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository, $transactionRepository;
+    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository, $transactionRepository, $billingRepository;
 
-    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository, TransactionRepository $transactionRepository)
+    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository, TransactionRepository $transactionRepository, BillingRepository $billingRepository)
     {
         $this->userRepository = $userRepository;
         $this->tenantRepository = $tenantRepository;
@@ -29,6 +30,7 @@ class YajraDatatablesController extends Controller
         $this->warehouseSubscriptionRepository = $warehouseSubscriptionRepository;
         $this->taxRepository = $taxRepository;
         $this->transactionRepository = $transactionRepository;
+        $this->billingRepository = $billingRepository;
     }
 
     public function admin_index()
@@ -587,6 +589,30 @@ class YajraDatatablesController extends Controller
             return view('components.data-ajax.yajra-column.data-admin-yearly-sales-report.action-column', compact('model'))->render();
         })
         ->rawColumns(['created_at', 'amount', 'grand_total', 'action'])
+        ->make(true);
+    }
+
+    public function bills_history()
+    {
+        $transactions = $this->transactionRepository->getTransactionByStatus('confirmed');
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-bills-history.name-column', compact('model'))->render();
+        })
+        ->addColumn('bank', function ($model) {
+            return view('components.data-ajax.yajra-column.data-bills-history.bank-column', compact('model'))->render();
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-bills-history.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-bills-history.grand-total-column', compact('model'))->render();
+        })
+        ->rawColumns(['name', 'bank', 'created_at', 'grand_total'])
         ->make(true);
     }
 }

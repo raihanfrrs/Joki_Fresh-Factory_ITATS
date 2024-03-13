@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Bank;
 use App\Models\Tax;
 use App\Models\Tenant;
 use Illuminate\Database\Migrations\Migration;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignIdFor(Tenant::class);
             $table->foreignIdFor(Tax::class);
+            $table->foreignIdFor(Bank::class)->nullable();
             $table->bigInteger('grand_total');
             $table->enum('status', ['payment', 'success', 'confirmed', 'declined'])->default('payment');
             $table->dateTime('payment_due')->nullable();

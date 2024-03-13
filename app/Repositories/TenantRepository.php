@@ -70,8 +70,7 @@ class TenantRepository
 
     public function updateTenantPassword($data, $user_id)
     {
-        $user = $this->userRepository->getUser($user_id);
-        return $user->update(['password' => bcrypt($data->newPassword)]);
+        return $this->userRepository->updateUserPassword($data, $user_id);
     }
 
     public function deleteTenant($tenant)
