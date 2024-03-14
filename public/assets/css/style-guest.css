@@ -148,6 +148,11 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
   font-size: 12px;
 }
 
+.btn-small-primary {
+  padding: 13px 25px 10px;
+  font-size: 12px;
+}
+
 .btn-round {
   border-radius: 4px;
 }
@@ -554,7 +559,7 @@ ul.dropdown-menu li {
   }
 }
 .bg-1 {
-  background: url("../images/bg/home-11.jpg") no-repeat 50% 50%;
+  background: url("../images/bg/home-2.jpg") no-repeat 50% 50%;
   background-size: cover;
 }
 
@@ -564,7 +569,7 @@ ul.dropdown-menu li {
 }
 
 .slider {
-  background: url("../images/bg/home-9.jpg") no-repeat;
+  background: url("../images/bg/home-1.jpg") no-repeat;
   background-size: cover;
   background-position: 10% 0%;
   padding: 200px 0;
@@ -649,7 +654,7 @@ ul.dropdown-menu li {
 }
 
 .bg-counter {
-  background: url("../images/bg/home-12.jpg") no-repeat;
+  background: url("../images/bg/counter.jpg") no-repeat;
   background-size: cover;
 }
 
@@ -726,13 +731,13 @@ ul.dropdown-menu li {
 }
 
 .cta {
-  background: url("../images/bg/home-10.jpg") fixed 50% 50%;
+  background: url("../images/bg/home-3.jpg") fixed 50% 50%;
   background-size: cover;
   padding: 120px 0px;
 }
 
 .cta-block {
-  background: url("../images/bg/home-10.jpg") no-repeat;
+  background: url("../images/bg/home-3.jpg") no-repeat;
   background-size: cover;
 }
 

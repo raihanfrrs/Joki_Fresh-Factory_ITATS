@@ -12,7 +12,7 @@ Route::controller(LayoutController::class)->group(function () {
 
 Route::middleware('guest')->group(function () {
     Route::controller(LoginController::class)->group(function () {
-        Route::get('sign-in', 'user');
+        Route::get('sign-in', 'user')->name('login.user');
         Route::get('/admin-001-login', 'ghost');
         Route::post('sign-in/{level}', 'store')->name('login.store');
     });

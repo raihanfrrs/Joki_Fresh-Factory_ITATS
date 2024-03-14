@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/slick/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/slick/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/swiper/swiper.css') }}" />
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style-guest.css') }}">
@@ -39,6 +41,7 @@
 
     <!-- VENDOR JS -->
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/swiper/swiper.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/slick/slick.min.js') }}"></script>
@@ -48,6 +51,7 @@
     <!-- MAIN JS -->
     <script src="{{ asset('assets/js/script-guest.js') }}"></script>
 
+    @stack('scripts')
 </body>
 
 </html>

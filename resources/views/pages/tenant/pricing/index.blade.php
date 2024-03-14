@@ -87,6 +87,13 @@
                         </div>
                         @endforeach
                     </div>
+                    @else
+                    <div class="alert alert-primary" role="alert">
+                        <h5 class="alert-heading mb-2">No Warehouse Available!</h5>
+                        <p class="mb-0">
+                          Sorry, there is no warehouse available.
+                        </p>
+                    </div>
                     @endif
                   </p>
                 </div>
