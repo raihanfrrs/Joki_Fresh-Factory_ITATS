@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Carbon\Carbon;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionRepository
 {
@@ -29,8 +30,10 @@ class TransactionRepository
     {
         $query = Transaction::where('status', $status);
 
-        if (auth()->user()->level == 'tenant') {
-            $query->where('tenant_id', auth()->user()->tenant->id);
+        if (Auth::check()) {
+            if (auth()->user()->level == 'tenant') {
+                $query->where('tenant_id', auth()->user()->tenant->id);
+            }
         }
 
         return $query->get();

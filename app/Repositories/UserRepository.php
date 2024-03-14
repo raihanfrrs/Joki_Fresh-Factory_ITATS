@@ -30,6 +30,11 @@ class UserRepository
                     ->get();
     }
 
+    public function getAllUserTenant()
+    {
+        return User::where('level', 'tenant')->get();
+    }
+
     public function getUser($id)
     {
         return User::find($id);
