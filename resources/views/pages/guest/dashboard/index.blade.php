@@ -42,20 +42,20 @@
 		<div class="row">
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="counter-item text-center mb-5 mb-lg-0">
-					<h3 class="mb-0"><span class="counter-stat font-weight-bold">69</span> +</h3>
-					<p class="text-muted">Project Done</p>
+					<h3 class="mb-0"><span class="counter-stat font-weight-bold">{{ $transactions }}</span></h3>
+					<p class="text-muted">Reserved Done</p>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="counter-item text-center mb-5 mb-lg-0">
-					<h3 class="mb-0"><span class="counter-stat font-weight-bold">125 </span>M </h3>
-					<p class="text-muted">User Worldwide</p>
+					<h3 class="mb-0"><span class="counter-stat font-weight-bold">{{ $warehouses }}</span></h3>
+					<p class="text-muted">Our Warehouse</p>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="counter-item text-center mb-5 mb-lg-0">
-					<h3 class="mb-0"><span class="counter-stat font-weight-bold">39</span></h3>
-					<p class="text-muted">Availble Country</p>
+					<h3 class="mb-0"><span class="counter-stat font-weight-bold">{{ $users }}</span></h3>
+					<p class="text-muted">Our Tenant</p>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-sm-6">

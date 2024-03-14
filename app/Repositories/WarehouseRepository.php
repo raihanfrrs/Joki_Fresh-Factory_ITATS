@@ -20,6 +20,11 @@ class WarehouseRepository
         return Warehouse::find($id);
     }
 
+    public function getWarehousesExceptThisWarehouse($id)
+    {
+        return Warehouse::where('id', '!=', $id)->limit(5)->get();
+    }
+
     public function createWarehouse($data)
     {
         $warehouse_id = Uuid::uuid4()->toString();

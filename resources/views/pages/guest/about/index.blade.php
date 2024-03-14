@@ -51,22 +51,22 @@
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="counter-item text-center mb-5 mb-lg-0">
 					<i class="ti-check color-one text-md"></i>
-					<h3 class="mt-2 mb-0 text-white"><span class="counter-stat font-weight-bold">1730</span> +</h3>
-					<p class="text-white-50">Project Done</p>
+					<h3 class="mt-2 mb-0 text-black"><span class="counter-stat font-weight-bold">{{ $transactions }}</span></h3>
+					<p class="text-black-50">Reserved Done</p>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="counter-item text-center mb-5 mb-lg-0">
-					<i class="ti-flag color-one text-md"></i>
-					<h3 class="mt-2 mb-0 text-white"><span class="counter-stat font-weight-bold">125 </span>M </h3>
-					<p class="text-white-50">User Worldwide</p>
+					<i class="ti-list color-one text-md"></i>
+					<h3 class="mt-2 mb-0 text-black"><span class="counter-stat font-weight-bold">{{ $warehouses }}</span></h3>
+					<p class="text-black-50">Our Warehouse</p>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="counter-item text-center mb-5 mb-lg-0">
-					<i class="ti-layers color-one text-md"></i>
-					<h3 class="mt-2 mb-0 text-white"><span class="counter-stat font-weight-bold">39</span></h3>
-					<p class="text-white-50">Availble Country</p>
+					<i class="ti-user color-one text-md"></i>
+					<h3 class="mt-2 mb-0 text-black"><span class="counter-stat font-weight-bold">{{ $users }}</span></h3>
+					<p class="text-black-50">Our Tenant</p>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-sm-6">
