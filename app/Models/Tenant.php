@@ -62,4 +62,29 @@ class Tenant extends Model implements HasMedia
     {
         return $this->hasMany(Rented::class);
     }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function product_category()
+    {
+        return $this->hasMany(ProductCategory::class);
+    }
+
+    public function rack()
+    {
+        return $this->hasMany(Rack::class);
+    }
+
+    public function supplier()
+    {
+        return $this->hasMany(Supplier::class);
+    }
+
+    public function customer()
+    {
+        return $this->hasMany(Customer::class);
+    }
 }
