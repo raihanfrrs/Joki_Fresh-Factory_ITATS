@@ -51,7 +51,7 @@
                     </ul>
 
                     <div class="list-group">
-                    <a href="{{ route('pricing') }}" class="list-group-item d-flex justify-content-between">
+                    <a href="{{ route('pricing.index', 'all') }}" class="list-group-item d-flex justify-content-between">
                         <span>Add more warehouse from pricing</span>
                         <i class="ti ti-sm ti-chevron-right scaleX-n1-rtl"></i>
                     </a>

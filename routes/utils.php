@@ -24,6 +24,11 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listMonthlySalesReportTable', 'admin_monthly_sales_report');
     Route::get('listYearlySalesReportTable', 'admin_yearly_sales_report');
     Route::get('listBillsHistoryTable', 'bills_history');
+    Route::get('listWarehouseProductsTable/{warehouse}', 'warehouse_product');
+    Route::get('listWarehouseProductCategoriesTable/{warehouse}', 'warehouse_product_category');
+    Route::get('listWarehouseRacksTable/{warehouse}', 'warehouse_rack');
+    Route::get('listWarehouseSuppliersTable/{warehouse}', 'warehouse_supplier');
+    Route::get('listWarehouseCustomersTable/{warehouse}', 'warehouse_customer');
 });
 
 Route::controller(AjaxController::class)->group(function () {

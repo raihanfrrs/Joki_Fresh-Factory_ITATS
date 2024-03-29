@@ -31,8 +31,16 @@
 						<div class="blog-item-content bg-white p-5">
 							<div class="blog-item-meta bg-gray pt-2 pb-1 px-3 d-flex justify-content-between">
 								<span class="text-muted text-capitalize d-inline-block me-3"><i class="ti-package me-2"></i> {{ $warehouse->warehouse_category->category }}</span>
-								<span class="text-muted text-capitalize d-inline-block me-3"><i class="ti-bar-chart me-2"></i>{{ \App\Models\DetailTransaction::join('transactions', 'transactions.id', 'detail_transactions.transaction_id')->whereIn('warehouse_subscription_id', [$warehouse_subscriptions])->count() }} Total Reserved</span>
-								<span class="text-muted text-capitalize d-inline-block me-3"><i class="ti-time me-1"></i> {{ \Carbon\Carbon::parse($warehouse->created_at)->format('d/m/Y') }}</span>
+								<span class="text-muted text-capitalize d-inline-block me-3"><i class="ti-bar-chart me-2"></i>{{ \App\Models\DetailTransaction::join('transactions', 'transactions.id', 'detail_transactions.transaction_id')->whereIn('warehouse_subscription_id', [$warehouse_subscriptions])->where('transactions.status', 'confirmed')->count() }} Reserved</span>
+								<span class="text-muted text-capitalize d-inline-block me-3"><i class="ti-unlink me-1"></i> 
+								@if ($warehouse->status == 'available')
+									<div class="badge bg-success">{{ $warehouse->status }}</div>
+								@elseif ($warehouse->status == 'unavailable' || $warehouse->status == 'rented')
+									<div class="badge bg-danger">{{ $warehouse->status }}</div>
+								@elseif ($warehouse->status == 'maintenance' || $warehouse->status == 'damaged')
+									<div class="badge bg-warning">{{ $warehouse->status }}</div>
+								@endif
+								</span>
 							</div>                        
 
 							<h3 class="mt-3 mb-2 text-capitalize"><a href="{{ route('our.properties.show', $warehouse->id) }}">{{ $warehouse->name }}</a></h3>

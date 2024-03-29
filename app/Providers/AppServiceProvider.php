@@ -28,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('convertMonthsToYearsAndMonths', function ($expression) {
             return "<?php echo \App\Helpers\Helpers::convertMonthsToYearsAndMonths($expression); ?>";
         });
+        
+        Blade::directive('calculateRemainingTime', function ($expression) {
+            return "<?php echo \App\Helpers\Helpers::calculateRemainingTime($expression); ?>";
+        });
     }
 }
