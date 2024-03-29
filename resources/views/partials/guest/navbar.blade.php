@@ -22,7 +22,7 @@
                 </ul>
         
                 <div class="my-2 my-md-0 ml-lg-4 text-center ms-2">
-                  <a href="/sign-in" class="btn btn-solid-border btn-round-full">Sign In</a>
+                  <a href="{{ route('login.user') }}" class="btn btn-solid-border btn-round-full">Sign In</a>
                 </div>
               </div>
             </nav>
