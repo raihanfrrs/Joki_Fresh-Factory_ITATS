@@ -12,8 +12,8 @@ Route::controller(LayoutController::class)->group(function () {
 
 Route::middleware('guest')->group(function () {
     Route::controller(LoginController::class)->group(function () {
-        Route::get('sign-in', 'user')->name('login.user');
-        Route::get('/admin-001-login', 'ghost');
+        Route::get('tenant', 'user')->name('login.user');
+        Route::get('admin', 'ghost');
         Route::post('sign-in/{level}', 'store')->name('login.store');
     });
 
