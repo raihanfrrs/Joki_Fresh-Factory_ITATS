@@ -50,4 +50,9 @@ class Subscription extends Model
     {
         return $this->hasMany(Customer::class);
     }
+
+    public function batch()
+    {
+        return $this->hasMany(Batch::class);
+    }
 }

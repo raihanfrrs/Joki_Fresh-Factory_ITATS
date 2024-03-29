@@ -4,23 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Warehouse;
 use App\Repositories\TaxRepository;
+use App\Repositories\RackRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\TenantRepository;
 use App\Repositories\BillingRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Request;
+use App\Repositories\CustomerRepository;
+use App\Repositories\SupplierRepository;
 use Yajra\DataTables\Facades\DataTables;
 use App\Repositories\WarehouseRepository;
 use App\Repositories\TransactionRepository;
 use App\Repositories\SubscriptionRepository;
+use App\Repositories\ProductCategoryRepository;
 use App\Repositories\WarehouseCategoryRepository;
 use App\Repositories\WarehouseSubscriptionRepository;
 
 class YajraDatatablesController extends Controller
 {
-    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository, $transactionRepository, $billingRepository;
+    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository, $transactionRepository, $billingRepository, $productRepository, $productCategoryRepository, $rackRepository, $supplierRepository, $customerRepository;
 
-    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository, TransactionRepository $transactionRepository, BillingRepository $billingRepository)
+    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository, TransactionRepository $transactionRepository, BillingRepository $billingRepository, ProductRepository $productRepository, ProductCategoryRepository $productCategoryRepository, RackRepository $rackRepository, SupplierRepository $supplierRepository, CustomerRepository $customerRepository)
     {
         $this->userRepository = $userRepository;
         $this->tenantRepository = $tenantRepository;
@@ -31,6 +37,11 @@ class YajraDatatablesController extends Controller
         $this->taxRepository = $taxRepository;
         $this->transactionRepository = $transactionRepository;
         $this->billingRepository = $billingRepository;
+        $this->productRepository = $productRepository;
+        $this->productCategoryRepository = $productCategoryRepository;
+        $this->rackRepository = $rackRepository;
+        $this->supplierRepository = $supplierRepository;
+        $this->customerRepository = $customerRepository;
     }
 
     public function admin_index()
@@ -613,6 +624,156 @@ class YajraDatatablesController extends Controller
             return view('components.data-ajax.yajra-column.data-bills-history.grand-total-column', compact('model'))->render();
         })
         ->rawColumns(['name', 'bank', 'created_at', 'grand_total'])
+        ->make(true);
+    }
+
+    public function warehouse_product(Warehouse $warehouse)
+    {
+        $products = $this->productRepository->getAllProductByWarehouseIdAndTenantId($warehouse->id);
+
+        return DataTables::of($products)
+        ->addColumn('index', function ($model) use ($products) {
+            return $products->search($model) + 1;
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product.name-column', compact('model'))->render();
+        })
+        ->addColumn('stock', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product.stock-column', compact('model'))->render();
+        })
+        ->addColumn('sale_price', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product.sale-price-column', compact('model'))->render();
+        })
+        ->addColumn('weight', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product.weight-column', compact('model'))->render();
+        })
+        ->addColumn('dimension', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product.dimension-column', compact('model'))->render();
+        })
+        ->addColumn('expired_date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product.expired-date-column', compact('model'))->render();
+        })
+        ->addColumn('status', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product.status-column', compact('model'))->render();
+        })
+        ->addColumn('availability_status', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product.availability-status-column', compact('model'))->render();
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('update_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product.updated-at-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['name', 'stock', 'sale_price', 'weight', 'dimension', 'expired_date', 'status', 'availability_status', 'created_at', 'update_at', 'action'])
+        ->make(true);
+    }
+
+    public function warehouse_product_category(Warehouse $warehouse)
+    {
+        $product_categories = $this->productCategoryRepository->getAllProductCategoryByWarehouseIdAndTenantId($warehouse->id);
+
+        return DataTables::of($product_categories)
+        ->addColumn('index', function ($model) use ($product_categories) {
+            return $product_categories->search($model) + 1;
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-category.name-column', compact('model'))->render();
+        })
+        ->addColumn('total_product', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-category.total-product-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-category.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['name', 'total_product', 'action'])
+        ->make(true);
+    }
+
+    public function warehouse_rack(Warehouse $warehouse)
+    {
+        $racks = $this->rackRepository->getAllRackByWarehouseIdAndTenantId($warehouse->id);
+
+        return DataTables::of($racks)
+        ->addColumn('index', function ($model) use ($racks) {
+            return $racks->search($model) + 1;
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-rack.name-column', compact('model'))->render();
+        })
+        ->addColumn('total_product', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-rack.total-product-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-rack.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['name', 'total_product', 'action'])
+        ->make(true);
+    }
+
+    public function warehouse_supplier(Warehouse $warehouse)
+    {
+        $suppliers = $this->supplierRepository->getAllSupplierByWarehouseIdAndTenantId($warehouse->id);
+
+        return DataTables::of($suppliers)
+        ->addColumn('index', function ($model) use ($suppliers) {
+            return $suppliers->search($model) + 1;
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier.name-column', compact('model'))->render();
+        })
+        ->addColumn('email', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier.email-column', compact('model'))->render();
+        })
+        ->addColumn('phone', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier.phone-column', compact('model'))->render();
+        })
+        ->addColumn('address', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier.address-column', compact('model'))->render();
+        })
+        ->addColumn('status', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier.address-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['name', 'email', 'phone', 'address', 'status', 'action'])
+        ->make(true);
+    }
+    
+    public function warehouse_customer(Warehouse $warehouse)
+    {
+        $suppliers = $this->customerRepository->getAllCustomerByWarehouseIdAndTenantId($warehouse->id);
+
+        return DataTables::of($suppliers)
+        ->addColumn('index', function ($model) use ($suppliers) {
+            return $suppliers->search($model) + 1;
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer.name-column', compact('model'))->render();
+        })
+        ->addColumn('email', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer.email-column', compact('model'))->render();
+        })
+        ->addColumn('phone', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer.phone-column', compact('model'))->render();
+        })
+        ->addColumn('address', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer.address-column', compact('model'))->render();
+        })
+        ->addColumn('type', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer.type-column', compact('model'))->render();
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['name', 'email', 'phone', 'address', 'type', 'created_at', 'action'])
         ->make(true);
     }
 }

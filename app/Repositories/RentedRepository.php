@@ -40,11 +40,17 @@ class RentedRepository
 
     public function updateRentedStatusByTransactionId($id)
     {
+        
         foreach (self::getRentedByTransactionId($id) as $key => $item) {
+            $subscriptionDurationInMonths = self::getRented($item->id)->warehouse_subscription->subscription->month_duration;
+            
+            $yearsToAdd = floor($subscriptionDurationInMonths / 12);
+            $monthsToAdd = $subscriptionDurationInMonths % 12;
+
             self::getRented($item->id)->update([
                 'status' => 'active',
                 'started_at' => Carbon::now(),
-                'ended_at' => Carbon::now()->addMonths(self::getRented($item->id)->warehouse_subscription->subscription->month_duration)->endOfMonth()
+                'ended_at' => Carbon::now()->addYears($yearsToAdd)->addMonths($monthsToAdd)
             ]);
 
             $this->tenantRepository->getTenant($item->tenant_id)->update([

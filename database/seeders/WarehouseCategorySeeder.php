@@ -29,10 +29,6 @@ class WarehouseCategorySeeder extends Seeder
             ],
             [
                 'id' => Uuid::uuid4()->toString(),
-                'category' => 'Pemberangkatan'
-            ],
-            [
-                'id' => Uuid::uuid4()->toString(),
                 'category' => 'Musiman'
             ],
             [
@@ -58,10 +54,6 @@ class WarehouseCategorySeeder extends Seeder
             [
                 'id' => Uuid::uuid4()->toString(),
                 'category' => 'Order Fullfillment'
-            ],
-            [
-                'id' => Uuid::uuid4()->toString(),
-                'category' => 'Distribusi'
             ]
         ];
 

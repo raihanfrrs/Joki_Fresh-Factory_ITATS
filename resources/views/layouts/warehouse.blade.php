@@ -58,6 +58,10 @@
 
     <!-- Page CSS -->
     @auth
+        @if (\App\Models\Rented::where('tenant_id', auth()->user()->tenant->id)->where('warehouse_id', $warehouse->id)->count() == 0)
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-misc.css') }}" />
+        @endif
+
         {{-- @if (request()->is('master/admin/*', 'master/tenant/*'))
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-user-view.css') }}" />
         @elseif (request()->is('master/warehouse/*'))
@@ -79,35 +83,39 @@
 
   <body>
 
-    @include('components.flasher.flasher')
-
-    @include('components.modal.modal')
-
-    @if (request()->is('report/daily-sales/*/print', 'report/monthly-sales/*/print', 'report/yearly-sales/*/print'))
-        @yield('section-print')
+    @if (\App\Models\Rented::where('tenant_id', auth()->user()->tenant->id)->where('warehouse_id', $warehouse->id)->count() == 0)
+        @include('components.error.page-not-found')
     @else
-        <div class="layout-wrapper layout-content-navbar">
-            <div class="layout-container">
+        @include('components.flasher.flasher')
 
-            @include('partials.warehouse.sidebar')
+        @include('components.modal.modal')
 
-                <div class="layout-page">
-                
-                    @include('partials.warehouse.navbar')
+        @if (request()->is('report/daily-sales/*/print', 'report/monthly-sales/*/print', 'report/yearly-sales/*/print'))
+            @yield('section-print')
+        @else
+            <div class="layout-wrapper layout-content-navbar">
+                <div class="layout-container">
 
-                    <div class="content-wrapper">
+                @include('partials.warehouse.sidebar')
 
-                    @yield('section-warehouse')
+                    <div class="layout-page">
+                    
+                        @include('partials.warehouse.navbar')
 
-                    <div class="content-backdrop fade"></div>
+                        <div class="content-wrapper">
+
+                        @yield('section-warehouse')
+
+                        <div class="content-backdrop fade"></div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="layout-overlay layout-menu-toggle"></div>
+
+                <div class="drag-target"></div>
             </div>
-
-            <div class="layout-overlay layout-menu-toggle"></div>
-
-            <div class="drag-target"></div>
-        </div>
+        @endif
     @endif
 
     <!-- Core JS -->
@@ -154,42 +162,16 @@
     @if (request()->is('dashboard/*'))
         <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
         <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
-    {{-- @elseif (request()->is('master/admin', 'master/admin/*'))
-        <script src="{{ asset('assets/js/app-admin-list.js') }}"></script>
-    @elseif (request()->is('master/tenant', 'master/tenant/*'))
-        <script src="{{ asset('assets/js/app-tenant-list.js') }}"></script>
-    @elseif (request()->is('master/warehouse'))
-        <script src="{{ asset('assets/js/app-warehouse-list.js') }}"></script>
-    @elseif (request()->is('master/warehouse/*'))
-        <script src="{{ asset('assets/js/ui-carousel.js') }}"></script>
-        <script src="{{ asset('assets/js/wizard-ex-property-listing.js') }}"></script>
-    @elseif (request()->is('master/category', 'master/category/*'))
-        <script src="{{ asset('assets/js/app-category-list.js') }}"></script>
-    @elseif (request()->is('master/subscription', 'master/subscription/*'))
-        <script src="{{ asset('assets/js/app-subscription-list.js') }}"></script>
-    @elseif (request()->is('master/taxes', 'master/taxes/*'))
-        <script src="{{ asset('assets/js/app-taxes-list.js') }}"></script>
-    @elseif (request()->is('purchase/success'))
-        <script src="{{ asset('assets/js/app-purchase-pending-list.js') }}"></script>
-    @elseif (request()->is('purchase/confirmed'))
-        <script src="{{ asset('assets/js/app-purchase-confirmed-list.js') }}"></script>
-    @elseif (request()->is('purchase/declined'))
-        <script src="{{ asset('assets/js/app-purchase-declined-list.js') }}"></script>
-    @elseif (request()->is('calculation/rental-price', 'calculation/rental-price/*'))
-        <script src="{{ asset('assets/js/app-rental-price-calculation-list.js') }}"></script>
-        <script src="{{ asset('assets/js/app-warehouse-subscription-list.js') }}"></script>
-    @elseif (request()->is('settings/*'))
-        <script src="{{ asset('assets/js/pages-account-settings-security.js') }}"></script>
-        <script src="{{ asset('assets/js/pages-account-settings-billing.js') }}"></script>
-        <script src="{{ asset('assets/js/app-bills-history-list.js') }}"></script>
-    @elseif (request()->is('report/daily-sales'))
-        <script src="{{ asset('assets/js/app-daily-sales-report-list.js') }}"></script>
-    @elseif (request()->is('report/monthly-sales'))
-        <script src="{{ asset('assets/js/app-monthly-sales-report-list.js') }}"></script>
-    @elseif (request()->is('report/yearly-sales'))
-        <script src="{{ asset('assets/js/app-yearly-sales-report-list.js') }}"></script>
-    @elseif (request()->is('report/daily-sales/*/print', 'report/monthly-sales/*/print', 'report/yearly-sales/*/print'))
-        <script src="{{ asset('assets/js/app-invoice-print.js') }}"></script> --}}
+    @elseif (request()->is('warehouse/*/products'))
+        <script src="{{ asset('assets/js/app-warehouse-product-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/categories'))
+        <script src="{{ asset('assets/js/app-warehouse-category-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/racks'))
+        <script src="{{ asset('assets/js/app-warehouse-rack-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/suppliers'))
+        <script src="{{ asset('assets/js/app-warehouse-supplier-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/customers'))
+        <script src="{{ asset('assets/js/app-warehouse-customer-list.js') }}"></script>
     @endif
     
     @stack('scripts')

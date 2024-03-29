@@ -2,13 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Models\DetailTransaction;
-use App\Models\Rented;
 use Ramsey\Uuid\Uuid;
+use App\Models\Rented;
 use App\Models\Transaction;
 use App\Models\TempTransaction;
+use App\Models\DetailTransaction;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\TaxRepository;
+use App\Repositories\WarehouseRepository;
 
 class TempTransactionRepository
 {
