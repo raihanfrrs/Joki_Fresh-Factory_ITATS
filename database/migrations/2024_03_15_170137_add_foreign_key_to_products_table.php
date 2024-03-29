@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreign(['subscription_id'], 'products_ibfk_3')->references(['id'])->on('subscriptions')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign(['rack_id'], 'products_ibfk_4')->references(['id'])->on('racks')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign(['product_category_id'], 'products_ibfk_5')->references(['id'])->on('product_categories')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreign(['supplier_id'], 'products_ibfk_6')->references(['id'])->on('suppliers')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -32,7 +31,6 @@ return new class extends Migration
             $table->dropForeign('products_ibfk_3');
             $table->dropForeign('products_ibfk_4');
             $table->dropForeign('products_ibfk_5');
-            $table->dropForeign('products_ibfk_6');
         });
     }
 };

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->longText('address');
-            $table->enum('category', ['individual', 'corporate']);
+            $table->enum('type', ['individual', 'corporate']);
             $table->timestamps();
         });
     }

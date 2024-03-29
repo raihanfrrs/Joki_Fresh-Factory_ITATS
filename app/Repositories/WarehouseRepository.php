@@ -51,7 +51,7 @@ class WarehouseRepository
                 'administrative_room_or_office' => $data['administrative_room_or_office'],
                 'worker_safety_equipment' => $data['worker_safety_equipment'],
                 'firefighting_tools' => $data['firefighting_tools'],
-                'goods_handling_equipment' => $data['goods_handling_equipment'] ?? ''
+                'goods_handling_equipment' => $data['goods_handling_equipment'] ?? null
             ]);
     
             if ($data->hasFile('warehouse_image')) {
@@ -95,7 +95,7 @@ class WarehouseRepository
                 'administrative_room_or_office' => $data['administrative_room_or_office'],
                 'worker_safety_equipment' => $data['worker_safety_equipment'],
                 'firefighting_tools' => $data['firefighting_tools'],
-                'goods_handling_equipment' => $data['goods_handling_equipment'] ?? ''
+                'goods_handling_equipment' => $data['goods_handling_equipment'] ?? null
             ]);
     
             if ($data->hasFile('edit_warehouse_image')) {
@@ -115,6 +115,13 @@ class WarehouseRepository
         });
 
         return true;
+    }
+
+    public function updateStatusWarehouse($id, $status)
+    {
+        $warehouse = self::getWarehouse($id);
+
+        return $warehouse->update(['status' => $status]);
     }
 
     public function deleteWarehouse($warehouse)

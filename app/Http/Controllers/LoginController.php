@@ -56,6 +56,7 @@ class LoginController extends Controller
 
             if ($user) {
                 return redirect()->intended('/')->with([
+                    'flash-type' => 'sweetalert',
                     'case' => 'default',
                     'position' => 'center',
                     'type' => 'success',

@@ -21,11 +21,6 @@ class Supplier extends Model
         'status'
     ];
 
-    public function product()
-    {
-        return $this->hasMany(Product::class);
-    }
-
     public function warehouse()
     {
         return $this->belongsTo(Warehouse::class);
@@ -39,5 +34,10 @@ class Supplier extends Model
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    public function batch()
+    {
+        return $this->hasMany(Batch::class);
     }
 }

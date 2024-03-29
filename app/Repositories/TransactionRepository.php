@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionRepository
 {
-    protected $rented;
+    protected $rentedRepository, $warehouseRepostory;
 
-    public function __construct(RentedRepository $rentedRepository)
+    public function __construct(RentedRepository $rentedRepository, WarehouseRepository $warehouseRepository)
     {
-        $this->rented = $rentedRepository;
+        $this->rentedRepository = $rentedRepository;
+        $this->warehouseRepostory = $warehouseRepository;
     }
 
     public function getAllTransactions()
@@ -72,17 +73,18 @@ class TransactionRepository
             $transaction->update([
                 'status' => 'confirmed'
             ]);
-
-            return $this->rented->updateRentedStatusByTransactionId($id);
+            
+            return $this->rentedRepository->updateRentedStatusByTransactionId($id);
         } elseif ($status == 'declined') {
             $transaction->update([
                 'status' => 'declined'
             ]);
 
-            foreach ($this->rented->getRentedByTransactionId($id) as $key => $item) {
-                $this->rented->deleteRented($item->id);
+            foreach ($this->rentedRepository->getRentedByTransactionId($id) as $key => $item) {
+                $this->warehouseRepostory->updateStatusWarehouse($item->warehouse_id, 'available');
+                $this->rentedRepository->deleteRented($item->id);
             }
-
+            
             return true;
         }
     }

@@ -9,17 +9,18 @@ use App\Repositories\TransactionRepository;
 
 class CheckoutRepository
 {
-    protected $transactionRepository, $billingRepository;
+    protected $transactionRepository, $detailTransactionRepository, $billingRepository, $warehouseRepository;
 
-    public function __construct(TransactionRepository $transactionRepository, BillingRepository $billingRepository)
+    public function __construct(TransactionRepository $transactionRepository, DetailTransactionRepository $detailTransactionRepository, BillingRepository $billingRepository, WarehouseRepository $warehouseRepository)
     {
         $this->transactionRepository = $transactionRepository;
+        $this->detailTransactionRepository = $detailTransactionRepository;
         $this->billingRepository = $billingRepository;
+        $this->warehouseRepository = $warehouseRepository;
     }
 
     public function storeTransaction($data, $transaction_id)
     {
-
         DB::transaction(function () use ($data, $transaction_id) {
             $transaction = $this->transactionRepository->getTransactionById($transaction_id);
 
@@ -32,6 +33,10 @@ class CheckoutRepository
                 $transaction->addMediaFromRequest('transaction_image')->withResponsiveImages()->toMediaCollection('transaction_images');
             }
         });
+
+        foreach ($this->detailTransactionRepository->getDetailTransactionByTransactionId($transaction_id) as $key => $detail_transaction) {
+            $this->warehouseRepository->updateStatusWarehouse($detail_transaction->warehouse_subscription->warehouse_id, 'rented');
+        }
 
         return true;
     }

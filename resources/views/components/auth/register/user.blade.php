@@ -2,6 +2,12 @@
 
 @section('authentication')
 
+<style>
+    .bs-stepper-header {
+        display: flex;
+    }
+</style>
+
 <div
     class="d-none d-lg-flex col-lg-4 align-items-center justify-content-center p-5 auth-cover-bg-color position-relative auth-multisteps-bg-height">
     <img

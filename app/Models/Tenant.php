@@ -87,4 +87,9 @@ class Tenant extends Model implements HasMedia
     {
         return $this->hasMany(Customer::class);
     }
+
+    public function batch()
+    {
+        return $this->hasMany(Batch::class);
+    }
 }

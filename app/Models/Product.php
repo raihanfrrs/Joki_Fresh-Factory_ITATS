@@ -16,7 +16,6 @@ class Product extends Model
         'subscription_id',
         'product_category_id',
         'rack_id',
-        'supplier_id',
         'name',
         'stock',
         'price',
@@ -54,8 +53,8 @@ class Product extends Model
         return $this->belongsTo(Rack::class);
     }
 
-    public function supplier()
+    public function batch()
     {
-        return $this->belongsTo(Supplier::class);
+        return $this->hasMany(Batch::class);
     }
 }

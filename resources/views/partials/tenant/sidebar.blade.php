@@ -43,7 +43,7 @@
       @foreach (auth()->user()->tenant->rented->where('status', 'active') as $item)
       <li class="menu-item">
         <a href="{{ route('warehouse.index', $item->warehouse->id) }}" class="menu-link" target="_blank">
-          <i class="menu-icon tf-icons ti ti-building"></i>
+          <i class="menu-icon tf-icons ti ti-building-warehouse"></i>
           <div data-i18n="{{ $item->warehouse->name }}">{{ $item->warehouse->name }}</div>
         </a>
       </li>

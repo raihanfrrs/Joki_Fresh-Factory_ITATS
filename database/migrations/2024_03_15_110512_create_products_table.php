@@ -24,19 +24,15 @@ return new class extends Migration
             $table->foreignIdFor(Subscription::class);
             $table->foreignIdFor(ProductCategory::class);
             $table->foreignIdFor(Rack::class);
-            $table->foreignIdFor(Supplier::class);
             $table->string('name');
-            $table->integer('stock');
-            $table->bigInteger('price');
+            $table->bigInteger('sale_price');
             $table->bigInteger('weight');
-            $table->bigInteger('dimension');
+            $table->bigInteger('dimension')->nullable();
             $table->date('expired_date')->nullable();
-            $table->date('arrival date')->nullable();
             $table->longText('description')->nullable();
             $table->enum('status', ['active', 'inactive', 'damaged']);
             $table->enum('availability_status', ['available', 'run_out']);
             $table->timestamps();
-
         });
     }
 
