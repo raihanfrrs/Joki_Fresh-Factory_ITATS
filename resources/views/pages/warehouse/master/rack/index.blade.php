@@ -34,18 +34,18 @@
             aria-label="Close"></button>
         </div>
         <div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100">
-          <form action="{{ route('master.taxes.store') }}" method="POST" class="add-new-user pt-0" id="addNewTaxForm">
+          <form action="{{ route('warehouse.racks.store', $warehouse->id) }}" method="POST" class="add-new-user pt-0" id="addNewRackForm">
             @csrf
             <div class="mb-3">
-              <label class="form-label" for="value">Tax Value</label>
+              <label class="form-label" for="name">Rack</label>
               <input
-                type="number"
+                type="text"
                 class="form-control"
-                id="value"
-                name="value"
-                value="{{ old('value') }}"
+                id="name"
+                name="name"
+                value="{{ old('name') }}"
                 required />
-                @error('value')
+                @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>

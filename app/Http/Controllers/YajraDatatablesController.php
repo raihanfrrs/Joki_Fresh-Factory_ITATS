@@ -662,7 +662,7 @@ class YajraDatatablesController extends Controller
         ->addColumn('created_at', function ($model) {
             return view('components.data-ajax.yajra-column.data-warehouse-product.created-at-column', compact('model'))->render();
         })
-        ->addColumn('update_at', function ($model) {
+        ->addColumn('updated_at', function ($model) {
             return view('components.data-ajax.yajra-column.data-warehouse-product.updated-at-column', compact('model'))->render();
         })
         ->addColumn('action', function ($model) {
@@ -735,7 +735,7 @@ class YajraDatatablesController extends Controller
             return view('components.data-ajax.yajra-column.data-warehouse-supplier.address-column', compact('model'))->render();
         })
         ->addColumn('status', function ($model) {
-            return view('components.data-ajax.yajra-column.data-warehouse-supplier.address-column', compact('model'))->render();
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier.status-column', compact('model'))->render();
         })
         ->addColumn('action', function ($model) {
             return view('components.data-ajax.yajra-column.data-warehouse-supplier.action-column', compact('model'))->render();

@@ -49,5 +49,8 @@ Route::controller(AjaxController::class)->group(function () {
     Route::get('ajax/shopping-cart/{temp_transaction}/delete', 'tenant_shopping_cart_destroy');
     Route::post('ajax/shopping-cart/{temp_transaction}/update-subscription', 'tenant_shopping_cart_update_subscription');
     Route::post('ajax/deactivate-account', 'deactivate_account');
+    Route::get('ajax/product-category/{category}/edit', 'product_category_edit');
+    Route::get('ajax/rack/{rack}/edit', 'rack_edit');
+    Route::get('ajax/supplier/{supplier}/edit', 'supplier_edit');
 });
 

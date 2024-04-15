@@ -162,10 +162,11 @@
     @if (request()->is('dashboard/*'))
         <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
         <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
-    @elseif (request()->is('warehouse/*/products'))
+    @elseif (request()->is('warehouse/*/products', 'warehouse/*/products/*'))
         <script src="{{ asset('assets/js/app-warehouse-product-list.js') }}"></script>
+        <script src="{{ asset('assets/js/wizard-ex-product-listing.js') }}"></script>
     @elseif (request()->is('warehouse/*/categories'))
-        <script src="{{ asset('assets/js/app-warehouse-category-list.js') }}"></script>
+        <script src="{{ asset('assets/js/app-warehouse-product-category-list.js') }}"></script>
     @elseif (request()->is('warehouse/*/racks'))
         <script src="{{ asset('assets/js/app-warehouse-rack-list.js') }}"></script>
     @elseif (request()->is('warehouse/*/suppliers'))

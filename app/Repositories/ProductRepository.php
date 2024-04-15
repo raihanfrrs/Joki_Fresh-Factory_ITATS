@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use Ramsey\Uuid\Uuid;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductRepository
 {
@@ -19,5 +21,184 @@ class ProductRepository
     public function getAllProductByWarehouseIdAndTenantId($warehouse_id)
     {
         return Product::where('warehouse_id', $warehouse_id)->where('tenant_id', auth()->user()->tenant->id)->get();
+    }
+
+    public function createProduct($data, $warehouse)
+    {
+        $product_id = Uuid::uuid4()->toString();
+
+        DB::transaction(function () use ($data, $warehouse, $product_id) {
+            $product = Product::create([
+                'id' => $product_id,
+                'tenant_id' => auth()->user()->tenant->id,
+                'warehouse_id' => $warehouse->id,
+                'subscription_id' => $warehouse->rented->warehouse_subscription->subscription_id,
+                'product_category_id' => $data->product_category_id,
+                'rack_id' => $data->rack_id,
+                'name' => $data->name,
+                'sale_price' => intval(preg_replace("/[^0-9]/", "", $data->sale_price)),
+                'weight' => $data->weight,
+                'dimension' => $data->dimension ?? null,
+                'expired_date' => $data->expired_date ?? null,
+                'description' => $data->description ?? null
+            ]);
+    
+            if ($data->hasFile('product_image_one')) {
+                $media = $product->addMedia($data->file('product_image_one'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('product_images');
+        
+                $media->update([
+                    'model_id' => $product_id,
+                    'model_type' => Product::class,
+                ]);
+            }
+
+            if ($data->hasFile('product_image_two')) {
+                $media = $product->addMedia($data->file('product_image_two'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('product_images');
+        
+                $media->update([
+                    'model_id' => $product_id,
+                    'model_type' => Product::class,
+                ]);
+            }
+
+            if ($data->hasFile('product_image_three')) {
+                $media = $product->addMedia($data->file('product_image_three'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('product_images');
+        
+                $media->update([
+                    'model_id' => $product_id,
+                    'model_type' => Product::class,
+                ]);
+            }
+
+            if ($data->hasFile('product_image_four')) {
+                $media = $product->addMedia($data->file('product_image_four'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('product_images');
+        
+                $media->update([
+                    'model_id' => $product_id,
+                    'model_type' => Product::class,
+                ]);
+            }
+
+            if ($data->hasFile('product_image_five')) {
+                $media = $product->addMedia($data->file('product_image_five'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('product_images');
+        
+                $media->update([
+                    'model_id' => $product_id,
+                    'model_type' => Product::class,
+                ]);
+            }
+
+        });
+
+        return true;
+    }
+
+    public function updateProduct($data, $warehouse, $product)
+    {
+        DB::transaction(function () use ($data, $warehouse, $product) {
+            $product->update([
+                'tenant_id' => auth()->user()->tenant->id,
+                'warehouse_id' => $warehouse->id,
+                'subscription_id' => $warehouse->rented->warehouse_subscription->subscription_id,
+                'product_category_id' => $data->product_category_id,
+                'rack_id' => $data->rack_id,
+                'name' => $data->name,
+                'sale_price' => intval(preg_replace("/[^0-9]/", "", $data->sale_price)),
+                'weight' => $data->weight,
+                'dimension' => $data->dimension ?? null,
+                'expired_date' => $data->expired_date ?? null,
+                'description' => $data->description ?? null
+            ]);
+
+            if ($data->hasFile('product_image_one')) {
+                $warehouse->clearMediaCollection('product_image_one');
+
+                $media = $warehouse->addMedia($data->file('product_image_one'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('product_images');
+        
+                $media->update([
+                    'model_id' => $product->id,
+                    'model_type' => Product::class,
+                ]);
+            }
+
+            if ($data->hasFile('product_image_two')) {
+                $warehouse->clearMediaCollection('product_image_two');
+
+                $media = $warehouse->addMedia($data->file('product_image_two'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('product_images');
+        
+                $media->update([
+                    'model_id' => $product->id,
+                    'model_type' => Product::class,
+                ]);
+            }
+
+            if ($data->hasFile('product_image_three')) {
+                $warehouse->clearMediaCollection('product_image_three');
+
+                $media = $warehouse->addMedia($data->file('product_image_three'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('product_images');
+        
+                $media->update([
+                    'model_id' => $product->id,
+                    'model_type' => Product::class,
+                ]);
+            }
+
+            if ($data->hasFile('product_image_four')) {
+                $warehouse->clearMediaCollection('product_image_four');
+
+                $media = $warehouse->addMedia($data->file('product_image_four'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('product_images');
+        
+                $media->update([
+                    'model_id' => $product->id,
+                    'model_type' => Product::class,
+                ]);
+            }
+            
+            if ($data->hasFile('product_image_five')) {
+                $warehouse->clearMediaCollection('product_image_five');
+
+                $media = $warehouse->addMedia($data->file('product_image_five'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('product_images');
+        
+                $media->update([
+                    'model_id' => $product->id,
+                    'model_type' => Product::class,
+                ]);
+            }
+        });
+
+        return true;
+    }
+
+    public function deleteProduct($warehouse, $product)
+    {
+        return DB::transaction(function () use ($warehouse, $product) {
+            $product->clearMediaCollection('product_images');
+
+            if ($product->trashed()) {
+                return $product->forceDelete();
+            } else {
+                return $product->delete();
+            }
+        });
     }
 }

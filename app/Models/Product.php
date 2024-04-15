@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
     protected $keyType = "string";
     protected $fillable = [
         'id',
@@ -17,16 +21,28 @@ class Product extends Model
         'product_category_id',
         'rack_id',
         'name',
-        'stock',
-        'price',
+        'sale_price',
         'weight',
         'dimension',
         'expired_date',
-        'arrival_date',
         'description',
         'status',
         'availability_status'
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('product_images')
+            ->singleFile();
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(368)
+            ->height(232)
+            ->sharpen(10);
+    }
 
     public function tenant()
     {

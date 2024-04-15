@@ -257,7 +257,7 @@ function formatRupiahV2(angka) {
 
     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
     return 'Rp ' + rupiah;
-  }
+}
 
 $(document).on('click', '#button-submit-image-change', function(e) {
     let filePath = $('#image').val();

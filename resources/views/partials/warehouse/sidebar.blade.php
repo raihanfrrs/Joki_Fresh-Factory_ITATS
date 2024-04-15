@@ -46,7 +46,7 @@
         </a>
       </li>
       <li class="menu-item {{ request()->is('warehouse/*/categories', 'warehouse/*/categories/*') ? 'active' : '' }}">
-        <a href="{{ route('warehouse.categories.index', $warehouse->id) }}" class="menu-link">
+        <a href="{{ route('warehouse.product.categories.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-truck-loading"></i>
           <div data-i18n="Categories">Categories</div>
         </a>
