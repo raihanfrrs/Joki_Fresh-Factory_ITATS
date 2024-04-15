@@ -11,13 +11,13 @@
 <div
     class="d-none d-lg-flex col-lg-4 align-items-center justify-content-center p-5 auth-cover-bg-color position-relative auth-multisteps-bg-height">
     <img
-    src="../../assets/img/illustrations/auth-register-multisteps-illustration.png"
+    src="{{ asset('assets/img/illustrations/auth-register-multisteps-illustration.png') }}"
     alt="auth-register-multisteps"
     class="img-fluid"
     width="280" />
 
     <img
-    src="../../assets/img/illustrations/bg-shape-image-light.png"
+    src="{{ asset('assets/img/illustrations/bg-shape-image-light.png') }}"
     alt="auth-register-multisteps"
     class="platform-bg"
     data-app-light-img="illustrations/bg-shape-image-light.png"

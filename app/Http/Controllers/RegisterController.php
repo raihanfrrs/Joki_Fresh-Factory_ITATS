@@ -22,7 +22,7 @@ class RegisterController extends Controller
     public function store(TenantRegisterRequest $request)
     {
         if ($this->userRegisterRepository->createTenant($request)) {
-            return redirect('/sign-in')->with([
+            return redirect()->route('login.user')->with([
                 'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',

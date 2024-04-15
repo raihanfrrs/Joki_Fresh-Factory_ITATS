@@ -27,11 +27,11 @@ $(function () {
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
-        { data: 'name', class: 'text-center' },
+        { data: 'name', class: 'text-center text-capitalize' },
         { data: 'email', class: 'text-center' },
         { data: 'phone', class: 'text-center' },
         { data: 'address', class: 'text-center' },
-        { data: 'status', class: 'text-center' },
+        { data: 'status', class: 'text-center text-capitalize' },
         { data: 'action' }
       ],
       columnDefs: [
@@ -214,18 +214,17 @@ $(function () {
   }
 
   // Delete Record
-  $(document).on('click', '#button-delete-campaign-category', function () {
+  $(document).on('click', '#button-delete-supplier', function () {
     let id = $(this).attr('data-id');
-    let count = $(this).attr('data-count');
-    let formSelector = ".form-delete-campaign-category-" + id;
+    let formSelector = ".form-delete-supplier-" + id;
 
     Swal.fire({
-      title: 'Apakah anda yakin?',
-      text: "Kategori akan dihapus dari "+count+" influencer!",
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      cancelButtonText: 'Batal',
-      confirmButtonText: 'Ya, Hapus!',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, Delete!',
       customClass: {
         confirmButton: 'btn btn-primary me-3',
         cancelButton: 'btn btn-label-secondary'

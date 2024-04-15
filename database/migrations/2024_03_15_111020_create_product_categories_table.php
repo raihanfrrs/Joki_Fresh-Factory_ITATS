@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Warehouse::class);
             $table->foreignIdFor(Subscription::class);
             $table->string('name');
+            // $table->softDeletes();
             $table->timestamps();
         });
     }

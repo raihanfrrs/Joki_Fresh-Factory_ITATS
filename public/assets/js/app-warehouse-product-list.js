@@ -27,8 +27,16 @@ $(function () {
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
-        { data: 'category', class: 'text-center' },
-        { data: 'total_warehouse', class: 'text-center' },
+        { data: 'name', class: 'text-center text-capitalize' },
+        { data: 'stock', class: 'text-center' },
+        { data: 'sale_price', class: 'text-center' },
+        { data: 'weight', class: 'text-center' },
+        { data: 'dimension', class: 'text-center' },
+        { data: 'expired_date', class: 'text-center' },
+        { data: 'status', class: 'text-center text-capitalize' },
+        { data: 'availability_status', class: 'text-center text-capitalize' },
+        { data: 'created_at', class: 'text-center' },
+        { data: 'updated_at', class: 'text-center' },
         { data: 'action' }
       ],
       columnDefs: [
@@ -107,7 +115,7 @@ $(function () {
         {
           targets: 11,
           render: function (data, type, full, meta) {
-            return full.update_at;
+            return full.updated_at;
           }
         },
         {
@@ -199,8 +207,7 @@ $(function () {
           text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Product</span>',
           className: 'add-new btn btn-primary',
           attr: {
-            'data-bs-toggle': 'offcanvas',
-            'data-bs-target': '#offcanvasAddUser'
+            'id': 'btn-add-product',
           }
         }
       ],
@@ -240,19 +247,22 @@ $(function () {
     });
   }
 
+  $(document).on('click', '#btn-add-product', function () {
+    location.href = "/warehouse/"+warehouse_id+"/products/add";
+  });
+
   // Delete Record
-  $(document).on('click', '#button-delete-campaign-category', function () {
+  $(document).on('click', '#button-delete-product', function () {
     let id = $(this).attr('data-id');
-    let count = $(this).attr('data-count');
-    let formSelector = ".form-delete-campaign-category-" + id;
+    let formSelector = ".form-delete-product-" + id;
 
     Swal.fire({
-      title: 'Apakah anda yakin?',
-      text: "Kategori akan dihapus dari "+count+" influencer!",
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      cancelButtonText: 'Batal',
-      confirmButtonText: 'Ya, Hapus!',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, Delete!',
       customClass: {
         confirmButton: 'btn btn-primary me-3',
         cancelButton: 'btn btn-label-secondary'
