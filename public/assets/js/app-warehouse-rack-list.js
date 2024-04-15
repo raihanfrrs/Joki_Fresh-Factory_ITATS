@@ -27,7 +27,7 @@ $(function () {
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
-        { data: 'name', class: 'text-center' },
+        { data: 'name', class: 'text-center text-capitalize' },
         { data: 'total_product', class: 'text-center' },
         { data: 'action' }
       ],
@@ -193,18 +193,17 @@ $(function () {
   }
 
   // Delete Record
-  $(document).on('click', '#button-delete-campaign-category', function () {
+  $(document).on('click', '#button-delete-rack', function () {
     let id = $(this).attr('data-id');
-    let count = $(this).attr('data-count');
-    let formSelector = ".form-delete-campaign-category-" + id;
+    let formSelector = ".form-delete-rack-" + id;
 
     Swal.fire({
-      title: 'Apakah anda yakin?',
-      text: "Kategori akan dihapus dari "+count+" influencer!",
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      cancelButtonText: 'Batal',
-      confirmButtonText: 'Ya, Hapus!',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, Delete!',
       customClass: {
         confirmButton: 'btn btn-primary me-3',
         cancelButton: 'btn btn-label-secondary'
@@ -224,3 +223,44 @@ $(function () {
     $('.dataTables_length .form-select').removeClass('form-select-sm');
   }, 300);
 });
+
+(function () {
+  const phoneMaskList = document.querySelectorAll('.phone-mask'),
+  addNewRackForm = document.getElementById('addNewRackForm');
+
+  // Phone Number
+  if (phoneMaskList) {
+    phoneMaskList.forEach(function (phoneMask) {
+      new Cleave(phoneMask, {
+        phone: true,
+        phoneRegionCode: 'US'
+      });
+    });
+  }
+  // Add New User Form Validation
+  const fv = FormValidation.formValidation(addNewRackForm, {
+    fields: {
+      name: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter rack name'
+          }
+        }
+      }
+    },
+    plugins: {
+      trigger: new FormValidation.plugins.Trigger(),
+      bootstrap5: new FormValidation.plugins.Bootstrap5({
+        // Use this for enabling/changing valid/invalid class
+        eleValidClass: '',
+        rowSelector: function (field, ele) {
+          // field is the field name & ele is the field element
+          return '.mb-3';
+        }
+      }),
+      // Submit the form when all fields are valid
+      // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+      autoFocus: new FormValidation.plugins.AutoFocus()
+    }
+  });
+})();

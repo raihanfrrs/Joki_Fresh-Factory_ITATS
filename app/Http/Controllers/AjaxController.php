@@ -3,22 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tax;
+use App\Models\Bank;
+use App\Models\Rack;
 use App\Models\User;
 use App\Models\Admin;
-use App\Models\Bank;
 use App\Models\Tenant;
+use App\Models\Supplier;
 use App\Models\Warehouse;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use App\Models\ProductCategory;
 use App\Models\TempTransaction;
 use App\Models\WarehouseCategory;
+use App\Repositories\UserRepository;
 use App\Models\WarehouseSubscription;
 use App\Repositories\AdminRepository;
 use App\Repositories\TenantRepository;
 use App\Repositories\WarehouseRepository;
 use App\Repositories\TransactionRepository;
 use App\Repositories\TempTransactionRepository;
-use App\Repositories\UserRepository;
 use App\Repositories\WarehouseCategoryRepository;
 use App\Repositories\WarehouseSubscriptionCartRepository;
 
@@ -149,5 +152,20 @@ class AjaxController extends Controller
         if($this->userRepository->deactivateUser(auth()->user()->id)) {
             return true;
         }
+    }
+
+    public function product_category_edit(ProductCategory $category)
+    {
+        return view('components.data-ajax.pages.modal.data-edit-product-category-modal', compact('category'));
+    }
+
+    public function rack_edit(Rack $rack)
+    {
+        return view('components.data-ajax.pages.modal.data-edit-rack-modal', compact('rack'));
+    }
+
+    public function supplier_edit(Supplier $supplier)
+    {
+        return view('components.data-ajax.pages.modal.data-edit-supplier-modal', compact('supplier'));
     }
 }

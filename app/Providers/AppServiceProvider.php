@@ -32,5 +32,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('calculateRemainingTime', function ($expression) {
             return "<?php echo \App\Helpers\Helpers::calculateRemainingTime($expression); ?>";
         });
+
+        Blade::directive('convertGramToKg', function ($expression) {
+            return "<?php echo \App\Helpers\Helpers::convertGramToKg($expression); ?>";
+        });
     }
 }

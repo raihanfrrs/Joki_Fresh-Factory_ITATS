@@ -56,4 +56,14 @@ class Helpers
 
         return $remainingTime;
     }
+
+    public static function convertGramToKg($weightGram)
+    {
+        if ($weightGram >= 1000) {
+            $weightKg = $weightGram / 1000;
+            return number_format($weightKg) . ' Kg';
+        } else {
+            return $weightGram . ' gram';
+        }
+    }
 }

@@ -27,11 +27,12 @@ return new class extends Migration
             $table->string('name');
             $table->bigInteger('sale_price');
             $table->bigInteger('weight');
-            $table->bigInteger('dimension')->nullable();
+            $table->string('dimension')->nullable();
             $table->date('expired_date')->nullable();
             $table->longText('description')->nullable();
-            $table->enum('status', ['active', 'inactive', 'damaged']);
-            $table->enum('availability_status', ['available', 'run_out']);
+            $table->enum('status', ['active', 'inactive', 'damaged'])->default('active');
+            $table->enum('availability_status', ['available', 'run_out'])->default('available');
+            // $table->softDeletes();
             $table->timestamps();
         });
     }
