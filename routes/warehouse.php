@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InboundController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RackController;
@@ -50,5 +51,12 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
 
     Route::controller(CustomerController::class)->group(function () {
         Route::get('warehouse/{warehouse}/customers', 'warehouse_customer_index')->name('warehouse.customers.index');
+    });
+
+    Route::controller(InboundController::class)->group(function () {
+        Route::get('warehouse/{warehouse}/inbounds', 'warehouse_inbound_index')->name('warehouse.inbound.index');
+        Route::get('warehouse/{warehouse}/inbounds/add', 'warehouse_inbound_create');
+        Route::post('warehouse/{warehouse}/inbounds', 'warehouse_inbound_store')->name('warehouse.inbound.store');
+
     });
 });
