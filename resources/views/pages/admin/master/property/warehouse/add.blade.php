@@ -103,8 +103,29 @@
                     @enderror
                 </div>
                 <div class="col-lg-12">
-                    <label class="form-label" for="warehouse_image">Image</label>
-                    <input type="file" class="form-control" name="warehouse_image[]" id="warehouse_image" multiple>
+                  <label class="form-label" for="image1">Image 1</label>
+                  <input type="file" class="form-control" name="warehouse_image[]" id="image1" onchange="previewImageWarehouse(1)">
+                  <img class="mt-3 img-preview1 w-25">
+                </div>
+                <div class="col-lg-12">
+                  <label class="form-label" for="image2">Image 2</label>
+                  <input type="file" class="form-control" name="warehouse_image[]" id="image2" onchange="previewImageWarehouse(2)">
+                  <img class="mt-3 img-preview2 w-25">
+                </div>
+                <div class="col-lg-12">
+                  <label class="form-label" for="image3">Image 3</label>
+                  <input type="file" class="form-control" name="warehouse_image[]" id="image3" onchange="previewImageWarehouse(3)">
+                  <img class="mt-3 img-preview3 w-25">
+                </div>
+                <div class="col-lg-12">
+                  <label class="form-label" for="image4">Image 4</label>
+                  <input type="file" class="form-control" name="warehouse_image[]" id="image4" onchange="previewImageWarehouse(4)">
+                  <img class="mt-3 img-preview4 w-25">
+                </div>
+                <div class="col-lg-12">
+                  <label class="form-label" for="image5">Image 5</label>
+                  <input type="file" class="form-control" name="warehouse_image[]" id="image5" onchange="previewImageWarehouse(5)">
+                  <img class="mt-3 img-preview5 w-25">
                 </div>
                 <div class="col-12 d-flex justify-content-between mt-4">
                     <button class="btn btn-label-secondary btn-prev waves-effect" disabled="">

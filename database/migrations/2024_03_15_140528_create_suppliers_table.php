@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('phone');
             $table->longText('address');
             $table->enum('status', ['active', 'inactive']);
-            // $table->softDeletes();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -90,43 +90,28 @@
                 </div>
                 <div class="col-lg-12">
                     <label class="form-label" for="image1">Image 1</label>
-                    <input type="file" class="form-control" name="product_image_one" id="image1" onchange="previewImageProduct(1)">
+                    <input type="file" class="form-control" name="product_image[]" id="image1" onchange="previewImageProduct(1)">
                     <img class="mt-3 img-preview1 w-25">
-                    @error('product_image_one')
-                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                    @enderror
                 </div>
                 <div class="col-lg-12">
                     <label class="form-label" for="image2">Image 2</label>
-                    <input type="file" class="form-control" name="product_image_two" id="image2" onchange="previewImageProduct(2)">
+                    <input type="file" class="form-control" name="product_image[]" id="image2" onchange="previewImageProduct(2)">
                     <img class="mt-3 img-preview2 w-25">
-                    @error('product_image_two')
-                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                    @enderror
                 </div>
                 <div class="col-lg-12">
                     <label class="form-label" for="image3">Image 3</label>
-                    <input type="file" class="form-control" name="product_image_three" id="image3" onchange="previewImageProduct(3)">
+                    <input type="file" class="form-control" name="product_image[]" id="image3" onchange="previewImageProduct(3)">
                     <img class="mt-3 img-preview3 w-25">
-                    @error('product_image_three')
-                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                    @enderror
                 </div>
                 <div class="col-lg-12">
                     <label class="form-label" for="image4">Image 4</label>
-                    <input type="file" class="form-control" name="product_image_four" id="image4" onchange="previewImageProduct(4)">
+                    <input type="file" class="form-control" name="product_image[]" id="image4" onchange="previewImageProduct(4)">
                     <img class="mt-3 img-preview4 w-25">
-                    @error('product_image_four')
-                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                    @enderror
                 </div>
                 <div class="col-lg-12">
                     <label class="form-label" for="image5">Image 5</label>
-                    <input type="file" class="form-control" name="product_image_five" id="image5" onchange="previewImageProduct(5)">
+                    <input type="file" class="form-control" name="product_image[]" id="image5" onchange="previewImageProduct(5)">
                     <img class="mt-3 img-preview5 w-25">
-                    @error('product_image_five')
-                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                    @enderror
                 </div>
                 <div class="col-12 d-flex justify-content-between mt-4">
                     <button class="btn btn-label-secondary btn-prev waves-effect" disabled="">
@@ -193,7 +178,7 @@
                         <i class="ti ti-arrow-left ti-xs me-sm-1 me-0"></i>
                         <span class="align-middle d-sm-inline-block d-none">Previous</span>
                     </button>
-                    <button class="btn btn-success btn-submit btn-next waves-effect waves-light btn-submit-product">
+                    <button class="btn btn-success btn-submit btn-next waves-effect waves-light">
                         <span class="align-middle d-sm-inline-block d-none me-sm-1">Submit</span><i class="ti ti-check ti-xs"></i>
                     </button>
                 </div>

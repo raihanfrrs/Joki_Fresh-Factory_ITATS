@@ -39,3 +39,13 @@ function previewImageProduct(iteration) {
         imgPreview.src = oFREvent.target.result;
     }
 }
+
+function fillUpWarehouseImageUUID(iteration, uuid) {
+    const warehouse_image_uuid = document.querySelector(`#warehouse_image_uuid_${iteration}`);
+    warehouse_image_uuid.setAttribute('value', uuid);
+}
+
+function fillUpProductImageUUID(iteration, uuid) {
+    const product_image_uuid = document.querySelector(`#product_image_uuid_${iteration}`);
+    product_image_uuid.setAttribute('value', uuid);
+}

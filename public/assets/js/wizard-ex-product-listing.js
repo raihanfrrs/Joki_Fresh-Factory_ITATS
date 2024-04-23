@@ -220,9 +220,20 @@
         submitButton: new FormValidation.plugins.SubmitButton()
       }
     }).on('core.form.valid', function () {
-      let form = $(".form-submit-warehouse");
-      form.attr('onsubmit', 'return true');
-      form.submit();
+      let imageOne = $('#image1')[0].files[0];
+      let imageTwo = $('#image2')[0].files[0];
+      let imageThree = $('#image3')[0].files[0];
+      let imageFour = $('#image4')[0].files[0];
+      let imageFive = $('#image5')[0].files[0];
+
+      let formProduct = $('.form-submit-product');
+      
+      if (imageOne == undefined && imageTwo == undefined && imageThree == undefined && imageFour == undefined && imageFive == undefined) {
+          alert('Please select at least one product image.');
+      } else {
+          formProduct.attr('onsubmit', 'return true');
+          formProduct.submit();
+      }
     });
 
     wizardPropertyListingNext.forEach(item => {

@@ -7,6 +7,7 @@ use App\Models\Warehouse;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class WarehouseRepository
 {
@@ -98,19 +99,65 @@ class WarehouseRepository
                 'goods_handling_equipment' => $data['goods_handling_equipment'] ?? null
             ]);
     
-            if ($data->hasFile('edit_warehouse_image')) {
-                $warehouse->clearMediaCollection('warehouse_images');
-
-                foreach ($data->file('edit_warehouse_image') as $key => $file) {
-                    $media = $warehouse->addMedia($file)
-                        ->withResponsiveImages()
-                        ->toMediaCollection('warehouse_images');
-            
-                    $media->update([
-                        'model_id' => $id,
-                        'model_type' => Warehouse::class,
-                    ]);
+            if (!empty($data->warehouse_image_uuid)) {
+                foreach ($data->warehouse_image_uuid as $key => $uuid) {
+                    Media::where('uuid', $uuid)->where('model_type', Warehouse::class)->delete();
                 }
+            }
+
+            if ($data->hasFile('warehouse_image_one')) {
+                $media = $warehouse->addMedia($data->file('warehouse_image_one'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('warehouse_images');
+        
+                $media->update([
+                    'model_id' => $warehouse->id,
+                    'model_type' => Warehouse::class,
+                ]);
+            }
+
+            if ($data->hasFile('warehouse_image_two')) {
+                $media = $warehouse->addMedia($data->file('warehouse_image_two'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('warehouse_images');
+        
+                $media->update([
+                    'model_id' => $warehouse->id,
+                    'model_type' => Warehouse::class,
+                ]);
+            }
+
+            if ($data->hasFile('warehouse_image_three')) {
+                $media = $warehouse->addMedia($data->file('warehouse_image_three'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('warehouse_images');
+        
+                $media->update([
+                    'model_id' => $warehouse->id,
+                    'model_type' => Warehouse::class,
+                ]);
+            }
+
+            if ($data->hasFile('warehouse_image_four')) {
+                $media = $warehouse->addMedia($data->file('warehouse_image_four'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('warehouse_images');
+        
+                $media->update([
+                    'model_id' => $warehouse->id,
+                    'model_type' => Warehouse::class,
+                ]);
+            }
+            
+            if ($data->hasFile('warehouse_image_five')) {
+                $media = $warehouse->addMedia($data->file('warehouse_image_five'))
+                    ->withResponsiveImages()
+                    ->toMediaCollection('warehouse_images');
+        
+                $media->update([
+                    'model_id' => $warehouse->id,
+                    'model_type' => Warehouse::class,
+                ]);
             }
         });
 

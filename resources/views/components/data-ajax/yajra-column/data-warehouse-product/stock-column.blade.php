@@ -1,1 +1,1 @@
-{{ $model->batch->isEmpty() ? 0 : $model->batch->available->sum() }}
+{{ $model->batch->isEmpty() ? 0 : $model->batch->sum('available') }}
