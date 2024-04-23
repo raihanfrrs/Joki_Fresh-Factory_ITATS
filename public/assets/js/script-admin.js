@@ -476,4 +476,4 @@ $(document).on('click', '#button-delete-bank-account', function () {
         $(formSelector).submit();
       }
     });
-  });
+});

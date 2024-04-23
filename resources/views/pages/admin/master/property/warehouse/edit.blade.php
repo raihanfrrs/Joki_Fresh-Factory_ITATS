@@ -103,16 +103,71 @@
                         <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-                @foreach ($warehouse->getMedia('warehouse_images') as $media)
+                @php
+                    $mediaUrls = [];
+                    $mediaUuid = [];
+                    $mediaCollection = $warehouse->getMedia('warehouse_images');
+
+                    foreach ($mediaCollection as $media) {
+                        $mediaUrls[] = $media->getUrl();
+                        $mediaUuid[] = $media->uuid;
+                    }
+                @endphp
+
                 <div class="col-lg-12">
-                    <label class="form-label" for="image">Image {{ $loop->iteration }}</label>
-                    <input type="file" class="form-control" name="edit_warehouse_image[]" id="image{{ $loop->iteration }}" onchange="previewImageWarehouse({{ $loop->iteration }})" >
-                    <img src="{{ $media->getUrl() }}" class="img-fluid img-preview{{ $loop->iteration }} w-25 my-3 d-block">
+                    <label class="form-label" for="image1">Image 1</label>
+                    <input type="file" class="form-control" name="warehouse_image_one" id="image1" onchange="previewImageWarehouse(1); fillUpWarehouseImageUUID(1, '{{ $mediaUuid[0] }}')">
+                    <input type="hidden" name="warehouse_image_uuid[]" id="warehouse_image_uuid_1">
+                    @if (!empty($mediaUrls[0]))
+                        <img src="{{ $mediaUrls[0] }}" class="mt-3 img-preview1 w-25">
+                    @endif
+                    @error('warehouse_image_one')
+                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
-                @endforeach
                 <div class="col-lg-12">
-                  <label class="form-label" for="warehouse_image">Additional image</label>
-                  <input type="file" class="form-control" name="edit_warehouse_image[]" id="warehouse_image" multiple>
+                    <label class="form-label" for="image2">Image 2</label>
+                    <input type="file" class="form-control" name="warehouse_image_two" id="image2" onchange="previewImageWarehouse(2); fillUpWarehouseImageUUID(2, '{{ $mediaUuid[1] }}')">
+                    <input type="hidden" name="warehouse_image_uuid[]" id="warehouse_image_uuid_2">
+                    @if (!empty($mediaUrls[1]))
+                        <img src="{{ $mediaUrls[1] }}" class="mt-3 img-preview2 w-25">
+                    @endif
+                    @error('warehouse_image_two')
+                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-lg-12">
+                    <label class="form-label" for="image3">Image 3</label>
+                    <input type="file" class="form-control" name="warehouse_image_three" id="image3" onchange="previewImageWarehouse(3); fillUpWarehouseImageUUID(3, '{{ $mediaUuid[2] }}')">
+                    <input type="hidden" name="warehouse_image_uuid[]" id="warehouse_image_uuid_3">
+                    @if (!empty($mediaUrls[2]))
+                        <img src="{{ $mediaUrls[2] }}" class="mt-3 img-preview3 w-25">
+                    @endif
+                    @error('warehouse_image_three')
+                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-lg-12">
+                    <label class="form-label" for="image4">Image 4</label>
+                    <input type="file" class="form-control" name="warehouse_image_four" id="image4" onchange="previewImageWarehouse(4); fillUpWarehouseImageUUID(4, '{{ $mediaUuid[3] }}')">
+                    <input type="hidden" name="warehouse_image_uuid[]" id="warehouse_image_uuid_4">
+                    @if (!empty($mediaUrls[3]))
+                        <img src="{{ $mediaUrls[3] }}" class="mt-3 img-preview4 w-25">
+                    @endif
+                    @error('warehouse_image_four')
+                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-lg-12">
+                    <label class="form-label" for="image5">Image 5</label>
+                    <input type="file" class="form-control" name="warehouse_image_five" id="image5" onchange="previewWarehouseProduct(5); fillUpWarehouseImageUUID(5, '{{ $mediaUuid[4] }}')">
+                    <input type="hidden" name="warehouse_image_uuid[]" id="warehouse_image_uuid_5">
+                    @if (!empty($mediaUrls[4]))
+                        <img src="{{ $mediaUrls[4] }}" class="mt-3 img-preview5 w-25">
+                    @endif
+                    @error('warehouse_image_five')
+                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="col-12 d-flex justify-content-between mt-4">
                     <button class="btn btn-label-secondary btn-prev waves-effect" disabled="">

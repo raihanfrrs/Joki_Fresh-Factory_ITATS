@@ -27,7 +27,7 @@ return new class extends Migration
             $table->bigInteger('price');
             $table->bigInteger('on_hand');
             $table->bigInteger('available');
-            $table->timestamp('received_at');
+            $table->dateTime('received_at');
             $table->timestamps();
         });
     }

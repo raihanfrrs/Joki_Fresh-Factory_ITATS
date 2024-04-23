@@ -29,6 +29,7 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listWarehouseRacksTable/{warehouse}', 'warehouse_rack');
     Route::get('listWarehouseSuppliersTable/{warehouse}', 'warehouse_supplier');
     Route::get('listWarehouseCustomersTable/{warehouse}', 'warehouse_customer');
+    Route::get('listWarehouseInboundsTable/{warehouse}', 'warehouse_inbound');
 });
 
 Route::controller(AjaxController::class)->group(function () {

@@ -11,7 +11,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Product extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, SoftDeletes;
     protected $keyType = "string";
     protected $fillable = [
         'id',
@@ -32,8 +32,7 @@ class Product extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('product_images')
-            ->singleFile();
+        $this->addMediaCollection('product_images');
     }
 
     public function registerMediaConversions(Media $media = null): void

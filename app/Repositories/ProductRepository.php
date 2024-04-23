@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Ramsey\Uuid\Uuid;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProductRepository
 {
@@ -42,62 +43,19 @@ class ProductRepository
                 'expired_date' => $data->expired_date ?? null,
                 'description' => $data->description ?? null
             ]);
-    
-            if ($data->hasFile('product_image_one')) {
-                $media = $product->addMedia($data->file('product_image_one'))
-                    ->withResponsiveImages()
-                    ->toMediaCollection('product_images');
-        
-                $media->update([
-                    'model_id' => $product_id,
-                    'model_type' => Product::class,
-                ]);
-            }
 
-            if ($data->hasFile('product_image_two')) {
-                $media = $product->addMedia($data->file('product_image_two'))
-                    ->withResponsiveImages()
-                    ->toMediaCollection('product_images');
-        
-                $media->update([
-                    'model_id' => $product_id,
-                    'model_type' => Product::class,
-                ]);
+            if ($data->hasFile('product_image')) {
+                foreach ($data->file('product_image') as $key => $file) {
+                    $media = $warehouse->addMedia($file)
+                        ->withResponsiveImages()
+                        ->toMediaCollection('product_images');
+            
+                    $media->update([
+                        'model_id' => $product_id,
+                        'model_type' => Product::class,
+                    ]);
+                }
             }
-
-            if ($data->hasFile('product_image_three')) {
-                $media = $product->addMedia($data->file('product_image_three'))
-                    ->withResponsiveImages()
-                    ->toMediaCollection('product_images');
-        
-                $media->update([
-                    'model_id' => $product_id,
-                    'model_type' => Product::class,
-                ]);
-            }
-
-            if ($data->hasFile('product_image_four')) {
-                $media = $product->addMedia($data->file('product_image_four'))
-                    ->withResponsiveImages()
-                    ->toMediaCollection('product_images');
-        
-                $media->update([
-                    'model_id' => $product_id,
-                    'model_type' => Product::class,
-                ]);
-            }
-
-            if ($data->hasFile('product_image_five')) {
-                $media = $product->addMedia($data->file('product_image_five'))
-                    ->withResponsiveImages()
-                    ->toMediaCollection('product_images');
-        
-                $media->update([
-                    'model_id' => $product_id,
-                    'model_type' => Product::class,
-                ]);
-            }
-
         });
 
         return true;
@@ -120,10 +78,14 @@ class ProductRepository
                 'description' => $data->description ?? null
             ]);
 
-            if ($data->hasFile('product_image_one')) {
-                $warehouse->clearMediaCollection('product_image_one');
+            if (!empty($data->product_image_uuid)) {
+                foreach ($data->product_image_uuid as $key => $uuid) {
+                    Media::where('uuid', $uuid)->where('model_type', Product::class)->delete();
+                }
+            }
 
-                $media = $warehouse->addMedia($data->file('product_image_one'))
+            if ($data->hasFile('product_image_one')) {
+                $media = $product->addMedia($data->file('product_image_one'))
                     ->withResponsiveImages()
                     ->toMediaCollection('product_images');
         
@@ -134,9 +96,7 @@ class ProductRepository
             }
 
             if ($data->hasFile('product_image_two')) {
-                $warehouse->clearMediaCollection('product_image_two');
-
-                $media = $warehouse->addMedia($data->file('product_image_two'))
+                $media = $product->addMedia($data->file('product_image_two'))
                     ->withResponsiveImages()
                     ->toMediaCollection('product_images');
         
@@ -147,9 +107,7 @@ class ProductRepository
             }
 
             if ($data->hasFile('product_image_three')) {
-                $warehouse->clearMediaCollection('product_image_three');
-
-                $media = $warehouse->addMedia($data->file('product_image_three'))
+                $media = $product->addMedia($data->file('product_image_three'))
                     ->withResponsiveImages()
                     ->toMediaCollection('product_images');
         
@@ -160,9 +118,7 @@ class ProductRepository
             }
 
             if ($data->hasFile('product_image_four')) {
-                $warehouse->clearMediaCollection('product_image_four');
-
-                $media = $warehouse->addMedia($data->file('product_image_four'))
+                $media = $product->addMedia($data->file('product_image_four'))
                     ->withResponsiveImages()
                     ->toMediaCollection('product_images');
         
@@ -173,9 +129,7 @@ class ProductRepository
             }
             
             if ($data->hasFile('product_image_five')) {
-                $warehouse->clearMediaCollection('product_image_five');
-
-                $media = $warehouse->addMedia($data->file('product_image_five'))
+                $media = $product->addMedia($data->file('product_image_five'))
                     ->withResponsiveImages()
                     ->toMediaCollection('product_images');
         

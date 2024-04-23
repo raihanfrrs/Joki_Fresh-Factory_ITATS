@@ -43,8 +43,7 @@ class Warehouse extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('warehouse_images')
-            ->singleFile();
+        $this->addMediaCollection('warehouse_images');
     }
 
     public function registerMediaConversions(Media $media = null): void

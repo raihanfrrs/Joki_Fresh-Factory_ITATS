@@ -303,16 +303,20 @@ class AdminMasterController extends Controller
 
     public function master_warehouse_store(WarehouseStoreRequest $request)
     {
-        if ($request->validated()) {
-            if ($this->warehouseRepository->createWarehouse($request)) {
-                return redirect()->back()->with([
-                    'flash-type' => 'sweetalert',
-                    'case' => 'default',
-                    'position' => 'center',
-                    'type' => 'success',
-                    'message' => 'Warehouse has been created!'
-                ]);
+        try {
+            if ($request->validated()) {
+                if ($this->warehouseRepository->createWarehouse($request)) {
+                    return redirect()->back()->with([
+                        'flash-type' => 'sweetalert',
+                        'case' => 'default',
+                        'position' => 'center',
+                        'type' => 'success',
+                        'message' => 'Warehouse has been created!'
+                    ]);
+                }
             }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
         }
     }
 

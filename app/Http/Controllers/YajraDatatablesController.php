@@ -10,6 +10,7 @@ use App\Repositories\RackRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\TenantRepository;
 use App\Repositories\BillingRepository;
+use App\Repositories\InboundRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Request;
 use App\Repositories\CustomerRepository;
@@ -24,9 +25,9 @@ use App\Repositories\WarehouseSubscriptionRepository;
 
 class YajraDatatablesController extends Controller
 {
-    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository, $transactionRepository, $billingRepository, $productRepository, $productCategoryRepository, $rackRepository, $supplierRepository, $customerRepository;
+    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository, $transactionRepository, $billingRepository, $productRepository, $productCategoryRepository, $rackRepository, $supplierRepository, $customerRepository, $inboundRepository;
 
-    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository, TransactionRepository $transactionRepository, BillingRepository $billingRepository, ProductRepository $productRepository, ProductCategoryRepository $productCategoryRepository, RackRepository $rackRepository, SupplierRepository $supplierRepository, CustomerRepository $customerRepository)
+    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository, TransactionRepository $transactionRepository, BillingRepository $billingRepository, ProductRepository $productRepository, ProductCategoryRepository $productCategoryRepository, RackRepository $rackRepository, SupplierRepository $supplierRepository, CustomerRepository $customerRepository, InboundRepository $inboundRepository)
     {
         $this->userRepository = $userRepository;
         $this->tenantRepository = $tenantRepository;
@@ -42,6 +43,7 @@ class YajraDatatablesController extends Controller
         $this->rackRepository = $rackRepository;
         $this->supplierRepository = $supplierRepository;
         $this->customerRepository = $customerRepository;
+        $this->inboundRepository = $inboundRepository;
     }
 
     public function admin_index()
@@ -774,6 +776,42 @@ class YajraDatatablesController extends Controller
             return view('components.data-ajax.yajra-column.data-warehouse-customer.action-column', compact('model'))->render();
         })
         ->rawColumns(['name', 'email', 'phone', 'address', 'type', 'created_at', 'action'])
+        ->make(true);
+    }
+
+    public function warehouse_inbound(Warehouse $warehouse)
+    {
+        $inbounds = $this->inboundRepository->getAllInboundByWarehouseIdAndTenantId($warehouse->id);
+
+        return DataTables::of($inbounds)
+        ->addColumn('index', function ($model) use ($inbounds) {
+            return $inbounds->search($model) + 1;
+        })
+        ->addColumn('code', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inbound.code-column', compact('model'))->render();
+        })
+        ->addColumn('supplier', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inbound.supplier-column', compact('model'))->render();
+        })
+        ->addColumn('product', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inbound.product-column', compact('model'))->render();
+        })
+        ->addColumn('price', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inbound.price-column', compact('model'))->render();
+        })
+        ->addColumn('on_hand', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inbound.on-hand-column', compact('model'))->render();
+        })
+        ->addColumn('available', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inbound.available-column', compact('model'))->render();
+        })
+        ->addColumn('received_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inbound.received-at-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inbound.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['code', 'supplier', 'product', 'price', 'on_hand', 'available', 'received_at', 'action'])
         ->make(true);
     }
 }

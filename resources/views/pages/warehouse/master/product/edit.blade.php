@@ -92,16 +92,19 @@
 
                 @php
                     $mediaUrls = [];
+                    $mediaUuid = [];
                     $mediaCollection = $product->getMedia('product_images');
 
                     foreach ($mediaCollection as $media) {
                         $mediaUrls[] = $media->getUrl();
+                        $mediaUuid[] = $media->uuid;
                     }
                 @endphp
 
                 <div class="col-lg-12">
                     <label class="form-label" for="image1">Image 1</label>
-                    <input type="file" class="form-control" name="product_image_one" id="image1" onchange="previewImageProduct(1)">
+                    <input type="file" class="form-control" name="product_image_one" id="image1" onchange="previewImageProduct(1); fillUpProductImageUUID(1, '{{ $mediaUuid[0] }}')">
+                    <input type="hidden" name="product_image_uuid[]" id="product_image_uuid_1">
                     @if (!empty($mediaUrls[0]))
                         <img src="{{ $mediaUrls[0] }}" class="mt-3 img-preview1 w-25">
                     @endif
@@ -111,7 +114,8 @@
                 </div>
                 <div class="col-lg-12">
                     <label class="form-label" for="image2">Image 2</label>
-                    <input type="file" class="form-control" name="product_image_two" id="image2" onchange="previewImageProduct(2)">
+                    <input type="file" class="form-control" name="product_image_two" id="image2" onchange="previewImageProduct(2); fillUpProductImageUUID(2, '{{ $mediaUuid[1] }}')">
+                    <input type="hidden" name="product_image_uuid[]" id="product_image_uuid_2">
                     @if (!empty($mediaUrls[1]))
                         <img src="{{ $mediaUrls[1] }}" class="mt-3 img-preview2 w-25">
                     @endif
@@ -121,7 +125,8 @@
                 </div>
                 <div class="col-lg-12">
                     <label class="form-label" for="image3">Image 3</label>
-                    <input type="file" class="form-control" name="product_image_three" id="image3" onchange="previewImageProduct(3)">
+                    <input type="file" class="form-control" name="product_image_three" id="image3" onchange="previewImageProduct(3); fillUpProductImageUUID(3, '{{ $mediaUuid[2] }}')">
+                    <input type="hidden" name="product_image_uuid[]" id="product_image_uuid_3">
                     @if (!empty($mediaUrls[2]))
                         <img src="{{ $mediaUrls[2] }}" class="mt-3 img-preview3 w-25">
                     @endif
@@ -131,7 +136,8 @@
                 </div>
                 <div class="col-lg-12">
                     <label class="form-label" for="image4">Image 4</label>
-                    <input type="file" class="form-control" name="product_image_four" id="image4" onchange="previewImageProduct(4)">
+                    <input type="file" class="form-control" name="product_image_four" id="image4" onchange="previewImageProduct(4); fillUpProductImageUUID(4, '{{ $mediaUuid[3] }}')">
+                    <input type="hidden" name="product_image_uuid[]" id="product_image_uuid_4">
                     @if (!empty($mediaUrls[3]))
                         <img src="{{ $mediaUrls[3] }}" class="mt-3 img-preview4 w-25">
                     @endif
@@ -141,7 +147,8 @@
                 </div>
                 <div class="col-lg-12">
                     <label class="form-label" for="image5">Image 5</label>
-                    <input type="file" class="form-control" name="product_image_five" id="image5" onchange="previewImageProduct(5)">
+                    <input type="file" class="form-control" name="product_image_five" id="image5" onchange="previewImageProduct(5); fillUpProductImageUUID(5, '{{ $mediaUuid[4] }}')">
+                    <input type="hidden" name="product_image_uuid[]" id="product_image_uuid_5">
                     @if (!empty($mediaUrls[4]))
                         <img src="{{ $mediaUrls[4] }}" class="mt-3 img-preview5 w-25">
                     @endif

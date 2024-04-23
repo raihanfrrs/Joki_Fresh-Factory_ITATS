@@ -32,7 +32,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->enum('status', ['active', 'inactive', 'damaged'])->default('active');
             $table->enum('availability_status', ['available', 'run_out'])->default('available');
-            // $table->softDeletes();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

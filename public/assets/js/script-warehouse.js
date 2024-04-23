@@ -1,22 +1,11 @@
-$(document).on('click', '.btn-submit-product', function () {
-    let imageOne = $('#product_image_one').val();
-    let imageTwo = $('#product_image_two').val();
-    let imageThree = $('#product_image_three').val();
-    let imageFour = $('#product_image_four').val();
-    let imageFive = $('#product_image_five').val();
-
-    let formProduct = $('.form-submit-product');
-    
-    if (imageOne == '' && imageTwo == '' && imageThree == '' && imageFour == '' && imageFive == '') {
-        alert('Pilih setidaknya satu gambar.');
-    } else {
-        formProduct.attr('onsubmit', 'return true');
-        formProduct.submit();
-    }
+$(document).on('click', '.btn-submit-inbound', function () {
+    let formInbound = $('.form-submit-inbound');
+    formInbound.attr('onsubmit', 'return true');
+    formInbound.submit();
 });
 
 $(function(){
-    $("#sale_price").keyup(function(e){
+    $("#sale_price, #price").keyup(function(e){
       $(this).val(format($(this).val()));
     });
 });

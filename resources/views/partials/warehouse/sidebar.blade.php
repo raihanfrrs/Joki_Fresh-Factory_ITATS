@@ -74,8 +74,8 @@
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">TOOLS</span>
       </li>
-      <li class="menu-item">
-        <a href="" class="menu-link">
+      <li class="menu-item {{ request()->is('warehouse/*/inbounds', 'warehouse/*/inbounds/*') ? 'active' : '' }}">
+        <a href="{{ route('warehouse.inbound.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-plane-arrival"></i>
           <div data-i18n="Inbound">Inbound</div>
         </a>
@@ -84,6 +84,12 @@
         <a href="" class="menu-link">
           <i class="menu-icon tf-icons ti ti-assembly"></i>
           <div data-i18n="Inventory">Inventory</div>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-assembly"></i>
+          <div data-i18n="Inventory">Outbound</div>
         </a>
       </li>
 
