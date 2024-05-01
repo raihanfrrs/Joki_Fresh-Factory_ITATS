@@ -802,16 +802,67 @@ class YajraDatatablesController extends Controller
         ->addColumn('on_hand', function ($model) {
             return view('components.data-ajax.yajra-column.data-warehouse-inbound.on-hand-column', compact('model'))->render();
         })
-        ->addColumn('available', function ($model) {
-            return view('components.data-ajax.yajra-column.data-warehouse-inbound.available-column', compact('model'))->render();
-        })
         ->addColumn('received_at', function ($model) {
             return view('components.data-ajax.yajra-column.data-warehouse-inbound.received-at-column', compact('model'))->render();
         })
         ->addColumn('action', function ($model) {
             return view('components.data-ajax.yajra-column.data-warehouse-inbound.action-column', compact('model'))->render();
         })
-        ->rawColumns(['code', 'supplier', 'product', 'price', 'on_hand', 'available', 'received_at', 'action'])
+        ->rawColumns(['code', 'supplier', 'product', 'price', 'on_hand', 'received_at', 'action'])
+        ->make(true);
+    }
+
+    public function warehouse_inventory(Warehouse $warehouse)
+    {
+        $inventories = $this->productRepository->getAllProductByWarehouseIdAndTenantId($warehouse->id);
+
+        return DataTables::of($inventories)
+        ->addColumn('index', function ($model) use ($inventories) {
+            return $inventories->search($model) + 1;
+        })
+        ->addColumn('product', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inventory.name-column', compact('model'))->render();
+        })
+        ->addColumn('category', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inventory.category-column', compact('model'))->render();
+        })
+        ->addColumn('rack', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inventory.rack-column', compact('model'))->render();
+        })
+        ->addColumn('actual_stock', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inventory.actual-stock-column', compact('model'))->render();
+        })
+        ->addColumn('on_hand', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inventory.on-hand-column', compact('model'))->render();
+        })
+        ->addColumn('sale_price', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inventory.sale-price-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-inventory.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['index', 'product', 'category', 'rack', 'actual_stock', 'on_hand', 'sale_price', 'action'])
+        ->make(true);
+    }
+
+    public function warehouse_supplier_performance(Warehouse $warehouse)
+    {
+        $suppliers = $this->supplierRepository->getAllSupplierByWarehouseIdAndTenantId($warehouse->id);
+
+        return DataTables::of($suppliers)
+        ->addColumn('index', function ($model) use ($suppliers) {
+            return $suppliers->search($model) + 1;
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier-performance.name-column', compact('model'))->render();
+        })
+        ->addColumn('product_amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier-performance.product-amount-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier-performance.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['name', 'product_amount', 'action'])
         ->make(true);
     }
 }
