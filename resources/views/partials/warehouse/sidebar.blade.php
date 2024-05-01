@@ -80,8 +80,8 @@
           <div data-i18n="Inbound">Inbound</div>
         </a>
       </li>
-      <li class="menu-item">
-        <a href="" class="menu-link">
+      <li class="menu-item {{ request()->is('warehouse/*/inventory', 'warehouse/*/inventory/*') ? 'active' : '' }}">
+        <a href="{{ route('warehouse.inventory.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-assembly"></i>
           <div data-i18n="Inventory">Inventory</div>
         </a>
@@ -89,7 +89,7 @@
       <li class="menu-item">
         <a href="" class="menu-link">
           <i class="menu-icon tf-icons ti ti-assembly"></i>
-          <div data-i18n="Inventory">Outbound</div>
+          <div data-i18n="Outbound">Outbound</div>
         </a>
       </li>
 
@@ -97,8 +97,8 @@
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">REPORT</span>
       </li>
-      <li class="menu-item">
-        <a href="" class="menu-link">
+      <li class="menu-item {{ request()->is('warehouse/*/supplier-performance', 'warehouse/*/supplier-performance/*') ? 'active' : '' }}">
+        <a href="{{ route('warehouse.supplier.performance.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-clipboard-list"></i>
           <div data-i18n="Supplier Performance">Supplier Performance</div>
         </a>

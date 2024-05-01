@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InboundController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RackController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\warehouseReportingController;
 
 Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
 
@@ -57,6 +59,14 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
         Route::get('warehouse/{warehouse}/inbounds', 'warehouse_inbound_index')->name('warehouse.inbound.index');
         Route::get('warehouse/{warehouse}/inbounds/add', 'warehouse_inbound_create');
         Route::post('warehouse/{warehouse}/inbounds', 'warehouse_inbound_store')->name('warehouse.inbound.store');
+    });
 
+    Route::controller(InventoryController::class)->group(function () {
+        Route::get('warehouse/{warehouse}/inventory', 'warehouse_inventory_index')->name('warehouse.inventory.index');
+    });
+
+    Route::controller(warehouseReportingController::class)->group(function () {
+        Route::get('warehouse/{warehouse}/supplier-performance', 'warehouse_supplier_performance_reporting_index')->name('warehouse.supplier.performance.index');
+        Route::get('warehouse/{warehouse}/supplier-performance/{supplier}/print', 'warehouse_supplier_performance_reporting_print')->name('warehouse.supplier.performance.print');
     });
 });

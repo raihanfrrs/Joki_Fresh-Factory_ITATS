@@ -18,22 +18,18 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
-  var dt_brand_table = $('#listWarehouseInboundsTable');
+  var dt_brand_table = $('#listWarehouseSupplierPerformanceTable');
   var warehouse_id = dt_brand_table.attr('data-id');
 
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
-      ajax: "/listWarehouseInboundsTable/"+ warehouse_id,
+      ajax: "/listWarehouseSupplierPerformanceTable/"+ warehouse_id,
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
-        { data: 'code', class: 'text-center' },
-        { data: 'supplier', class: 'text-center' },
-        { data: 'product', class: 'text-center' },
-        { data: 'price', class: 'text-center' },
-        { data: 'on_hand', class: 'text-center' },
-        { data: 'received_at', class: 'text-center' },
-        { data: 'action' }
+        { data: 'name', class: 'text-center' },
+        { data: 'product_amount', class: 'text-center' },
+        { data: 'action', class: 'text-center' },
       ],
       columnDefs: [
         {
@@ -57,37 +53,13 @@ $(function () {
           targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.code;
+            return full.name;
           }
         },
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.supplier;
-          }
-        },
-        {
-          targets: 4,
-          render: function (data, type, full, meta) {
-            return full.product;
-          }
-        },
-        {
-          targets: 5,
-          render: function (data, type, full, meta) {
-            return full.price;
-          }
-        },
-        {
-          targets: 6,
-          render: function (data, type, full, meta) {
-            return full.on_hand;
-          }
-        },
-        {
-          targets: 7,
-          render: function (data, type, full, meta) {
-            return full.received_at;
+            return full.product_amount;
           }
         },
         {
@@ -126,7 +98,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7],
+                columns: [1, 2, 3],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -146,7 +118,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7],
+                columns: [1, 2, 3],
               }
             },
             {
@@ -154,7 +126,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7],
+                columns: [1, 2, 3],
               }
             },
             {
@@ -162,7 +134,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7],
+                columns: [1, 2, 3],
               }
             },
             {
@@ -170,18 +142,11 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7],
+                columns: [1, 2, 3],
               }
             }
           ]
         },
-        {
-          text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Inbound</span>',
-          className: 'add-new btn btn-primary',
-          attr: {
-            'id': 'btn-add-inbound',
-          }
-        }
       ],
       // For responsive popup
       responsive: {
@@ -219,33 +184,6 @@ $(function () {
     });
   }
 
-  $(document).on('click', '#btn-add-inbound', function () {
-    location.href = "/warehouse/"+warehouse_id+"/inbounds/add";
-  });
-
-  // Delete Record
-  $(document).on('click', '#button-delete-product', function () {
-    let id = $(this).attr('data-id');
-    let formSelector = ".form-delete-product-" + id;
-
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      cancelButtonText: 'Cancel',
-      confirmButtonText: 'Yes, Delete!',
-      customClass: {
-        confirmButton: 'btn btn-primary me-3',
-        cancelButton: 'btn btn-label-secondary'
-      },
-      buttonsStyling: false
-    }).then(function (result) {
-      if (result.isConfirmed) {
-        $(formSelector).submit();
-      }
-    });
-  });
 
   // Filter form control to default size
   // ? setTimeout used for multilingual table initialization
