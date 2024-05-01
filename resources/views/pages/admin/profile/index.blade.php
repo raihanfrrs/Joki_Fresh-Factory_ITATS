@@ -44,12 +44,6 @@
             <a class="nav-link {{ Request::is('admin/teams') ? 'active' : '' }}" href="{{ route('admin.teams') }}"><i class="ti-xs ti ti-users me-1"></i> Teams</a>
           </li>
           @endif
-          <li class="nav-item">
-            <a class="nav-link" href="pages-profile-projects.html"><i class="ti-xs ti ti-layout-grid me-1"></i> Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages-profile-connections.html"><i class="ti-xs ti ti-link me-1"></i> Connections</a>
-          </li>
         </ul>
       </div>
     </div>

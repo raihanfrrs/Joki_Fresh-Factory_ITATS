@@ -35,6 +35,22 @@
         </ul>
       </li>
 
+      <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">MAIN</span>
+      </li>
+      <li class="menu-item {{ request()->is('pricing/*', 'pricing/*/cart') ? 'active' : '' }}">
+        <a href="{{ route('pricing.index', 'all') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-currency-dollar"></i>
+          <div data-i18n="Pricing">Pricing</div>
+        </a>
+      </li>
+      <li class="menu-item {{ request()->is('transaction/*', 'transaction/*/detail') ? 'active' : '' }}">
+        <a href="{{ route('tenant.transaction.index', 'payment') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-cash"></i>
+          <div data-i18n="Transaction">Transaction</div>
+        </a>
+      </li>
+
       <!-- WAREHOUSE -->
       @if (auth()->user()->tenant->rented()->where('status', 'active')->count() > 0)
       <li class="menu-header small text-uppercase">

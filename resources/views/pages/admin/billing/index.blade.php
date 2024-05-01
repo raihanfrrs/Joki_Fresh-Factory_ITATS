@@ -1,4 +1,9 @@
-<div class="card mb-4">
+@extends('layouts.admin')
+
+@section('section-admin')
+<div class="container-xxl flex-grow-1 container-p-y">
+
+  <div class="card mb-4">
     <h5 class="card-header">Payment Methods</h5>
     <div class="card-body">
       <div class="row">
@@ -91,3 +96,5 @@
     </table>
   </div>
 </div>
+</div>
+@endsection
