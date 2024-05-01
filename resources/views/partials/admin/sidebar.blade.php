@@ -121,6 +121,17 @@
         </a>
       </li>
 
+      <!-- SPESIAL -->
+      <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">SPECIAL</span>
+      </li>
+      <li class="menu-item {{ request()->is('billing') ? 'active' : '' }}">
+        <a href="{{ route('admin.settings.billing') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-credit-card"></i>
+          <div data-i18n="Billing">Billing</div>
+        </a>
+      </li>
+
       <!-- LAPORAN -->
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">REPORTING</span>

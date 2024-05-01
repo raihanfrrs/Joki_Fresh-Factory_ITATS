@@ -22,8 +22,8 @@ class BillingStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'account_holder_name' => ['required', 'string', 'unique:banks'],
-            'bank_account_number' => ['required', 'numeric'],
+            'account_holder_name' => ['required', 'string'],
+            'bank_account_number' => ['required', 'numeric', 'unique:banks'],
             'bank_name' => ['required', 'string']
         ];
     }
