@@ -176,6 +176,10 @@
     @elseif (request()->is('warehouse/*/inbounds', 'warehouse/*/inbounds/*'))
         <script src="{{ asset('assets/js/app-warehouse-inbound-list.js') }}"></script>
         <script src="{{ asset('assets/js/wizard-ex-inbound-listing.js') }}"></script>
+    @elseif (request()->is('warehouse/*/inventory', 'warehouse/*/inventory/*'))
+        <script src="{{ asset('assets/js/app-warehouse-inventory-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/supplier-performance', 'warehouse/*/supplier-performance/*'))
+        <script src="{{ asset('assets/js/app-warehouse-supplier-performance-list.js') }}"></script>
     @endif
     
     @stack('scripts')

@@ -18,22 +18,21 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
-  var dt_brand_table = $('#listWarehouseInboundsTable');
+  var dt_brand_table = $('#listWarehouseInventoriesTable');
   var warehouse_id = dt_brand_table.attr('data-id');
 
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
-      ajax: "/listWarehouseInboundsTable/"+ warehouse_id,
+      ajax: "/listWarehouseInventoriesTable/"+ warehouse_id,
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
-        { data: 'code', class: 'text-center' },
-        { data: 'supplier', class: 'text-center' },
         { data: 'product', class: 'text-center' },
-        { data: 'price', class: 'text-center' },
+        { data: 'category', class: 'text-center' },
+        { data: 'rack', class: 'text-center' },
+        { data: 'actual_stock', class: 'text-center' },
         { data: 'on_hand', class: 'text-center' },
-        { data: 'received_at', class: 'text-center' },
-        { data: 'action' }
+        { data: 'sale_price', class: 'text-center' },
       ],
       columnDefs: [
         {
@@ -57,25 +56,25 @@ $(function () {
           targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.code;
+            return full.product;
           }
         },
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.supplier;
+            return full.category;
           }
         },
         {
           targets: 4,
           render: function (data, type, full, meta) {
-            return full.product;
+            return full.rack;
           }
         },
         {
           targets: 5,
           render: function (data, type, full, meta) {
-            return full.price;
+            return full.actual_stock;
           }
         },
         {
@@ -87,16 +86,7 @@ $(function () {
         {
           targets: 7,
           render: function (data, type, full, meta) {
-            return full.received_at;
-          }
-        },
-        {
-          targets: -1,
-          title: 'Actions',
-          searchable: false,
-          orderable: false,
-          render: function (data, type, full, meta) {
-              return full.action;
+            return full.sale_price;
           }
         },
       ],
@@ -175,13 +165,6 @@ $(function () {
             }
           ]
         },
-        {
-          text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Inbound</span>',
-          className: 'add-new btn btn-primary',
-          attr: {
-            'id': 'btn-add-inbound',
-          }
-        }
       ],
       // For responsive popup
       responsive: {
