@@ -1504,7 +1504,7 @@ class Blueprint
         } elseif (Builder::$defaultMorphKeyType === 'ulid') {
             $this->nullableUlidMorphs($name, $indexName);
         } else {
-            $this->nullableNumericMorphs($name, $indexName);
+            $this->nullableUuidMorphs($name, $indexName);
         }
     }
 
