@@ -12,9 +12,6 @@
           <li class="nav-item">
             <a class="nav-link {{ Request::is('settings/admin-password') ? 'active' : '' }}" href="{{ route('admin.settings.password') }}"><i class="ti-xs ti ti-lock me-1"></i> Security</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link {{ Request::is('settings/billing') ? 'active' : '' }}" href="{{ route('admin.settings.billing') }}"><i class="ti-xs ti ti-file-description me-1"></i> Billing</a>
-          </li>
         </ul>
 
         @if (Request::is('settings/admin-profile'))

@@ -192,6 +192,7 @@
         @elseif (request()->is('settings/*'))
             <script src="{{ asset('assets/js/pages-account-settings-security.js') }}"></script>
             <script src="{{ asset('assets/js/pages-account-settings-billing.js') }}"></script>
+        @elseif (request()->is('billing'))
             <script src="{{ asset('assets/js/app-bills-history-list.js') }}"></script>
         @elseif (request()->is('report/daily-sales'))
             <script src="{{ asset('assets/js/app-daily-sales-report-list.js') }}"></script>

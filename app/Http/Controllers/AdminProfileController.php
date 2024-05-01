@@ -81,7 +81,7 @@ class AdminProfileController extends Controller
 
     public function admin_setting_billing_index()
     {
-        return view('pages.admin.settings.index', [
+        return view('pages.admin.billing.index', [
             'bills' => $this->billingRepository->getAllBillingByUserId()
         ]);
     }
