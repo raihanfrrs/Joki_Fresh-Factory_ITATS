@@ -49,4 +49,9 @@ class AdminReportingController extends Controller
             'transactions' => $this->transactionRepository->getTransactionByYear($year)
         ]);
     }
+
+    public function report_taxes_index()
+    {
+        return view('pages.admin.reporting.taxes.index');
+    }
 }

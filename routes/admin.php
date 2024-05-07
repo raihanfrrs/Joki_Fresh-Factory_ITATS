@@ -67,6 +67,8 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::get('report/yearly-sales/{date}/print', 'report_yearly_sales_print')->name('report.yearly.sales.print');
 
         Route::get('report/performance', 'report_performance_index')->name('report.performance');
+
+        Route::get('report/taxes', 'report_taxes_index')->name('report.taxes');
     });
 
     Route::controller(AdminProfileController::class)->group(function () {

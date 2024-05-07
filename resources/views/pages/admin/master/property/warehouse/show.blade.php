@@ -43,10 +43,21 @@
                     @endif
                 </span>
             </li>
+            <li class="list-group-item"><b>Rental Price</b><br>
+              <div class="demo-inline-spacing mt-3">
+                  <ol class="list-group list-group-numbered">
+                  @foreach ($warehouse->warehouse_subscription->sortBy('subscription.month_duration') as $subscription)
+                      <li class="list-group-item">
+                          {{ $subscription->subscription->name }} | @convertMonthsToYearsAndMonths($subscription->subscription->month_duration)
+                          <span style="float: right;" class="fw-bold">@rupiah($subscription->total_price)</span>
+                      </li>
+                  @endforeach
+                  </ol>
+              </div>
+          </li>
           </ul>
           <div class="card-body d-flex justify-content-center">
-            <a href="{{ route('master.warehouse.show', $warehouse->id) }}" class="card-link">Details</a>
-            <a href="javascript:void(0)" class="card-link" data-bs-target="#editWarehouse" data-bs-toggle="modal" id="button-trigger-modal-edit-warehouse" data-id="{{ $warehouse->id }}">Edit</a>
+            <a href="{{ route('master.warehouse.edit', $warehouse->id) }}" class="card-link" target="_blank">Edit</a>
             <form action="{{ route('master.warehouse.destroy', $warehouse->id) }}" method="post" class="form-delete-warehouse-{{ $warehouse->id }}">
                 @csrf
                 @method('delete')
@@ -60,19 +71,7 @@
     <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
       <ul class="nav nav-pills flex-column flex-md-row mb-4">
         <li class="nav-item">
-          <a class="nav-link nav-link-warehose active" href="javascript:void(0);" id="information" data-id="{{ $warehouse->id }}"><i class="ti ti-user-check ti-xs me-1"></i>Information</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-warehose" href="javascript:void(0);" id="activity" data-id="{{ $warehouse->id }}"><i class="ti ti-lock ti-xs me-1"></i>Activity</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-warehose" href="javascript:void(0);"><i class="ti ti-currency-dollar ti-xs me-1"></i>Billing &amp; Plans</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-warehose" href="javascript:void(0);"><i class="ti ti-bell ti-xs me-1"></i>Notifications</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-warehose" href="javascript:void(0);"><i class="ti ti-link ti-xs me-1"></i>Connections</a>
+          <a class="nav-link nav-link-warehouse active" href="javascript:void(0);" id="information" data-id="{{ $warehouse->id }}"><i class="ti ti-chart-bar ti-xs me-1"></i>Rental Activity</a>
         </li>
       </ul>
 

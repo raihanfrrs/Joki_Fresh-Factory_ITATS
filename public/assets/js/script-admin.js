@@ -26,7 +26,7 @@ const allMasterDetailData = () => {
     }
 
     if (warehouseId) {
-        masterDetailData("/ajax/warehouse-details/"+warehouseId+'/information', "#data-warehouse-detail");
+        masterDetailData("/ajax/warehouse-details/"+warehouseId+'/rental-activity', "#data-warehouse-detail");
     }
 
     masterDetailData('/ajax/admin-details/new-purchase-count', "#label-new-purchase-count");
@@ -57,20 +57,6 @@ $('.nav-link-tenant').on('click', function () {
       allMasterDetailData();
     } else if (pos == 'security') {
       masterDetailData("/ajax/tenant-details/"+adminId+'/security', "#data-tenant-detail");
-    }
-});
-
-$('.nav-link-warehouse').on('click', function () {
-    let pos = $(this).attr('id');
-    const warehouseId = $(this).attr('data-id');
-  
-    $('.nav-link').removeClass('active');
-    $(this).addClass('active');
-  
-    if (pos == 'inforamtion') {
-      allMasterDetailData();
-    } else if (pos == 'activity') {
-      masterDetailData("/ajax/warehouse-details/"+warehouseId+'/activity', "#data-warehouse-detail");
     }
 });
 
@@ -475,5 +461,28 @@ $(document).on('click', '#button-delete-bank-account', function () {
       if (result.isConfirmed) {
         $(formSelector).submit();
       }
+    });
+});
+
+$(document).on('click', '#button-trigger-modal-detail-tax-amount', function () {
+    let id = $(this).attr('data-id');
+
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
+    $.ajax({
+        url: "/ajax/tax/"+id+"/show",
+        method: "get",
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#data-detail-tax-amount-modal").html(response);
+            $("#listDetailTaxesReportTable").attr('data-id', id);
+        },
+        error: function(xhr, status, error) {
+        }
     });
 });

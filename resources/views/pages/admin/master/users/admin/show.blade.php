@@ -105,15 +105,6 @@
         <li class="nav-item">
           <a class="nav-link nav-link-admin" href="javascript:void(0);" id="security" data-id="{{ $admin->id }}"><i class="ti ti-lock ti-xs me-1"></i>Security</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-admin" href="javascript:void(0);"><i class="ti ti-currency-dollar ti-xs me-1"></i>Billing &amp; Plans</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-admin" href="javascript:void(0);"><i class="ti ti-bell ti-xs me-1"></i>Notifications</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-admin" href="javascript:void(0);"><i class="ti ti-link ti-xs me-1"></i>Connections</a>
-        </li>
       </ul>
 
       <div id="data-admin-detail"></div>
