@@ -159,6 +159,12 @@
           </li>
         </ul>
       </li>
+      <li class="menu-item {{ request()->is('report/taxes') ? 'active' : '' }}">
+        <a href="{{ route('report.taxes') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-checkup-list"></i>
+          <div data-i18n="Taxes">Taxes</div>
+        </a>
+      </li>
     </ul>
 
 </aside>

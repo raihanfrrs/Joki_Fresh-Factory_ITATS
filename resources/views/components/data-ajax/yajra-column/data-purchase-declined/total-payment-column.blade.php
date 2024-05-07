@@ -1,1 +1,1 @@
-@rupiah($model->grand_total)
+@rupiah($model->grand_total) (Incl. Tax {{ $model->tax->value }}%)

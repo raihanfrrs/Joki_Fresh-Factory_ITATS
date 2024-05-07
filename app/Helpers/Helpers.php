@@ -40,18 +40,18 @@ class Helpers
 
         // Jika sisa waktu lebih dari 1 tahun, tampilkan dalam format tahun, bulan, hari
         if ($remainingYears > 0) {
-            $remainingTime .= "$remainingYears tahun, ";
-            $remainingTime .= "$remainingMonths bulan, ";
-            $remainingTime .= "$remainingDays hari";
+            $remainingTime .= "$remainingYears Year, ";
+            $remainingTime .= "$remainingMonths Month, ";
+            $remainingTime .= "$remainingDays Day";
         }
         // Jika sisa waktu kurang dari 1 tahun, tampilkan dalam format bulan, hari
         elseif ($remainingMonths > 0) {
-            $remainingTime .= "$remainingMonths bulan, ";
-            $remainingTime .= "$remainingDays hari";
+            $remainingTime .= "$remainingMonths Month, ";
+            $remainingTime .= "$remainingDays Day";
         }
         // Jika sisa waktu kurang dari 1 bulan, tampilkan hanya dalam hari
         else {
-            $remainingTime .= "$remainingDays hari";
+            $remainingTime .= "$remainingDays Day";
         }
 
         return $remainingTime;

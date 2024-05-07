@@ -15,4 +15,11 @@ class DetailTransactionRepository
     {
         return DetailTransaction::where('transaction_id', $id)->get();
     }
+
+    public function getDetailTransactionByWarehouseId($id)
+    {
+        return DetailTransaction::join('warehouse_subscriptions', 'detail_transactions.warehouse_subscription_id', '=', 'warehouse_subscriptions.id')
+                                ->where('warehouse_subscriptions.warehouse_id', $id)
+                                ->get();
+    }
 }

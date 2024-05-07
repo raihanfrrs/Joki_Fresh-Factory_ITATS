@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             WarehouseCategorySeeder::class,
             SubscriptionSeeder::class,
             CountrySeeder::class,
-            TaxSeeder::class
+            TaxSeeder::class,
+            BankSeeder::class
         ]);
     }
 }

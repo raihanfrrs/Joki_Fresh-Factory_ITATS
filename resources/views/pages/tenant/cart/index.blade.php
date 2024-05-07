@@ -34,6 +34,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <span class="text-body">Address : {{ $cart->warehouse->address }}</span>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="text-md-end">
