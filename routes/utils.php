@@ -32,6 +32,10 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listWarehouseInboundsTable/{warehouse}', 'warehouse_inbound');
     Route::get('listWarehouseInventoriesTable/{warehouse}', 'warehouse_inventory');
     Route::get('listWarehouseSupplierPerformanceTable/{warehouse}', 'warehouse_supplier_performance');
+    Route::get('listDetailSubscriptionsTable/{subscription}', 'admin_detail_subscription');
+    Route::get('listTaxesReportTable', 'admin_taxes_report');
+    Route::get('listDetailTaxesReportTable/{tax}', 'admin_detail_taxes_report');
+    Route::get('listRentalActivityTable/{warehouse}', 'admin_rental_activity_warehouse');
 });
 
 Route::controller(AjaxController::class)->group(function () {
@@ -55,5 +59,6 @@ Route::controller(AjaxController::class)->group(function () {
     Route::get('ajax/product-category/{category}/edit', 'product_category_edit');
     Route::get('ajax/rack/{rack}/edit', 'rack_edit');
     Route::get('ajax/supplier/{supplier}/edit', 'supplier_edit');
+    Route::get('ajax/tax/{tax}/show', 'tax_show');
 });
 

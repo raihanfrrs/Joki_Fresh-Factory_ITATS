@@ -62,6 +62,8 @@
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-user-view.css') }}" />
         @elseif (request()->is('master/warehouse/*'))
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/ui-carousel.css') }}" />
+        @elseif (request()->is('master/category/*'))
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/ui-carousel.css') }}" />
         @elseif (request()->is('admin/profile', 'admin/teams'))
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-profile.css') }}" />
         @endif
@@ -175,9 +177,11 @@
             <script src="{{ asset('assets/js/ui-carousel.js') }}"></script>
             <script src="{{ asset('assets/js/wizard-ex-property-listing.js') }}"></script>
         @elseif (request()->is('master/category', 'master/category/*'))
+            <script src="{{ asset('assets/js/ui-carousel.js') }}"></script>
             <script src="{{ asset('assets/js/app-category-list.js') }}"></script>
         @elseif (request()->is('master/subscription', 'master/subscription/*'))
             <script src="{{ asset('assets/js/app-subscription-list.js') }}"></script>
+            <script src="{{ asset('assets/js/app-detail-subscription-list.js') }}"></script>
         @elseif (request()->is('master/taxes', 'master/taxes/*'))
             <script src="{{ asset('assets/js/app-taxes-list.js') }}"></script>
         @elseif (request()->is('purchase/success'))
@@ -200,8 +204,8 @@
             <script src="{{ asset('assets/js/app-monthly-sales-report-list.js') }}"></script>
         @elseif (request()->is('report/yearly-sales'))
             <script src="{{ asset('assets/js/app-yearly-sales-report-list.js') }}"></script>
-        @elseif (request()->is('report/daily-sales/*/print', 'report/monthly-sales/*/print', 'report/yearly-sales/*/print'))
-            {{-- <script src="{{ asset('assets/js/app-invoice-print.js') }}"></script> --}}
+        @elseif (request()->is('report/taxes'))
+            <script src="{{ asset('assets/js/app-report-taxes-list.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>

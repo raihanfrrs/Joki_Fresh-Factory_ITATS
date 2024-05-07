@@ -68,10 +68,10 @@ class AjaxController extends Controller
 
     public function warehouse_detail_show($warehouse, $type)
     {
-        if ($type == 'information') {
-            return view('components.data-ajax.pages.data-warehouse-detail.information');
-        } elseif ($type == 'activity') {
-            return view('components.data-ajax.pages.data-warehouse-detail.activity');
+        if ($type == 'rental-activity') {
+            return view('components.data-ajax.pages.data-warehouse-detail.rental-activity', [
+                'warehouse' => $this->warehouseRepository->getWarehouse($warehouse)
+            ]);
         }
     }
 
@@ -167,5 +167,10 @@ class AjaxController extends Controller
     public function supplier_edit(Supplier $supplier)
     {
         return view('components.data-ajax.pages.modal.data-edit-supplier-modal', compact('supplier'));
+    }
+
+    public function tax_show(Tax $tax)
+    {
+        return view('components.data-ajax.pages.modal.data-detail-tax-amount-modal', compact('tax'));
     }
 }

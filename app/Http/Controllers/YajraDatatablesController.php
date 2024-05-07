@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\DetailTransaction;
+use App\Models\Rented;
 use App\Models\Warehouse;
+use App\Models\Subscription;
 use App\Repositories\TaxRepository;
 use App\Repositories\RackRepository;
 use App\Repositories\UserRepository;
@@ -22,12 +25,15 @@ use App\Repositories\SubscriptionRepository;
 use App\Repositories\ProductCategoryRepository;
 use App\Repositories\WarehouseCategoryRepository;
 use App\Repositories\WarehouseSubscriptionRepository;
+use App\Models\Tax;
+use App\Models\Transaction;
+use App\Repositories\DetailTransactionRepository;
 
 class YajraDatatablesController extends Controller
 {
-    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository, $transactionRepository, $billingRepository, $productRepository, $productCategoryRepository, $rackRepository, $supplierRepository, $customerRepository, $inboundRepository;
+    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository, $transactionRepository, $billingRepository, $productRepository, $productCategoryRepository, $rackRepository, $supplierRepository, $customerRepository, $inboundRepository, $detailTransactionRepository;
 
-    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository, TransactionRepository $transactionRepository, BillingRepository $billingRepository, ProductRepository $productRepository, ProductCategoryRepository $productCategoryRepository, RackRepository $rackRepository, SupplierRepository $supplierRepository, CustomerRepository $customerRepository, InboundRepository $inboundRepository)
+    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository, TransactionRepository $transactionRepository, BillingRepository $billingRepository, ProductRepository $productRepository, ProductCategoryRepository $productCategoryRepository, RackRepository $rackRepository, SupplierRepository $supplierRepository, CustomerRepository $customerRepository, InboundRepository $inboundRepository, DetailTransactionRepository $detailTransactionRepository)
     {
         $this->userRepository = $userRepository;
         $this->tenantRepository = $tenantRepository;
@@ -44,6 +50,7 @@ class YajraDatatablesController extends Controller
         $this->supplierRepository = $supplierRepository;
         $this->customerRepository = $customerRepository;
         $this->inboundRepository = $inboundRepository;
+        $this->detailTransactionRepository = $detailTransactionRepository;
     }
 
     public function admin_index()
@@ -863,6 +870,112 @@ class YajraDatatablesController extends Controller
             return view('components.data-ajax.yajra-column.data-warehouse-supplier-performance.action-column', compact('model'))->render();
         })
         ->rawColumns(['name', 'product_amount', 'action'])
+        ->make(true);
+    }
+
+    public function admin_detail_subscription(Subscription $subscription)
+    {
+        foreach ($subscription->warehouse_subscription as $key => $subscription) {
+            $renteds[] = $subscription->id;
+        }
+
+        $renteds = Rented::whereIn('warehouse_subscription_id', $renteds)->get();
+
+        return DataTables::of($renteds)
+        ->addColumn('index', function ($model) use ($renteds) {
+            return $renteds->search($model) + 1;
+        })
+        ->addColumn('warehouse', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-detail-subscription.warehouse-column', compact('model'))->render();
+        })
+        ->addColumn('tenant', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-detail-subscription.tenant-column', compact('model'))->render();
+        })
+        ->addColumn('remaining_time', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-detail-subscription.remaining-time-column', compact('model'))->render();
+        })
+        ->addColumn('start_date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-detail-subscription.start-date-column', compact('model'))->render();
+        })
+        ->addColumn('end_date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-admin-detail-subscription.end-date-column', compact('model'))->render();
+        })
+        ->rawColumns(['index', 'warehouse', 'tenant', 'remaining_time', 'start_date', 'end_date'])
+        ->make(true);
+    }
+
+    public function admin_taxes_report()
+    {
+        $taxes = $this->taxRepository->getAllTaxes();
+
+        return DataTables::of($taxes)
+        ->addColumn('index', function ($model) use ($taxes) {
+            return $taxes->search($model) + 1;
+        })
+        ->addColumn('tax', function ($model) {
+            return view('components.data-ajax.yajra-column.data-taxes-report.tax-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-taxes-report.amount-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-taxes-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['tax', 'amount', 'action'])
+        ->make(true);
+    }
+
+    public function admin_detail_taxes_report(Tax $tax)
+    {
+        $taxes = $tax->transaction;
+
+        return DataTables::of($taxes)
+        ->addColumn('index', function ($model) use ($taxes) {
+            return $taxes->search($model) + 1;
+        })
+        ->addColumn('date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-detail-taxes-report.date-column', compact('model'))->render();
+        })
+        ->addColumn('amount', function ($model) {
+            return view('components.data-ajax.yajra-column.data-detail-taxes-report.amount-column', compact('model'))->render();
+        })
+        ->rawColumns(['date', 'amount'])
+        ->make(true);
+    }
+
+    public function admin_rental_activity_warehouse(Warehouse $warehouse)
+    {
+        $detail_transactions = $this->detailTransactionRepository->getDetailTransactionByWarehouseId($warehouse->id);
+
+        foreach ($detail_transactions as $key => $detail_transaction) {
+            $transaction_id[] = $detail_transaction->transaction_id;
+        }
+
+        $transactions = Transaction::whereIn('id', $transaction_id)->get();
+
+        return DataTables::of($transactions)
+        ->addColumn('index', function ($model) use ($transactions) {
+            return $transactions->search($model) + 1;
+        })
+        ->addColumn('tenant', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-activity.tenant-column', compact('model'))->render();
+        })
+        ->addColumn('date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-activity.date-column', compact('model'))->render();
+        })
+        ->addColumn('subscription', function ($model) use ($detail_transaction) {
+            return view('components.data-ajax.yajra-column.data-rental-activity.subscription-column', compact('model', 'detail_transaction'))->render();
+        })
+        ->addColumn('bank', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-activity.bank-column', compact('model'))->render();
+        })
+        ->addColumn('total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-activity.total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-rental-activity.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['tenant', 'date', 'subscription', 'bank', 'total', 'action'])
         ->make(true);
     }
 }
