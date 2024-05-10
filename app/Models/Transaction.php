@@ -22,7 +22,8 @@ class Transaction extends Model implements HasMedia
         'bank_id',
         'grand_total',
         'payment_due',
-        'status'
+        'status',
+        'snap_token'
     ];
 
     public function registerMediaCollections(): void

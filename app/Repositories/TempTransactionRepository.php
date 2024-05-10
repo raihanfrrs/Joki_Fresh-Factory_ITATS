@@ -64,12 +64,35 @@ class TempTransactionRepository
     {
         $transaction_id = Uuid::uuid4()->toString();
 
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $transaction_id,
+                'gross_amount' => self::getTempTransactionByTenantId()->sum('subtotal') + (self::getTempTransactionByTenantId()->sum('subtotal') * $this->taxRepository->getTaxByStatus('active')->first()->value / 100),
+            ),
+            'customer_details' => array(
+                'first_name' => auth()->user()->tenant->name,
+                'email' => auth()->user()->tenant->email
+            )
+        );
+        
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
         Transaction::create([
             'id' => $transaction_id,
             'tenant_id' => auth()->user()->tenant->id,
             'tax_id' => $this->taxRepository->getTaxByStatus('active')->first()->id,
             'grand_total' => self::getTempTransactionByTenantId()->sum('subtotal') + (self::getTempTransactionByTenantId()->sum('subtotal') * $this->taxRepository->getTaxByStatus('active')->first()->value / 100),
-            'payment_due' => now()->addHour()
+            'payment_due' => now()->addHour(),
+            'snap_token' => $snapToken
         ]);
 
         foreach (self::getTempTransactionByTenantId()->get() as $item) {
