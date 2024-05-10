@@ -22,6 +22,7 @@ return new class extends Migration
             $table->bigInteger('grand_total');
             $table->enum('status', ['payment', 'success', 'confirmed', 'declined'])->default('payment');
             $table->dateTime('payment_due')->nullable();
+            $table->string('snap_token');
             $table->timestamps();
         });
     }

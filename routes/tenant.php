@@ -12,6 +12,7 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
     Route::controller(PricingController::class)->group(function () {
         Route::get('pricing/{warehouse_category}', 'pricing_index')->name('pricing.index');
         Route::post('pricing/{warehouse}/cart', 'pricing_store_cart')->name('pricing.store.cart');
+        Route::get('pricing/{warehouse}/warehouse-detail', 'pricing_show')->name('pricing.show');
     });
 
     Route::controller(CartController::class)->group(function () {
