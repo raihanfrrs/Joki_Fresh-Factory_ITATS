@@ -28,7 +28,7 @@ class CheckoutController extends Controller
     {
         return view('pages.tenant.transaction.invoice.index', [
             'transaction' => $transaction,
-            'bank' => $this->billingRepository->getPrimaryBilling()
+            // 'bank' => $this->billingRepository->getPrimaryBilling()
         ]);
     }
 
@@ -41,6 +41,14 @@ class CheckoutController extends Controller
                 'position' => 'center',
                 'type' => 'success',
                 'message' => 'Checkout Success!'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Checkout Failed!'
             ]);
         }
     }

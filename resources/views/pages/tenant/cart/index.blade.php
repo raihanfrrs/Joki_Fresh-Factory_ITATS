@@ -82,7 +82,7 @@
                     @if ($carts->count())
                     <div class="d-grid">
                       <button class="btn btn-primary btn-next waves-effect waves-light">Place Order</button>
-                    </div>
+                  </div>
                     @endif
                 </div>
                 </div>

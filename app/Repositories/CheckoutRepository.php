@@ -21,17 +21,22 @@ class CheckoutRepository
 
     public function storeTransaction($data, $transaction_id)
     {
-        DB::transaction(function () use ($data, $transaction_id) {
-            $transaction = $this->transactionRepository->getTransactionById($transaction_id);
+        $transaction = $this->transactionRepository->getTransactionById($transaction_id);
+
+        if ($transaction->status == 'success') {
+            return false;
+        }
+
+        DB::transaction(function () use ($data, $transaction) {
 
             $transaction->update([
-                'bank_id' => $this->billingRepository->getPrimaryBilling()->id,
+                // 'bank_id' => $this->billingRepository->getPrimaryBilling()->id,
                 'status' => 'success'
             ]);
 
-            if ($data->hasFile('transaction_image')) {
-                $transaction->addMediaFromRequest('transaction_image')->withResponsiveImages()->toMediaCollection('transaction_images');
-            }
+            // if ($data->hasFile('transaction_image')) {
+            //     $transaction->addMediaFromRequest('transaction_image')->withResponsiveImages()->toMediaCollection('transaction_images');
+            // }
         });
 
         foreach ($this->detailTransactionRepository->getDetailTransactionByTransactionId($transaction_id) as $key => $detail_transaction) {

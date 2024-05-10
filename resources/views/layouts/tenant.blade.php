@@ -61,6 +61,9 @@
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/ui-carousel.css') }}" />
         @elseif (request()->is('tenant/profile'))
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-profile.css') }}" />
+        @elseif (request()->is('pricing/*/warehouse-detail'))
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/ui-carousel.css') }}" />
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-faq.css') }}" />
         @endif
     @else
         <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
@@ -170,6 +173,8 @@
         @elseif (request()->is('settings/*'))
             <script src="{{ asset('assets/js/pages-account-settings-account.js')  }}"></script>
             <script src="{{ asset('assets/js/pages-account-settings-security.js') }}"></script>
+        @elseif (request()->is('pricing/*/warehouse-detail'))
+            <script src="{{ asset('assets/js/ui-carousel.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>

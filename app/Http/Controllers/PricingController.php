@@ -58,4 +58,9 @@ class PricingController extends Controller
             ]);
         }
     }
+
+    public function pricing_show(Warehouse $warehouse)
+    {
+        return view('pages.tenant.pricing.show', compact('warehouse'));
+    }
 }
