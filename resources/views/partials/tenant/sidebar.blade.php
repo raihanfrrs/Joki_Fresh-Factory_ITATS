@@ -48,6 +48,7 @@
         <a href="{{ route('tenant.transaction.index', 'payment') }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-cash"></i>
           <div data-i18n="Transaction">Transaction</div>
+          <div class="badge bg-label-primary rounded-pill ms-auto" id="label-total-new-payment-count"></div>
         </a>
       </li>
 

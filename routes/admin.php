@@ -80,10 +80,10 @@ Route::group(['middleware' => ['cekUserLogin:admin']], function(){
         Route::get('settings/admin-password', 'admin_setting_password_index')->name('admin.settings.password');
         Route::patch('settings/admin-password/{admin}', 'admin_setting_password_update')->name('admin.settings.password.update');
 
-        Route::get('billing', 'admin_setting_billing_index')->name('admin.settings.billing');
-        Route::post('billing', 'admin_setting_billing_store')->name('admin.settings.billing.store');
-        Route::patch('billing/{bank}', 'admin_setting_billing_update')->name('admin.settings.billing.update');
-        Route::delete('billing/{bank}', 'admin_setting_billing_destroy')->name('admin.settings.billing.destroy');
+        // Route::get('billing', 'admin_setting_billing_index')->name('admin.settings.billing');
+        // Route::post('billing', 'admin_setting_billing_store')->name('admin.settings.billing.store');
+        // Route::patch('billing/{bank}', 'admin_setting_billing_update')->name('admin.settings.billing.update');
+        // Route::delete('billing/{bank}', 'admin_setting_billing_destroy')->name('admin.settings.billing.destroy');
     });
 
     Route::controller(AdminCalculationController::class)->group(function () {

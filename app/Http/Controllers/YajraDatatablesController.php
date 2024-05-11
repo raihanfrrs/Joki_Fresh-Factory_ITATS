@@ -452,7 +452,7 @@ class YajraDatatablesController extends Controller
 
     public function purchases_pending()
     {
-        $transactions = $this->transactionRepository->getTransactionByStatus('success');
+        $transactions = $this->transactionRepository->getTransactionByStatus('payment');
 
         return DataTables::of($transactions)
         ->addColumn('index', function ($model) use ($transactions) {
