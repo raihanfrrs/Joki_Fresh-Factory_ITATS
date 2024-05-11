@@ -23,12 +23,12 @@ table tr th {
                   <span class="align-middle fw-semibold">Property</span>
                 </button>
               </li>
-              <li class="nav-item" role="presentation">
+              {{-- <li class="nav-item" role="presentation">
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#delivery" aria-selected="false" tabindex="-1" role="tab">
                   <i class="ti ti-briefcase me-1 ti-sm"></i>
                   <span class="align-middle fw-semibold">Subscription</span>
                 </button>
-              </li>
+              </li> --}}
             </ul>
           </div>
         </div>
@@ -112,7 +112,20 @@ table tr th {
                   </h2>
                   <div id="accordionPayment-2" class="accordion-collapse collapse">
                     <div class="accordion-body">
-                      
+                      <table style="width:100%">
+                        <tr>
+                          <th>Capacity:</th>
+                          <td>{{ $warehouse->capacity }} <span>m<sup>3</sup></span></td>
+                        </tr>
+                        <tr>
+                          <th>Building Area:</th>
+                          <td>{{ $warehouse->building_area }} <span>m<sup>3</sup></span></td>
+                        </tr>
+                        <tr>
+                          <th>Surface Area:</th>
+                          <td>{{ $warehouse->surface_area }} <span>m<sup>3</sup></span></td>
+                        </tr>
+                    </table>
                     </div>
                   </div>
                 </div>
@@ -125,72 +138,78 @@ table tr th {
                   </h2>
                   <div id="accordionPayment-3" class="accordion-collapse collapse">
                     <div class="accordion-body">
-                      For any technical difficulties you are experiencing with our website, please contact us at
-                      our
-                      <a href="javascript:void(0);">support portal</a>, or you can call us toll-free at
-                      <strong>1-000-000-000</strong>, or email us at
-                      <a href="javascript:void(0);">order@companymail.com</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="delivery" role="tabpanel">
-              <div class="d-flex mb-3 gap-3">
-                <div>
-                  <span class="badge bg-label-primary rounded-2 p-2">
-                    <i class="ti ti-briefcase ti-lg"></i>
-                  </span>
-                </div>
-                <div>
-                  <h4 class="mb-0">
-                    <span class="align-middle">Delivery</span>
-                  </h4>
-                  <small>Lorem ipsum, dolor sit amet.</small>
-                </div>
-              </div>
-              <div id="accordionDelivery" class="accordion">
-                <div class="card accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionDelivery-1" aria-controls="accordionDelivery-1">
-                      How would you ship my order?
-                    </button>
-                  </h2>
-
-                  <div id="accordionDelivery-1" class="accordion-collapse collapse show">
-                    <div class="accordion-body">
-                      For large products, we deliver your product via a third party logistics company offering
-                      you the “room of choice” scheduled delivery service. For small products, we offer free
-                      parcel delivery.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionDelivery-2" aria-controls="accordionDelivery-2">
-                      What is the delivery cost of my order?
-                    </button>
-                  </h2>
-                  <div id="accordionDelivery-2" class="accordion-collapse collapse">
-                    <div class="accordion-body">
-                      The cost of scheduled delivery is $69 or $99 per order, depending on the destination
-                      postal code. The parcel delivery is free.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionDelivery-4" aria-controls="accordionDelivery-4">
-                      What to do if my product arrives damaged?
-                    </button>
-                  </h2>
-                  <div id="accordionDelivery-4" class="accordion-collapse collapse">
-                    <div class="accordion-body">
-                      We will promptly replace any product that is damaged in transit. Just contact our
-                      <a href="javascript:void(0);">support team</a>, to notify us of the situation within 48
-                      hours of product arrival.
+                      <div class="row">
+                        <div class="col-md-6">
+                          <table style="width:100%">
+                            <tr>
+                              <th>Storage Shelves:</th>
+                              <td>{{ $warehouse->storage_shelves }}</td>
+                            </tr>
+                            <tr>
+                              <th>Toilet or Rest Area:</th>
+                              <td>{{ $warehouse->toilet_and_rest_area }}</td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-6">
+                          <table style="width:100%">
+                            <tr>
+                              <th>Lightning System:</th>
+                              <td><span class="text-capitalize">{{ $warehouse->effective_lighting_system }}</span></td>
+                            </tr>
+                            <tr>
+                              <th>Security System:</th>
+                              <td><span class="text-capitalize">{{ $warehouse->advanced_security_system }}</span></td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-6">
+                          <table style="width:100%">
+                            <tr>
+                              <th>Electricity:</th>
+                              <td> <span class="text-capitalize">{{ $warehouse->electricity }}</span></td>
+                            </tr>
+                            <tr>
+                              <th>Administrative Room Or Office:</th>
+                              <td><span class="text-capitalize">{{ $warehouse->administrative_room_or_office }}</span></td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-6">
+                          <table style="width:100%">
+                            <tr>
+                              <th>Worker Safety Equipment:</th>
+                              <td><span class="text-capitalize">{{ $warehouse->worker_safety_equipment }}</span></td>
+                            </tr>
+                            <tr>
+                              <th>Firefighting Tools:</th>
+                              <td><span class="text-capitalize">{{ $warehouse->firefighting_tools }}</span></td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <table style="width:100%">
+                            <tr>
+                              <th>Goods Handling Equipment:</th>
+                              <td>
+                                <span class="text-capitalize">
+                                  <ul>
+                                    @if (!is_null($warehouse->goods_handling_equipment))
+                                    @foreach (json_decode($warehouse->goods_handling_equipment, true) as $key => $item)
+                                        <li>{{ $item['value'] }}</li>
+                                    @endforeach
+                                    @else
+                                      Empty
+                                    @endif
+                                  </ul>
+                                </span>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
