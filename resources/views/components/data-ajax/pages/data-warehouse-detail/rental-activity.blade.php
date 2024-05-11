@@ -11,7 +11,7 @@
             <th class="text-center">Tenant</th>
             <th class="text-center">Date</th>
             <th class="text-center">Subscription</th>
-            <th class="text-center">Bank</th>
+            {{-- <th class="text-center">Bank</th> --}}
             <th class="text-center">Total</th>
             <th class="text-center">Action</th>
         </tr>
