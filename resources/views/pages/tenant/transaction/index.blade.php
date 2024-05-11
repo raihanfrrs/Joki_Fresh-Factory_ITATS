@@ -9,27 +9,27 @@
           <li class="nav-item">
             <a class="nav-link {{ $status === 'payment' ? 'active' : '' }}" href="{{ route('tenant.transaction.index', 'payment') }}"><i class="ti ti-wallet me-1 ti-xs"></i> Payment</a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link {{ $status === 'success' ? 'active' : '' }}" href="{{ route('tenant.transaction.index', 'success') }}"><i class="ti ti-alert-octagon me-1 ti-xs"></i> Pending</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link {{ $status === 'confirmed' ? 'active' : '' }}" href="{{ route('tenant.transaction.index', 'confirmed') }}"><i class="ti ti-check me-1 ti-xs"></i> Confirmed</a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link {{ $status === 'declined' ? 'active' : '' }}" href="{{ route('tenant.transaction.index', 'declined') }}"><i class="ti ti-x me-1 ti-xs"></i> Declined</a>
-          </li>
+          </li> --}}
         </ul>
       </div>
     </div>
 
     @if ($status === 'payment')
         @include('pages.tenant.transaction.payment.index')
-    @elseif ($status === 'success')
-        @include('pages.tenant.transaction.pending.index')
+    {{-- @elseif ($status === 'success')
+        @include('pages.tenant.transaction.pending.index') --}}
     @elseif ($status === 'confirmed')
         @include('pages.tenant.transaction.confirmed.index')
-    @elseif ($status === 'declined')
-        @include('pages.tenant.transaction.declined.index')
+    {{-- @elseif ($status === 'declined')
+        @include('pages.tenant.transaction.declined.index') --}}
     @endif
 </div>
 @endsection

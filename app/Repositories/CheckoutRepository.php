@@ -23,7 +23,7 @@ class CheckoutRepository
     {
         $transaction = $this->transactionRepository->getTransactionById($transaction_id);
 
-        if ($transaction->status == 'success') {
+        if ($transaction->status == 'confirmed') {
             return false;
         }
 
@@ -31,13 +31,15 @@ class CheckoutRepository
 
             $transaction->update([
                 // 'bank_id' => $this->billingRepository->getPrimaryBilling()->id,
-                'status' => 'success'
+                'status' => 'confirmed'
             ]);
 
             // if ($data->hasFile('transaction_image')) {
             //     $transaction->addMediaFromRequest('transaction_image')->withResponsiveImages()->toMediaCollection('transaction_images');
             // }
         });
+
+        $this->transactionRepository->updateTransactionStatus($transaction_id);
 
         foreach ($this->detailTransactionRepository->getDetailTransactionByTransactionId($transaction_id) as $key => $detail_transaction) {
             $this->warehouseRepository->updateStatusWarehouse($detail_transaction->warehouse_subscription->warehouse_id, 'rented');

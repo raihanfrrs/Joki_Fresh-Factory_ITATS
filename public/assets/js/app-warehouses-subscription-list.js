@@ -19,7 +19,6 @@ $(function () {
   }
 
   var dt_brand_table = $('#listWarehousesSubscriptionTable');
-
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
       ajax: "/listWarehousesTable/choose",

@@ -184,12 +184,12 @@
             <script src="{{ asset('assets/js/app-detail-subscription-list.js') }}"></script>
         @elseif (request()->is('master/taxes', 'master/taxes/*'))
             <script src="{{ asset('assets/js/app-taxes-list.js') }}"></script>
-        @elseif (request()->is('purchase/success'))
+        @elseif (request()->is('purchase/payment'))
             <script src="{{ asset('assets/js/app-purchase-pending-list.js') }}"></script>
         @elseif (request()->is('purchase/confirmed'))
             <script src="{{ asset('assets/js/app-purchase-confirmed-list.js') }}"></script>
-        @elseif (request()->is('purchase/declined'))
-            <script src="{{ asset('assets/js/app-purchase-declined-list.js') }}"></script>
+        {{-- @elseif (request()->is('purchase/declined'))
+            <script src="{{ asset('assets/js/app-purchase-declined-list.js') }}"></script> --}}
         @elseif (request()->is('calculation/rental-price', 'calculation/rental-price/*'))
             <script src="{{ asset('assets/js/app-rental-price-calculation-list.js') }}"></script>
             <script src="{{ asset('assets/js/app-warehouse-subscription-list.js') }}"></script>
