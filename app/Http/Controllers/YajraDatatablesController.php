@@ -875,6 +875,8 @@ class YajraDatatablesController extends Controller
 
     public function admin_detail_subscription(Subscription $subscription)
     {
+        $renteds = array();
+
         foreach ($subscription->warehouse_subscription as $key => $subscription) {
             $renteds[] = $subscription->id;
         }
@@ -966,9 +968,9 @@ class YajraDatatablesController extends Controller
         ->addColumn('subscription', function ($model) use ($detail_transaction) {
             return view('components.data-ajax.yajra-column.data-rental-activity.subscription-column', compact('model', 'detail_transaction'))->render();
         })
-        ->addColumn('bank', function ($model) {
-            return view('components.data-ajax.yajra-column.data-rental-activity.bank-column', compact('model'))->render();
-        })
+        // ->addColumn('bank', function ($model) {
+        //     return view('components.data-ajax.yajra-column.data-rental-activity.bank-column', compact('model'))->render();
+        // })
         ->addColumn('total', function ($model) {
             return view('components.data-ajax.yajra-column.data-rental-activity.total-column', compact('model'))->render();
         })

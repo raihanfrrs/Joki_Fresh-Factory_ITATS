@@ -30,7 +30,7 @@ $(function () {
         { data: 'tenant', class: 'text-center' },
         { data: 'date', class: 'text-center' },
         { data: 'subscription', class: 'text-center' },
-        { data: 'bank', class: 'text-center' },
+        // { data: 'bank', class: 'text-center' },
         { data: 'total', class: 'text-center' },
         { data: 'action' }
       ],
@@ -71,14 +71,14 @@ $(function () {
             return full.subscription;
           }
         },
+        // {
+        //   targets: 5,
+        //   render: function (data, type, full, meta) {
+        //     return full.bank;
+        //   }
+        // },
         {
           targets: 5,
-          render: function (data, type, full, meta) {
-            return full.bank;
-          }
-        },
-        {
-          targets: 6,
           render: function (data, type, full, meta) {
             return full.total;
           }
@@ -119,7 +119,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
+                columns: [1, 2, 3, 4, 5],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -139,7 +139,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
+                columns: [1, 2, 3, 4, 5],
               }
             },
             {
@@ -147,7 +147,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
+                columns: [1, 2, 3, 4, 5],
               }
             },
             {
@@ -155,7 +155,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
+                columns: [1, 2, 3, 4, 5],
               }
             },
             {
@@ -163,7 +163,7 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
+                columns: [1, 2, 3, 4, 5],
               }
             }
           ]
