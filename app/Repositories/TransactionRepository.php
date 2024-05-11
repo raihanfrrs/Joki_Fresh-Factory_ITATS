@@ -60,33 +60,33 @@ class TransactionRepository
 
         return Transaction::join('detail_transactions', 'transactions.id', '=', 'detail_transactions.transaction_id')
             ->join('taxes', 'transactions.tax_id', '=', 'taxes.id')
-            ->select(DB::raw('COUNT(*) as amount'), DB::raw('SUM(subtotal + (subtotal * value / 100)) as subtotal'), $groupByClause)
+            ->select(DB::raw('COUNT(*) as amount'), DB::raw('SUM(subtotal + (subtotal * value / 100)) as subtotal'),$groupByClause)
             ->groupBy('period')
             ->get();
     }
 
-    public function updateTransactionStatus($id, $status)
+    public function updateTransactionStatus($id, $status = null)
     {
         $transaction = self::getTransactionById($id);
 
-        if ($status == 'success') {
-            $transaction->update([
-                'status' => 'confirmed'
-            ]);
+        // if ($status == 'success') {
+        //     $transaction->update([
+        //         'status' => 'confirmed'
+        //     ]);
             
-            return $this->rentedRepository->updateRentedStatusByTransactionId($id);
-        } elseif ($status == 'declined') {
-            $transaction->update([
-                'status' => 'declined'
-            ]);
+        return $this->rentedRepository->updateRentedStatusByTransactionId($id);
+        // } elseif ($status == 'declined') {
+        //     $transaction->update([
+        //         'status' => 'declined'
+        //     ]);
 
-            foreach ($this->rentedRepository->getRentedByTransactionId($id) as $key => $item) {
-                $this->warehouseRepostory->updateStatusWarehouse($item->warehouse_id, 'available');
-                $this->rentedRepository->deleteRented($item->id);
-            }
+        //     foreach ($this->rentedRepository->getRentedByTransactionId($id) as $key => $item) {
+        //         $this->warehouseRepostory->updateStatusWarehouse($item->warehouse_id, 'available');
+        //         $this->rentedRepository->deleteRented($item->id);
+        //     }
             
-            return true;
-        }
+        //     return true;
+        // }
     }
 
     public function getTransactionByDay($day)

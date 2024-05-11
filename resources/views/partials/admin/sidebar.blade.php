@@ -114,7 +114,7 @@
         <span class="menu-header-text">PURCHASE</span>
       </li>
       <li class="menu-item {{ request()->is('purchase/*') ? 'active' : '' }}">
-        <a href="{{ route('purchase.index', 'success') }}" class="menu-link">
+        <a href="{{ route('purchase.index', 'payment') }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-zoom-money"></i>
           <div data-i18n="Purchases">Purchases</div>
           <div class="badge bg-label-primary rounded-pill ms-auto" id="label-new-purchase-count"></div>
@@ -122,7 +122,7 @@
       </li>
 
       <!-- SPESIAL -->
-      <li class="menu-header small text-uppercase">
+      {{-- <li class="menu-header small text-uppercase">
         <span class="menu-header-text">SPECIAL</span>
       </li>
       <li class="menu-item {{ request()->is('billing') ? 'active' : '' }}">
@@ -130,7 +130,7 @@
           <i class="menu-icon tf-icons ti ti-credit-card"></i>
           <div data-i18n="Billing">Billing</div>
         </a>
-      </li>
+      </li> --}}
 
       <!-- LAPORAN -->
       <li class="menu-header small text-uppercase">

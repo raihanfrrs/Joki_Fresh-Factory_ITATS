@@ -4,7 +4,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row invoice-preview">
 
-      <div class="col-xl-9 col-md-8 col-12 mb-md-0 mb-4">
+      <div class="col-xl-12 col-md-12 col-12 mb-md-0 mb-4">
         <div class="card invoice-preview-card">
           <div class="card-body">
             <div class="d-flex justify-content-between flex-xl-row flex-md-column flex-sm-row flex-column m-sm-3 m-0">
@@ -38,7 +38,7 @@
                 <p class="mb-1">{{ $transaction->tenant->email }}</p>
                 <p class="mb-0">{{ $transaction->tenant->address }}</p>
               </div>
-              <div class="col-xl-6 col-md-12 col-sm-7 col-12">
+              {{-- <div class="col-xl-6 col-md-12 col-sm-7 col-12">
                 <h6 class="mb-4">Bill To:</h6>
                 <table>
                   <tbody>
@@ -60,7 +60,7 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </div> --}}
             </div>
           </div>
           <div class="table-responsive border-top">
@@ -86,7 +86,7 @@
                 @endforeach
                 <tr>
                     <td colspan="3" class="align-top px-4 py-4">
-                      <span class="ms-3">Thanks for your purchase</span>
+                      {{-- <span class="ms-3">Thanks for your purchase</span> --}}
                     </td>
                     <td class="text-end pe-3 py-4">
                       <p class="mb-2 pt-3">Subtotal:</p>
@@ -105,13 +105,13 @@
         </div>
       </div>
 
-      <div class="col-xl-3 col-md-4 col-12 invoice-actions">
+      {{-- <div class="col-xl-3 col-md-4 col-12 invoice-actions">
         <div class="card">
           <div class="card-body">
             <img src="{{ $transaction->getFirstMediaUrl('transaction_images') }}" class="img-fluid">
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
 
 </div>

@@ -73,6 +73,17 @@ class TempTransactionRepository
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
 
+        $items = array();
+
+        foreach (self::getTempTransactionByTenantId()->get() as $item) {
+            $items[] = array(
+                'id' => $item->warehouse_subscription->warehouse_id,
+                'price' => $item->subtotal,
+                'quantity' => 1,
+                'name' => $item->warehouse_subscription->warehouse->name
+            );
+        }
+
         $params = array(
             'transaction_details' => array(
                 'order_id' => $transaction_id,
@@ -80,8 +91,11 @@ class TempTransactionRepository
             ),
             'customer_details' => array(
                 'first_name' => auth()->user()->tenant->name,
-                'email' => auth()->user()->tenant->email
-            )
+                'email' => auth()->user()->tenant->email,
+                'phone' => auth()->user()->tenant->phone,
+                'billing_address' => auth()->user()->tenant->address
+            ),
+            'item_details' => $items
         );
         
         $snapToken = \Midtrans\Snap::getSnapToken($params);
