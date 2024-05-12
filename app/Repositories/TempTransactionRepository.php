@@ -4,11 +4,13 @@ namespace App\Repositories;
 
 use Ramsey\Uuid\Uuid;
 use App\Models\Rented;
+use App\Mail\PaymentMail;
 use App\Models\Transaction;
 use App\Models\TempTransaction;
 use App\Models\DetailTransaction;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\TaxRepository;
+use Illuminate\Support\Facades\Mail;
 use App\Repositories\WarehouseRepository;
 
 class TempTransactionRepository
@@ -80,7 +82,8 @@ class TempTransactionRepository
                 'id' => $item->warehouse_subscription->warehouse_id,
                 'price' => $item->subtotal,
                 'quantity' => 1,
-                'name' => $item->warehouse_subscription->warehouse->name
+                'name' => $item->warehouse_subscription->warehouse->name,
+                'subscription' => $item->warehouse_subscription->subscription->name." (".\App\Helpers\Helpers::convertMonthsToYearsAndMonths($item->warehouse_subscription->subscription->month_duration).")"
             );
         }
 
@@ -88,6 +91,7 @@ class TempTransactionRepository
             'transaction_details' => array(
                 'order_id' => $transaction_id,
                 'gross_amount' => self::getTempTransactionByTenantId()->sum('subtotal') + (self::getTempTransactionByTenantId()->sum('subtotal') * $this->taxRepository->getTaxByStatus('active')->first()->value / 100),
+                'tax_amount' => $this->taxRepository->getTaxByStatus('active')->first()->value
             ),
             'customer_details' => array(
                 'first_name' => auth()->user()->tenant->name,
@@ -99,6 +103,8 @@ class TempTransactionRepository
         );
         
         $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        Mail::to(auth()->user()->tenant->email)->send(new PaymentMail($params['transaction_details'], 'waiting', $params['customer_details'], $params['item_details']));
 
         Transaction::create([
             'id' => $transaction_id,
