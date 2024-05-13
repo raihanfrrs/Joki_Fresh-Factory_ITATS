@@ -5,22 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Outbound extends Model
 {
     use HasFactory;
+    
     protected $keyType = "string";
     protected $fillable = [
         'id',
         'tenant_id',
         'warehouse_id',
         'subscription_id',
-        'name',
-        'email',
-        'phone',
-        'address',
-        'category'
+        'customer_id',
+        'amount_total',
+        'grand_total',
+        'description'
     ];
-
+    
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
@@ -36,8 +36,13 @@ class Customer extends Model
         return $this->belongsTo(Subscription::class);
     }
 
-    public function outbound()
+    public function customer()
     {
-        return $this->hasMany(Outbound::class);
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function detail_outbound()
+    {
+        return $this->hasMany(DetailOutbound::class);
     }
 }

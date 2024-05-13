@@ -36,6 +36,7 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listTaxesReportTable', 'admin_taxes_report');
     Route::get('listDetailTaxesReportTable/{tax}', 'admin_detail_taxes_report');
     Route::get('listRentalActivityTable/{warehouse}', 'admin_rental_activity_warehouse');
+    Route::get('listWarehouseOutboundsTable/{warehouse}', 'warehouse_outbound');
 });
 
 Route::controller(AjaxController::class)->group(function () {

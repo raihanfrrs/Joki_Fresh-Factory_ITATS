@@ -180,6 +180,8 @@
         <script src="{{ asset('assets/js/app-warehouse-inventory-list.js') }}"></script>
     @elseif (request()->is('warehouse/*/supplier-performance', 'warehouse/*/supplier-performance/*'))
         <script src="{{ asset('assets/js/app-warehouse-supplier-performance-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/outbounds'))
+        <script src="{{ asset('assets/js/app-warehouse-outbound-list.js') }}"></script>
     @endif
     
     @stack('scripts')

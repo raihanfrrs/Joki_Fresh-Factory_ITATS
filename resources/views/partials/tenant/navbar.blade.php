@@ -184,7 +184,7 @@
             <li>
                 <a class="dropdown-item" href="{{ route('logout') }}">
                 <i class="ti ti-logout me-2 ti-sm"></i>
-                <span class="align-middle">Keluar</span>
+                <span class="align-middle">Logout</span>
                 </a>
             </li>
             </ul>

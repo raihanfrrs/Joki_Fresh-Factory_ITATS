@@ -118,4 +118,14 @@ class Warehouse extends Model implements HasMedia
     {
         return $this->hasMany(Batch::class);
     }
+
+    public function outbound()
+    {
+        return $this->hasMany(Outbound::class);
+    }
+
+    public function detail_outbound()
+    {
+        return $this->hasMany(DetailOutbound::class);
+    }
 }

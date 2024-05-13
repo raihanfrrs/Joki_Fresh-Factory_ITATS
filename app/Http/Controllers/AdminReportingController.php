@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tax;
 use App\Repositories\TransactionRepository;
 use Illuminate\Http\Request;
 

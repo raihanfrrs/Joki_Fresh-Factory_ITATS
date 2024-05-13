@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tax;
 use App\Models\User;
 use App\Models\Admin;
-use App\Models\DetailTransaction;
 use App\Models\Rented;
 use App\Models\Warehouse;
+use App\Models\Transaction;
 use App\Models\Subscription;
+use App\Models\DetailTransaction;
 use App\Repositories\TaxRepository;
 use App\Repositories\RackRepository;
 use App\Repositories\UserRepository;
@@ -17,23 +19,22 @@ use App\Repositories\InboundRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Request;
 use App\Repositories\CustomerRepository;
+use App\Repositories\OutboundRepository;
 use App\Repositories\SupplierRepository;
 use Yajra\DataTables\Facades\DataTables;
 use App\Repositories\WarehouseRepository;
 use App\Repositories\TransactionRepository;
 use App\Repositories\SubscriptionRepository;
 use App\Repositories\ProductCategoryRepository;
+use App\Repositories\DetailTransactionRepository;
 use App\Repositories\WarehouseCategoryRepository;
 use App\Repositories\WarehouseSubscriptionRepository;
-use App\Models\Tax;
-use App\Models\Transaction;
-use App\Repositories\DetailTransactionRepository;
 
 class YajraDatatablesController extends Controller
 {
-    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository, $transactionRepository, $billingRepository, $productRepository, $productCategoryRepository, $rackRepository, $supplierRepository, $customerRepository, $inboundRepository, $detailTransactionRepository;
+    protected $userRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $subscriptionRepository, $warehouseSubscriptionRepository, $taxRepository, $transactionRepository, $billingRepository, $productRepository, $productCategoryRepository, $rackRepository, $supplierRepository, $customerRepository, $inboundRepository, $detailTransactionRepository, $outboundRepository;
 
-    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository, TransactionRepository $transactionRepository, BillingRepository $billingRepository, ProductRepository $productRepository, ProductCategoryRepository $productCategoryRepository, RackRepository $rackRepository, SupplierRepository $supplierRepository, CustomerRepository $customerRepository, InboundRepository $inboundRepository, DetailTransactionRepository $detailTransactionRepository)
+    public function __construct(UserRepository $userRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, SubscriptionRepository $subscriptionRepository, WarehouseSubscriptionRepository $warehouseSubscriptionRepository, TaxRepository $taxRepository, TransactionRepository $transactionRepository, BillingRepository $billingRepository, ProductRepository $productRepository, ProductCategoryRepository $productCategoryRepository, RackRepository $rackRepository, SupplierRepository $supplierRepository, CustomerRepository $customerRepository, InboundRepository $inboundRepository, DetailTransactionRepository $detailTransactionRepository, OutboundRepository $outboundRepository)
     {
         $this->userRepository = $userRepository;
         $this->tenantRepository = $tenantRepository;
@@ -51,6 +52,7 @@ class YajraDatatablesController extends Controller
         $this->customerRepository = $customerRepository;
         $this->inboundRepository = $inboundRepository;
         $this->detailTransactionRepository = $detailTransactionRepository;
+        $this->outboundRepository = $outboundRepository;
     }
 
     public function admin_index()
@@ -978,6 +980,36 @@ class YajraDatatablesController extends Controller
             return view('components.data-ajax.yajra-column.data-rental-activity.action-column', compact('model'))->render();
         })
         ->rawColumns(['tenant', 'date', 'subscription', 'bank', 'total', 'action'])
+        ->make(true);
+    }
+
+    public function warehouse_outbound(Warehouse $warehouse)
+    {
+        $outbounds = $this->outboundRepository->getAllOutboundByWarehouseIdAndTenantId($warehouse->id);
+
+        return DataTables::of($outbounds)
+        ->addColumn('index', function ($model) use ($outbounds) {
+            return $outbounds->search($model) + 1;
+        })
+        ->addColumn('order_id', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-outbound.order-id-column', compact('model'))->render();
+        })
+        ->addColumn('customer', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-outbound.customer-column', compact('model'))->render();
+        })
+        ->addColumn('date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-outbound.date-column', compact('model'))->render();
+        })
+        ->addColumn('amount_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-outbound.amount-total-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-outbound.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-outbound.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['order_id', 'customer', 'date', 'amount_total', 'grand_total', 'action'])
         ->make(true);
     }
 }
