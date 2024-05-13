@@ -173,19 +173,9 @@
             <li>
                 <div class="dropdown-divider"></div>
             </li>
-            <li>
-                <a class="dropdown-item" href="{{ route('pricing.index', 'all') }}">
-                  <i class="ti ti-currency-dollar me-2 ti-sm"></i>
-                  <span class="align-middle">Pricing</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item" href="{{ route('tenant.transaction.index', 'payment') }}">
-                  <span class="d-flex align-items-center align-middle">
-                    <i class="flex-shrink-0 ti ti-cash me-2 ti-sm"></i>
-                    <span class="flex-grow-1 align-middle">Transaction</span>
-                    <span class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20" id="label-total-new-payment-count"></span>
-                  </span>
+            <a class="dropdown-item" href="/">
+                <i class="ti ti-home me-2 ti-sm"></i>
+                <span class="align-middle">Main Menu</span>
                 </a>
             </li>
             <li>
@@ -194,7 +184,7 @@
             <li>
                 <a class="dropdown-item" href="{{ route('logout') }}">
                 <i class="ti ti-logout me-2 ti-sm"></i>
-                <span class="align-middle">Keluar</span>
+                <span class="align-middle">Logout</span>
                 </a>
             </li>
             </ul>

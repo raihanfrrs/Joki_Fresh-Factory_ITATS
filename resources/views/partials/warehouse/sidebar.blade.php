@@ -87,8 +87,8 @@
         </a>
       </li>
       <li class="menu-item">
-        <a href="" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-assembly"></i>
+        <a href="{{ route('warehouse.outbound.index', $warehouse->id) }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-outbound"></i>
           <div data-i18n="Outbound">Outbound</div>
         </a>
       </li>
