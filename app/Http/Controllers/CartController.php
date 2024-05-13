@@ -23,10 +23,16 @@ class CartController extends Controller
 
     public function cart_index()
     {
-        return view('pages.tenant.cart.index', [
-            'carts' => $this->tempTransactionRepository->getTempTransactionByTenantId()->get(),
-            'tax' => $this->taxRepository->getTaxByStatus('active')->first()
-        ]);
+        $carts = $this->tempTransactionRepository->getTempTransactionByTenantId()->get();
+        $tax = $this->taxRepository->getTaxByStatus('active')->first();
+
+        $warehouse_ids = array();
+
+        foreach ($carts as $key => $cart) {
+            $warehouse_ids[] = $cart->warehouse->id;
+        }
+
+        return view('pages.tenant.cart.index', compact('carts', 'tax', 'warehouse_ids'));
     }
 
     public function cart_store()
