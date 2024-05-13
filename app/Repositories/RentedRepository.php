@@ -38,6 +38,17 @@ class RentedRepository
         return Rented::where('transaction_id', $id)->get();
     }
 
+    public function getRentedByWarehouseId($id, $require)
+    {
+        $rented = Rented::where('warehouse_id', $id);
+
+        if ($require == 'count') {
+            return $rented->count();
+        } elseif ($require == 'get') {
+            return $rented->get();
+        }
+    }
+
     public function updateRentedStatusByTransactionId($id)
     {
         
