@@ -19,7 +19,10 @@
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="navs-pills-left-home" role="tabpanel">
                   <p class="mb-0">
-                    @if ($warehouses->count())
+                    @php
+                        $warehouse_count = \App\Models\WarehouseSubscription::whereIn('warehouse_id', $warehouse_ids)->count()
+                    @endphp
+                    @if ($warehouses->count() && $warehouse_count)
                     <div class="row" id="row-list-products">
                         @foreach ($warehouses as $warehouse)
                         <div class="col-xl-4 col-lg-4 col-md-6 order-1 order-md-0 mb-5">
@@ -78,7 +81,8 @@
                                     <form action="{{ route('pricing.store.cart', $warehouse->id) }}" method="post" class="d-flex flex-row">
                                         @csrf
                                         <a href="{{ route('pricing.show', $warehouse->id) }}" class="btn btn-primary btn-md w-100 me-3" target="_blank"><i class="menu-icon tf-icons ti ti-file-description"></i> Details</a>
-                                        @if (!$warehouse->temp_transaction()->exists())
+                                        {{-- @if (!$warehouse->temp_transaction()->exists()) --}}
+                                        @if (\App\Models\TempTransaction::where('warehouse_id', $warehouse->id)->where('tenant_id', auth()->user()->tenant->id)->count() == 0)
                                             <button type="submit" class="btn btn-{{ $warehouse->rented ? 'secondary' : 'info' }} w-100 btn-md" {{ $warehouse->rented ? 'disabled' : '' }}><i class="menu-icon tf-icons ti ti-receipt"></i> {{ $warehouse->rented ? 'Reserved' : 'Book Now' }}</button>
                                         @endif
                                     </form>
