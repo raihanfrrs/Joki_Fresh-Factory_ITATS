@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InboundController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\OutboundController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RackController;
@@ -63,6 +64,11 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
 
     Route::controller(InventoryController::class)->group(function () {
         Route::get('warehouse/{warehouse}/inventory', 'warehouse_inventory_index')->name('warehouse.inventory.index');
+    });
+
+    Route::controller(OutboundController::class)->group(function () {
+        Route::get('warehouse/{warehouse}/outbounds', 'warehouse_outbound_index')->name('warehouse.outbound.index');
+        Route::get('warehouse/{warehouse}/outbounds/add', 'warehouse_outbound_create')->name('warehouse.outbound.create');
     });
 
     Route::controller(warehouseReportingController::class)->group(function () {
