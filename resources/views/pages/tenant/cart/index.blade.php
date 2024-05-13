@@ -79,10 +79,14 @@
                             <dd class="col-6 fw-semibold text-end mb-0">@rupiah($carts->sum('subtotal') + $carts->sum('subtotal') * $tax->value / 100)</dd>
                         </dl>
                     </div>
-                    @if ($carts->count())
+                    @if ($carts->count() > 0 && \App\Models\Rented::whereIn('warehouse_id', $warehouse_ids)->count() == 0)
                     <div class="d-grid">
                       <button class="btn btn-primary btn-next waves-effect waves-light">Place Order</button>
-                  </div>
+                    </div>
+                    @elseif ($carts->count() && \App\Models\Rented::whereIn('warehouse_id', $warehouse_ids)->count())
+                    <div class="d-grid">
+                      <a href="javascript:void(0)" class="btn btn-secondary btn-next waves-effect waves-light">Can't Place Order</a>
+                    </div>
                     @endif
                 </div>
                 </div>
