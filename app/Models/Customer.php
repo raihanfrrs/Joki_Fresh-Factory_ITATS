@@ -40,4 +40,9 @@ class Customer extends Model
     {
         return $this->hasMany(Outbound::class);
     }
+
+    public function temp_outbound()
+    {
+        return $this->hasMany(TempOutbound::class);
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Customer;
 use App\Models\Tenant;
 use App\Models\Product;
 use App\Models\Warehouse;
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->foreignIdFor(Warehouse::class);
             $table->foreignIdFor(Subscription::class);
             $table->foreignIdFor(Product::class);
+            $table->foreignIdFor(Customer::class);
             $table->bigInteger('quantity');
             $table->bigInteger('subtotal');
             $table->timestamps();

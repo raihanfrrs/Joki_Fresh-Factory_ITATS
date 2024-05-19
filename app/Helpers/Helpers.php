@@ -66,4 +66,14 @@ class Helpers
             return $weightGram . ' gram';
         }
     }
+
+    public static function convertCmToM($lengthCm)
+    {
+        if ($lengthCm >= 100) {
+            $lengthM = $lengthCm / 100;
+            return number_format($lengthM, 0) . ' m';
+        } else {
+            return $lengthCm . ' cm';
+        }
+    }
 }

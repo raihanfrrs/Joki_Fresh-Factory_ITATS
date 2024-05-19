@@ -39,4 +39,9 @@ class TempOutbound extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 }
