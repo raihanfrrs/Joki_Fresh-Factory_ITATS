@@ -1012,4 +1012,43 @@ class YajraDatatablesController extends Controller
         ->rawColumns(['order_id', 'customer', 'date', 'amount_total', 'grand_total', 'action'])
         ->make(true);
     }
+
+    public function warehouse_product_outbound(Warehouse $warehouse)
+    {
+        $products = $this->productRepository->getAllProductByWarehouseIdAndTenantIdWithActualStockNoZero($warehouse->id);
+
+        return DataTables::of($products)
+        ->addColumn('checkbox', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-outbound.checkbox-column', compact('model'))->render();
+        })
+        ->addColumn('name', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-outbound.name-column', compact('model'))->render();
+        })
+        ->addColumn('category', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-outbound.category-column', compact('model'))->render();
+        })
+        ->addColumn('rack', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-outbound.rack-column', compact('model'))->render();
+        })
+        ->addColumn('actual_stock', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-outbound.actual-stock-column', compact('model'))->render();
+        })
+        ->addColumn('sale_price', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-outbound.sale-price-column', compact('model'))->render();
+        })
+        ->addColumn('weight', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-outbound.weight-column', compact('model'))->render();
+        })
+        ->addColumn('dimension', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-outbound.dimension-column', compact('model'))->render();
+        })
+        ->addColumn('expired_date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-outbound.expired-date-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-outbound.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['checkbox', 'name', 'category', 'rack', 'actual_stock', 'sale_price', 'weight', 'dimension', 'expired_date', 'action'])
+        ->make(true);
+    }
 }

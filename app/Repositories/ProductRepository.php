@@ -23,6 +23,16 @@ class ProductRepository
     {
         return Product::where('warehouse_id', $warehouse_id)->where('tenant_id', auth()->user()->tenant->id)->get();
     }
+    public function getAllProductByWarehouseIdAndTenantIdWithActualStockNoZero($warehouse_id)
+    {
+        return Product::join('batches', 'products.id', '=', 'batches.product_id')
+                    ->select('products.*', DB::raw('sum(batches.available) as available'))
+                    ->where('available', '>', 0)
+                    ->where('products.warehouse_id', $warehouse_id)
+                    ->where('products.tenant_id', auth()->user()->tenant->id)
+                    ->groupBy('products.id')
+                    ->get();
+    }
 
     public function createProduct($data, $warehouse)
     {
@@ -39,7 +49,9 @@ class ProductRepository
                 'name' => $data->name,
                 'sale_price' => intval(preg_replace("/[^0-9]/", "", $data->sale_price)),
                 'weight' => $data->weight,
-                'dimension' => $data->dimension ?? null,
+                'length' => $data->length ?? null,
+                'width' => $data->width ?? null,
+                'height' => $data->height ?? null,
                 'expired_date' => $data->expired_date ?? null,
                 'description' => $data->description ?? null
             ]);
@@ -73,7 +85,9 @@ class ProductRepository
                 'name' => $data->name,
                 'sale_price' => intval(preg_replace("/[^0-9]/", "", $data->sale_price)),
                 'weight' => $data->weight,
-                'dimension' => $data->dimension ?? null,
+                'length' => $data->length ?? null,
+                'width' => $data->width ?? null,
+                'height' => $data->height ?? null,
                 'expired_date' => $data->expired_date ?? null,
                 'description' => $data->description ?? null
             ]);
