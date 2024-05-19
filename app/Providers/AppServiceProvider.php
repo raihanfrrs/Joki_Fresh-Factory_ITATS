@@ -36,5 +36,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('convertGramToKg', function ($expression) {
             return "<?php echo \App\Helpers\Helpers::convertGramToKg($expression); ?>";
         });
+
+        Blade::directive('convertCmToM', function ($expression) {
+            return "<?php echo \App\Helpers\Helpers::convertCmToM($expression); ?>";
+        });
     }
 }

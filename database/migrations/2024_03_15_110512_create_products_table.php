@@ -27,7 +27,9 @@ return new class extends Migration
             $table->string('name');
             $table->bigInteger('sale_price');
             $table->bigInteger('weight');
-            $table->string('dimension')->nullable();
+            $table->string('length')->nullable();
+            $table->string('width')->nullable();
+            $table->string('height')->nullable();
             $table->date('expired_date')->nullable();
             $table->longText('description')->nullable();
             $table->enum('status', ['active', 'inactive', 'damaged'])->default('active');

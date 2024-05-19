@@ -95,3 +95,9 @@ $(document).on('click', '#button-trigger-modal-edit-supplier', function () {
       }
   });
 });
+
+$(document).on('change', 'input[name="new_customer"]', function () {
+  if ($('#customer_not_exist').is(':checked')) {
+    $("#AddProductOutbound").modal('show');
+  }
+});
