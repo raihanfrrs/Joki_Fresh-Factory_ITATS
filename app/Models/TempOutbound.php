@@ -16,6 +16,7 @@ class TempOutbound extends Model
         'warehouse_id',
         'subscription_id',
         'product_id',
+        'customer_id',
         'quantity',
         'subtotal'
     ];

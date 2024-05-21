@@ -18,7 +18,8 @@ class Customer extends Model
         'email',
         'phone',
         'address',
-        'category'
+        'category',
+        'type'
     ];
 
     public function tenant()

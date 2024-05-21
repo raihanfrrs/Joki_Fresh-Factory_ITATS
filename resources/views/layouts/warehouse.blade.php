@@ -183,6 +183,7 @@
     @elseif (request()->is('warehouse/*/outbounds'))
         <script src="{{ asset('assets/js/app-warehouse-outbound-list.js') }}"></script>
     @elseif (request()->is('warehouse/*/outbounds/add'))
+        <script src="{{ asset('assets/js/app-warehouse-customer-outbound-list.js') }}"></script>
         <script src="{{ asset('assets/js/app-warehouse-product-outbound-list.js') }}"></script>
     @endif
     

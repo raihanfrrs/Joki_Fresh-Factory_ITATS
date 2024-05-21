@@ -96,8 +96,26 @@ $(document).on('click', '#button-trigger-modal-edit-supplier', function () {
   });
 });
 
-$(document).on('change', 'input[name="new_customer"]', function () {
-  if ($('#customer_not_exist').is(':checked')) {
-    $("#AddProductOutbound").modal('show');
-  }
+$(document).on('click', '#add-new-customer', function () {
+  let id = $(this).attr('data-id');
+
+  $("#AddCustomerOutbound").modal('show');
+
+  $.ajaxSetup({
+      headers: {
+          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+      },
+  });
+
+  $.ajax({
+      url: "/ajax/customer-outbound/"+id+"/create",
+      method: "get",
+      processData: false,
+      contentType: false,
+      success: function(response) {
+          $("#data-create-customer-modal").html(response);
+      },
+      error: function(xhr, status, error) {
+      }
+  });
 });
