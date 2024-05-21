@@ -21,10 +21,10 @@ return new class extends Migration
             $table->foreignIdFor(Tenant::class);
             $table->foreignIdFor(Warehouse::class);
             $table->foreignIdFor(Subscription::class);
-            $table->foreignIdFor(Product::class);
-            $table->foreignIdFor(Customer::class);
-            $table->bigInteger('quantity');
-            $table->bigInteger('subtotal');
+            $table->foreignIdFor(Product::class)->nullable();
+            $table->foreignIdFor(Customer::class)->nullable();
+            $table->bigInteger('quantity')->nullable();
+            $table->bigInteger('subtotal')->nullable();
             $table->timestamps();
         });
     }

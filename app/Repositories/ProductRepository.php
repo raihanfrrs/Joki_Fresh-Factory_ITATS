@@ -5,10 +5,18 @@ namespace App\Repositories;
 use Ramsey\Uuid\Uuid;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use App\Repositories\TempOutboundRepository;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProductRepository
 {
+    protected $tempOutboundRepository;
+
+    public function __construct(TempOutboundRepository $tempOutboundRepository)
+    {
+        $this->tempOutboundRepository = $tempOutboundRepository;
+    }
+
     public function getAllProducts()
     {
         return Product::all();
@@ -23,13 +31,21 @@ class ProductRepository
     {
         return Product::where('warehouse_id', $warehouse_id)->where('tenant_id', auth()->user()->tenant->id)->get();
     }
-    public function getAllProductByWarehouseIdAndTenantIdWithActualStockNoZero($warehouse_id)
+    public function getAllProductByWarehouseIdAndTenantIdWithActualStockNoZero($warehouse)
     {
+        $check_products_outbound = $this->tempOutboundRepository->getProductsTempOutbounds($warehouse);
+
+        $products = array();
+        foreach ($check_products_outbound as $key => $product) {
+            $products[] = $product->product_id;
+        }
+
         return Product::join('batches', 'products.id', '=', 'batches.product_id')
                     ->select('products.*', DB::raw('sum(batches.available) as available'))
                     ->where('available', '>', 0)
-                    ->where('products.warehouse_id', $warehouse_id)
+                    ->where('products.warehouse_id', $warehouse->id)
                     ->where('products.tenant_id', auth()->user()->tenant->id)
+                    ->whereNotIn('products.id', $products)
                     ->groupBy('products.id')
                     ->get();
     }
