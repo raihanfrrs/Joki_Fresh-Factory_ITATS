@@ -18,24 +18,19 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
-  var dt_brand_table = $('#listWarehouseProductsOutboundTable');
+  var dt_brand_table = $('#listWarehouseCustomersOutboundTable');
   var warehouse_id = dt_brand_table.attr('data-id');
 
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
-      ajax: "/listWarehouseProductsOutboundTable/"+ warehouse_id,
-      processing: true,
-      serverSide: true,
+      ajax: "/listWarehouseCustomersOutboundTable/"+ warehouse_id,
       columns: [
         { data: '' },
-        { data: 'checkbox', class: 'text-center' },
         { data: 'name', class: 'text-center' },
-        { data: 'category', class: 'text-center' },
-        { data: 'rack', class: 'text-center' },
-        { data: 'actual_stock', class: 'text-center' },
-        { data: 'sale_price', class: 'text-center' },
-        { data: 'weight', class: 'text-center' },
-        { data: 'dimension', class: 'text-center' },
+        { data: 'email', class: 'text-center' },
+        { data: 'phone', class: 'text-center' },
+        { data: 'address', class: 'text-center' },
+        { data: 'type', class: 'text-center' },
         { data: 'action' }
       ],
       columnDefs: [
@@ -53,56 +48,35 @@ $(function () {
           targets: 1,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.checkbox;
+            return full.name;
           }
         },
         {
           targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.name;
+            return full.email;
           }
         },
         {
           targets: 3,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.category;
+            return full.phone;
           }
         },
         {
           targets: 4,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.rack;
+            return full.address;
           }
         },
         {
           targets: 5,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.actual_stock;
-          }
-        },
-        {
-          targets: 6,
-          responsivePriority: 4,
-          render: function (data, type, full, meta) {
-            return full.sale_price;
-          }
-        },
-        {
-          targets: 7,
-          responsivePriority: 4,
-          render: function (data, type, full, meta) {
-            return full.weight;
-          }
-        },
-        {
-          targets: 8,
-          responsivePriority: 4,
-          render: function (data, type, full, meta) {
-            return full.dimension;
+            return full.type;
           }
         },
         {
@@ -132,11 +106,11 @@ $(function () {
       },
       buttons: [
         {
-          text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add To Cart</span>',
+          text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Customer</span>',
           className: 'add-new btn btn-primary ms-3',
           attr: {
-            'id': 'btn-add-all-product-to-cart',
-            'disabled': true
+            'id': 'add-new-customer',
+            'data-id': warehouse_id
           }
         }
       ],
@@ -195,36 +169,8 @@ $(function () {
     }
   });
 
-  $(document).on('click', '[id^="btn-add-product-to-cart"]', function () {
-    let product_id = $(this).attr('data-product-id');
-    let warehouse_id = $(this).attr('data-warehouse-id');
-
-    $.ajaxSetup({
-      headers: {
-          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-      },
-    });
-
-    $.ajax({
-        url: "/ajax/product-inbound/"+warehouse_id+"/store/"+product_id,
-        method: "POST",
-        processData: false,
-        contentType: false,
-        success: function(response) {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Product Added To Cart',
-            showConfirmButton: false,
-            timer: 2500
-          });
-          $("#div-product-outbound").load(location.href + " #div-product-outbound");
-          dt_brand_table.ajax.reload(null, false);
-          $("#div-cart-outbound").load(location.href + " #div-cart-outbound");
-        },
-        error: function(xhr, status, error) {
-        }
-    });
+  $(document).on('click', "[id^='btn-add-customer-to-cart']", function () {
+    $("#form-add-customer-to-cart").submit();
   });
 
   // Filter form control to default size

@@ -7,6 +7,7 @@ use App\Models\Bank;
 use App\Models\Rack;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Product;
 use App\Models\Tenant;
 use App\Models\Supplier;
 use App\Models\Warehouse;
@@ -18,6 +19,7 @@ use App\Models\WarehouseCategory;
 use App\Repositories\UserRepository;
 use App\Models\WarehouseSubscription;
 use App\Repositories\AdminRepository;
+use App\Repositories\TempOutboundRepository;
 use App\Repositories\TenantRepository;
 use App\Repositories\WarehouseRepository;
 use App\Repositories\TransactionRepository;
@@ -27,9 +29,9 @@ use App\Repositories\WarehouseSubscriptionCartRepository;
 
 class AjaxController extends Controller
 {
-    private $adminRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $warehouseSubscriptionCartRepository, $tempTransactionRepository, $transactionRepository, $userRepository;
+    private $adminRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $warehouseSubscriptionCartRepository, $tempTransactionRepository, $transactionRepository, $userRepository, $tempOutboundRepository;
 
-    public function __construct(AdminRepository $adminRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, WarehouseSubscriptionCartRepository $warehouseSubscriptionCartRepository, TempTransactionRepository $tempTransactionRepository, TransactionRepository $transactionRepository, UserRepository $userRepository) {
+    public function __construct(AdminRepository $adminRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, WarehouseSubscriptionCartRepository $warehouseSubscriptionCartRepository, TempTransactionRepository $tempTransactionRepository, TransactionRepository $transactionRepository, UserRepository $userRepository, TempOutboundRepository $tempOutboundRepository) {
         $this->adminRepository = $adminRepository;
         $this->tenantRepository = $tenantRepository;
         $this->warehouseCategoryRepository = $warehouseCategoryRepository;
@@ -38,6 +40,7 @@ class AjaxController extends Controller
         $this->tempTransactionRepository = $tempTransactionRepository;
         $this->transactionRepository = $transactionRepository;
         $this->userRepository = $userRepository;
+        $this->tempOutboundRepository = $tempOutboundRepository;
     }
 
     public function admin_detail_show($admin, $type)
@@ -172,5 +175,15 @@ class AjaxController extends Controller
     public function tax_show(Tax $tax)
     {
         return view('components.data-ajax.pages.modal.data-detail-tax-amount-modal', compact('tax'));
+    }
+
+    public function customer_outbound_create(Warehouse $warehouse)
+    {
+        return view('components.data-ajax.pages.modal.data-create-customer-outbound-modal', compact('warehouse'));
+    }
+
+    public function product_inbound_store(Warehouse $warehouse, Product $product)
+    {
+        return $this->tempOutboundRepository->createTempOutboundWithNewOneProduct($warehouse, $product);
     }
 }
