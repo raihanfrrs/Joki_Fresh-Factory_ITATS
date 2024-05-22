@@ -45,4 +45,16 @@ class InboundRepository
 
         return true;
     }
+
+    public function updateAvailableProductStockInbound($warehouse, $product, $quantity)
+    {
+        $batch = Batch::where('warehouse_id', $warehouse->id)
+                    ->where('tenant_id', auth()->user()->tenant->id)
+                    ->where('subscription_id', $warehouse->rented->warehouse_subscription->subscription_id)
+                    ->where('product_id', $product->id)
+                    ->where('available', '>', 0)
+                    ->first();
+
+        return $batch->update(['available' => $batch->available - $quantity]);
+    }
 }

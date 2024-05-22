@@ -64,6 +64,10 @@ Route::controller(AjaxController::class)->group(function () {
     Route::get('ajax/supplier/{supplier}/edit', 'supplier_edit');
     Route::get('ajax/tax/{tax}/show', 'tax_show');
     Route::get('/ajax/customer-outbound/{warehouse}/create', 'customer_outbound_create');
-    Route::post('/ajax/product-inbound/{warehouse}/store/{product}', 'product_inbound_store');
+    Route::post('/ajax/product-outbound/{warehouse}/store/{product}', 'product_outbound_store');
+    Route::post('/ajax/product-outbound/{warehouse}/store', 'products_outbound_store');
+    Route::post('/ajax/product-quantity-outbound/{temp_outbound}/edit', 'product_quantity_outbound_edit');
+    Route::post('/ajax/product-outbound/{temp_outbound}/delete', 'product_outbound_destroy');
+    Route::post('/ajax/temp-outbound/{temp_outbound}/delete', 'temp_outbounds_destroy');
 });
 

@@ -150,25 +150,6 @@ $(function () {
     });
   }
 
-  $("#select_all_product_ids").on('click', function () {
-    $("input[id^='checkbox_product_ids']").prop('checked', $(this).prop('checked'));
-    $('#btn-add-all-product-to-cart').attr('disabled', !$(this).prop('checked'));
-  });
-
-  $(document).on("click", "[id^='checkbox_product_ids']", function () {
-    if ($("[id^='checkbox_product_ids']:checked").length == $("[id^='checkbox_product_ids']").length) {
-      $('#select_all_product_ids').prop('checked', true);
-    } else {
-      $('#select_all_product_ids').prop('checked', false);
-    }
-
-    if ($("[id^='checkbox_product_ids']:checked").length > 0) {
-      $('#btn-add-all-product-to-cart').attr('disabled', false);
-    } else {
-      $('#btn-add-all-product-to-cart').attr('disabled', true);
-    }
-  });
-
   $(document).on('click', "[id^='btn-add-customer-to-cart']", function () {
     $("#form-add-customer-to-cart").submit();
   });
