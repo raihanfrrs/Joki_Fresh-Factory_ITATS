@@ -26,6 +26,11 @@ class OutboundController extends Controller
         return view('pages.warehouse.outbound.index', compact('warehouse'));
     }
 
+    public function warehouse_outbound_store(Warehouse $warehouse, Request $request)
+    {
+        return $this->tempOutboundRepository->storeOutbound($warehouse, $request);
+    }
+
     public function warehouse_outbound_create(Warehouse $warehouse)
     {
         $tempOutbound = $this->tempOutboundRepository->checkTempOutbounds($warehouse);

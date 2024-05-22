@@ -14,6 +14,7 @@ use App\Models\Warehouse;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
+use App\Models\TempOutbound;
 use App\Models\TempTransaction;
 use App\Models\WarehouseCategory;
 use App\Repositories\UserRepository;
@@ -182,8 +183,32 @@ class AjaxController extends Controller
         return view('components.data-ajax.pages.modal.data-create-customer-outbound-modal', compact('warehouse'));
     }
 
-    public function product_inbound_store(Warehouse $warehouse, Product $product)
+    public function product_outbound_store(Warehouse $warehouse, Product $product)
     {
         return $this->tempOutboundRepository->createTempOutboundWithNewOneProduct($warehouse, $product);
+    }
+
+    public function products_outbound_store(Warehouse $warehouse, Request $request)
+    {
+        return $this->tempOutboundRepository->createTempOutboundWithNewProducts($warehouse, $request);
+    }
+
+    public function product_quantity_outbound_edit(Request $request, TempOutbound $temp_outbound)
+    {
+        return $this->tempOutboundRepository->updateQuantityProductTempOutbound($request, $temp_outbound);
+    }
+
+    public function product_outbound_destroy(TempOutbound $temp_outbound)
+    {
+        if($this->tempOutboundRepository->destroyTempOutboundById($temp_outbound->id)) {
+            return true;
+        }
+    }
+
+    public function temp_outbounds_destroy(Request $request)
+    {
+        if($this->tempOutboundRepository->destroyTempOutboundsById($request)) {
+            return true;
+        }
     }
 }
