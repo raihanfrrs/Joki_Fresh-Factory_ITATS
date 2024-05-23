@@ -72,6 +72,8 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
         Route::post('warehouse/{warehouse}/outbounds/store', 'warehouse_outbound_store')->name('warehouse.outbound.store');
         Route::get('warehouse/{warehouse}/outbounds/add', 'warehouse_outbound_create')->name('warehouse.outbound.create');
         Route::post('warehouse/{warehouse}/outbounds/{customer}/store', 'warehouse_outbound_customer_store')->name('warehouse.outbound.customer.store');
+        Route::get('warehouse/{warehouse}/outbound/{outbound}', 'warehouse_outbound_invoice')->name('warehouse.outbound.invoice');
+        Route::get('warehouse/{warehouse}/outbound-print/{outbound}', 'warehouse_outbound_invoice_print')->name('warehouse.outbound.invoice.print');
     });
 
     Route::controller(warehouseReportingController::class)->group(function () {
