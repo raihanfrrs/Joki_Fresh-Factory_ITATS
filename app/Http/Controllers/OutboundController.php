@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Customer;
+use App\Models\Outbound;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
@@ -58,5 +59,15 @@ class OutboundController extends Controller
                 'message' => 'Product must be added first!'
             ]);
         }
+    }
+
+    public function warehouse_outbound_invoice(Warehouse $warehouse, Outbound $outbound)
+    {
+        return view('pages.warehouse.outbound.invoice', compact('warehouse', 'outbound'));
+    }
+
+    public function warehouse_outbound_invoice_print(Warehouse $warehouse, Outbound $outbound)
+    {
+        return view('pages.warehouse.outbound.print', compact('warehouse', 'outbound'));
     }
 }

@@ -113,7 +113,7 @@
                   </tr>
                   @endforeach
                   <tr>
-                    <td colspan="5" class="align-top px-4 py-4">
+                    <td colspan="6" class="align-top px-4 py-4">
                       <span class="ms-3">Customer : 
                         @if (!empty($tempOutbound->customer))
                           {{ $tempOutbound->customer->name }}

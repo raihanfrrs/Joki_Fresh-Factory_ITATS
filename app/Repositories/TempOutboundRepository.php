@@ -173,8 +173,9 @@ class TempOutboundRepository
         $tempOutbound = self::getFirstProductsTempOutbounds($warehouse);
         $tempOutbounds = self::getProductsTempOutbounds($warehouse);
 
-        DB::transaction(function () use ($tempOutbound, $tempOutbounds, $data, $warehouse) {
-            $outbound_id = Uuid::uuid4()->toString();
+        $outbound_id = Uuid::uuid4()->toString();
+
+        DB::transaction(function () use ($tempOutbound, $tempOutbounds, $data, $warehouse, $outbound_id) {
 
             Outbound::create([
                 'id' => $outbound_id,
@@ -205,7 +206,7 @@ class TempOutboundRepository
             self::deleteTempOutbounds($warehouse);
         });
 
-        return true;
+        return $outbound_id;
     }
 
     public function destroyTempOutboundById($id)

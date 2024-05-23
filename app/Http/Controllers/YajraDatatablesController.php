@@ -1008,8 +1008,8 @@ class YajraDatatablesController extends Controller
         ->addColumn('grand_total', function ($model) {
             return view('components.data-ajax.yajra-column.data-warehouse-outbound.grand-total-column', compact('model'))->render();
         })
-        ->addColumn('action', function ($model) {
-            return view('components.data-ajax.yajra-column.data-warehouse-outbound.action-column', compact('model'))->render();
+        ->addColumn('action', function ($model) use ($warehouse) {
+            return view('components.data-ajax.yajra-column.data-warehouse-outbound.action-column', compact('model', 'warehouse'))->render();
         })
         ->rawColumns(['order_id', 'customer', 'date', 'amount_total', 'grand_total', 'action'])
         ->make(true);

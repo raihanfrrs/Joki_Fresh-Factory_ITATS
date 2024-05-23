@@ -86,7 +86,7 @@
           <div data-i18n="Inventory">Inventory</div>
         </a>
       </li>
-      <li class="menu-item {{ request()->is('warehouse/*/outbounds', 'warehouse/*/outbounds/*') ? 'active' : '' }}">
+      <li class="menu-item {{ request()->is('warehouse/*/outbounds', 'warehouse/*/outbounds/*', 'warehouse/*/outbound/*') ? 'active' : '' }}">
         <a href="{{ route('warehouse.outbound.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-outbound"></i>
           <div data-i18n="Outbound">Outbound</div>
