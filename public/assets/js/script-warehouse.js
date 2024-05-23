@@ -198,13 +198,17 @@ $(document).on('click', '#btn-submit-outbound', function () {
         method: "post",
         success: function(response) {
             if (response) {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Outbound Success',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+                setTimeout(function() {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Outbound Success',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }, 2500);
+
+                window.open('/warehouse/'+warehouse_id+'/outbound/'+response, '_blank');
                 window.location.reload();
             }
         },
