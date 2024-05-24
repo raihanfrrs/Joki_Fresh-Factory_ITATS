@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             SubscriptionSeeder::class,
             CountrySeeder::class,
             TaxSeeder::class,
-            BankSeeder::class
+            // BankSeeder::class
         ]);
     }
 }

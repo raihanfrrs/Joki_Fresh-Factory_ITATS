@@ -59,6 +59,14 @@ class ProductCategoryController extends Controller
         }
     }
 
+    public function warehouse_category_show(Warehouse $warehouse, ProductCategory $category)
+    {
+        return view('pages.warehouse.master.category.show', [
+            'warehouse' => $warehouse,
+            'category' => $category
+        ]);
+    }
+
     public function warehouse_category_delete(Warehouse $warehouse, ProductCategory $category)
     {
         if ($this->productCategoryRepository->deleteProductCategory($warehouse, $category)) {

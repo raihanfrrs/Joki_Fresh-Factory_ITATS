@@ -1,1 +1,1 @@
-{{ $model->rack->name }}
+{{ $model->rack()->withTrashed()->first()->name }}

@@ -1,1 +1,1 @@
-{{ $model->supplier->name }}
+{{ $model->supplier()->withTrashed()->first()->name }}

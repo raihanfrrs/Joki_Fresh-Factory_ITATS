@@ -69,5 +69,7 @@ Route::controller(AjaxController::class)->group(function () {
     Route::post('/ajax/product-quantity-outbound/{temp_outbound}/edit', 'product_quantity_outbound_edit');
     Route::post('/ajax/product-outbound/{temp_outbound}/delete', 'product_outbound_destroy');
     Route::post('/ajax/temp-outbound/{temp_outbound}/delete', 'temp_outbounds_destroy');
+    Route::get('/ajax/inbound/{inbound}/edit', 'inbound_edit');
+    Route::post('/ajax/inbound/code-check', 'inbound_code_check');
 });
 

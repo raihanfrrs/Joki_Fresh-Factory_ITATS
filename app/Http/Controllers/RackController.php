@@ -59,6 +59,14 @@ class RackController extends Controller
         }
     }
 
+    public function warehouse_rack_show(Warehouse $warehouse, Rack $rack)
+    {
+        return view('pages.warehouse.master.rack.show', [
+            'warehouse' => $warehouse,
+            'rack' => $rack
+        ]);
+    }
+
     public function warehouse_rack_delete(Warehouse $warehouse, Rack $rack)
     {
         try {

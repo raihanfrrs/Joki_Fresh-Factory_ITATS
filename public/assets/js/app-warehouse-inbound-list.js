@@ -224,9 +224,9 @@ $(function () {
   });
 
   // Delete Record
-  $(document).on('click', '#button-delete-product', function () {
+  $(document).on('click', '#button-delete-inbound', function () {
     let id = $(this).attr('data-id');
-    let formSelector = ".form-delete-product-" + id;
+    let formSelector = ".form-delete-inbound-" + id;
 
     Swal.fire({
       title: 'Are you sure?',
