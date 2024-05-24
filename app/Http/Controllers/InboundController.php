@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\InboundStoreRequest;
+use App\Models\Batch;
 use App\Models\Warehouse;
-use App\Repositories\InboundRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Repositories\InboundRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\SupplierRepository;
+use App\Http\Requests\InboundStoreRequest;
 
 class InboundController extends Controller
 {
@@ -53,6 +55,32 @@ class InboundController extends Controller
         } catch (\Exception $e) {
             dd($e);
             return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function warehouse_inbound_update(Request $request, Batch $inbound)
+    {
+        if ($this->inboundRepository->updateInbound($request, $inbound)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Inbound has been updated!'
+            ]);
+        }
+    }
+
+    public function warehouse_inbound_delete(Batch $inbound)
+    {
+        if ($this->inboundRepository->deleteInbound($inbound)) {
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Inbound has been deleted!'
+            ]);
         }
     }
 }

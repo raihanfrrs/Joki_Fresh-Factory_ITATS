@@ -216,3 +216,25 @@ $(document).on('click', '#btn-submit-outbound', function () {
         }
     });
 });
+
+$(document).on('click', '#button-trigger-modal-edit-inbound', function () {
+    let id = $(this).attr('data-id');
+  
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+  
+    $.ajax({
+        url: "/ajax/inbound/"+id+"/edit",
+        method: "get",
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#data-edit-inbound-modal").html(response);
+        },
+        error: function(xhr, status, error) {
+        }
+    });
+  });

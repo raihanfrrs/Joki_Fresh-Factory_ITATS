@@ -28,6 +28,7 @@ return new class extends Migration
             $table->bigInteger('on_hand');
             $table->bigInteger('available');
             $table->dateTime('received_at');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

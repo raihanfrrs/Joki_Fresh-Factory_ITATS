@@ -61,6 +61,8 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
         Route::get('warehouse/{warehouse}/inbounds', 'warehouse_inbound_index')->name('warehouse.inbound.index');
         Route::get('warehouse/{warehouse}/inbounds/add', 'warehouse_inbound_create');
         Route::post('warehouse/{warehouse}/inbounds', 'warehouse_inbound_store')->name('warehouse.inbound.store');
+        Route::patch('warehouse/inbounds/{inbound}', 'warehouse_inbound_update')->name('warehouse.inbound.update');
+        Route::delete('warehouse/inbounds/{inbound}', 'warehouse_inbound_delete')->name('warehouse.inbound.destroy');
     });
 
     Route::controller(InventoryController::class)->group(function () {

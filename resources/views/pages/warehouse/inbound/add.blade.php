@@ -84,7 +84,7 @@
                 <div class="col-sm-6 fv-plugins-icon-container">
                     <label class="form-label" for="received_at">Received At</label>
                     <div class="position-relative">
-                        <input type="datetime-local" id="received_at" name="received_at" class="form-control @error('received_at') is-invalid @enderror" value="{{ old('received_at', Carbon\Carbon::now()->format('Y-m-d\TH:i')) }}">
+                        <input type="datetime-local" id="received_at" name="received_at" class="form-control @error('received_at') is-invalid @enderror" min="1" value="{{ old('received_at', Carbon\Carbon::now()->format('Y-m-d\TH:i')) }}">
                     </div>
                     @error('received_at')
                         <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
