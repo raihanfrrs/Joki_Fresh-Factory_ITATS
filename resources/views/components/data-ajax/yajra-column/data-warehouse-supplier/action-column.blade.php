@@ -7,7 +7,4 @@
             <i class="ti ti-trash ti-sm mx-2"></i>
         </a>
     </form>
-    <a href="{{ route('warehouse.suppliers.show', ['warehouse' => $model->warehouse_id, 'supplier' => $model->id]) }}" class="text-body">
-        <i class="ti ti-eye ti-sm mx-2"></i>
-    </a>
 </div>

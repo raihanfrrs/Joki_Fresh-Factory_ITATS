@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('warehouse_categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('category');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
