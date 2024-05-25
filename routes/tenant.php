@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\PricingController;
-use App\Http\Controllers\TenantProfileController;
-use App\Http\Controllers\WarehouseController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PricingController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\TenantProfileController;
+use App\Http\Controllers\TenantReportingController;
 
 Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
     
@@ -38,5 +39,11 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
         Route::patch('settings/tenant-profile/{tenant}', 'tenant_setting_profile_update')->name('tenant.settings.profile.update');
         Route::get('settings/tenant-password', 'tenant_setting_password_index')->name('tenant.settings.password');
         Route::patch('settings/tenant-password/{tenant}', 'tenant_setting_password_update')->name('tenant.settings.password.update');
+    });
+
+    Route::controller(TenantReportingController::class)->group(function () {
+        Route::get('reporting/{warehouse}/sales/{period}', 'reporting_periodic_sales')->name('reporting.periodic.sales.index');
+        Route::get('reporting/{warehouse}/performance/{type}', 'reporting_performance')->name('reporting.performance.index');
+        Route::get('history/{warehouse}/{type}', 'reporting_history')->name('reporting.history.index');
     });
 });
