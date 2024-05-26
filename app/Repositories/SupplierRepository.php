@@ -63,4 +63,14 @@ class SupplierRepository
             }
         });
     }
+
+    public function getAllSupplierWithJoinBatch($warehouse)
+    {
+        return Supplier::join('batches', 'suppliers.id', '=', 'batches.supplier_id')
+                        ->select('suppliers.name as supplier_name', DB::raw('SUM(batches.on_hand) as on_hand'))
+                        ->where('suppliers.warehouse_id', $warehouse->id)
+                        ->where('suppliers.tenant_id', auth()->user()->tenant->id)
+                        ->groupBy('suppliers.id')
+                        ->get();
+    }
 }

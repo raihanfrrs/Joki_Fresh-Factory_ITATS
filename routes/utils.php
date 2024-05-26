@@ -42,6 +42,9 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listDailySalesReportTenantTable/{warehouse}', 'tenant_sales_report_daily');
     Route::get('listMonthlySalesReportTenantTable/{warehouse}', 'tenant_sales_report_monthly');
     Route::get('listYearlySalesReportTenantTable/{warehouse}', 'tenant_sales_report_yearly');
+    Route::get('listProductPerformanceTenantTable/{warehouse}', 'tenant_product_performance');
+    Route::get('listSupplierPerformanceTenantTable/{warehouse}', 'tenant_supplier_performance');
+    Route::get('listCustomerPerformanceTenantTable/{warehouse}', 'tenant_customer_performance');
 });
 
 Route::controller(AjaxController::class)->group(function () {

@@ -1152,4 +1152,79 @@ class YajraDatatablesController extends Controller
         ->rawColumns(['created_at', 'amount_total', 'grand_total', 'action'])
         ->make(true);
     }
+
+    public function tenant_product_performance(Warehouse $warehouse)
+    {
+        $products = $this->productRepository->getAllProductWithJoinDetailOutbound($warehouse);
+
+        return DataTables::of($products)
+        ->addColumn('index', function ($model) use ($products) {
+            return $products->search($model) + 1;
+        })
+        ->addColumn('product', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-product-performance-report.product-column', compact('model'))->render();
+        })
+        ->addColumn('stock_sold', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-product-performance-report.stock-sold-column', compact('model'))->render();
+        })
+        ->addColumn('income', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-product-performance-report.income-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-product-performance-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['product', 'stock_sold', 'income', 'action'])
+        ->make(true);
+    }
+
+    public function tenant_supplier_performance(Warehouse $warehouse)
+    {
+        $suppliers = $this->supplierRepository->getAllSupplierWithJoinBatch($warehouse);
+
+        return DataTables::of($suppliers)
+        ->addColumn('index', function ($model) use ($suppliers) {
+            return $suppliers->search($model) + 1;
+        })
+        ->addColumn('supplier', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-supplier-performance-report.supplier-column', compact('model'))->render();
+        })
+        ->addColumn('stock_sent', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-supplier-performance-report.stock-sent-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-supplier-performance-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['supplier', 'stock_sent', 'action'])
+        ->make(true);
+    }
+
+    public function tenant_customer_performance(Warehouse $warehouse)
+    {
+        $customers = $this->customerRepository->getAllCustomerWithJoinOutbound($warehouse);
+
+        return DataTables::of($customers)
+        ->addColumn('index', function ($model) use ($customers) {
+            return $customers->search($model) + 1;
+        })
+        ->addColumn('customer', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-customer-performance-report.customer-column', compact('model'))->render();
+        })
+        ->addColumn('phone', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-customer-performance-report.phone-column', compact('model'))->render();
+        })
+        ->addColumn('email', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-customer-performance-report.email-column', compact('model'))->render();
+        })
+        ->addColumn('amount_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-customer-performance-report.amount-total-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-customer-performance-report.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-customer-performance-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['supplier', 'stock_sent', 'action'])
+        ->make(true);
+    }
 }

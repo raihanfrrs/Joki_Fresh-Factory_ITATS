@@ -18,18 +18,20 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
-  var dt_brand_table = $('#listProductPerformanceTenantTable');
+  var dt_brand_table = $('#listCustomerPerformanceTenantTable');
   var warehouse_id = dt_brand_table.attr('data-id');
 
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
-      ajax: "/listProductPerformanceTenantTable/"+ warehouse_id,
+      ajax: "/listCustomerPerformanceTenantTable/"+ warehouse_id,
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
-        { data: 'product', class: 'text-center' },
-        { data: 'stock_sold', class: 'text-center' },
-        { data: 'income', class: 'text-center' },
+        { data: 'customer', class: 'text-center' },
+        { data: 'phone', class: 'text-center' },
+        { data: 'email', class: 'text-center' },
+        { data: 'amount_total', class: 'text-center' },
+        { data: 'grand_total', class: 'text-center' },
         { data: 'action' }
       ],
       columnDefs: [
@@ -54,19 +56,31 @@ $(function () {
           targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.product;
+            return full.customer;
           }
         },
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.stock_sold;
+            return full.phone;
           }
         },
         {
           targets: 4,
           render: function (data, type, full, meta) {
-            return full.income;
+            return full.email;
+          }
+        },
+        {
+          targets: 5,
+          render: function (data, type, full, meta) {
+            return full.amount_total;
+          }
+        },
+        {
+          targets: 6,
+          render: function (data, type, full, meta) {
+            return full.grand_total;
           }
         },
         {

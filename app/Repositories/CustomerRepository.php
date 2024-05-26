@@ -41,4 +41,14 @@ class CustomerRepository
 
         return true;
     }
+
+    public function getAllCustomerWithJoinOutbound($warehouse)
+    {
+        return Customer::join('outbounds', 'customers.id', '=', 'outbounds.customer_id')
+                        ->where('customers.warehouse_id', $warehouse->id)
+                        ->where('customers.tenant_id', auth()->user()->tenant->id)
+                        ->select('customers.*', DB::raw('SUM(amount_total) as amount_total'), DB::raw('SUM(grand_total) as grand_total'))
+                        ->groupBy('customers.id')
+                        ->get();
+    }
 }

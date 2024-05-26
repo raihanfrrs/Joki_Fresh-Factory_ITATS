@@ -84,7 +84,7 @@
         <span class="menu-header-text">REPORTING</span>
       </li>
         @foreach ($detail_transactions as $detail_transaction)
-        <li class="menu-item {{ request()->is('reporting/*/sales/*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->is('reporting/*/sales/*', 'reporting/*/performance/*') ? 'open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons ti ti-clipboard-list"></i>
             <div data-i18n="{{ $detail_transaction->warehouse_subscription->warehouse->name }}">{{ $detail_transaction->warehouse_subscription->warehouse->name }}</div>
@@ -112,22 +112,22 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item {{ request()->is('report/daily-sales', 'report/monthly-sales', 'report/yearly-sales') ? 'open' : '' }}">
+            <li class="menu-item {{ request()->is('reporting/*/performance/*') ? 'open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div data-i18n="Performance">Performance</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item">
+                <li class="menu-item {{ request()->is('reporting/*/performance/product') ? 'active' : '' }}">
                   <a href="{{ route('reporting.performance.index', ['warehouse' => $detail_transaction->warehouse_subscription->warehouse->id, 'type' => 'product']) }}" class="menu-link">
                     <div data-i18n="Product">Product</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ request()->is('reporting/*/performance/supplier') ? 'active' : '' }}">
                   <a href="{{ route('reporting.performance.index', ['warehouse' => $detail_transaction->warehouse_subscription->warehouse->id, 'type' => 'supplier']) }}" class="menu-link">
                     <div data-i18n="Supplier">Supplier</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ request()->is('reporting/*/performance/customer') ? 'active' : '' }}">
                   <a href="{{ route('reporting.performance.index', ['warehouse' => $detail_transaction->warehouse_subscription->warehouse->id, 'type' => 'customer']) }}" class="menu-link">
                     <div data-i18n="Customer">Customer</div>
                   </a>
