@@ -1080,4 +1080,76 @@ class YajraDatatablesController extends Controller
         ->rawColumns(['name', 'email', 'phone', 'address', 'type', 'action'])
         ->make(true);
     }
+
+    public function tenant_sales_report_daily(Warehouse $warehouse)
+    {
+        $outbounds = $this->outboundRepository->getAllOutboundsGroupByPeriodically('day', $warehouse);
+
+        return DataTables::of($outbounds)
+        ->addColumn('index', function ($model) use ($outbounds) {
+            return $outbounds->search($model) + 1;
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-daily-sales-report.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('amount_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-daily-sales-report.amount-total-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-daily-sales-report.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-daily-sales-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['created_at', 'amount_total', 'grand_total', 'action'])
+        ->make(true);
+    }
+
+    public function tenant_sales_report_monthly(Warehouse $warehouse)
+    {
+        $outbounds = $this->outboundRepository->getAllOutboundsGroupByPeriodically('month', $warehouse);
+
+        return DataTables::of($outbounds)
+        ->addColumn('index', function ($model) use ($outbounds) {
+            return $outbounds->search($model) + 1;
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-monthly-sales-report.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('amount_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-monthly-sales-report.amount-total-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-monthly-sales-report.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-monthly-sales-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['created_at', 'amount_total', 'grand_total', 'action'])
+        ->make(true);
+    }
+
+    public function tenant_sales_report_yearly(Warehouse $warehouse)
+    {
+        $outbounds = $this->outboundRepository->getAllOutboundsGroupByPeriodically('year', $warehouse);
+
+        return DataTables::of($outbounds)
+        ->addColumn('index', function ($model) use ($outbounds) {
+            return $outbounds->search($model) + 1;
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-yearly-sales-report.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('amount_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-yearly-sales-report.amount-total-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-yearly-sales-report.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-yearly-sales-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['created_at', 'amount_total', 'grand_total', 'action'])
+        ->make(true);
+    }
 }
