@@ -45,5 +45,9 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
         Route::get('reporting/{warehouse}/sales/{period}', 'reporting_periodic_sales')->name('reporting.periodic.sales.index');
         Route::get('reporting/{warehouse}/performance/{type}', 'reporting_performance')->name('reporting.performance.index');
         Route::get('history/{warehouse}/{type}', 'reporting_history')->name('reporting.history.index');
+
+        Route::get('reporting/{warehouse}/sales-print-daily/{date}', 'reporting_daily_sales_print')->name('reporting.periodic.daily.sales.print');
+        Route::get('reporting/{warehouse}/sales-print-monthly/{date}', 'reporting_monthly_sales_print')->name('reporting.periodic.monthly.sales.print');
+        Route::get('reporting/{warehouse}/sales-print-yearly/{date}', 'reporting_yearly_sales_print')->name('reporting.periodic.yearly.sales.print');
     });
 });
