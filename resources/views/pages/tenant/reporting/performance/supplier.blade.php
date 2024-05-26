@@ -12,9 +12,8 @@
             <tr>
               <th></th>
               <th class="text-center">No</th>
-              <th class="text-center">Product</th>
-              <th class="text-center">Stock Sold</th>
-              <th class="text-center">Profit</th>
+              <th class="text-center">Supplier</th>
+              <th class="text-center">Stock Sent</th>
               <th class="text-center">Action</th>
             </tr>
           </thead>
