@@ -189,6 +189,12 @@
             <script src="{{ asset('assets/js/app-monthly-sales-report-tenant-list.js') }}"></script>
         @elseif (request()->is('reporting/*/sales/yearly'))
             <script src="{{ asset('assets/js/app-yearly-sales-report-tenant-list.js') }}"></script>
+        @elseif (request()->is('reporting/*/performance/product'))
+            <script src="{{ asset('assets/js/app-tenant-product-warehouse-list.js') }}"></script>
+        @elseif (request()->is('reporting/*/performance/supplier'))
+            <script src="{{ asset('assets/js/app-tenant-supplier-warehouse-list.js') }}"></script>
+        @elseif (request()->is('reporting/*/performance/customer'))
+            <script src="{{ asset('assets/js/app-tenant-customer-warehouse-list.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>

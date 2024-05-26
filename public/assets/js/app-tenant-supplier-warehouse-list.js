@@ -18,18 +18,17 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
-  var dt_brand_table = $('#listProductPerformanceTenantTable');
+  var dt_brand_table = $('#listSupplierPerformanceTenantTable');
   var warehouse_id = dt_brand_table.attr('data-id');
 
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
-      ajax: "/listProductPerformanceTenantTable/"+ warehouse_id,
+      ajax: "/listSupplierPerformanceTenantTable/"+ warehouse_id,
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
-        { data: 'product', class: 'text-center' },
-        { data: 'stock_sold', class: 'text-center' },
-        { data: 'income', class: 'text-center' },
+        { data: 'supplier', class: 'text-center' },
+        { data: 'stock_sent', class: 'text-center' },
         { data: 'action' }
       ],
       columnDefs: [
@@ -54,19 +53,13 @@ $(function () {
           targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.product;
+            return full.supplier;
           }
         },
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.stock_sold;
-          }
-        },
-        {
-          targets: 4,
-          render: function (data, type, full, meta) {
-            return full.income;
+            return full.stock_sent;
           }
         },
         {

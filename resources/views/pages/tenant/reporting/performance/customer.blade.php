@@ -12,9 +12,11 @@
             <tr>
               <th></th>
               <th class="text-center">No</th>
-              <th class="text-center">Product</th>
-              <th class="text-center">Stock Sold</th>
-              <th class="text-center">Profit</th>
+              <th class="text-center">Customer</th>
+              <th class="text-center">Phone</th>
+              <th class="text-center">Email</th>
+              <th class="text-center">Amount Product</th>
+              <th class="text-center">Total Order</th>
               <th class="text-center">Action</th>
             </tr>
           </thead>
