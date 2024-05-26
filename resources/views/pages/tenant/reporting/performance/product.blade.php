@@ -14,7 +14,7 @@
               <th class="text-center">No</th>
               <th class="text-center">Product</th>
               <th class="text-center">Stock Sold</th>
-              <th class="text-center">Profit</th>
+              <th class="text-center">Income</th>
               <th class="text-center">Action</th>
             </tr>
           </thead>
