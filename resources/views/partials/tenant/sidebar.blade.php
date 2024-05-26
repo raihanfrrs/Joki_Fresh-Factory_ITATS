@@ -70,11 +70,13 @@
       @php 
         $transactions = \App\Models\Transaction::where('tenant_id', auth()->user()->tenant->id)->where('status', 'confirmed')->get();
 
-        foreach ($transactions as $key => $transaction) {
-          $detail_transaction_ids = $transaction->detail_transaction->pluck('id')->toArray();
+        if ($transactions->count() != 0) {
+          foreach ($transactions as $key => $transaction) {
+            $detail_transaction_ids = $transaction->detail_transaction->pluck('id')->toArray();
+          }
+          
+          $detail_transactions = \App\Models\DetailTransaction::whereIn('id', $detail_transaction_ids)->get();
         }
-        
-        $detail_transactions = \App\Models\DetailTransaction::whereIn('id', $detail_transaction_ids)->get();
       @endphp
 
       @if ($transactions->count() > 0)

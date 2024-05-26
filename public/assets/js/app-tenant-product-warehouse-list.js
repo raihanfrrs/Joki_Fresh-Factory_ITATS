@@ -27,8 +27,9 @@ $(function () {
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
-        { data: 'name', class: 'text-center text-capitalize' },
-        { data: 'total_product', class: 'text-center' },
+        { data: 'product', class: 'text-center text-capitalize' },
+        { data: 'stock_sold', class: 'text-center' },
+        { data: 'income', class: 'text-center' },
         { data: 'action' }
       ],
       columnDefs: [
