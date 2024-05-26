@@ -18,7 +18,8 @@ class Customer extends Model
         'email',
         'phone',
         'address',
-        'category'
+        'category',
+        'type'
     ];
 
     public function tenant()
@@ -39,5 +40,10 @@ class Customer extends Model
     public function outbound()
     {
         return $this->hasMany(Outbound::class);
+    }
+
+    public function temp_outbound()
+    {
+        return $this->hasMany(TempOutbound::class);
     }
 }

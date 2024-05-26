@@ -7,10 +7,13 @@ use App\Models\Bank;
 use App\Models\Rack;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Batch;
 use App\Models\Tenant;
+use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\Warehouse;
 use App\Models\Subscription;
+use App\Models\TempOutbound;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use App\Models\TempTransaction;
@@ -19,17 +22,21 @@ use App\Repositories\UserRepository;
 use App\Models\WarehouseSubscription;
 use App\Repositories\AdminRepository;
 use App\Repositories\TenantRepository;
+use App\Repositories\InboundRepository;
+use App\Repositories\ProductRepository;
+use App\Repositories\SupplierRepository;
 use App\Repositories\WarehouseRepository;
 use App\Repositories\TransactionRepository;
+use App\Repositories\TempOutboundRepository;
 use App\Repositories\TempTransactionRepository;
 use App\Repositories\WarehouseCategoryRepository;
 use App\Repositories\WarehouseSubscriptionCartRepository;
 
 class AjaxController extends Controller
 {
-    private $adminRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $warehouseSubscriptionCartRepository, $tempTransactionRepository, $transactionRepository, $userRepository;
+    private $adminRepository, $tenantRepository, $warehouseCategoryRepository, $warehouseRepository, $warehouseSubscriptionCartRepository, $tempTransactionRepository, $transactionRepository, $userRepository, $tempOutboundRepository, $productRepository, $supplierRepository, $inboundRepository;
 
-    public function __construct(AdminRepository $adminRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, WarehouseSubscriptionCartRepository $warehouseSubscriptionCartRepository, TempTransactionRepository $tempTransactionRepository, TransactionRepository $transactionRepository, UserRepository $userRepository) {
+    public function __construct(AdminRepository $adminRepository, TenantRepository $tenantRepository, WarehouseCategoryRepository $warehouseCategoryRepository, WarehouseRepository $warehouseRepository, WarehouseSubscriptionCartRepository $warehouseSubscriptionCartRepository, TempTransactionRepository $tempTransactionRepository, TransactionRepository $transactionRepository, UserRepository $userRepository, TempOutboundRepository $tempOutboundRepository, ProductRepository $productRepository, SupplierRepository $supplierRepository, InboundRepository $inboundRepository) {
         $this->adminRepository = $adminRepository;
         $this->tenantRepository = $tenantRepository;
         $this->warehouseCategoryRepository = $warehouseCategoryRepository;
@@ -38,6 +45,10 @@ class AjaxController extends Controller
         $this->tempTransactionRepository = $tempTransactionRepository;
         $this->transactionRepository = $transactionRepository;
         $this->userRepository = $userRepository;
+        $this->tempOutboundRepository = $tempOutboundRepository;
+        $this->productRepository = $productRepository;
+        $this->supplierRepository = $supplierRepository;
+        $this->inboundRepository = $inboundRepository;
     }
 
     public function admin_detail_show($admin, $type)
@@ -172,5 +183,52 @@ class AjaxController extends Controller
     public function tax_show(Tax $tax)
     {
         return view('components.data-ajax.pages.modal.data-detail-tax-amount-modal', compact('tax'));
+    }
+
+    public function customer_outbound_create(Warehouse $warehouse)
+    {
+        return view('components.data-ajax.pages.modal.data-create-customer-outbound-modal', compact('warehouse'));
+    }
+
+    public function product_outbound_store(Warehouse $warehouse, Product $product)
+    {
+        return $this->tempOutboundRepository->createTempOutboundWithNewOneProduct($warehouse, $product);
+    }
+
+    public function products_outbound_store(Warehouse $warehouse, Request $request)
+    {
+        return $this->tempOutboundRepository->createTempOutboundWithNewProducts($warehouse, $request);
+    }
+
+    public function product_quantity_outbound_edit(Request $request, TempOutbound $temp_outbound)
+    {
+        return $this->tempOutboundRepository->updateQuantityProductTempOutbound($request, $temp_outbound);
+    }
+
+    public function product_outbound_destroy(TempOutbound $temp_outbound)
+    {
+        if($this->tempOutboundRepository->destroyTempOutboundById($temp_outbound->id)) {
+            return true;
+        }
+    }
+
+    public function temp_outbounds_destroy(Request $request)
+    {
+        if($this->tempOutboundRepository->destroyTempOutboundsById($request)) {
+            return true;
+        }
+    }
+
+    public function inbound_edit(Batch $inbound)
+    {
+        $products = $this->productRepository->getAllProductByWarehouseIdAndTenantId($inbound->warehouse->id);
+        $suppliers = $this->supplierRepository->getAllSupplierByWarehouseIdAndTenantId($inbound->warehouse->id);
+
+        return view('components.data-ajax.pages.modal.data-edit-inbound-modal', compact('inbound', 'products', 'suppliers'));
+    }
+
+    public function inbound_code_check(Request $request)
+    {
+        return $this->inboundRepository->checkInboundCode($request);
     }
 }

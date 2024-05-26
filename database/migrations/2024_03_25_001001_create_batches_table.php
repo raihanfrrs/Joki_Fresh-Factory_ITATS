@@ -23,11 +23,12 @@ return new class extends Migration
             $table->foreignIdFor(Subscription::class);
             $table->foreignIdFor(Supplier::class);
             $table->foreignIdFor(Product::class);
-            $table->bigInteger('code')->unique();
+            $table->string('code')->unique();
             $table->bigInteger('price');
             $table->bigInteger('on_hand');
             $table->bigInteger('available');
             $table->dateTime('received_at');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

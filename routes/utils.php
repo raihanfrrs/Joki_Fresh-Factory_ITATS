@@ -37,6 +37,8 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listDetailTaxesReportTable/{tax}', 'admin_detail_taxes_report');
     Route::get('listRentalActivityTable/{warehouse}', 'admin_rental_activity_warehouse');
     Route::get('listWarehouseOutboundsTable/{warehouse}', 'warehouse_outbound');
+    Route::get('listWarehouseProductsOutboundTable/{warehouse}', 'warehouse_product_outbound');
+    Route::get('listWarehouseCustomersOutboundTable/{warehouse}', 'warehouse_customer_outbound');
 });
 
 Route::controller(AjaxController::class)->group(function () {
@@ -61,5 +63,13 @@ Route::controller(AjaxController::class)->group(function () {
     Route::get('ajax/rack/{rack}/edit', 'rack_edit');
     Route::get('ajax/supplier/{supplier}/edit', 'supplier_edit');
     Route::get('ajax/tax/{tax}/show', 'tax_show');
+    Route::get('/ajax/customer-outbound/{warehouse}/create', 'customer_outbound_create');
+    Route::post('/ajax/product-outbound/{warehouse}/store/{product}', 'product_outbound_store');
+    Route::post('/ajax/product-outbound/{warehouse}/store', 'products_outbound_store');
+    Route::post('/ajax/product-quantity-outbound/{temp_outbound}/edit', 'product_quantity_outbound_edit');
+    Route::post('/ajax/product-outbound/{temp_outbound}/delete', 'product_outbound_destroy');
+    Route::post('/ajax/temp-outbound/{temp_outbound}/delete', 'temp_outbounds_destroy');
+    Route::get('/ajax/inbound/{inbound}/edit', 'inbound_edit');
+    Route::post('/ajax/inbound/code-check', 'inbound_code_check');
 });
 

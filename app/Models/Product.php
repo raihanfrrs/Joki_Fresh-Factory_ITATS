@@ -23,7 +23,9 @@ class Product extends Model implements HasMedia
         'name',
         'sale_price',
         'weight',
-        'dimension',
+        'length',
+        'width',
+        'height',
         'expired_date',
         'description',
         'status',
@@ -76,5 +78,10 @@ class Product extends Model implements HasMedia
     public function detail_outbound()
     {
         return $this->hasMany(DetailOutbound::class);
+    }
+
+    public function temp_outbound()
+    {
+        return $this->hasMany(TempOutbound::class);
     }
 }

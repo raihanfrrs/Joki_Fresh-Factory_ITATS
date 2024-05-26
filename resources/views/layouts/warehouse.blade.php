@@ -90,8 +90,12 @@
 
         @include('components.modal.modal')
 
-        @if (request()->is('report/daily-sales/*/print', 'report/monthly-sales/*/print', 'report/yearly-sales/*/print'))
+        @if (request()->is('warehouse/*/outbound-print/*'))
             @yield('section-print')
+
+            <script>
+                window.print();
+            </script>
         @else
             <div class="layout-wrapper layout-content-navbar">
                 <div class="layout-container">
@@ -182,6 +186,9 @@
         <script src="{{ asset('assets/js/app-warehouse-supplier-performance-list.js') }}"></script>
     @elseif (request()->is('warehouse/*/outbounds'))
         <script src="{{ asset('assets/js/app-warehouse-outbound-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/outbounds/add'))
+        <script src="{{ asset('assets/js/app-warehouse-customer-outbound-list.js') }}"></script>
+        <script src="{{ asset('assets/js/app-warehouse-product-outbound-list.js') }}"></script>
     @endif
     
     @stack('scripts')

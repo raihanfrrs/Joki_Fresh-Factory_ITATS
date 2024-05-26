@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use Ramsey\Uuid\Uuid;
 use App\Models\Customer;
+use Illuminate\Support\Facades\DB;
 
 class CustomerRepository
 {
@@ -19,5 +21,24 @@ class CustomerRepository
     public function getAllCustomerByWarehouseIdAndTenantId($warehouse_id)
     {
         return Customer::where('warehouse_id', $warehouse_id)->where('tenant_id', auth()->user()->tenant->id)->get();
+    }
+
+    public function createCustomer($data, $warehouse)
+    {
+        DB::transaction(function () use ($data, $warehouse) {
+            $customer = Customer::create([
+                'id' => Uuid::uuid4()->toString(),
+                'tenant_id' => auth()->user()->tenant->id,
+                'warehouse_id' => $warehouse->id,
+                'subscription_id' => $warehouse->rented->warehouse_subscription->subscription_id,
+                'name' => $data->name,
+                'email' => $data->email,
+                'phone' => $data->phone,
+                'address' => $data->address,
+                'type' => $data->type,
+            ]);
+        });
+
+        return true;
     }
 }

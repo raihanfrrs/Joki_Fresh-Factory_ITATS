@@ -102,4 +102,9 @@ class Tenant extends Model implements HasMedia
     {
         return $this->hasMany(DetailOutbound::class);
     }
+
+    public function temp_outbound()
+    {
+        return $this->hasMany(TempOutbound::class);
+    }
 }

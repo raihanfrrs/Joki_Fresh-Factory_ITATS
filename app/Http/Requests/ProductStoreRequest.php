@@ -28,7 +28,9 @@ class ProductStoreRequest extends FormRequest
             'description' => 'nullable',
             'sale_price' => 'required',
             'weight' => 'required',
-            'dimension' => 'nullable',
+            'length' => 'nullable',
+            'width' => 'nullable',
+            'height' => 'nullable',
             'expired_date' => 'nullable|date',
         ];
     }

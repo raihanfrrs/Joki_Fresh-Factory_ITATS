@@ -94,9 +94,9 @@ class AdminRepository
     {
         $admin = self::getAdmin($admin);
         if ($admin->trashed()) {
-            return $admin->forceDelete();
+            return $admin->forceDelete() && $admin->user->forceDelete();
         } else {
-            return $admin->delete();
+            return $admin->delete() && $admin->user->delete();
         }
     }
 }

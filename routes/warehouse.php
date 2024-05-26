@@ -54,12 +54,15 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
 
     Route::controller(CustomerController::class)->group(function () {
         Route::get('warehouse/{warehouse}/customers', 'warehouse_customer_index')->name('warehouse.customers.index');
+        Route::post('warehouse/{warehouse}/customers', 'warehouse_customer_store')->name('warehouse.customers.store');
     });
 
     Route::controller(InboundController::class)->group(function () {
         Route::get('warehouse/{warehouse}/inbounds', 'warehouse_inbound_index')->name('warehouse.inbound.index');
         Route::get('warehouse/{warehouse}/inbounds/add', 'warehouse_inbound_create');
         Route::post('warehouse/{warehouse}/inbounds', 'warehouse_inbound_store')->name('warehouse.inbound.store');
+        Route::patch('warehouse/inbounds/{inbound}', 'warehouse_inbound_update')->name('warehouse.inbound.update');
+        Route::delete('warehouse/inbounds/{inbound}', 'warehouse_inbound_delete')->name('warehouse.inbound.destroy');
     });
 
     Route::controller(InventoryController::class)->group(function () {
@@ -68,7 +71,11 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
 
     Route::controller(OutboundController::class)->group(function () {
         Route::get('warehouse/{warehouse}/outbounds', 'warehouse_outbound_index')->name('warehouse.outbound.index');
+        Route::post('warehouse/{warehouse}/outbounds/store', 'warehouse_outbound_store')->name('warehouse.outbound.store');
         Route::get('warehouse/{warehouse}/outbounds/add', 'warehouse_outbound_create')->name('warehouse.outbound.create');
+        Route::post('warehouse/{warehouse}/outbounds/{customer}/store', 'warehouse_outbound_customer_store')->name('warehouse.outbound.customer.store');
+        Route::get('warehouse/{warehouse}/outbound/{outbound}', 'warehouse_outbound_invoice')->name('warehouse.outbound.invoice');
+        Route::get('warehouse/{warehouse}/outbound-print/{outbound}', 'warehouse_outbound_invoice_print')->name('warehouse.outbound.invoice.print');
     });
 
     Route::controller(warehouseReportingController::class)->group(function () {

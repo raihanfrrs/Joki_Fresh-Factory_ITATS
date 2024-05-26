@@ -77,9 +77,9 @@ class TenantRepository
     {
         $tenant = self::getTenant($tenant);
         if ($tenant->trashed()) {
-            return $tenant->forceDelete();
+            return $tenant->forceDelete() && $tenant->user->forceDelete();
         } else {
-            return $tenant->delete();
+            return $tenant->delete() && $tenant->user->delete();
         }
     }
 }

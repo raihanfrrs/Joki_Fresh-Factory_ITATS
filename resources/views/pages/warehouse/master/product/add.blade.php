@@ -160,9 +160,23 @@
                     @enderror
                 </div>
                 <div class="col-sm-4 fv-plugins-icon-container">
-                    <label class="form-label" for="dimension">Dimension (CM) <sup><span class="text-danger">*Optional</span></sup></label>
-                    <input type="text" id="dimension" name="dimension" class="form-control @error('dimension') is-invalid @enderror" placeholder="100 x 100" value="{{ old('dimension') }}">
-                    @error('dimension')
+                    <label class="form-label" for="length">Length (CM) <sup><span class="text-danger">*Optional</span></sup></label>
+                    <input type="text" id="length" name="length" class="form-control @error('length') is-invalid @enderror" placeholder="100" value="{{ old('length') }}">
+                    @error('length')
+                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-sm-4 fv-plugins-icon-container">
+                    <label class="form-label" for="dimension">Width (CM) <sup><span class="text-danger">*Optional</span></sup></label>
+                    <input type="text" id="width" name="width" class="form-control @error('width') is-invalid @enderror" placeholder="100" value="{{ old('width') }}">
+                    @error('width')
+                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-sm-4 fv-plugins-icon-container">
+                    <label class="form-label" for="height">Height (CM) <sup><span class="text-danger">*Optional</span></sup></label>
+                    <input type="text" id="height" name="height" class="form-control @error('height') is-invalid @enderror" placeholder="100" value="{{ old('height') }}">
+                    @error('height')
                         <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
