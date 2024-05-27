@@ -9,12 +9,13 @@ use App\Repositories\TempTransactionRepository;
 
 class RentedRepository
 {
-    protected $tempTransactionRepository, $tenantRepository;
+    protected $tempTransactionRepository, $tenantRepository, $detailTransactionRepository;
 
-    public function __construct(TempTransactionRepository $tempTransactionRepository, TenantRepository $tenantRepository)
+    public function __construct(TempTransactionRepository $tempTransactionRepository, TenantRepository $tenantRepository, DetailTransactionRepository $detailTransactionRepository)
     {
         $this->tempTransactionRepository = $tempTransactionRepository;
         $this->tenantRepository = $tenantRepository; 
+        $this->detailTransactionRepository = $detailTransactionRepository;
     }
 
     public function getRented($id)
@@ -51,6 +52,17 @@ class RentedRepository
 
     public function updateRentedStatusByTransactionId($id)
     {
+        foreach ($this->detailTransactionRepository->getDetailTransactionByTransactionId($id) as $key => $item) {
+            $subscriptionDurationInMonths = $item->warehouse_subscription->subscription->month_duration;
+
+            $yearsToAdd = floor($subscriptionDurationInMonths / 12);
+            $monthsToAdd = $subscriptionDurationInMonths % 12;
+
+            $this->detailTransactionRepository->getDetailTransactionById($item->id)->update([
+                'started_at' => Carbon::now(),
+                'ended_at' => Carbon::now()->addYears($yearsToAdd)->addMonths($monthsToAdd)
+            ]);
+        }
         
         foreach (self::getRentedByTransactionId($id) as $key => $item) {
             $subscriptionDurationInMonths = self::getRented($item->id)->warehouse_subscription->subscription->month_duration;

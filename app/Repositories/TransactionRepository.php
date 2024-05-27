@@ -133,4 +133,15 @@ class TransactionRepository
                         ->whereYear('transactions.created_at', $year)
                         ->get();
     }
+
+    public function getTransactionWithDetailTransaction($warehouse)
+    {
+        return Transaction::join('detail_transactions', 'transactions.id', '=', 'detail_transactions.transaction_id')
+                        ->join('warehouse_subscriptions', 'detail_transactions.warehouse_subscription_id', '=', 'warehouse_subscriptions.id')
+                        ->join('subscriptions', 'warehouse_subscriptions.subscription_id', '=', 'subscriptions.id')
+                        ->select('detail_transactions.started_at', 'detail_transactions.ended_at', 'detail_transactions.subtotal', 'subscriptions.name as subscription')
+                        ->where('transactions.tenant_id', auth()->user()->tenant->id)
+                        ->where('warehouse_subscriptions.warehouse_id', $warehouse->id)
+                        ->get();
+    }
 }

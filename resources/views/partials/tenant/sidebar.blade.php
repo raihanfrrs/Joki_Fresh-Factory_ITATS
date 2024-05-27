@@ -84,7 +84,7 @@
         <span class="menu-header-text">REPORTING</span>
       </li>
         @foreach ($detail_transactions as $detail_transaction)
-        <li class="menu-item {{ request()->is('reporting/*/sales/*', 'reporting/*/performance/*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->is('reporting/*/sales/*', 'reporting/*/performance/*', 'history/*/*') ? 'open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons ti ti-clipboard-list"></i>
             <div data-i18n="{{ $detail_transaction->warehouse_subscription->warehouse->name }}">{{ $detail_transaction->warehouse_subscription->warehouse->name }}</div>
@@ -134,12 +134,12 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item {{ request()->is('report/daily-sales', 'report/monthly-sales', 'report/yearly-sales') ? 'open' : '' }}">
+            <li class="menu-item {{ request()->is('history/*/*') ? 'open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div data-i18n="History">History</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item">
+                <li class="menu-item {{ request()->is('history/*/rent') ? 'active' : '' }}">
                   <a href="{{ route('reporting.history.index', ['warehouse' => $detail_transaction->warehouse_subscription->warehouse->id, 'type' => 'rent']) }}" class="menu-link">
                     <div data-i18n="Rent">Rent</div>
                   </a>

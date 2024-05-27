@@ -18,19 +18,19 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
-  var dt_brand_table = $('#listProductPerformanceTenantTable');
+  var dt_brand_table = $('#listRentHistoryTenantTable');
   var warehouse_id = dt_brand_table.attr('data-id');
 
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
-      ajax: "/listProductPerformanceTenantTable/"+ warehouse_id,
+      ajax: "/listRentHistoryTenantTable/"+ warehouse_id,
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
-        { data: 'product', class: 'text-center' },
-        { data: 'stock_sold', class: 'text-center' },
-        { data: 'income', class: 'text-center' },
-        { data: 'action' }
+        { data: 'subscription', class: 'text-center' },
+        { data: 'started_at', class: 'text-center' },
+        { data: 'ended_at', class: 'text-center' },
+        { data: 'price', class: 'text-center' }
       ],
       columnDefs: [
         {
@@ -54,28 +54,25 @@ $(function () {
           targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.product;
+            return full.subscription;
           }
         },
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.stock_sold;
+            return full.started_at;
           }
         },
         {
           targets: 4,
           render: function (data, type, full, meta) {
-            return full.income;
+            return full.ended_at;
           }
         },
         {
-          targets: -1,
-          title: 'Actions',
-          searchable: false,
-          orderable: false,
+          targets: 5,
           render: function (data, type, full, meta) {
-              return full.action;
+            return full.price;
           }
         },
       ],
@@ -105,7 +102,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4],
+                columns: [1, 2, 3, 4, 5],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -125,7 +122,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4],
+                columns: [1, 2, 3, 4, 5],
               }
             },
             {
@@ -133,7 +130,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4],
+                columns: [1, 2, 3, 4, 5],
               }
             },
             {
@@ -141,7 +138,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4],
+                columns: [1, 2, 3, 4, 5],
               }
             },
             {
@@ -149,13 +146,12 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4],
+                columns: [1, 2, 3, 4, 5],
               }
             }
           ]
         },
       ],
-      // For responsive popup
       responsive: {
         details: {
           display: $.fn.dataTable.Responsive.display.modal({

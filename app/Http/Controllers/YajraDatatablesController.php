@@ -1224,7 +1224,34 @@ class YajraDatatablesController extends Controller
         ->addColumn('action', function ($model) {
             return view('components.data-ajax.yajra-column.data-tenant-customer-performance-report.action-column', compact('model'))->render();
         })
-        ->rawColumns(['supplier', 'stock_sent', 'action'])
+        ->rawColumns(['customer', 'phone', 'email', 'amount_total', 'grand_total', 'action'])
+        ->make(true);
+    }
+
+    public function tenant_rent_history(Warehouse $warehouse)
+    {
+        $rentals = $this->transactionRepository->getTransactionWithDetailTransaction($warehouse);
+
+        return DataTables::of($rentals)
+        ->addColumn('index', function ($model) use ($rentals) {
+            return $rentals->search($model) + 1;
+        })
+        ->addColumn('subscription', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-rent-history.subscription-column', compact('model'))->render();
+        })
+        ->addColumn('started_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-rent-history.started-at-column', compact('model'))->render();
+        })
+        ->addColumn('ended_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-rent-history.ended-at-column', compact('model'))->render();
+        })
+        ->addColumn('price', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-rent-history.price-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-tenant-rent-history.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['subscription', 'started_at', 'ended_at', 'price', 'action'])
         ->make(true);
     }
 }

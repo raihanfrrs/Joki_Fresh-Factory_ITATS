@@ -195,6 +195,8 @@
             <script src="{{ asset('assets/js/app-tenant-supplier-warehouse-list.js') }}"></script>
         @elseif (request()->is('reporting/*/performance/customer'))
             <script src="{{ asset('assets/js/app-tenant-customer-warehouse-list.js') }}"></script>
+        @elseif (request()->is('history/*/rent'))
+            <script src="{{ asset('assets/js/app-rent-history-tenant-list.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>

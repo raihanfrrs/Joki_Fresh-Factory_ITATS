@@ -60,6 +60,8 @@ class TenantReportingController extends Controller
 
     public function reporting_history(Warehouse $warehouse, $type)
     {
-
+        if ($type == 'rent') {
+            return view('pages.tenant.reporting.history.rent', compact('warehouse'));
+        }
     }
 }
