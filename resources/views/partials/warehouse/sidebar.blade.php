@@ -80,7 +80,7 @@
           <div data-i18n="Inbound">Inbound</div>
         </a>
       </li>
-      {{-- <li class="menu-item {{ request()->is('warehouse/*/inventory', 'warehouse/*/inventory/*') ? 'active' : '' }}">
+      <li class="menu-item {{ request()->is('warehouse/*/inventory', 'warehouse/*/inventory/*') ? 'active' : '' }}">
         <a href="{{ route('warehouse.inventory.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-assembly"></i>
           <div data-i18n="Inventory">Inventory</div>
@@ -91,7 +91,7 @@
           <i class="menu-icon tf-icons ti ti-outbound"></i>
           <div data-i18n="Outbound">Outbound</div>
         </a>
-      </li> --}}
+      </li>
 
       <!-- LAPORAN -->
       {{-- <li class="menu-header small text-uppercase">
