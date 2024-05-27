@@ -11,6 +11,11 @@ class DetailTransactionRepository
         return DetailTransaction::all();
     }
 
+    public function getDetailTransactionById($id)
+    {
+        return DetailTransaction::find($id);
+    }
+
     public function getDetailTransactionByTransactionId($id)
     {
         return DetailTransaction::where('transaction_id', $id)->get();

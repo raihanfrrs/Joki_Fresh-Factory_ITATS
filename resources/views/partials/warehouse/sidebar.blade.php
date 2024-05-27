@@ -57,13 +57,13 @@
           <div data-i18n="Racks">Racks</div>
         </a>
       </li>
-      {{-- <li class="menu-item {{ request()->is('warehouse/*/suppliers', 'warehouse/*/suppliers/*') ? 'active' : '' }}">
+      <li class="menu-item {{ request()->is('warehouse/*/suppliers', 'warehouse/*/suppliers/*') ? 'active' : '' }}">
         <a href="{{ route('warehouse.suppliers.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-truck"></i>
           <div data-i18n="Suppliers">Suppliers</div>
         </a>
       </li>
-      <li class="menu-item {{ request()->is('warehouse/*/customers', 'warehouse/*/customers/*') ? 'active' : '' }}">
+      {{-- <li class="menu-item {{ request()->is('warehouse/*/customers', 'warehouse/*/customers/*') ? 'active' : '' }}">
         <a href="{{ route('warehouse.customers.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-users"></i>
           <div data-i18n="Customers">Customers</div>
@@ -71,7 +71,7 @@
       </li> --}}
 
       <!-- Tools -->
-      {{-- <li class="menu-header small text-uppercase">
+      <li class="menu-header small text-uppercase">
         <span class="menu-header-text">TOOLS</span>
       </li>
       <li class="menu-item {{ request()->is('warehouse/*/inbounds', 'warehouse/*/inbounds/*') ? 'active' : '' }}">
@@ -91,10 +91,10 @@
           <i class="menu-icon tf-icons ti ti-outbound"></i>
           <div data-i18n="Outbound">Outbound</div>
         </a>
-      </li> --}}
+      </li>
 
       <!-- LAPORAN -->
-      {{-- <li class="menu-header small text-uppercase">
+      <li class="menu-header small text-uppercase">
         <span class="menu-header-text">REPORT</span>
       </li>
       <li class="menu-item {{ request()->is('report/daily-sales', 'report/monthly-sales', 'report/yearly-sales') ? 'open' : '' }}">
@@ -139,7 +139,7 @@
             </a>
           </li>
         </ul>
-      </li> --}}
+      </li>
 
       {{-- <li class="menu-item {{ request()->is('report/sales', 'report/sales/*', 'report/performance', 'report/performance/*') ? 'open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
