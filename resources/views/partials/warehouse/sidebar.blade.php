@@ -57,14 +57,13 @@
           <div data-i18n="Racks">Racks</div>
         </a>
       </li>
-      
-      {{-- <li class="menu-item {{ request()->is('warehouse/*/suppliers', 'warehouse/*/suppliers/*') ? 'active' : '' }}">
+      <li class="menu-item {{ request()->is('warehouse/*/suppliers', 'warehouse/*/suppliers/*') ? 'active' : '' }}">
         <a href="{{ route('warehouse.suppliers.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-truck"></i>
           <div data-i18n="Suppliers">Suppliers</div>
         </a>
       </li>
-      <li class="menu-item {{ request()->is('warehouse/*/customers', 'warehouse/*/customers/*') ? 'active' : '' }}">
+      {{-- <li class="menu-item {{ request()->is('warehouse/*/customers', 'warehouse/*/customers/*') ? 'active' : '' }}">
         <a href="{{ route('warehouse.customers.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-users"></i>
           <div data-i18n="Customers">Customers</div>
@@ -80,8 +79,8 @@
           <i class="menu-icon tf-icons ti ti-plane-arrival"></i>
           <div data-i18n="Inbound">Inbound</div>
         </a>
-      </li>
-      <li class="menu-item {{ request()->is('warehouse/*/inventory', 'warehouse/*/inventory/*') ? 'active' : '' }}">
+      </li> --}}
+      {{-- <li class="menu-item {{ request()->is('warehouse/*/inventory', 'warehouse/*/inventory/*') ? 'active' : '' }}">
         <a href="{{ route('warehouse.inventory.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-assembly"></i>
           <div data-i18n="Inventory">Inventory</div>
