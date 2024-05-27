@@ -94,7 +94,7 @@
       </li>
 
       <!-- LAPORAN -->
-      {{-- <li class="menu-header small text-uppercase">
+      <li class="menu-header small text-uppercase">
         <span class="menu-header-text">REPORT</span>
       </li>
       <li class="menu-item {{ request()->is('report/daily-sales', 'report/monthly-sales', 'report/yearly-sales') ? 'open' : '' }}">
@@ -139,7 +139,7 @@
             </a>
           </li>
         </ul>
-      </li> --}}
+      </li>
 
       {{-- <li class="menu-item {{ request()->is('report/sales', 'report/sales/*', 'report/performance', 'report/performance/*') ? 'open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
