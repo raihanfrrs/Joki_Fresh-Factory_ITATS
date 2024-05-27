@@ -31,31 +31,33 @@ class Helpers
         $startedAt = Carbon::parse($startedAt);
         $endedAt = Carbon::parse($endedAt);
 
-        // Hitung sisa waktu antara dua tanggal dalam tahun, bulan, dan hari
-        $remainingYears = $startedAt->diffInYears($endedAt);
-        $remainingMonths = $startedAt->diffInMonths($endedAt) % 12;
-        $remainingDays = $startedAt->diffInDays($endedAt) % 30;
+        // Hitung selisih antara dua tanggal
+        $diff = $startedAt->diff($endedAt);
+
+        // Ekstrak tahun, bulan, dan hari dari selisih
+        $remainingYears = $diff->y;
+        $remainingMonths = $diff->m;
+        $remainingDays = $diff->d;
 
         $remainingTime = '';
 
         // Jika sisa waktu lebih dari 1 tahun, tampilkan dalam format tahun, bulan, hari
         if ($remainingYears > 0) {
-            $remainingTime .= "$remainingYears Year, ";
-            $remainingTime .= "$remainingMonths Month, ";
-            $remainingTime .= "$remainingDays Day";
+            $remainingTime .= "$remainingYears Year" . ($remainingYears > 1 ? 's' : '') . ", ";
         }
-        // Jika sisa waktu kurang dari 1 tahun, tampilkan dalam format bulan, hari
-        elseif ($remainingMonths > 0) {
-            $remainingTime .= "$remainingMonths Month, ";
-            $remainingTime .= "$remainingDays Day";
+        // Jika sisa waktu lebih dari 1 bulan, tampilkan dalam format bulan, hari
+        if ($remainingMonths > 0) {
+            $remainingTime .= "$remainingMonths Month" . ($remainingMonths > 1 ? 's' : '') . ", ";
         }
-        // Jika sisa waktu kurang dari 1 bulan, tampilkan hanya dalam hari
-        else {
-            $remainingTime .= "$remainingDays Day";
-        }
+        // Tampilkan sisa waktu dalam hari
+        $remainingTime .= "$remainingDays Day" . ($remainingDays > 1 ? 's' : '');
+
+        // Trim trailing comma and space
+        $remainingTime = rtrim($remainingTime, ', ');
 
         return $remainingTime;
     }
+
 
     public static function convertGramToKg($weightGram)
     {

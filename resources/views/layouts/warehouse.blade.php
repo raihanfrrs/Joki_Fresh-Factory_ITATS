@@ -111,6 +111,14 @@
                         @yield('section-warehouse')
 
                         <div class="content-backdrop fade"></div>
+                            <footer class="content-footer footer bg-footer-theme">
+                                <div class="container-xxl">
+                                    <div class="footer-container d-flex align-items-center justify-content-center py-2 flex-md-row flex-column font-weight-bold">
+                                        <span>Remaining Rental Time :</span>
+                                        <span class="text-primary">@calculateRemainingTime(\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d') , $warehouse->rented->ended_at)</span>
+                                    </div>
+                                </div>
+                            </footer>
                         </div>
                     </div>
                 </div>
