@@ -57,6 +57,7 @@
           <div data-i18n="Racks">Racks</div>
         </a>
       </li>
+      
       {{-- <li class="menu-item {{ request()->is('warehouse/*/suppliers', 'warehouse/*/suppliers/*') ? 'active' : '' }}">
         <a href="{{ route('warehouse.suppliers.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-truck"></i>
