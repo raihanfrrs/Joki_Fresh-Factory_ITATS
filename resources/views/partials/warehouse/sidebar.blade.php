@@ -3,7 +3,7 @@
     <div class="app-brand demo">
       <a href="{{ route('warehouse.index', $warehouse->id) }}" class="app-brand-link">
         <span class="app-brand-text demo menu-text fw-bold text-uppercase">Tenant</span>
-        <span class="app-brand-text badge rounded-pill bg-{{ $warehouse->rented->status == 'active' ? 'success' : 'danger' }} text-capitalize">{{ $warehouse->rented->status }}</span>
+      <span class="app-brand-text badge rounded-pill bg-{{ $warehouse->rented->status == 'active' ? 'success' : 'danger' }} text-capitalize"></span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
