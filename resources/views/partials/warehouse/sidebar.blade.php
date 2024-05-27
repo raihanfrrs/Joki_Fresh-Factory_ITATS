@@ -71,7 +71,7 @@
       </li> --}}
 
       <!-- Tools -->
-      {{-- <li class="menu-header small text-uppercase">
+      <li class="menu-header small text-uppercase">
         <span class="menu-header-text">TOOLS</span>
       </li>
       <li class="menu-item {{ request()->is('warehouse/*/inbounds', 'warehouse/*/inbounds/*') ? 'active' : '' }}">
@@ -79,7 +79,7 @@
           <i class="menu-icon tf-icons ti ti-plane-arrival"></i>
           <div data-i18n="Inbound">Inbound</div>
         </a>
-      </li> --}}
+      </li>
       {{-- <li class="menu-item {{ request()->is('warehouse/*/inventory', 'warehouse/*/inventory/*') ? 'active' : '' }}">
         <a href="{{ route('warehouse.inventory.index', $warehouse->id) }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-assembly"></i>
