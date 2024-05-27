@@ -13,7 +13,9 @@ class DetailTransaction extends Model
         'id',
         'transaction_id',
         'warehouse_subscription_id',
-        'subtotal'
+        'subtotal',
+        'started_at',
+        'ended_at',
     ];
 
     public function transaction()

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignIdFor(Transaction::class);
             $table->foreignIdFor(WarehouseSubscription::class);
             $table->bigInteger('subtotal');
+            $table->date('started_at')->nullable();
+            $table->date('ended_at')->nullable();
             $table->timestamps();
         });
     }
