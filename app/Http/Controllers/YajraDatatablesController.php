@@ -858,22 +858,22 @@ class YajraDatatablesController extends Controller
 
     public function warehouse_supplier_performance(Warehouse $warehouse)
     {
-        $suppliers = $this->supplierRepository->getAllSupplierByWarehouseIdAndTenantId($warehouse->id);
+        $suppliers = $this->supplierRepository->getAllSupplierWithJoinBatch($warehouse);
 
         return DataTables::of($suppliers)
         ->addColumn('index', function ($model) use ($suppliers) {
             return $suppliers->search($model) + 1;
         })
-        ->addColumn('name', function ($model) {
-            return view('components.data-ajax.yajra-column.data-warehouse-supplier-performance.name-column', compact('model'))->render();
+        ->addColumn('supplier', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier-performance-in-rental.supplier-column', compact('model'))->render();
         })
-        ->addColumn('product_amount', function ($model) {
-            return view('components.data-ajax.yajra-column.data-warehouse-supplier-performance.product-amount-column', compact('model'))->render();
+        ->addColumn('stock_sent', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier-performance-in-rental.stock-sent-column', compact('model'))->render();
         })
         ->addColumn('action', function ($model) {
-            return view('components.data-ajax.yajra-column.data-warehouse-supplier-performance.action-column', compact('model'))->render();
+            return view('components.data-ajax.yajra-column.data-warehouse-supplier-performance-in-rental.action-column', compact('model'))->render();
         })
-        ->rawColumns(['name', 'product_amount', 'action'])
+        ->rawColumns(['supplier', 'stock_sent', 'action'])
         ->make(true);
     }
 
@@ -1177,6 +1177,30 @@ class YajraDatatablesController extends Controller
         ->make(true);
     }
 
+    public function warehouse_product_performance(Warehouse $warehouse)
+    {
+        $products = $this->productRepository->getAllProductWithJoinDetailOutbound($warehouse);
+
+        return DataTables::of($products)
+        ->addColumn('index', function ($model) use ($products) {
+            return $products->search($model) + 1;
+        })
+        ->addColumn('product', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-performance-in-rental.product-column', compact('model'))->render();
+        })
+        ->addColumn('stock_sold', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-performance-in-rental.stock-sold-column', compact('model'))->render();
+        })
+        ->addColumn('income', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-performance-in-rental.income-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-product-performance-in-rental.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['product', 'stock_sold', 'income', 'action'])
+        ->make(true);
+    }
+
     public function tenant_supplier_performance(Warehouse $warehouse)
     {
         $suppliers = $this->supplierRepository->getAllSupplierWithJoinBatch($warehouse);
@@ -1228,6 +1252,36 @@ class YajraDatatablesController extends Controller
         ->make(true);
     }
 
+    public function warehouse_customer_performance(Warehouse $warehouse)
+    {
+        $customers = $this->customerRepository->getAllCustomerWithJoinOutbound($warehouse);
+
+        return DataTables::of($customers)
+        ->addColumn('index', function ($model) use ($customers) {
+            return $customers->search($model) + 1;
+        })
+        ->addColumn('customer', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer-performance-in-rental.customer-column', compact('model'))->render();
+        })
+        ->addColumn('phone', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer-performance-in-rental.phone-column', compact('model'))->render();
+        })
+        ->addColumn('email', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer-performance-in-rental.email-column', compact('model'))->render();
+        })
+        ->addColumn('amount_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer-performance-in-rental.amount-total-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer-performance-in-rental.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-customer-performance-in-rental.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['customer', 'phone', 'email', 'amount_total', 'grand_total', 'action'])
+        ->make(true);
+    }
+
     public function tenant_rent_history(Warehouse $warehouse)
     {
         $rentals = $this->transactionRepository->getTransactionWithDetailTransaction($warehouse);
@@ -1252,6 +1306,78 @@ class YajraDatatablesController extends Controller
             return view('components.data-ajax.yajra-column.data-tenant-rent-history.action-column', compact('model'))->render();
         })
         ->rawColumns(['subscription', 'started_at', 'ended_at', 'price', 'action'])
+        ->make(true);
+    }
+
+    public function warehouse_sales_report_daily(Warehouse $warehouse)
+    {
+        $outbounds = $this->outboundRepository->getAllOutboundsGroupByPeriodically('day', $warehouse);
+
+        return DataTables::of($outbounds)
+        ->addColumn('index', function ($model) use ($outbounds) {
+            return $outbounds->search($model) + 1;
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-daily-sales-report.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('amount_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-daily-sales-report.amount-total-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-daily-sales-report.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-daily-sales-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['created_at', 'amount_total', 'grand_total', 'action'])
+        ->make(true);
+    }
+
+    public function warehouse_sales_report_monthly(Warehouse $warehouse)
+    {
+        $outbounds = $this->outboundRepository->getAllOutboundsGroupByPeriodically('month', $warehouse);
+
+        return DataTables::of($outbounds)
+        ->addColumn('index', function ($model) use ($outbounds) {
+            return $outbounds->search($model) + 1;
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-monthly-sales-report.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('amount_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-monthly-sales-report.amount-total-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-monthly-sales-report.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-monthly-sales-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['created_at', 'amount_total', 'grand_total', 'action'])
+        ->make(true);
+    }
+
+    public function warehouse_sales_report_yearly(Warehouse $warehouse)
+    {
+        $outbounds = $this->outboundRepository->getAllOutboundsGroupByPeriodically('year', $warehouse);
+
+        return DataTables::of($outbounds)
+        ->addColumn('index', function ($model) use ($outbounds) {
+            return $outbounds->search($model) + 1;
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-yearly-sales-report.created-at-column', compact('model'))->render();
+        })
+        ->addColumn('amount_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-yearly-sales-report.amount-total-column', compact('model'))->render();
+        })
+        ->addColumn('grand_total', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-yearly-sales-report.grand-total-column', compact('model'))->render();
+        })
+        ->addColumn('action', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-yearly-sales-report.action-column', compact('model'))->render();
+        })
+        ->rawColumns(['created_at', 'amount_total', 'grand_total', 'action'])
         ->make(true);
     }
 }

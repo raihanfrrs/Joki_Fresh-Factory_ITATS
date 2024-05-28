@@ -79,7 +79,11 @@ Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
     });
 
     Route::controller(warehouseReportingController::class)->group(function () {
-        Route::get('warehouse/{warehouse}/supplier-performance', 'warehouse_supplier_performance_reporting_index')->name('warehouse.supplier.performance.index');
-        Route::get('warehouse/{warehouse}/supplier-performance/{supplier}/print', 'warehouse_supplier_performance_reporting_print')->name('warehouse.supplier.performance.print');
+        Route::get('warehouse/{warehouse}/reporting-sales/{period}', 'warehouse_reporting_sales')->name('reporting.periodic.warehouse.sales.index');
+        Route::get('warehouse/{warehouse}/sales-print-daily/{date}', 'warehouse_reporting_daily_sales_print')->name('reporting.periodic.warehouse.daily.sales.print');
+        Route::get('warehouse/{warehouse}/sales-print-monthly/{date}', 'warehouse_reporting_monthly_sales_print')->name('reporting.periodic.warehouse.monthly.sales.print');
+        Route::get('warehouse/{warehouse}/sales-print-yearly/{date}', 'warehouse_reporting_yearly_sales_print')->name('reporting.periodic.warehouse.yearly.sales.print');
+
+        Route::get('warehouse/{warehouse}/performance/{type}', 'warehouse_reporting_performance')->name('warehouse.performance.index');
     });
 });

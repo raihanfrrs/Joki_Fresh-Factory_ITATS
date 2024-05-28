@@ -90,7 +90,7 @@
 
         @include('components.modal.modal')
 
-        @if (request()->is('warehouse/*/outbound-print/*'))
+        @if (request()->is('warehouse/*/outbound-print/*', 'warehouse/*/sales-print-daily/*', 'warehouse/*/sales-print-monthly/*', 'warehouse/*/sales-print-yearly/*'))
             @yield('section-print')
 
             <script>
@@ -190,13 +190,23 @@
         <script src="{{ asset('assets/js/wizard-ex-inbound-listing.js') }}"></script>
     @elseif (request()->is('warehouse/*/inventory', 'warehouse/*/inventory/*'))
         <script src="{{ asset('assets/js/app-warehouse-inventory-list.js') }}"></script>
-    @elseif (request()->is('warehouse/*/supplier-performance', 'warehouse/*/supplier-performance/*'))
-        <script src="{{ asset('assets/js/app-warehouse-supplier-performance-list.js') }}"></script>
     @elseif (request()->is('warehouse/*/outbounds'))
         <script src="{{ asset('assets/js/app-warehouse-outbound-list.js') }}"></script>
     @elseif (request()->is('warehouse/*/outbounds/add'))
         <script src="{{ asset('assets/js/app-warehouse-customer-outbound-list.js') }}"></script>
         <script src="{{ asset('assets/js/app-warehouse-product-outbound-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/performance/supplier'))
+        <script src="{{ asset('assets/js/app-warehouse-supplier-performance-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/performance/product'))
+        <script src="{{ asset('assets/js/app-warehouse-product-performance-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/performance/customer'))
+        <script src="{{ asset('assets/js/app-warehouse-customer-performance-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/reporting-sales/daily'))
+        <script src="{{ asset('assets/js/app-daily-sales-report-warehouse-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/reporting-sales/monthly'))
+        <script src="{{ asset('assets/js/app-monthly-sales-report-warehouse-list.js') }}"></script>
+    @elseif (request()->is('warehouse/*/reporting-sales/yearly'))
+        <script src="{{ asset('assets/js/app-yearly-sales-report-warehouse-list.js') }}"></script>
     @endif
     
     @stack('scripts')
