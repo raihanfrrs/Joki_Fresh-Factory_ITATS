@@ -31,7 +31,6 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listWarehouseCustomersTable/{warehouse}', 'warehouse_customer');
     Route::get('listWarehouseInboundsTable/{warehouse}', 'warehouse_inbound');
     Route::get('listWarehouseInventoriesTable/{warehouse}', 'warehouse_inventory');
-    Route::get('listWarehouseSupplierPerformanceTable/{warehouse}', 'warehouse_supplier_performance');
     Route::get('listDetailSubscriptionsTable/{subscription}', 'admin_detail_subscription');
     Route::get('listTaxesReportTable', 'admin_taxes_report');
     Route::get('listDetailTaxesReportTable/{tax}', 'admin_detail_taxes_report');
@@ -46,6 +45,12 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listSupplierPerformanceTenantTable/{warehouse}', 'tenant_supplier_performance');
     Route::get('listCustomerPerformanceTenantTable/{warehouse}', 'tenant_customer_performance');
     Route::get('listRentHistoryTenantTable/{warehouse}', 'tenant_rent_history');
+    Route::get('listSupplierPerformanceWarehouseTable/{warehouse}', 'warehouse_supplier_performance');
+    Route::get('listProductPerformanceWarehouseTable/{warehouse}', 'warehouse_product_performance');
+    Route::get('listCustomerPerformanceWarehouseTable/{warehouse}', 'warehouse_customer_performance');
+    Route::get('listDailySalesReportWarehouseTable/{warehouse}', 'warehouse_sales_report_daily');
+    Route::get('listMonthlySalesReportWarehouseTable/{warehouse}', 'warehouse_sales_report_monthly');
+    Route::get('listYearlySalesReportWarehouseTable/{warehouse}', 'warehouse_sales_report_yearly');
 });
 
 Route::controller(AjaxController::class)->group(function () {
