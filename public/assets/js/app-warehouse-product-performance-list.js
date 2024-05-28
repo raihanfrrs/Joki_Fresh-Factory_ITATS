@@ -18,18 +18,19 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
-  var dt_brand_table = $('#listSupplierPerformanceWarehouseTable');
+  var dt_brand_table = $('#listProductPerformanceWarehouseTable');
   var warehouse_id = dt_brand_table.attr('data-id');
 
   if (dt_brand_table.length) {
     var dt_user = dt_brand_table.DataTable({
-      ajax: "/listSupplierPerformanceWarehouseTable/"+ warehouse_id,
+      ajax: "/listProductPerformanceWarehouseTable/"+ warehouse_id,
       columns: [
         { data: '' },
         { data: 'index', class: 'text-center' },
-        { data: 'supplier', class: 'text-center' },
-        { data: 'stock_sent', class: 'text-center' },
-        { data: 'action', class: 'text-center' },
+        { data: 'product', class: 'text-center' },
+        { data: 'stock_sold', class: 'text-center' },
+        { data: 'income', class: 'text-center' },
+        { data: 'action' }
       ],
       columnDefs: [
         {
@@ -53,13 +54,19 @@ $(function () {
           targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            return full.supplier;
+            return full.product;
           }
         },
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.stock_sent;
+            return full.stock_sold;
+          }
+        },
+        {
+          targets: 4,
+          render: function (data, type, full, meta) {
+            return full.income;
           }
         },
         {
@@ -98,7 +105,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3],
+                columns: [1, 2, 3, 4],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -118,7 +125,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3],
+                columns: [1, 2, 3, 4],
               }
             },
             {
@@ -126,7 +133,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3],
+                columns: [1, 2, 3, 4],
               }
             },
             {
@@ -134,7 +141,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3],
+                columns: [1, 2, 3, 4],
               }
             },
             {
@@ -142,7 +149,7 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3],
+                columns: [1, 2, 3, 4],
               }
             }
           ]
@@ -183,7 +190,6 @@ $(function () {
       }
     });
   }
-
 
   // Filter form control to default size
   // ? setTimeout used for multilingual table initialization

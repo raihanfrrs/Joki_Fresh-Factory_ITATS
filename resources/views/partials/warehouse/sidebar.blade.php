@@ -97,45 +97,51 @@
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">REPORT</span>
       </li>
-      <li class="menu-item {{ request()->is('report/daily-sales', 'report/monthly-sales', 'report/yearly-sales') ? 'open' : '' }}">
+      <li class="menu-item {{ request()->is('warehouse/*/reporting-sales/*') ? 'open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons ti ti-clipboard-list"></i>
           <div data-i18n="Sales">Sales</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item {{ request()->is('report/daily-sales') ? 'active' : '' }}">
-            <a href="{{ route('report.daily.sales') }}" class="menu-link">
+          <li class="menu-item {{ request()->is('warehouse/*/reporting-sales/daily') ? 'active' : '' }}">
+            <a href="{{ route('reporting.periodic.warehouse.sales.index', ['warehouse' => $warehouse->id, 'period' => 'daily']) }}" class="menu-link">
               <div data-i18n="Daily">Daily</div>
             </a>
           </li>
-          <li class="menu-item {{ request()->is('report/monthly-sales') ? 'active' : '' }}">
-            <a href="{{ route('report.monthly.sales') }}" class="menu-link">
+          <li class="menu-item {{ request()->is('warehouse/*/reporting-sales/monthly') ? 'active' : '' }}">
+            <a href="{{ route('reporting.periodic.warehouse.sales.index', ['warehouse' => $warehouse->id, 'period' => 'monthly']) }}" class="menu-link">
               <div data-i18n="Monthly">Monthly</div>
             </a>
           </li>
-          <li class="menu-item {{ request()->is('report/yearly-sales') ? 'active' : '' }}">
-            <a href="{{ route('report.yearly.sales') }}" class="menu-link">
+          <li class="menu-item {{ request()->is('warehouse/*/reporting-sales/yearly') ? 'active' : '' }}">
+            <a href="{{ route('reporting.periodic.warehouse.sales.index', ['warehouse' => $warehouse->id, 'period' => 'yearly']) }}" class="menu-link">
               <div data-i18n="Yearly">Yearly</div>
             </a>
           </li>
         </ul>
       </li>
-      <li class="menu-item {{ request()->is('report/daily-sales', 'report/monthly-sales', 'report/yearly-sales') ? 'open' : '' }}">
+      <li class="menu-item {{ request()->is('warehouse/*/performance/*') ? 'open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons ti ti-clipboard-list"></i>
           <div data-i18n="Performance">Performance</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item {{ request()->is('warehouse/*/product') ? 'active' : '' }}">
-            <a href="" class="menu-link">
+          <li class="menu-item {{ request()->is('warehouse/*/performance/product') ? 'active' : '' }}">
+            <a href="{{ route('warehouse.performance.index', ['warehouse' => $warehouse->id, 'type' => 'product']) }}" class="menu-link">
               <i class="menu-icon tf-icons ti ti-clipboard-list"></i>
-              <div data-i18n="Product Performance">Product Performance</div>
+              <div data-i18n="Product">Product</div>
             </a>
           </li>
-          <li class="menu-item {{ request()->is('warehouse/*/supplier-performance') ? 'active' : '' }}">
-            <a href="{{ route('warehouse.supplier.performance.index', $warehouse->id) }}" class="menu-link">
+          <li class="menu-item {{ request()->is('warehouse/*/performance/supplier') ? 'active' : '' }}">
+            <a href="{{ route('warehouse.performance.index', ['warehouse' => $warehouse->id, 'type' => 'supplier']) }}" class="menu-link">
               <i class="menu-icon tf-icons ti ti-clipboard-list"></i>
-              <div data-i18n="Supplier Performance">Supplier Performance</div>
+              <div data-i18n="Supplier">Supplier</div>
+            </a>
+          </li>
+          <li class="menu-item {{ request()->is('warehouse/*/performance/customer') ? 'active' : '' }}">
+            <a href="{{ route('warehouse.performance.index', ['warehouse' => $warehouse->id, 'type' => 'customer']) }}" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-clipboard-list"></i>
+              <div data-i18n="Customer">Customer</div>
             </a>
           </li>
         </ul>
