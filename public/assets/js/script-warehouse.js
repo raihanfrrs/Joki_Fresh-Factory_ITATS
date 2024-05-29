@@ -238,3 +238,69 @@ $(document).on('click', '#button-trigger-modal-edit-inbound', function () {
         }
     });
   });
+
+$(document).on('click', '#button-trigger-modal-detail-warehouse-product-performance', function () {
+    let id = $(this).attr('data-id');
+  
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+  
+    $.ajax({
+        url: "/ajax/warehouse-product-performance/"+id+"/detail",
+        method: "get",
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#data-detail-warehouse-product-performance-modal").html(response);
+        },
+        error: function(xhr, status, error) {
+        }
+    });
+});
+
+$(document).on('click', '#button-trigger-modal-detail-warehouse-supplier-performance', function () {
+    let id = $(this).attr('data-id');
+  
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+  
+    $.ajax({
+        url: "/ajax/warehouse-supplier-performance/"+id+"/detail",
+        method: "get",
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#data-detail-warehouse-supplier-performance-modal").html(response);
+        },
+        error: function(xhr, status, error) {
+        }
+    });
+});
+
+$(document).on('click', '#button-trigger-modal-detail-warehouse-customer-performance', function () {
+    let id = $(this).attr('data-id');
+  
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+  
+    $.ajax({
+        url: "/ajax/warehouse-customer-performance/"+id+"/detail",
+        method: "get",
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#data-detail-warehouse-customer-performance-modal").html(response);
+        },
+        error: function(xhr, status, error) {
+        }
+    });
+});
