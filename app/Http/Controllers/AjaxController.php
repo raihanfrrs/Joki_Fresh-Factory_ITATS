@@ -10,6 +10,7 @@ use App\Models\Admin;
 use App\Models\Batch;
 use App\Models\Tenant;
 use App\Models\Product;
+use App\Models\Customer;
 use App\Models\Supplier;
 use App\Models\Warehouse;
 use App\Models\Subscription;
@@ -230,5 +231,20 @@ class AjaxController extends Controller
     public function inbound_code_check(Request $request)
     {
         return $this->inboundRepository->checkInboundCode($request);
+    }
+
+    public function warehouse_product_performance_detail(Product $product)
+    {
+        return view('components.data-ajax.pages.modal.data-warehouse-product-performance-modal', compact('product'));
+    }
+
+    public function warehouse_supplier_performance_detail(Supplier $supplier)
+    {
+        return view('components.data-ajax.pages.modal.data-warehouse-supplier-performance-modal', compact('supplier'));
+    }
+
+    public function warehouse_customer_performance_detail(Customer $customer)
+    {
+        return view('components.data-ajax.pages.modal.data-warehouse-customer-performance-modal', compact('customer'));
     }
 }

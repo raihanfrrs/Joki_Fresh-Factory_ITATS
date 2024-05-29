@@ -51,6 +51,9 @@ Route::controller(YajraDatatablesController::class)->group(function () {
     Route::get('listDailySalesReportWarehouseTable/{warehouse}', 'warehouse_sales_report_daily');
     Route::get('listMonthlySalesReportWarehouseTable/{warehouse}', 'warehouse_sales_report_monthly');
     Route::get('listYearlySalesReportWarehouseTable/{warehouse}', 'warehouse_sales_report_yearly');
+    Route::get('listProductPerformanceReportTable/{product}', 'warehouse_detail_product_performance');
+    Route::get('listSupplierPerformanceReportTable/{supplier}', 'warehouse_detail_supplier_performance');
+    Route::get('listCustomerPerformanceReportTable/{customer}', 'warehouse_detail_customer_performance');
 });
 
 Route::controller(AjaxController::class)->group(function () {
@@ -83,5 +86,8 @@ Route::controller(AjaxController::class)->group(function () {
     Route::post('/ajax/temp-outbound/{temp_outbound}/delete', 'temp_outbounds_destroy');
     Route::get('/ajax/inbound/{inbound}/edit', 'inbound_edit');
     Route::post('/ajax/inbound/code-check', 'inbound_code_check');
+    Route::get('/ajax/warehouse-product-performance/{product}/detail', 'warehouse_product_performance_detail');
+    Route::get('/ajax/warehouse-supplier-performance/{supplier}/detail', 'warehouse_supplier_performance_detail');
+    Route::get('/ajax/warehouse-customer-performance/{customer}/detail', 'warehouse_customer_performance_detail');
 });
 

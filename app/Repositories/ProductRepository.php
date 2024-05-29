@@ -189,7 +189,7 @@ class ProductRepository
     public function getAllProductWithJoinDetailOutbound($warehouse)
     {
         return Product::join('detail_outbounds', 'products.id', '=', 'detail_outbounds.product_id')
-                    ->select('products.name as product_name', DB::raw('SUM(detail_outbounds.quantity) as quantity'), DB::raw('SUM(detail_outbounds.subtotal) as subtotal'))
+                    ->select('products.id', 'products.name as product_name', DB::raw('SUM(detail_outbounds.quantity) as quantity'), DB::raw('SUM(detail_outbounds.subtotal) as subtotal'))
                     ->where('products.warehouse_id', $warehouse->id)
                     ->where('products.tenant_id', auth()->user()->tenant->id)
                     ->groupBy('products.id')

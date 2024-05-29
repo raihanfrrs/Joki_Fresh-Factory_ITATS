@@ -6,6 +6,9 @@ use App\Models\Tax;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Rented;
+use App\Models\Product;
+use App\Models\Customer;
+use App\Models\Supplier;
 use App\Models\Warehouse;
 use App\Models\Transaction;
 use App\Models\Subscription;
@@ -25,9 +28,9 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Repositories\WarehouseRepository;
 use App\Repositories\TransactionRepository;
 use App\Repositories\SubscriptionRepository;
+use App\Repositories\TempOutboundRepository;
 use App\Repositories\ProductCategoryRepository;
 use App\Repositories\DetailTransactionRepository;
-use App\Repositories\TempOutboundRepository;
 use App\Repositories\WarehouseCategoryRepository;
 use App\Repositories\WarehouseSubscriptionRepository;
 
@@ -1378,6 +1381,78 @@ class YajraDatatablesController extends Controller
             return view('components.data-ajax.yajra-column.data-warehouse-yearly-sales-report.action-column', compact('model'))->render();
         })
         ->rawColumns(['created_at', 'amount_total', 'grand_total', 'action'])
+        ->make(true);
+    }
+    
+    public function warehouse_detail_product_performance(Product $product)
+    {
+        $products = $product->detail_outbound;
+
+        return DataTables::of($products)
+        ->addColumn('index', function ($model) use ($products) {
+            return $products->search($model) + 1;
+        })
+        ->addColumn('product', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-product-performance.product-column', compact('model'))->render();
+        })
+        ->addColumn('date_sales', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-product-performance.date-sales-column', compact('model'))->render();
+        })
+        ->addColumn('quantity', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-product-performance.quantity-column', compact('model'))->render();
+        })
+        ->addColumn('subtotal', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-product-performance.subtotal-column', compact('model'))->render();
+        })
+        ->rawColumns(['product', 'date_sales', 'quantity', 'subtotal'])
+        ->make(true);
+    }
+
+    public function warehouse_detail_supplier_performance(Supplier $supplier)
+    {
+        $suppliers = $supplier->batch;
+
+        return DataTables::of($suppliers)
+        ->addColumn('index', function ($model) use ($suppliers) {
+            return $suppliers->search($model) + 1;
+        })
+        ->addColumn('supplier', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-supplier-performance.supplier-column', compact('model'))->render();
+        })
+        ->addColumn('product', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-supplier-performance.product-column', compact('model'))->render();
+        })
+        ->addColumn('arrival_date', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-supplier-performance.arrival-date-column', compact('model'))->render();
+        })
+        ->addColumn('quantity', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-supplier-performance.quantity-column', compact('model'))->render();
+        })
+        ->rawColumns(['supplier', 'product', 'arrival_date', 'quantity'])
+        ->make(true);
+    }
+
+    public function warehouse_detail_customer_performance(Customer $customer)
+    {
+        $customers = $customer->outbound;
+
+        return DataTables::of($customers)
+        ->addColumn('index', function ($model) use ($customers) {
+            return $customers->search($model) + 1;
+        })
+        ->addColumn('customer', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-customer-performance.customer-column', compact('model'))->render();
+        })
+        ->addColumn('date_issue', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-customer-performance.date-issue-column', compact('model'))->render();
+        })
+        ->addColumn('total_product', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-customer-performance.total-product-column', compact('model'))->render();
+        })
+        ->addColumn('total_spend', function ($model) {
+            return view('components.data-ajax.yajra-column.data-warehouse-detail-customer-performance.total-spend-column', compact('model'))->render();
+        })
+        ->rawColumns(['supplier', 'total_product', 'total_spend'])
         ->make(true);
     }
 }
