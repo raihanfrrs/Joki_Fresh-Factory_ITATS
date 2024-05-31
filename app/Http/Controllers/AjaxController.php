@@ -247,4 +247,19 @@ class AjaxController extends Controller
     {
         return view('components.data-ajax.pages.modal.data-warehouse-customer-performance-modal', compact('customer'));
     }
+
+    public function tenant_product_performance_detail(Product $product)
+    {
+        return view('components.data-ajax.pages.modal.data-tenant-product-performance-modal', compact('product'));
+    }
+
+    public function tenant_supplier_performance_detail(Supplier $supplier)
+    {
+        return view('components.data-ajax.pages.modal.data-tenant-supplier-performance-modal', compact('supplier'));
+    }
+
+    public function tenant_customer_performance_detail(Customer $customer)
+    {
+        return view('components.data-ajax.pages.modal.data-tenant-customer-performance-modal', compact('customer'));
+    }
 }

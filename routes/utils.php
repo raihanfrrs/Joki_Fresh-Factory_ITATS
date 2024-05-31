@@ -89,5 +89,7 @@ Route::controller(AjaxController::class)->group(function () {
     Route::get('/ajax/warehouse-product-performance/{product}/detail', 'warehouse_product_performance_detail');
     Route::get('/ajax/warehouse-supplier-performance/{supplier}/detail', 'warehouse_supplier_performance_detail');
     Route::get('/ajax/warehouse-customer-performance/{customer}/detail', 'warehouse_customer_performance_detail');
+    Route::get('/ajax/tenant-product-performance/{product}/detail', 'tenant_product_performance_detail');
+    Route::get('/ajax/tenant-supplier-performance/{supplier}/detail', 'tenant_supplier_performance_detail');
+    Route::get('/ajax/tenant-customer-performance/{customer}/detail', 'tenant_customer_performance_detail');
 });
-

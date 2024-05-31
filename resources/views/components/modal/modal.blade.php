@@ -236,3 +236,45 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="detailTenantProductPerformance" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+    <div class="modal-content p-3 p-md-5">
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="text-center mb-4">
+          <h3 class="mb-2">Detail Product Performance</h3>
+        </div>
+        <div id="data-detail-tenant-product-performance-modal"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="detailTenantSupplierPerformance" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+    <div class="modal-content p-3 p-md-5">
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="text-center mb-4">
+          <h3 class="mb-2">Detail Supplier Performance</h3>
+        </div>
+        <div id="data-detail-tenant-supplier-performance-modal"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="detailTenantCustomerPerformance" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+    <div class="modal-content p-3 p-md-5">
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="text-center mb-4">
+          <h3 class="mb-2">Detail Customer Performance</h3>
+        </div>
+        <div id="data-detail-tenant-customer-performance-modal"></div>
+      </div>
+    </div>
+  </div>
+</div>
