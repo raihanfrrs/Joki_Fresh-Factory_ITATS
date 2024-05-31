@@ -75,3 +75,72 @@ $(document).on('change', '#warehouse_subscription_id', function () {
         }
     });
 });
+
+$(document).on('click', '#button-trigger-modal-detail-tenant-product-performance', function () {
+    let id = $(this).attr('data-id');
+
+  
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+  
+    $.ajax({
+        url: "/ajax/tenant-product-performance/"+id+"/detail",
+        method: "get",
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#data-detail-tenant-product-performance-modal").html(response);
+        },
+        error: function(xhr, status, error) {
+        }
+    });
+});
+
+$(document).on('click', '#button-trigger-modal-detail-tenant-supplier-performance', function () {
+    let id = $(this).attr('data-id');
+
+  
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+  
+    $.ajax({
+        url: "/ajax/tenant-supplier-performance/"+id+"/detail",
+        method: "get",
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#data-detail-tenant-supplier-performance-modal").html(response);
+        },
+        error: function(xhr, status, error) {
+        }
+    });
+});
+
+$(document).on('click', '#button-trigger-modal-detail-tenant-customer-performance', function () {
+    let id = $(this).attr('data-id');
+
+  
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+  
+    $.ajax({
+        url: "/ajax/tenant-customer-performance/"+id+"/detail",
+        method: "get",
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#data-detail-tenant-customer-performance-modal").html(response);
+        },
+        error: function(xhr, status, error) {
+        }
+    });
+});
