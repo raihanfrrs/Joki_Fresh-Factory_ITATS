@@ -50,6 +50,11 @@ class RentedRepository
         }
     }
 
+    public function deleteRentWhenExpiredToday()
+    {
+        return Rented::whereDate('ended_at', Carbon::today())->delete();
+    }
+
     public function updateRentedStatusByTransactionId($id)
     {
         foreach ($this->detailTransactionRepository->getDetailTransactionByTransactionId($id) as $key => $item) {
