@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\RentedRepository;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
@@ -10,17 +11,22 @@ use App\Repositories\TransactionRepository;
 
 class LayoutController extends Controller
 {
-    protected $warehouseRepository, $transactionRepository, $userRepository;
+    protected $warehouseRepository, $transactionRepository, $userRepository, $rentedRepository;
 
-    public function __construct(WarehouseRepository $warehouseRepository, TransactionRepository $transactionRepository, UserRepository $userRepository)
+    public function __construct(WarehouseRepository $warehouseRepository, TransactionRepository $transactionRepository, UserRepository $userRepository, RentedRepository $rentedRepository)
     {
         $this->warehouseRepository = $warehouseRepository;
         $this->transactionRepository = $transactionRepository;
         $this->userRepository = $userRepository;
+        $this->rentedRepository = $rentedRepository;
     }
 
     public function index()
     {
+        if (Auth::check()) {
+            $this->rentedRepository->deleteRentWhenExpiredToday();
+        }
+
         if (Auth::check() && auth()->user()->level == 'tenant') {
             return view('pages.tenant.dashboard.index');
         } elseif (Auth::check() && auth()->user()->level == 'admin') {
