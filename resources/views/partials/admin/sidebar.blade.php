@@ -27,11 +27,6 @@
               <div data-i18n="Analitik">Analitik</div>
             </a>
           </li>
-          <li class="menu-item {{ request()->is('dashboard/crm') ? 'active' : '' }}">
-            <a href="" class="menu-link">
-              <div data-i18n="CRM">CRM</div>
-            </a>
-          </li>
         </ul>
       </li>
 

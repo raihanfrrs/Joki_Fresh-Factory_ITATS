@@ -66,6 +66,8 @@
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/ui-carousel.css') }}" />
         @elseif (request()->is('admin/profile', 'admin/teams'))
             <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-profile.css') }}" />
+        @elseif (request()->is('/'))
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/cards-advance.css') }}" />
         @endif
     @else
         <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
@@ -210,6 +212,8 @@
             <script src="{{ asset('assets/js/app-yearly-sales-report-list.js') }}"></script>
         @elseif (request()->is('report/taxes'))
             <script src="{{ asset('assets/js/app-report-taxes-list.js') }}"></script>
+        @elseif (request()->is('/'))
+            <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
