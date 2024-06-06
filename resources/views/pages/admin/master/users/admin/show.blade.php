@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('title')
+    Master - Detail Admin
+@endsection
+
 @section('section-admin')
 <div id="attribute" data-attribute="{{ auth()->user()->attribute }}"></div>
 <div class="container-xxl flex-grow-1 container-p-y">

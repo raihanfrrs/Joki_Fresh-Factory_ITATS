@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('title')
+    Master - Edit Warehouse
+@endsection
+
 @section('section-admin')
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4">

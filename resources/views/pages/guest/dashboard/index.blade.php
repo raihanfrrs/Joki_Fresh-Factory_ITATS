@@ -1,5 +1,9 @@
 @extends('layouts.guest')
 
+@section('title')
+    Warehouse - Landing Page
+@endsection
+
 @section('section-guest')
 <section class="section intro">
 	<div class="container">

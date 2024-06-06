@@ -1,5 +1,9 @@
 @extends('layouts.warehouse')
 
+@section('title')
+    Outbound - Invoice
+@endsection
+
 @section('section-warehouse')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row invoice-preview">

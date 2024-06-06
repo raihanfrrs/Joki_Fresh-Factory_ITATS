@@ -1,5 +1,9 @@
 @extends('layouts.guest')
 
+@section('title')
+    Warehouse - Our Service
+@endsection
+
 @section('section-guest')
 <section class="section service border-top pb-5">
 	<div class="container">

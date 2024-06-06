@@ -1,5 +1,9 @@
 @extends('layouts.tenant')
 
+@section('title')
+    Reporting - Performance - Supplier
+@endsection
+
 @section('section-tenant')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
