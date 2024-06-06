@@ -1,5 +1,9 @@
 @extends('layouts.tenant')
 
+@section('title')
+    Cart - Page
+@endsection
+
 @section('section-tenant')
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Shopping Cart /</span> Checkout</h4>

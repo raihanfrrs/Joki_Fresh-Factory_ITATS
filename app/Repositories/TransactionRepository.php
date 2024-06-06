@@ -61,6 +61,7 @@ class TransactionRepository
         return Transaction::join('detail_transactions', 'transactions.id', '=', 'detail_transactions.transaction_id')
             ->join('taxes', 'transactions.tax_id', '=', 'taxes.id')
             ->select(DB::raw('COUNT(*) as amount'), DB::raw('SUM(subtotal + (subtotal * value / 100)) as subtotal'),$groupByClause)
+            ->where('transactions.status', '=', 'confirmed')
             ->groupBy('period')
             ->get();
     }
@@ -100,6 +101,7 @@ class TransactionRepository
                         ->join('warehouses', 'warehouse_subscriptions.warehouse_id', '=', 'warehouses.id')
                         ->join('subscriptions', 'warehouse_subscriptions.subscription_id', '=', 'subscriptions.id')
                         ->select('transactions.*', 'detail_transactions.subtotal','tenants.name as tenant_name','taxes.value', 'subscriptions.name as subscription_name', 'warehouses.name as warehouse_name')
+                        ->where('transactions.status', '=', 'confirmed')
                         ->whereDate('transactions.created_at', '=', date('Y-m-d', $timestamp))
                         ->get();
     }
@@ -117,6 +119,7 @@ class TransactionRepository
                         ->join('warehouses', 'warehouse_subscriptions.warehouse_id', '=', 'warehouses.id')
                         ->join('subscriptions', 'warehouse_subscriptions.subscription_id', '=', 'subscriptions.id')
                         ->select('transactions.*', 'detail_transactions.subtotal','tenants.name as tenant_name','taxes.value', 'subscriptions.name as subscription_name', 'warehouses.name as warehouse_name')
+                        ->where('transactions.status', '=', 'confirmed')
                         ->whereBetween('transactions.created_at', [$timestamp->format('Y-m-d H:i:s'), $timestamp->endOfMonth()->format('Y-m-d H:i:s')])
                         ->get();
     }
@@ -130,6 +133,7 @@ class TransactionRepository
                         ->join('warehouses', 'warehouse_subscriptions.warehouse_id', '=', 'warehouses.id')
                         ->join('subscriptions', 'warehouse_subscriptions.subscription_id', '=', 'subscriptions.id')
                         ->select('transactions.*', 'detail_transactions.subtotal','tenants.name as tenant_name','taxes.value', 'subscriptions.name as subscription_name', 'warehouses.name as warehouse_name')
+                        ->where('transactions.status', '=', 'confirmed')
                         ->whereYear('transactions.created_at', $year)
                         ->get();
     }

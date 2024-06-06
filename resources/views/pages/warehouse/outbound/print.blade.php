@@ -1,5 +1,9 @@
 @extends('layouts.warehouse')
 
+@section('title')
+    Outbound - Print
+@endsection
+
 @section('section-print')
 <table class="table m-0">
     <thead class="table-light">

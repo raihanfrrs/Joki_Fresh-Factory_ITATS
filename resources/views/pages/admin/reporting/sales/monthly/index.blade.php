@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('title')
+    Reporting - Sales - Monthly
+@endsection
+
 @section('section-admin')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">

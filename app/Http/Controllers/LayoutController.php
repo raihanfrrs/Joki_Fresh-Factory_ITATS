@@ -30,7 +30,9 @@ class LayoutController extends Controller
         if (Auth::check() && auth()->user()->level == 'tenant') {
             return view('pages.tenant.dashboard.index');
         } elseif (Auth::check() && auth()->user()->level == 'admin') {
-            return view('pages.admin.dashboard.index');
+            return view('pages.admin.dashboard.index', [
+                'transactions' => $this->transactionRepository->getAllTransactionsGroupByPeriodically('year'),
+            ]);
         } else {
             return view('pages.guest.dashboard.index', [
                 'transactions' => $this->transactionRepository->getTransactionByStatus('confirmed')->count(),

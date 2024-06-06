@@ -1,5 +1,9 @@
 @extends('layouts.guest')
 
+@section('title')
+    Warehouse - Detail Properties
+@endsection
+
 @section('section-guest')
 <div class="container">
     <div class="row">
