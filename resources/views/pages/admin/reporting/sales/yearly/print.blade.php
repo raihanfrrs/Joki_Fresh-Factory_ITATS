@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('title')
+    Reporting - Print Sales - Yearly
+@endsection
+
 @section('section-print')
 <table class="table m-0">
     <thead class="table-light">

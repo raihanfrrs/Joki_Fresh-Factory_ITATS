@@ -1,5 +1,9 @@
 @extends('layouts.tenant')
 
+@section('title')
+    Reporting - Print Sales - Monthly
+@endsection
+
 @section('section-print')
 <table class="table m-0">
     <thead class="table-light">

@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('title')
+    Dashboard - Admin
+@endsection
+
 @section('section-admin')
 
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -10,10 +14,10 @@
           <div class="d-flex align-items-end row">
             <div class="col-7">
               <div class="card-body text-nowrap">
-                <h5 class="card-title mb-0">Congratulations John! 🎉</h5>
-                <p class="mb-2">Best seller of the month</p>
-                <h4 class="text-primary mb-1">$48.9k</h4>
-                <a href="javascript:;" class="btn btn-primary waves-effect waves-light">View Sales</a>
+                <h5 class="card-title mb-0 text-capitalize">Congratulations {{ auth()->user()->level }}! 🎉</h5>
+                <p class="mb-2">Highest Income This Year</p>
+                <h4 class="text-primary mb-1">@rupiah($transactions[0]->subtotal)</h4>
+                <a href="{{ route('report.yearly.sales') }}" class="btn btn-primary waves-effect waves-light">View Sales</a>
               </div>
             </div>
             <div class="col-5 text-center text-sm-left">

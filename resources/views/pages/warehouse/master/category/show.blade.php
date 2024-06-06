@@ -1,5 +1,9 @@
 @extends('layouts.warehouse')
 
+@section('title')
+    Master - Detail Product Category
+@endsection
+
 @section('section-warehouse')
 <div class="container-xxl flex-grow-1 container-p-y">
     <h3>{{ $category->name }}</h3>

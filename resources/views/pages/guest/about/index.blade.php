@@ -1,5 +1,9 @@
 @extends('layouts.guest')
 
+@section('title')
+    Warehouse - About Us
+@endsection
+
 @section('section-guest')
 <section class="section about-2 position-relative">
 	<div class="container">

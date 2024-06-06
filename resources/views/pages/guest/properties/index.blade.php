@@ -1,5 +1,9 @@
 @extends('layouts.guest')
 
+@section('title')
+    Warehouse - Properties
+@endsection
+
 @section('section-guest')
 <section class="section blog-wrap bg-gray">
 	<div class="container">

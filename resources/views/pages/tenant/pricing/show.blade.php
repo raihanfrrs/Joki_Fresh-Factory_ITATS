@@ -1,5 +1,9 @@
 @extends('layouts.tenant')
 
+@section('title')
+    Pricing - Details
+@endsection
+
 @section('section-tenant')
 <style>
 table tr th, td {

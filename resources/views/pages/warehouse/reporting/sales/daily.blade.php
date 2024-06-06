@@ -1,5 +1,9 @@
 @extends('layouts.warehouse')
 
+@section('title')
+    Reporting - Sales - Daily
+@endsection
+
 @section('section-warehouse')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">

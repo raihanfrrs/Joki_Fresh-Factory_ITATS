@@ -1,5 +1,9 @@
 @extends('layouts.guest')
 
+@section('title')
+    Warehouse - Contact
+@endsection
+
 @section('section-guest')
 <section class="contact-form-wrap section">
 	<div class="container">
