@@ -22,11 +22,11 @@ class UserSeeder extends Seeder
                 'level' => 'admin',
                 'attribute' => 'core'
             ],
-            [
-                'id' => Uuid::uuid4()->toString(),
-                'username' => 'tenant',
-                'password' => bcrypt('tenant123')
-            ],
+            // [
+            //     'id' => Uuid::uuid4()->toString(),
+            //     'username' => 'tenant',
+            //     'password' => bcrypt('tenant123')
+            // ],
             [
                 'id' => Uuid::uuid4()->toString(),
                 'username' => 'admin1',

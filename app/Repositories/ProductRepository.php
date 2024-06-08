@@ -194,6 +194,11 @@ class ProductRepository
                     ->where('products.tenant_id', auth()->user()->tenant->id)
                     ->groupBy('products.id')
                     ->get();
+    }
 
+    public function getAllOfTimeRents()
+    {
+        return Product::join('tenants', 'tenants.id', '=', 'products.tenant_id')
+                        ->get();
     }
 }

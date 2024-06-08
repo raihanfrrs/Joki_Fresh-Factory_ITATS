@@ -214,6 +214,7 @@
             <script src="{{ asset('assets/js/app-report-taxes-list.js') }}"></script>
         @elseif (request()->is('/'))
             <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+            <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
         @endif
     @else
         <script src="{{ asset('assets/js/pages-auth.js') }}"></script>

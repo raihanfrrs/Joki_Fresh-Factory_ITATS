@@ -447,7 +447,7 @@
 
   // Example AJAX call
   const fetchDataFromServer = () => {
-    $.get('/dashboard/user-growth', {})
+    $.get('/ajax/dashboard/revenue-weekly-growth', {})
       .done((data) => {
         updateRevenueGrowthChart(data);
       })
