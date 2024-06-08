@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Admin;
 use Ramsey\Uuid\Uuid;
@@ -88,5 +89,61 @@ class UserRepository
                 'status' => 'inactive'
             ]);
         }
+    }
+
+    public function getTenantGrowthPercentage() {
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+        $lastMonth = Carbon::now()->subMonth()->month;
+        $lastMonthYear = Carbon::now()->subMonth()->year;
+
+        $currentMonthCount = self::getAllUserTenant()->where('created_at', $currentMonth)->where('created_at', $currentYear)->count();
+        $lastMonthCount = self::getAllUserTenant()->where('created_at', $lastMonth)->where('created_at', $lastMonthYear)->count();
+
+        if ($lastMonthCount == 0) {
+            return $currentMonthCount > 0 ? 100 : 0;
+        }
+
+        $growth = (($currentMonthCount - $lastMonthCount) / $lastMonthCount) * 100;
+
+        return round($growth, 2);
+    }
+
+    public function getTenantWithTransactionsCount() {
+        return User::join('tenants', 'tenants.user_id', '=', 'users.id')
+                    ->join('transactions', 'transactions.tenant_id', '=', 'tenants.id')
+                    ->distinct('tenants.id')
+                    ->count('tenants.id');
+    }
+
+    public function getTenantWithoutTransactionsCount() {
+        return User::join('tenants', 'tenants.user_id', '=', 'users.id')
+                    ->leftJoin('transactions', 'transactions.tenant_id', '=', 'tenants.id')
+                    ->whereNull('transactions.id')
+                    ->distinct('tenants.id')
+                    ->count('tenants.id');
+    }
+
+    public function getTenantTransactionStatistics() {
+        $totalTenants = $this->getAllUserTenant()->count();
+        $tenantsWithTransactions = $this->getTenantWithTransactionsCount();
+        $tenantsWithoutTransactions = $this->getTenantWithoutTransactionsCount();
+
+        if ($totalTenants == 0) {
+            return [
+                'with_transactions' => 0,
+                'without_transactions' => 0
+            ];
+        }
+
+        $withTransactionsPercentage = ($tenantsWithTransactions / $totalTenants) * 100;
+        $withoutTransactionsPercentage = ($tenantsWithoutTransactions / $totalTenants) * 100;
+
+        return [
+            'with_transactions' => round($withTransactionsPercentage, 2),
+            'without_transactions' => round($withoutTransactionsPercentage, 2),
+            'with_transactions_count' => $tenantsWithTransactions,
+            'without_transactions_count' => $tenantsWithoutTransactions
+        ];
     }
 }

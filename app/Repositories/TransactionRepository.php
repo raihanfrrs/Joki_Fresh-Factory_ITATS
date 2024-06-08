@@ -106,8 +106,6 @@ class TransactionRepository
                         ->get();
     }
 
-    
-
     public function getTransactionByMonth($month)
     {
         $timestamp = Carbon::createFromFormat('F-Y', $month)->startOfMonth();
@@ -147,5 +145,60 @@ class TransactionRepository
                         ->where('transactions.tenant_id', auth()->user()->tenant->id)
                         ->where('warehouse_subscriptions.warehouse_id', $warehouse->id)
                         ->get();
+    }
+
+    public function getWeeklyRevenueReport()
+    {
+        $weeklyDataTransaction = Transaction::select(DB::raw('COUNT(*) as amount'), DB::raw('SUM(grand_total) as grand_total'), DB::raw('DAYNAME(created_at) as day'))
+                            ->where('transactions.status', '=', 'confirmed')
+                            ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+                            ->groupBy(DB::raw('DAYNAME(created_at)'))
+                            ->orderByRaw('FIELD(day, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")')
+                            ->pluck('count', 'day', 'grand_total')
+                            ->all();
+
+        $processedData = [];
+        $daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    
+        foreach ($daysOfWeek as $day) {
+            $processedData[] = $weeklyDataTransaction[$day] ?? 0;
+        }
+    
+        $processedData = array_pad($processedData, 7, 0);
+
+        return $processedData;
+    }
+
+    public function getWeeklyReportTransactionIncome()
+    {
+        return Transaction::select(DB::raw('SUM(grand_total) as grand_total'))
+                            ->where('transactions.status', '=', 'confirmed')
+                            ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+                            ->first();
+    }
+
+    public function getWeeklyReportTransactionIncomePercentage() {
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+        $lastMonth = Carbon::now()->subMonth()->month;
+        $lastMonthYear = Carbon::now()->subMonth()->year;
+
+        $currentMonthCount = self::getAllTransactions()->where('transactions.status', '=', 'confirmed')->where('created_at', $currentMonth)->where('created_at', $currentYear)->count();
+        $lastMonthCount = self::getAllTransactions()->where('transactions.status', '=', 'confirmed')->where('created_at', $lastMonth)->where('created_at', $lastMonthYear)->count();
+
+        if ($lastMonthCount == 0) {
+            return $currentMonthCount > 0 ? 100 : 0;
+        }
+
+        $growth = (($currentMonthCount - $lastMonthCount) / $lastMonthCount) * 100;
+
+        return round($growth, 2);
+    }
+
+    public function getAllOfTimeTransactionsIncome($status)
+    {
+        return Transaction::select(DB::raw('SUM(grand_total) as grand_total'))
+                            ->where('transactions.status', '=', $status)
+                            ->first();
     }
 }

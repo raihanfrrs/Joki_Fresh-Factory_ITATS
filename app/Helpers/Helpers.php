@@ -78,4 +78,32 @@ class Helpers
             return $lengthCm . ' cm';
         }
     }
+
+    public static function formatNumberShort($number)
+    {
+        if ($number >= 1000000000) {
+            return round($number / 1000000000, 1) . 'B';
+        }
+        if ($number >= 1000000) {
+            return round($number / 1000000, 1) . 'M';
+        }
+        if ($number >= 1000) {
+            return round($number / 1000, 1) . 'K';
+        }
+        return (string)$number;
+    }
+
+    public static function formatRupiah($number)
+    {
+        if ($number >= 1000000000) {
+            return 'Rp ' . round($number / 1000000000, 1) . 'B';
+        }
+        if ($number >= 1000000) {
+            return 'Rp ' . round($number / 1000000, 1) . 'M';
+        }
+        if ($number >= 1000) {
+            return 'Rp ' . round($number / 1000, 1) . 'K';
+        }
+        return 'Rp ' . number_format($number, 0, ',', '.');
+    }
 }

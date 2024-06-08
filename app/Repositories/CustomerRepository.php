@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;

@@ -262,4 +262,9 @@ class AjaxController extends Controller
     {
         return view('components.data-ajax.pages.modal.data-tenant-customer-performance-modal', compact('customer'));
     }
+
+    public function dashboard_revenue_weekly_growth()
+    {
+        return $this->transactionRepository->getWeeklyRevenueReport();
+    }
 }

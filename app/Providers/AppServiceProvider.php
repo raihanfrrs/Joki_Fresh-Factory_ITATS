@@ -40,5 +40,13 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('convertCmToM', function ($expression) {
             return "<?php echo \App\Helpers\Helpers::convertCmToM($expression); ?>";
         });
+
+        Blade::directive('formatNumberShort', function ($expression) {
+            return "<?php echo \App\Helpers\Helpers::formatNumberShort($expression); ?>";
+        });
+        
+        Blade::directive('formatRupiah', function ($expression) {
+            return "<?php echo \App\Helpers\Helpers::formatRupiah($expression); ?>";
+        });
     }
 }
