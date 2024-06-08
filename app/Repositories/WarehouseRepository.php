@@ -180,4 +180,19 @@ class WarehouseRepository
             return $warehouse->delete();
         }
     }
+
+    public function calculateWarehouseAvailablePercentage()
+    {
+        $availableWarehousesCount = Warehouse::where('status', 'available')->count();
+
+        $totalWarehousesCount = Warehouse::count();
+
+        if ($totalWarehousesCount > 0) {
+            $percentageAvailable = ($availableWarehousesCount / $totalWarehousesCount) * 100;
+        } else {
+            $percentageAvailable = 0;
+        }
+
+        return $percentageAvailable;
+    }
 }

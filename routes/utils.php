@@ -92,4 +92,5 @@ Route::controller(AjaxController::class)->group(function () {
     Route::get('/ajax/tenant-product-performance/{product}/detail', 'tenant_product_performance_detail');
     Route::get('/ajax/tenant-supplier-performance/{supplier}/detail', 'tenant_supplier_performance_detail');
     Route::get('/ajax/tenant-customer-performance/{customer}/detail', 'tenant_customer_performance_detail');
+    Route::get('/ajax/dashboard/revenue-weekly-growth', 'dashboard_revenue_weekly_growth');
 });

@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Tenant;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class TenantRepository
 {
@@ -81,5 +82,29 @@ class TenantRepository
         } else {
             return $tenant->delete() && $tenant->user->delete();
         }
+    }
+
+    public function getAllOfTimeTransactions($status)
+    {
+        return Tenant::join('transactions', 'tenants.id', '=', 'transactions.tenant_id')
+                        ->where('transactions.status', $status)
+                        ->select(DB::raw('SUM(transactions.grand_total) as grand_total'))
+                        ->first();
+    }
+
+    public function getAllOfTimeOrders($status)
+    {
+        return Tenant::join('transactions', 'tenants.id', '=', 'transactions.tenant_id')
+                        ->where('transactions.status', $status)
+                        ->select(DB::raw('COUNT(*) as total_order'))
+                        ->first();
+    }
+
+    public function getAllOfTimeRents($status)
+    {
+        return Tenant::join('transactions', 'tenants.id', '=', 'transactions.tenant_id')
+                        ->join('detail_transactions', 'detail_transactions.transaction_id', '=', 'transactions.id')
+                        ->where('transactions.status', $status)
+                        ->count();
     }
 }

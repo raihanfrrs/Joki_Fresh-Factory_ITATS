@@ -73,4 +73,11 @@ class SupplierRepository
                         ->groupBy('suppliers.id')
                         ->get();
     }
+
+    public function getAllSupplierWithJoinProduct()
+    {
+        return Supplier::join('batches', 'suppliers.id', '=', 'batches.supplier_id')
+                        ->join('products', 'batches.product_id', '=', 'products.id')
+                        ->get();
+    }
 }
