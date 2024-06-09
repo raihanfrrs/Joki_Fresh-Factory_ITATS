@@ -56,7 +56,7 @@
                     <i class="ti ti-users ti-sm"></i>
                   </div>
                   <div class="card-info">
-                    <h5 class="mb-0">{{ $tenants }}</h5>
+                    <h5 class="mb-0">@formatNumberShort($tenants)</h5>
                     <small>Tenants</small>
                   </div>
                 </div>
@@ -67,7 +67,7 @@
                     <i class="ti ti-shopping-cart ti-sm"></i>
                   </div>
                   <div class="card-info">
-                    <h5 class="mb-0">{{ $orders[0]->amount }}</h5>
+                    <h5 class="mb-0">@formatNumberShort($orders[0]->amount)</h5>
                     <small>Orders</small>
                   </div>
                 </div>
@@ -78,7 +78,7 @@
                     <i class="ti ti-car ti-sm"></i>
                   </div>
                   <div class="card-info">
-                    <h5 class="mb-0">{{ $customers }}</h5>
+                    <h5 class="mb-0">@formatNumberShort($customers)</h5>
                     <small>Customer</small>
                   </div>
                 </div>
