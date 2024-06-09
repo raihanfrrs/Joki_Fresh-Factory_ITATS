@@ -15,7 +15,7 @@
               <div class="card-body text-nowrap">
                 <h5 class="card-title mb-0 text-capitalize">Congratulations @getFirstWord($warehouse->name)! 🎉</h5>
                 <p class="mb-2">Highest Income This Year</p>
-                <h4 class="text-primary mb-1">@rupiah($outbounds_year[0]->grand_total)</h4>
+                <h4 class="text-primary mb-1">@rupiah($outbounds_year[0]->grand_total ?? 0)</h4>
               </div>
             </div>
             <div class="col-5 text-center text-sm-left">
@@ -43,7 +43,7 @@
                     <i class="ti ti-currency-dollar ti-sm"></i>
                   </div>
                   <div class="card-info">
-                    <h5 class="mb-0">@formatRupiah($outbounds_month[0]->grand_total)</h5>
+                    <h5 class="mb-0">@formatRupiah($outbounds_month[0]->grand_total ?? 0)</h5>
                     <small>Sales</small>
                   </div>
                 </div>
@@ -54,7 +54,7 @@
                     <i class="ti ti-plane-inflight ti-sm"></i>
                   </div>
                   <div class="card-info">
-                    <h5 class="mb-0">@formatRupiah($total_inbound_price_month[0]->price)</h5>
+                    <h5 class="mb-0">@formatRupiah($total_inbound_price_month[0]->price ?? 0)</h5>
                     <small>Inbound</small>
                   </div>
                 </div>
@@ -65,7 +65,7 @@
                     <i class="ti ti-plane-departure ti-sm"></i>
                   </div>
                   <div class="card-info">
-                    <h5 class="mb-0">@formatNumberShort($total_outbound_amount_month[0]->amount_total)</h5>
+                    <h5 class="mb-0">@formatNumberShort($total_outbound_amount_month[0]->amount_total ?? 0)</h5>
                     <small>Outbound</small>
                   </div>
                 </div>
@@ -76,7 +76,7 @@
                     <i class="ti ti-car ti-sm"></i>
                   </div>
                   <div class="card-info">
-                    <h5 class="mb-0">@formatNumberShort($total_customer_amount_month[0]->total_customer)</h5>
+                    <h5 class="mb-0">@formatNumberShort($total_customer_amount_month[0]->total_customer ?? 0)</h5>
                     <small>Customer</small>
                   </div>
                 </div>
