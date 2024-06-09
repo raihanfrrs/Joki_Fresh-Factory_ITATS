@@ -76,4 +76,29 @@ class CustomerRepository
             ->groupBy('period')
             ->get();
     }
+
+    public function getAllCustomersGroupByPeriodically($periodic, $warehouse)
+    {
+        $groupByClause = '';
+
+        switch ($periodic) {
+            case 'day':
+                $groupByClause = DB::raw('DATE(customers.created_at) as period');
+                break;
+            case 'month':
+                $groupByClause = DB::raw('DATE_FORMAT(customers.created_at, "%Y-%m") as period');
+                break;
+            case 'year':
+                $groupByClause = DB::raw('YEAR(customers.created_at) as period');
+                break;
+            default:
+                break;
+        }
+
+        return Customer::select(DB::raw('COUNT(*) as total_customer'),$groupByClause)
+            ->where('warehouse_id', $warehouse->id)
+            ->where('tenant_id', auth()->user()->tenant->id)
+            ->groupBy('period', 'warehouse_id')
+            ->get();
+    }
 }
