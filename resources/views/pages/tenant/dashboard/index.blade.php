@@ -6,116 +6,85 @@
 
 @section('section-tenant')
 <div class="container-xxl flex-grow-1 container-p-y">
-    
     <div class="row">
 
-        <div class="col-xl-4 mb-4 col-lg-5 col-12">
-            <div class="row">
-
-                <div class="col-xl-6 col-md-3 col-6">
-                    <div class="card">
-                      <div class="card-header pb-0">
-                        <h5 class="card-title mb-0">Pengguna</h5>
-                        <small class="text-muted">Bulan Terakhir</small>
-                      </div>
-                      <div class="card-body">
-                        <div id="profitLastMonth"></div>
-                        <div class="d-flex justify-content-between align-items-center mt-3 gap-3">
-                          <h4 class="mb-0" id="value-user-analytic">0</h4>
-                          <small class="" id="percent-user-analytic">+0%</small>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-6 col-md-3 col-6">
-                    <div class="card">
-                      <div class="card-header pb-0">
-                        <h5 class="card-title mb-0">Keuntungan</h5>
-                        <small class="text-muted">Bulan Terakhir</small>
-                      </div>
-                      <div class="card-body">
-                        <div id="profitLastMonth"></div>
-                        <div class="d-flex justify-content-between align-items-center mt-3 gap-3">
-                          <h4 class="mb-0" id="value-total-profit-last-month-analytic">0</h4>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12 col-xl-12 mt-4">
-                  <div class="card h-100">
-                    <div class="card-header d-flex justify-content-between">
-                      <div class="card-title m-0 me-2">
-                        <h5 class="m-0 me-2">Produk Populer</h5>
-                        <small class="text-muted">Total <span id="value-product-popular-analytic">0</span> Produk</small>
-                      </div>
-                      <div class="dropdown">
-                        <button
-                          class="btn p-0"
-                          type="button"
-                          id="popularProduct"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false">
-                          <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="popularProduct">
-                          <a class="dropdown-item" href="javascript:void(0);" id="date-product-popular-filter" data-date="last-month">Bulan Terakhir</a>
-                          <a class="dropdown-item" href="javascript:void(0);" id="date-product-popular-filter" data-date="last-year">Tahun Kemarin</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      <div id="data-product-popular-analytic"></div>
-                    </div>
-                  </div>
+      <div class="col-xl-4 mb-4 col-lg-5 col-12">
+        <div class="card">
+          <div class="d-flex align-items-end row">
+            <div class="col-7">
+              <div class="card-body text-nowrap">
+                <h5 class="card-title mb-0 text-capitalize">Congratulations @getFirstWord(auth()->user()->tenant->name)! 🎉</h5>
+                <p class="mb-2">Highest Income This Year</p>
+                <h4 class="text-primary mb-1">@rupiah($transactions_year[0]->grand_total)</h4>
               </div>
-
             </div>
+            <div class="col-5 text-center text-sm-left">
+              <div class="card-body pb-0 px-0 px-md-4">
+                <img src="{{ asset('assets/img/illustrations/card-advance-sale.png') }}" height="140" alt="view sales">
+              </div>
+            </div>
+          </div>
         </div>
-    
-        <div class="col-lg-8 mb-4 h-25">
-          <div class="row">
-            <div class="col-lg-12 col-sm-12">
-                <div class="card">
-                  <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                      <small class="d-block mb-1 text-muted">Ringkasan Pengguna</small>
-                    </div>
+      </div>
+
+      <div class="col-xl-8 mb-4 col-lg-7 col-12">
+        <div class="card h-100">
+          <div class="card-header">
+            <div class="d-flex justify-content-between mb-3">
+              <h5 class="card-title mb-0">Statistics</h5>
+              <small class="text-muted">On This {{ now()->format('F') }}</small>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row gy-3">
+              <div class="col-md-3 col-6">
+                <div class="d-flex align-items-center">
+                  <div class="badge rounded-pill bg-label-success me-3 p-2">
+                    <i class="ti ti-currency-dollar ti-sm"></i>
                   </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-4">
-                        <div class="d-flex gap-2 align-items-center mb-2">
-                          <span class="badge bg-label-info p-1 rounded"
-                            ><i class="ti ti-diamond"></i></span>
-                          <p class="mb-0">Langganan</p>
-                        </div>
-                        <h5 class="mb-0 pt-1 text-nowrap" id="percent-total-brand-subscription-analytic">0%</h5>
-                        <small class="text-muted" id="value-total-brand-subscription-analytic">0</small>
-                      </div>
-                      <div class="col-4">
-                        <div class="divider divider-vertical">
-                          <div class="divider-text">
-                            <span class="badge-divider-bg bg-label-secondary">VS</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-4 text-end">
-                        <div class="d-flex gap-2 justify-content-end align-items-center mb-2">
-                          <p class="mb-0">Gratis</p>
-                          <span class="badge bg-label-primary p-1 rounded"><i class="ti ti-diamond-off"></i></span>
-                        </div>
-                        <h5 class="mb-0 pt-1 text-nowrap ms-lg-n3 ms-xl-0" id="percent-total-brand-free-analytic">0%</h5>
-                        <small class="text-muted" id="value-total-brand-free-analytic">0</small>
-                      </div>
-                    </div>
+                  <div class="card-info">
+                    <h5 class="mb-0">@formatRupiah($transactions_month[0]->grand_total)</h5>
+                    <small>Sales</small>
                   </div>
                 </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="d-flex align-items-center">
+                  <div class="badge rounded-pill bg-label-info me-3 p-2">
+                    <i class="ti ti-plane-inflight ti-sm"></i>
+                  </div>
+                  <div class="card-info">
+                    <h5 class="mb-0">@formatRupiah($total_inbound_price_month[0]->price)</h5>
+                    <small>Inbound</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="d-flex align-items-center">
+                  <div class="badge rounded-pill bg-label-primary me-3 p-2">
+                    <i class="ti ti-plane-departure ti-sm"></i>
+                  </div>
+                  <div class="card-info">
+                    <h5 class="mb-0">@formatNumberShort($total_outbound_amount_month[0]->amount_total)</h5>
+                    <small>Outbound</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="d-flex align-items-center">
+                  <div class="badge rounded-pill bg-label-success me-3 p-2">
+                    <i class="ti ti-car ti-sm"></i>
+                  </div>
+                  <div class="card-info">
+                    <h5 class="mb-0">@formatNumberShort($total_customer_amount_month[0]->total_customer)</h5>
+                    <small>Customer</small>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-        </div>
+      </div>
 
     </div>
 </div>

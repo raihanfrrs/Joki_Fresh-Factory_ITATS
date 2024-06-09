@@ -49,6 +49,30 @@ class OutboundRepository
             ->get();
     }
 
+    public function getAllOutboundsGroupByTenantPeriodically($periodic)
+    {
+        $groupByClause = '';
+
+        switch ($periodic) {
+            case 'day':
+                $groupByClause = DB::raw('DATE(outbounds.created_at) as period');
+                break;
+            case 'month':
+                $groupByClause = DB::raw('DATE_FORMAT(outbounds.created_at, "%Y-%m") as period');
+                break;
+            case 'year':
+                $groupByClause = DB::raw('YEAR(outbounds.created_at) as period');
+                break;
+            default:
+                break;
+        }
+
+        return Outbound::select(DB::raw('SUM(amount_total) as amount_total'), DB::raw('SUM(grand_total) as grand_total'),$groupByClause)
+            ->where('tenant_id', auth()->user()->tenant->id)
+            ->groupBy('period')
+            ->get();
+    }
+
     public function getOutboundByDay($day, $warehouse)
     {
         $timestamp = strtotime($day);

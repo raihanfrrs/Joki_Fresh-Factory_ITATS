@@ -11,17 +11,20 @@ use App\Repositories\RentedRepository;
 use App\Repositories\TenantRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\CustomerRepository;
+use App\Repositories\OutboundRepository;
 use App\Repositories\SupplierRepository;
 use App\Repositories\WarehouseRepository;
 use App\Repositories\TransactionRepository;
 use App\Repositories\ProductCategoryRepository;
 use App\Repositories\DetailTransactionRepository;
+use App\Repositories\InboundRepository;
+use Illuminate\Bus\BatchRepository;
 
 class LayoutController extends Controller
 {
-    protected $warehouseRepository, $transactionRepository, $userRepository, $rentedRepository, $customerRepository, $detailTransactionRepository, $tenantRepository, $productRepository, $rackRepository, $productCategoryRepository, $supplierRepository;
+    protected $warehouseRepository, $transactionRepository, $userRepository, $rentedRepository, $customerRepository, $detailTransactionRepository, $tenantRepository, $productRepository, $rackRepository, $productCategoryRepository, $supplierRepository, $outboundRepository, $inboundRepository;
 
-    public function __construct(WarehouseRepository $warehouseRepository, TransactionRepository $transactionRepository, UserRepository $userRepository, RentedRepository $rentedRepository, CustomerRepository $customerRepository, DetailTransactionRepository $detailTransactionRepository, TenantRepository $tenantRepository, ProductRepository $productRepository, RackRepository $rackRepository, ProductCategoryRepository $productCategoryRepository, SupplierRepository $supplierRepository)
+    public function __construct(WarehouseRepository $warehouseRepository, TransactionRepository $transactionRepository, UserRepository $userRepository, RentedRepository $rentedRepository, CustomerRepository $customerRepository, DetailTransactionRepository $detailTransactionRepository, TenantRepository $tenantRepository, ProductRepository $productRepository, RackRepository $rackRepository, ProductCategoryRepository $productCategoryRepository, SupplierRepository $supplierRepository, OutboundRepository $outboundRepository, InboundRepository $inboundRepository)
     {
         $this->warehouseRepository = $warehouseRepository;
         $this->transactionRepository = $transactionRepository;
@@ -34,6 +37,8 @@ class LayoutController extends Controller
         $this->rackRepository = $rackRepository;
         $this->productCategoryRepository = $productCategoryRepository;
         $this->supplierRepository = $supplierRepository;
+        $this->outboundRepository = $outboundRepository;
+        $this->inboundRepository = $inboundRepository;
     }
 
     public function index()
@@ -43,7 +48,14 @@ class LayoutController extends Controller
         }
 
         if (Auth::check() && auth()->user()->level == 'tenant') {
-            return view('pages.tenant.dashboard.index');
+            return view('pages.tenant.dashboard.index', [
+                'transactions_year' => $this->outboundRepository->getAllOutboundsGroupByTenantPeriodically('year'),
+                'transactions_month' => $this->outboundRepository->getAllOutboundsGroupByTenantPeriodically('month'),
+                'total_inbound_price_month' => $this->inboundRepository->getAllInboundsGroupByTenantPeriodically('month'),
+                'total_outbound_amount_month' => $this->outboundRepository->getAllOutboundsGroupByTenantPeriodically('month'),
+                'total_customer_amount_month' => $this->customerRepository->getAllCustomersGroupByTenantPeriodically('month'),
+            ]);
+
         } elseif (Auth::check() && auth()->user()->level == 'admin') {
             return view('pages.admin.dashboard.index', [
                 'transactions_year' => $this->transactionRepository->getAllTransactionsGroupByPeriodically('year'),
