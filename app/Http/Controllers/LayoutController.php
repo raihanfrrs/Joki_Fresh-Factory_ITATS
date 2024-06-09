@@ -60,9 +60,15 @@ class LayoutController extends Controller
             return view('pages.admin.dashboard.index', [
                 'transactions_year' => $this->transactionRepository->getAllTransactionsGroupByPeriodically('year'),
                 'transactions_month' => $this->transactionRepository->getAllTransactionsGroupByPeriodically('month'),
-                'tenants' => $this->userRepository->getAllUserTenant()->where('created_at', Carbon::now()->month)->where('created_at', Carbon::now()->year)->count(),
+                'tenants' => $this->userRepository->getAllUserTenant()->filter(function ($tenant) {
+                                return Carbon::parse($tenant->created_at)->month === Carbon::now()->month &&
+                                    Carbon::parse($tenant->created_at)->year === Carbon::now()->year;
+                            })->count(),
                 'orders' => $this->transactionRepository->getAllTransactionsGroupByPeriodically('month'),
-                'customers' => $this->customerRepository->getAllCustomers()->where('created_at', Carbon::now()->month)->where('created_at', Carbon::now()->year)->count(),
+                'customers' => $this->customerRepository->getAllCustomers()->filter(function ($tenant) {
+                    return Carbon::parse($tenant->created_at)->month === Carbon::now()->month &&
+                        Carbon::parse($tenant->created_at)->year === Carbon::now()->year;
+                })->count(),
                 'tenant_growth_percentage' => $this->userRepository->getTenantGrowthPercentage(),
                 'tenant_overview_statistics' => $this->userRepository->getTenantTransactionStatistics(),
                 'revenue_growth_weekly_transaction_report' => $this->transactionRepository->getWeeklyReportTransactionIncome(),

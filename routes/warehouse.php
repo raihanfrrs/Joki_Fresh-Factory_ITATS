@@ -15,7 +15,7 @@ use App\Http\Controllers\warehouseReportingController;
 Route::group(['middleware' => ['cekUserLogin:tenant']], function(){
 
     Route::controller(WarehouseController::class)->group(function () {
-        Route::get('warehouse/{warehouse}', 'warehouse_index')->name('warehouse.index');
+        Route::get('warehouse/{warehouse}/dashboard', 'warehouse_index')->name('warehouse.index');
     });
     
     Route::controller(ProductController::class)->group(function () {

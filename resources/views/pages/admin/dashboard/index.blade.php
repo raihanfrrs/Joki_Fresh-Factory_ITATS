@@ -16,7 +16,7 @@
               <div class="card-body text-nowrap">
                 <h5 class="card-title mb-0 text-capitalize">Congratulations {{ auth()->user()->level }}! 🎉</h5>
                 <p class="mb-2">Highest Income This Year</p>
-                <h4 class="text-primary mb-1">@rupiah($transactions_year[0]->subtotal)</h4>
+                <h4 class="text-primary mb-1">@rupiah($transactions_year[0]->subtotal ?? 0)</h4>
                 <a href="{{ route('report.yearly.sales') }}" class="btn btn-primary waves-effect waves-light">View Sales</a>
               </div>
             </div>
@@ -45,7 +45,7 @@
                     <i class="ti ti-currency-dollar ti-sm"></i>
                   </div>
                   <div class="card-info">
-                    <h5 class="mb-0">@formatRupiah($transactions_month[0]->subtotal)</h5>
+                    <h5 class="mb-0">@formatRupiah($transactions_month[0]->subtotal ?? 0)</h5>
                     <small>Sales</small>
                   </div>
                 </div>
@@ -67,7 +67,7 @@
                     <i class="ti ti-shopping-cart ti-sm"></i>
                   </div>
                   <div class="card-info">
-                    <h5 class="mb-0">@formatNumberShort($orders[0]->amount)</h5>
+                    <h5 class="mb-0">@formatNumberShort($orders[0]->amount ?? 0)</h5>
                     <small>Orders</small>
                   </div>
                 </div>
