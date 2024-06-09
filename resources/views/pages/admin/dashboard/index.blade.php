@@ -45,7 +45,7 @@
                     <i class="ti ti-currency-dollar ti-sm"></i>
                   </div>
                   <div class="card-info">
-                    <h5 class="mb-0">@rupiah($transactions_month[0]->subtotal)</h5>
+                    <h5 class="mb-0">@formatRupiah($transactions_month[0]->subtotal)</h5>
                     <small>Sales</small>
                   </div>
                 </div>
