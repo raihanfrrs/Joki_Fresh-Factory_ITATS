@@ -16,20 +16,15 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboards -->
-      <li class="menu-item {{ request()->is('/', 'dashboard/crm') ? 'open' : '' }}">
+      <li class="menu-item {{ request()->is('warehouse/'.$warehouse->id.'/dashboard') ? 'open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons ti ti-smart-home"></i>
           <div data-i18n="Dashboards">Dashboards</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item {{ request()->is('/') ? 'active' : '' }}">
-            <a href="/" class="menu-link">
+          <li class="menu-item {{ request()->is('warehouse/'.$warehouse->id.'/dashboard') ? 'active' : '' }}">
+            <a href="{{ route('warehouse.index', $warehouse->id) }}" class="menu-link">
               <div data-i18n="Analitik">Analitik</div>
-            </a>
-          </li>
-          <li class="menu-item {{ request()->is('dashboard/crm') ? 'active' : '' }}">
-            <a href="" class="menu-link">
-              <div data-i18n="CRM">CRM</div>
             </a>
           </li>
         </ul>
