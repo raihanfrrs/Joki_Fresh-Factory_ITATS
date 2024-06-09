@@ -96,14 +96,21 @@ class Helpers
     public static function formatRupiah($number)
     {
         if ($number >= 1000000000) {
-            return 'Rp ' . round($number / 1000000000, 1) . 'B';
+            return 'Rp ' . number_format($number / 1000000000, 2, ',', '.') . 'B';
         }
         if ($number >= 1000000) {
-            return 'Rp ' . round($number / 1000000, 1) . 'M';
+            return 'Rp ' . number_format($number / 1000000, 2, ',', '.') . 'M';
         }
         if ($number >= 1000) {
-            return 'Rp ' . round($number / 1000, 1) . 'K';
+            return 'Rp ' . number_format($number / 1000, 2, ',', '.') . 'K';
         }
         return 'Rp ' . number_format($number, 0, ',', '.');
+    }
+
+    public static function getFirstWord($sentence)
+    {
+        $words = explode(' ', trim($sentence));
+
+        return $words[0];
     }
 }

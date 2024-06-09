@@ -48,5 +48,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('formatRupiah', function ($expression) {
             return "<?php echo \App\Helpers\Helpers::formatRupiah($expression); ?>";
         });
+
+        Blade::directive('getFirstWord', function ($expression) {
+            return "<?php echo \App\Helpers\Helpers::getFirstWord($expression); ?>";
+        });
     }
 }

@@ -97,4 +97,28 @@ class InboundRepository
             }
         });
     }
+
+    public function getAllInboundsGroupByTenantPeriodically($periodic)
+    {
+        $groupByClause = '';
+
+        switch ($periodic) {
+            case 'day':
+                $groupByClause = DB::raw('DATE(batches.created_at) as period');
+                break;
+            case 'month':
+                $groupByClause = DB::raw('DATE_FORMAT(batches.created_at, "%Y-%m") as period');
+                break;
+            case 'year':
+                $groupByClause = DB::raw('YEAR(batches.created_at) as period');
+                break;
+            default:
+                break;
+        }
+
+        return Batch::select(DB::raw('SUM(price) as price'),$groupByClause)
+            ->where('tenant_id', auth()->user()->tenant->id)
+            ->groupBy('period')
+            ->get();
+    }
 }

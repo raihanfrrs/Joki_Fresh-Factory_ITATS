@@ -331,7 +331,7 @@
         show: false
       },
       xaxis: {
-        categories: ['S', 'S', 'R', 'K', 'J', 'S', 'M'],
+        categories: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
         axisBorder: {
           show: false
         },
