@@ -192,18 +192,18 @@ $(function () {
   }
 
   // Delete Record
-  $(document).on('click', '#button-delete-campaign-category', function () {
+  $(document).on('click', '#button-delete-warehouse-category', function () {
     let id = $(this).attr('data-id');
     let count = $(this).attr('data-count');
-    let formSelector = ".form-delete-campaign-category-" + id;
+    let formSelector = ".form-delete-warehouse-category-" + id;
 
     Swal.fire({
-      title: 'Apakah anda yakin?',
-      text: "Kategori akan dihapus dari "+count+" influencer!",
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      cancelButtonText: 'Batal',
-      confirmButtonText: 'Ya, Hapus!',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, Delete!',
       customClass: {
         confirmButton: 'btn btn-primary me-3',
         cancelButton: 'btn btn-label-secondary'
