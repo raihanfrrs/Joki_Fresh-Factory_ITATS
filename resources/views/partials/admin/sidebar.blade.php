@@ -81,7 +81,7 @@
           <div class="badge bg-label-primary rounded-pill ms-auto" id="label-brand-new-count"></div>
         </a>
       </li>
-      <li class="menu-item {{ request()->is('master/tax', 'master/tax/*') ? 'active' : '' }}">
+      <li class="menu-item {{ request()->is('master/taxes', 'master/taxes/*') ? 'active' : '' }}">
         <a href="{{ route('master.taxes') }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-receipt-tax"></i>
           <div data-i18n="Taxes">Taxes</div>

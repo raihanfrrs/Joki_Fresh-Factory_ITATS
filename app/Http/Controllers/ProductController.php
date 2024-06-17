@@ -90,7 +90,7 @@ class ProductController extends Controller
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'success',
-                'message' => 'Warehouse has been deleted!'
+                'message' => 'Product has been deleted!'
             ]);
         }
     }
