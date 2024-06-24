@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Warehouse;
-use App\Repositories\TransactionRepository;
-use App\Repositories\UserRepository;
-use App\Repositories\WarehouseRepository;
 use Illuminate\Http\Request;
+use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Mail;
+use App\Repositories\WarehouseRepository;
+use App\Repositories\TransactionRepository;
 
 class GuestController extends Controller
 {
@@ -51,5 +52,31 @@ class GuestController extends Controller
     public function contact()
     {
         return view('pages.guest.contact.index');
+    }
+
+    public function contact_send(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string',
+        ]);
+
+        $data = $request->only('name', 'email', 'message');
+        
+        Mail::send([], [], function ($message) use ($data) {
+            $message->from($data['email'], $data['name'])
+                    ->to('rehanfarras76@gmail.com')
+                    ->subject('Contact For Support')
+                    ->html('<p>Name: ' . $data['name'] . '</p><p>Email: ' . $data['email'] . '</p><p>Message: ' . $data['message'] . '</p>'); // Set as HTML
+        });
+
+        return redirect()->back()->with([
+            'flash-type' => 'sweetalert',
+            'case' => 'default',
+            'position' => 'center',
+            'type' => 'success',
+            'message' => 'Berhasil Masuk!'
+        ]);
     }
 }

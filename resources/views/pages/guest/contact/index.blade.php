@@ -9,7 +9,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-12 col-sm-12">
-				<form id="contact-form" class="contact__form" method="post" action="index.html">
+				<form id="contact-form" class="contact__form" method="post" action="{{ route('contact.store') }}">
+					@csrf
 					<h3 class="text-md mb-4">Direct Contact</h3>
 					<div class="form-group">
 						<input name="name" type="text" class="form-control" placeholder="Your Name" required="">
@@ -24,7 +25,7 @@
 				</form>
 			</div>
 
-			<div class="col-lg-5 col-sm-12">
+			{{-- <div class="col-lg-5 col-sm-12">
 				<div class="contact-content pl-lg-5 mt-5 mt-lg-0">
 					<span class="text-muted">Expertise You Can Trust</span>
 					<h2 class="mb-5 mt-2">Feel free to reach out for any inquiries or information.</h2>
@@ -41,7 +42,7 @@
 						</li>
 					</ul>
 				</div>
-			</div>
+			</div> --}}
 		</div>
 	</div>
 </section>
