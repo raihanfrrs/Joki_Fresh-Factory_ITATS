@@ -107,9 +107,9 @@
                   <tr>
                     <td class="text-nowrap"><input type="checkbox" name="temp_outbound_ids[]" class="form-check-input" id="checkbox_temp_outbound_ids" value="{{ $tempOutbound->id }}"></td>
                     <td class="text-nowrap">{{ $loop->iteration }}</td>
-                    <td class="text-nowrap">{{ $tempOutbound->product->name }}</td>
-                    <td class="text-nowrap">{{ $tempOutbound->product->product_category->name }}</td>
-                    <td class="text-nowrap">{{ $tempOutbound->product->rack->name }}</td>
+                    <td class="text-nowrap">{{ $tempOutbound->product()->withTrashed()->first()->name }}</td>
+                    <td class="text-nowrap">{{ $tempOutbound->product->product_category()->withTrashed()->first()->name }}</td>
+                    <td class="text-nowrap">{{ $tempOutbound->product->rack()->withTrashed()->first()->name }}</td>
                     <td class="text-nowrap">@rupiah($tempOutbound->product->sale_price)</td>
                     <td class="text-nowrap"><input type="number" name="quantity" id="quantity" value="{{ $tempOutbound->quantity }}" min="1" max="{{ $tempOutbound->product->batch->sum('available') }}" class="form-control" data-id="{{ $tempOutbound->id }}"></td>
                     <td class="text-nowrap">@rupiah($tempOutbound->subtotal)</td>

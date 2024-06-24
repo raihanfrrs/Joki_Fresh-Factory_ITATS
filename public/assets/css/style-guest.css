@@ -559,22 +559,23 @@ ul.dropdown-menu li {
   }
 }
 .bg-1 {
-  background: url("../images/bg/home-2.jpg") no-repeat 50% 50%;
+  background: url("../img/backgrounds/background-fresh-factory.jpg") no-repeat 50% 50%;
   background-size: cover;
 }
 
 .bg-2 {
-  background: url("../images/bg/home-5.jpg");
+  background: url("../img/backgrounds/background-fresh-factory.jpg");
   background-size: cover;
 }
 
 .slider {
-  background: url("../images/bg/home-1.jpg") no-repeat;
+  background: url("../img/backgrounds/background-fresh-factory.jpg") no-repeat;
   background-size: cover;
   background-position: 10% 0%;
   padding: 200px 0;
   position: relative;
 }
+
 @media (max-width: 768px) {
   .slider {
     padding: 150px 0;

@@ -10,5 +10,6 @@ Route::middleware('guest')->group(function () {
         Route::get('our-properties', 'properties')->name('our.properties');
         Route::get('our-properties/{warehouse}', 'properties_detail')->name('our.properties.show');
         Route::get('contact-us', 'contact')->name('contact');
+        Route::post('contact-us', 'contact_send')->name('contact.store');
     });
 });
