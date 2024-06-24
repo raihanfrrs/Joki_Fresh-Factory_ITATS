@@ -17,10 +17,9 @@
         <div class="col-lg-6 col-sm-6 d-flex justify-content-end">
           <div class="widget">
             <div class="logo mb-4">
-              <h3>Mega<span>kit.</span></h3>
+              <h3>Fresh<span>Factory.</span></h3>
             </div>
-            <h6><a href="mailto:support@gmail.com">Support@megakit.com</a></h6>
-            <a href="tel:+23-345-67890"><span class="text-color h4">+23-456-6588</span></a>
+            <h6><a href="mailto:{{ config('mail.mailers.smtp.username') }}">Need Support? Mail Here!</a></h6>
           </div>
         </div>
       </div>
