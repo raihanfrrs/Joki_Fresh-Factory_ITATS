@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
@@ -50,11 +50,11 @@ class ProductRepository
         //             ->get();
 
         return Product::join('batches', 'products.id', '=', 'batches.product_id')
-                    ->select('products.*')
-                    ->where('batches.available', '>', 0)
-                    ->where('products.warehouse_id', $warehouse->id)
-                    ->whereNotIn('products.id', $products)
-                    ->get();
+            ->select('products.*')
+            ->where('batches.available', '>', 0)
+            ->where('products.warehouse_id', $warehouse->id)
+            ->whereNotIn('products.id', $products)
+            ->get();
     }
 
     public function createProduct($data, $warehouse)
@@ -84,7 +84,7 @@ class ProductRepository
                     $media = $warehouse->addMedia($file)
                         ->withResponsiveImages()
                         ->toMediaCollection('product_images');
-            
+
                     $media->update([
                         'model_id' => $product_id,
                         'model_type' => Product::class,
@@ -125,7 +125,7 @@ class ProductRepository
                 $media = $product->addMedia($data->file('product_image_one'))
                     ->withResponsiveImages()
                     ->toMediaCollection('product_images');
-        
+
                 $media->update([
                     'model_id' => $product->id,
                     'model_type' => Product::class,
@@ -136,7 +136,7 @@ class ProductRepository
                 $media = $product->addMedia($data->file('product_image_two'))
                     ->withResponsiveImages()
                     ->toMediaCollection('product_images');
-        
+
                 $media->update([
                     'model_id' => $product->id,
                     'model_type' => Product::class,
@@ -147,7 +147,7 @@ class ProductRepository
                 $media = $product->addMedia($data->file('product_image_three'))
                     ->withResponsiveImages()
                     ->toMediaCollection('product_images');
-        
+
                 $media->update([
                     'model_id' => $product->id,
                     'model_type' => Product::class,
@@ -158,18 +158,18 @@ class ProductRepository
                 $media = $product->addMedia($data->file('product_image_four'))
                     ->withResponsiveImages()
                     ->toMediaCollection('product_images');
-        
+
                 $media->update([
                     'model_id' => $product->id,
                     'model_type' => Product::class,
                 ]);
             }
-            
+
             if ($data->hasFile('product_image_five')) {
                 $media = $product->addMedia($data->file('product_image_five'))
                     ->withResponsiveImages()
                     ->toMediaCollection('product_images');
-        
+
                 $media->update([
                     'model_id' => $product->id,
                     'model_type' => Product::class,
@@ -196,16 +196,16 @@ class ProductRepository
     public function getAllProductWithJoinDetailOutbound($warehouse)
     {
         return Product::join('detail_outbounds', 'products.id', '=', 'detail_outbounds.product_id')
-                    ->select('products.id', 'products.name as product_name', DB::raw('SUM(detail_outbounds.quantity) as quantity'), DB::raw('SUM(detail_outbounds.subtotal) as subtotal'))
-                    ->where('products.warehouse_id', $warehouse->id)
-                    ->where('products.tenant_id', auth()->user()->tenant->id)
-                    ->groupBy('products.id')
-                    ->get();
+            ->select('products.id', 'products.name as product_name', DB::raw('SUM(detail_outbounds.quantity) as quantity'), DB::raw('SUM(detail_outbounds.subtotal) as subtotal'))
+            ->where('products.warehouse_id', $warehouse->id)
+            ->where('products.tenant_id', auth()->user()->tenant->id)
+            ->groupBy('products.id')
+            ->get();
     }
 
     public function getAllOfTimeRents()
     {
         return Product::join('tenants', 'tenants.id', '=', 'products.tenant_id')
-                        ->get();
+            ->get();
     }
 }
