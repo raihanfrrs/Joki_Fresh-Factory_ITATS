@@ -110,7 +110,7 @@ class YajraDatatablesController extends Controller
         ->addColumn('name', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-tenant.name-column', compact('model'))->render();
         })
-        ->addColumn('identity_number', function ($model) {
+        ->addColumn('npwp', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-tenant.identity-number-column', compact('model'))->render();
         })
         ->addColumn('email', function ($model) {
@@ -137,7 +137,7 @@ class YajraDatatablesController extends Controller
         ->addColumn('action', function ($model) {
             return view('components.data-ajax.yajra-column.data-master-tenant.action-column', compact('model'))->render();
         })
-        ->rawColumns(['name', 'identity_number', 'email', 'phone', 'pob_dob', 'gender', 'address', 'created_at', 'status', 'action'])
+        ->rawColumns(['name', 'npwp', 'email', 'phone', 'pob_dob', 'gender', 'address', 'created_at', 'status', 'action'])
         ->make(true);
     }
 

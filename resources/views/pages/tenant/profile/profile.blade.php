@@ -11,9 +11,9 @@
             <li class="d-flex align-items-center mb-3 text-capitalize">
               <i class="ti ti-check"></i><span class="fw-bold mx-2">Status:</span> <span>{{ auth()->user()->tenant->status }}</span>
             </li>
-            <li class="d-flex align-items-center mb-3">
+            {{-- <li class="d-flex align-items-center mb-3">
               <i class="ti ti-flag"></i><span class="fw-bold mx-2">Place, Date of Birth:</span> <span>{{ auth()->user()->tenant->pob }}, {{ \Carbon\Carbon::parse(auth()->user()->tenant->dob)->format('d/m/Y') }}</span>
-            </li>
+            </li> --}}
             <li class="d-flex align-items-center mb-3">
               <i class="ti ti-pin"></i><span class="fw-bold mx-2">Address:</span>
               <span>{{ auth()->user()->tenant->address }}</span>

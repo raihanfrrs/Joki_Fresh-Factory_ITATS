@@ -28,9 +28,9 @@ class TenantRegisterRequest extends FormRequest
             'confirm_password' => ['required', 'same:password'],
             'first_name' => ['required'],
             'phone' => ['required', 'numeric', 'unique:tenants'],
-            'identity_number' => ['required', 'numeric', 'unique:tenants'],
-            'pob' => ['required'],
-            'dob' => ['required', 'date'],
+            'npwp' => ['required', 'numeric', 'unique:tenants'],
+            // 'pob' => ['required'],
+            // 'dob' => ['required', 'date'],
             'address' => ['required']
         ];
     }

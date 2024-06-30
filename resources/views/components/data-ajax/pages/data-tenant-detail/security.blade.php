@@ -32,7 +32,7 @@
     </div>
 </div>
 
-<div class="card mb-4">
+{{-- <div class="card mb-4">
     <h5 class="card-header pb-2">Two-steps verification</h5>
     <div class="card-body">
     <span>Keep your account secure with authentication step.</span>
@@ -121,6 +121,6 @@
         </tbody>
     </table>
     </div>
-</div>
+</div> --}}
 
 <script src="{{ asset('assets/js/app-user-view-security.js') }}"></script>

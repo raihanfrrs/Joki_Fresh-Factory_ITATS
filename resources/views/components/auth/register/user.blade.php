@@ -183,14 +183,14 @@
                                 @enderror
                             </div>
                             <div class="col-sm-6">
-                                <label class="form-label" for="identity_number">Identity Number</label>
+                                <label class="form-label" for="npwp">NPWP</label>
                                 <input
                                     type="text"
-                                    id="identity_number"
-                                    name="identity_number"
-                                    class="form-control multi-steps-pincode @error('identity_number') is-invalid @enderror"
-                                    value="{{ old('identity_number') }}" />
-                                @error('identity_number')
+                                    id="npwp"
+                                    name="npwp"
+                                    class="form-control multi-steps-pincode @error('npwp') is-invalid @enderror"
+                                    value="{{ old('npwp') }}" />
+                                @error('npwp')
                                     <div class="invalid-feedback"> {{ $message }} </div>
                                 @enderror
                             </div>
@@ -201,7 +201,7 @@
                                     <div class="invalid-feedback"> {{ $message }} </div>
                                 @enderror
                             </div>
-                            <div class="col-sm-4">
+                            {{-- <div class="col-sm-4">
                                 <label class="form-label" for="pob">Place of Birth</label>
                                 <input type="text" id="pob" name="pob" class="form-control @error('pob') is-invalid @enderror" value="{{ old('pob') }}" />
                                 @error('pob')
@@ -214,8 +214,8 @@
                                 @error('dob')
                                     <div class="invalid-feedback"> {{ $message }} </div>
                                 @enderror
-                            </div>
-                            <div class="col-sm-4">
+                            </div> --}}
+                            {{-- <div class="col-sm-4">
                                 <label class="form-label d-block">Gender</label>
                                 <div class="form-check form-check-inline mt-2">
                                     <input class="form-check-input" type="radio" name="gender" id="male" value="male" {{ old('gender') == 'male' ? 'checked' : '' }}>
@@ -225,7 +225,7 @@
                                     <input class="form-check-input" type="radio" name="gender" id="female" value="female" {{ old('gender') == 'female' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="female">Female</label>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-12 d-flex justify-content-between mt-4">
                                 <button class="btn btn-label-secondary btn-prev">
                                     <i class="ti ti-arrow-left ti-xs me-sm-1 me-0"></i>

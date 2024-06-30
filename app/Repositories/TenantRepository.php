@@ -31,12 +31,12 @@ class TenantRepository
     {
         return self::getTenant($id)->update([
             'name' => $data['name'],
-            'identity_number' => $data['identity_number'],
+            'npwp' => $data['npwp'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'pob' => $data['pob'],
-            'dob' => $data['dob'],
-            'gender' => $data['gender'],
+            // 'pob' => $data['pob'],
+            // 'dob' => $data['dob'],
+            // 'gender' => $data['gender'],
             'address' => $data['address']
         ]);
     }

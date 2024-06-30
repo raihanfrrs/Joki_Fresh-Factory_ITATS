@@ -1,1 +1,1 @@
-{{ $model->identity_number }}
+{{ $model->npwp }}
