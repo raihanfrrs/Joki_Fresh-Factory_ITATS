@@ -27,11 +27,11 @@ $(function () {
         { data: '' },
         { data: 'index', class: 'text-center' },
         { data: 'name' },
-        { data: 'identity_number', class: 'text-center' },
+        { data: 'npwp', class: 'text-center' },
         { data: 'email', class: 'text-center' },
         { data: 'phone', class: 'text-center' },
-        { data: 'pob_dob' },
-        { data: 'gender', class: 'text-center text-capitalize' },
+        // { data: 'pob_dob' },
+        // { data: 'gender', class: 'text-center text-capitalize' },
         { data: 'address' },
         { data: 'created_at', class: 'text-center' },
         { data: 'status', class: 'text-center' },
@@ -64,7 +64,7 @@ $(function () {
         {
           targets: 3,
           render: function (data, type, full, meta) {
-            return full.identity_number;
+            return full.npwp;
           }
         },
         {
@@ -79,32 +79,32 @@ $(function () {
             return full.phone;
           }
         },
+        // {
+        //   targets: 6,
+        //   render: function (data, type, full, meta) {
+        //     return full.pob_dob;
+        //   }
+        // },
+        // {
+        //   targets: 7,
+        //   render: function (data, type, full, meta) {
+        //     return full.gender;
+        //   }
+        // },
         {
           targets: 6,
-          render: function (data, type, full, meta) {
-            return full.pob_dob;
-          }
-        },
-        {
-          targets: 7,
-          render: function (data, type, full, meta) {
-            return full.gender;
-          }
-        },
-        {
-          targets: 8,
           render: function (data, type, full, meta) {
             return full.address;
           }
         },
         {
-          targets: 9,
+          targets: 7,
           render: function (data, type, full, meta) {
             return full.created_at;
           }
         },
         {
-          targets: 10,
+          targets: 8,
           render: function (data, type, full, meta) {
             return full.status;
           }
@@ -146,7 +146,7 @@ $(function () {
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8],
               },
               customize: function (win) {
                 $(win.document.body)
@@ -166,7 +166,7 @@ $(function () {
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                columns: [1, 2, 3, 4, 5, 6, 7, 8]
               }
             },
             {
@@ -174,7 +174,7 @@ $(function () {
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8],
               }
             },
             {
@@ -182,7 +182,7 @@ $(function () {
               text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8],
               }
             },
             {
@@ -190,7 +190,7 @@ $(function () {
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [1, 2, 3, 4, 5, 6, 7, 8],
               }
             }
           ]

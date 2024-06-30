@@ -33,9 +33,9 @@
                     @enderror
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="identity_number" class="form-label">Identity Number</label>
-                    <input class="form-control" type="text" id="identity_number" name="identity_number" value="{{ old('identity_number', auth()->user()->tenant->identity_number) }}" required>
-                    @error('identity_number')
+                    <label for="npwp" class="form-label">NPWP</label>
+                    <input class="form-control" type="text" id="npwp" name="npwp" value="{{ old('npwp', auth()->user()->tenant->npwp) }}" required>
+                    @error('npwp')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -53,7 +53,7 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="mb-3 col-md-6">
+                {{-- <div class="mb-3 col-md-6">
                     <label for="pob" class="form-label">Place Of Birth</label>
                     <input type="text" class="form-control" id="pob" name="pob" value="{{ old('pob', auth()->user()->tenant->pob) }}">
                     @error('pob')
@@ -77,7 +77,7 @@
                         <input class="form-check-input" type="radio" name="gender" id="female" value="female" {{ old('gender', auth()->user()->tenant->gender) == 'female' ? 'checked' : '' }}>
                         <label class="form-check-label" for="female">Female</label>
                     </div>
-                </div>
+                </div> --}}
                 <div class="mb-3 col-md-6">
                     <label for="address" class="form-label">Address</label>
                     <textarea name="address" id="address" cols="30" rows="5" class="form-control">{{ old('address', auth()->user()->tenant->address) }}</textarea>

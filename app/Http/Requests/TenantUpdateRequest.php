@@ -27,11 +27,11 @@ class TenantUpdateRequest extends FormRequest
 
         return [
             'name' => ['required', 'min:6', 'max:255'],
-            'identity_number' => ['required', Rule::unique('tenants')->ignore($tenantId)],
+            'npwp' => ['required', Rule::unique('tenants')->ignore($tenantId)],
             'email' => ['required', 'email:rfc,dns', Rule::unique('tenants')->ignore($tenantId)],
             'phone' => ['required', 'numeric', Rule::unique('tenants')->ignore($tenantId)],
-            'pob' => ['required'],
-            'dob' => ['required', 'date'],
+            // 'pob' => ['required'],
+            // 'dob' => ['required', 'date'],
             'address' => ['required']
         ];
     }

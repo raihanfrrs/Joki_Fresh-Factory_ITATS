@@ -25,7 +25,7 @@ class TenantSeeder extends Seeder
                     'id' => Uuid::uuid4()->toString(),
                     'user_id' => $tenant->id,
                     'name' => 'Tenant 001',
-                    'identity_number' =>  $faker->numberBetween(1000000000000000, 9999999999999999),
+                    'npwp' =>  $faker->numberBetween(1000000000000000, 9999999999999999),
                     'email' => $faker->unique()->safeEmail,
                     'phone' => $faker->phoneNumber,
                     'pob' => 'Surabaya',
