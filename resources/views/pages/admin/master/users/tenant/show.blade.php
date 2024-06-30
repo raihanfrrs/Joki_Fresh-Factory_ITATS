@@ -72,17 +72,17 @@
                 <span class="text-capitalize">{{ $tenant->user->level }}</span>
               </li>
               <li class="mb-2 pt-1">
-                <span class="fw-semibold me-1">Identity Number:</span>
-                <span>{{ $tenant->identity_number }}</span>
+                <span class="fw-semibold me-1">NPWP:</span>
+                <span>{{ $tenant->npwp }}</span>
               </li>
               <li class="mb-2 pt-1">
                 <span class="fw-semibold me-1">Contact:</span>
                 <span>{{ $tenant->phone }}</span>
               </li>
-              <li class="mb-2 pt-1">
+              {{-- <li class="mb-2 pt-1">
                 <span class="fw-semibold me-1">Place, Date Of Birth:</span>
-                <span class="text-capitalize">{{ $tenant->pob }}, {{ \Carbon\Carbon::parse($tenant->dob)->format('d/m/Y') }}</span>
-              </li>
+                <span class="text-capitalize">{{ $tenant->pob }}, {{ \Carbon\Carbon::parse($tenant->dob)->format('d/m/Y') }} {{ $tenant->dob }}</span>
+              </li> --}}
               <li class="pt-1">
                 <span class="fw-semibold me-1">Address:</span>
                 <span>{{ $tenant->address }}</span>
@@ -108,15 +108,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link nav-link-tenant" href="javascript:void(0);" id="security" data-id="{{ $tenant->id }}"><i class="ti ti-lock ti-xs me-1"></i>Security</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-tenant" href="javascript:void(0);"><i class="ti ti-currency-dollar ti-xs me-1"></i>Billing &amp; Plans</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-tenant" href="javascript:void(0);"><i class="ti ti-bell ti-xs me-1"></i>Notifications</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-tenant" href="javascript:void(0);"><i class="ti ti-link ti-xs me-1"></i>Connections</a>
         </li>
       </ul>
 

@@ -15,19 +15,19 @@
         @enderror
     </div>
     <div class="col-12 col-md-6">
-      <label class="form-label" for="identity_number">Identity Number</label>
+      <label class="form-label" for="npwp">NPWP</label>
       <input
         type="text"
-        id="identity_number"
-        name="identity_number"
+        id="npwp"
+        name="npwp"
         class="form-control"
-        value="{{ old('identity_number', $tenant->identity_number) }}" 
+        value="{{ old('npwp', $tenant->npwp) }}" 
         required/>
-        @error('identity_number')
+        @error('npwp')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
-    <div class="col-12">
+    <div class="col-6">
         <label class="form-label" for="email">Email</label>
         <input
             type="email"
@@ -53,7 +53,7 @@
               <div class="invalid-feedback">{{ $message }}</div>
           @enderror
     </div>
-    <div class="col-12 col-md-6">
+    {{-- <div class="col-12 col-md-6">
         <label class="form-label" for="pob">Place Of Birth</label>
         <input
             type="text"
@@ -89,7 +89,7 @@
             <input class="form-check-input" type="radio" name="gender" id="female" value="female" {{ old('gender', $tenant->gender) == 'female' ? 'checked' : '' }}>
             <label class="form-check-label" for="female">Female</label>
         </div>
-    </div>
+    </div> --}}
     <div class="col-12 col-md-12">
         <label class="form-label" for="address">Address</label>
         <textarea class="form-select" name="address" id="address" cols="30" rows="10" required>{{ old('address', $tenant->address) }}</textarea>

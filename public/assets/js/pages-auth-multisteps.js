@@ -201,10 +201,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
               }
             }
           },
-          identity_number: {
+          npwp: {
             validators: {
               notEmpty: {
-                message: 'Please enter your identity number'
+                message: 'Please enter your NPWP'
               }
             }
           },

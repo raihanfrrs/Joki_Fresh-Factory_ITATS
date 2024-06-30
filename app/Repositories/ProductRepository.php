@@ -40,13 +40,20 @@ class ProductRepository
             $products[] = $product->product_id;
         }
 
+        // return Product::join('batches', 'products.id', '=', 'batches.product_id')
+        //             ->select('products.*', DB::raw('sum(batches.available) as available'))
+        //             ->where('available', '>', 0)
+        //             ->where('products.warehouse_id', $warehouse->id)
+        //             ->where('products.tenant_id', auth()->user()->tenant->id)
+        //             ->whereNotIn('products.id', $products)
+        //             ->groupBy('products.id')
+        //             ->get();
+
         return Product::join('batches', 'products.id', '=', 'batches.product_id')
-                    ->select('products.*', DB::raw('sum(batches.available) as available'))
-                    ->where('available', '>', 0)
+                    ->select('products.*')
+                    ->where('batches.available', '>', 0)
                     ->where('products.warehouse_id', $warehouse->id)
-                    ->where('products.tenant_id', auth()->user()->tenant->id)
                     ->whereNotIn('products.id', $products)
-                    ->groupBy('products.id')
                     ->get();
     }
 

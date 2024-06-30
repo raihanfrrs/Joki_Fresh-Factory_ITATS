@@ -16,12 +16,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignIdFor(User::class)->nullable();
             $table->string('name');
-            $table->string('identity_number')->unique();
+            $table->string('npwp')->unique();
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('pob');
-            $table->date('dob');
-            $table->enum('gender', ['male', 'female']);
             $table->longText('address');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->enum('rank', ['starter', 'paid'])->default('starter');

@@ -18,12 +18,9 @@ class Tenant extends Model implements HasMedia
         'id',
         'user_id',
         'name',
-        'identity_number',
+        'npwp',
         'email',
         'phone',
-        'pob',
-        'dob',
-        'gender',
         'address',
         'status',
         'rank'
