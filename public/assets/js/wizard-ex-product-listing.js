@@ -228,12 +228,16 @@
 
       let formProduct = $('.form-submit-product');
       
-      if (imageOne == undefined && imageTwo == undefined && imageThree == undefined && imageFour == undefined && imageFive == undefined) {
-          alert('Please select at least one product image.');
-      } else {
-          formProduct.attr('onsubmit', 'return true');
-          formProduct.submit();
-      }
+      if ((imageOne == undefined && $('#image1').data('image-exists') === false) &&
+            (imageTwo == undefined && $('#image2').data('image-exists') === false) &&
+            (imageThree == undefined && $('#image3').data('image-exists') === false) &&
+            (imageFour == undefined && $('#image4').data('image-exists') === false) &&
+            (imageFive == undefined && $('#image5').data('image-exists') === false)) {
+            alert('Please select at least one product image.');
+        } else {
+            formProduct.attr('onsubmit', 'return true');
+            formProduct.submit();
+        }
     });
 
     wizardPropertyListingNext.forEach(item => {
