@@ -124,24 +124,39 @@ $(document).on('change', '[id^="quantity"]', function () {
     let id = $(this).attr('data-id');
     let quantity = $(this).val();
 
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
+    let value = parseInt(quantity);
+    let min = parseInt($(this).attr('min'));
+    let max = parseInt($(this).attr('max'));
+    let quantity_now = '';
 
-    $.ajax({
-        url: "/ajax/product-quantity-outbound/"+id+"/edit",
-        method: "post",
-        data: {
-            quantity: quantity
-        },
-        success: function(response) {
-            $("#div-cart-outbound").load(location.href + " #div-cart-outbound");
-        },
-        error: function(xhr, status, error) {
-        }
-    });
+    if (value < min) {
+        $(this).val(min);
+    } else if (value > max) {
+        $(this).val(max);
+    }
+
+    quantity_now = $(this).val();
+
+    if (quantity_now <= max && quantity_now >= min) {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+    
+        $.ajax({
+            url: "/ajax/product-quantity-outbound/"+id+"/edit",
+            method: "post",
+            data: {
+                quantity: quantity_now
+            },
+            success: function(response) {
+                $("#div-cart-outbound").load(location.href + " #div-cart-outbound");
+            },
+            error: function(xhr, status, error) {
+            }
+        });
+    }
 });
 
 $(document).on('click', '[id^="btn-delete-outbound"]', function () {
