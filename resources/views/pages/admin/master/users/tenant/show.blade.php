@@ -65,7 +65,7 @@
               </li>
               <li class="mb-2 pt-1">
                 <span class="fw-semibold me-1">Status:</span>
-                <span class="badge bg-label-success">{{ $tenant->status }}</span>
+                <span class="badge bg-label-{{ $tenant->status == 'active' ? 'success' : 'danger' }}">{{ $tenant->status }}</span>
               </li>
               <li class="mb-2 pt-1">
                 <span class="fw-semibold me-1">Role:</span>
@@ -91,7 +91,11 @@
             @if (auth()->user()->attribute == 'core')
             <div class="d-flex justify-content-center">
               <a href="javascript:;" class="btn btn-primary me-3 waves-effect waves-light" data-bs-target="#editTenant" data-bs-toggle="modal" id="button-trigger-modal-edit-tenant" data-id="{{ $tenant->id }}">Edit</a>
-              <a href="javascript:;" class="btn btn-label-danger suspend-user waves-effect">Suspended</a>
+              <form action="{{ route('master.tenant.update.status', $tenant->id) }}" method="post">
+                @csrf
+                @method('PATCH')
+                <button type="submit" class="btn btn-label-{{ $tenant->status == 'active' ? 'danger' : 'success' }} suspend-user waves-effect">{{ $tenant->status == 'active' ? 'Suspended' : 'Actived' }}</button>
+              </form>
             </div>
             @endif
           </div>
